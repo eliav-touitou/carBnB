@@ -1,8 +1,8 @@
 {
   "cars": [
     {
-      "id": "1",
-      "owner": "Eyal",
+      "car_id": "1",
+      "owner_id": 1,
       "brand": "Reno",
       "year": "2009",
       "Model": "Megan",
@@ -13,8 +13,8 @@
       "is_rented": "false"
     },
     {
-      "id": "2",
-      "owner": "Jino",
+      "car_id": "2",
+      "owner_id": 2,
       "brand": "Suzuki",
       "year": "2014",
       "fuel": "95",
@@ -25,8 +25,8 @@
       "is_rented": "false"
     },
     {
-      "id": "3",
-      "owner": "Eliav",
+      "car_id": "3",
+      "owner_id": 3,
       "brand": "toyota",
       "year": "2018",
       "fuel": "95",
@@ -37,8 +37,8 @@
       "is_rented": "true"
     },
     {
-      "id": "4",
-      "owner": "Lea Shoshnik",
+      "car_id": "4",
+      "owner_id": 4,
       "brand": "ford",
       "year": "2016",
       "fuel": "95",
@@ -49,8 +49,8 @@
       "is_rented": "false"
     },
     {
-      "id": "5",
-      "owner": "Oded Margalit",
+      "car_id": "5",
+      "owner_id": 5,
       "brand": "Skoda",
       "year": "1989",
       "fuel": "Soler",
