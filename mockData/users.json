@@ -1,37 +1,37 @@
 {
   "users": [
     {
-      "ID": "1",
+      "id": "1",
       "name": "Eyal",
-      "phone-number": "0545732556",
+      "phone_number": "0545732556",
       "address": "Modiin, fuckyou, 23",
       "rating": "1"
     },
     {
-      "ID": "2",
+      "id": "2",
       "name": "Jino",
-      "phone-number": "0545732998",
+      "phone_number": "0545732998",
       "address": "Pisgat -zeev, fuckall, 8",
       "rating": "1"
     },
     {
-      "ID": "3",
+      "id": "3",
       "name": "Eliav",
-      "phone-number": "0545732117",
+      "phone_number": "0545732117",
       "address": "Efrat, hagoren, 8",
       "rating": "4"
     },
     {
-      "ID": "4",
+      "id": "4",
       "name": "Lea Shoshnik",
-      "phone-number": "0545985416",
+      "phone_number": "0545985416",
       "address": "edgswg",
       "rating": "2"
     },
     {
-      "ID": "5",
+      "id": "5",
       "name": "Oded Margalit",
-      "phone-number": "0589623778",
+      "phone_number": "0589623778",
       "address": "edgswg",
       "rating": "4"
     }
