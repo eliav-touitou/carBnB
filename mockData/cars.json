@@ -1,0 +1,64 @@
+{
+  "cars": [
+    {
+      "ID": "1",
+      "owner": "Eyal",
+      "brand": "Reno",
+      "year": "2009",
+      "Model": "Megan",
+      "fuel": "95",
+      "is rented": "false",
+      "price per day": "30",
+      "price per week": "20",
+      "price per month": "10"
+    },
+    {
+      "ID": "2",
+      "owner": "Jino",
+      "brand": "Suzuki",
+      "year": "2014",
+      "fuel": "95",
+      "Model": "Alto",
+      "price per day": "25",
+      "price per week": "20",
+      "price per month": "15",
+      "is rented": "false"
+    },
+    {
+      "ID": "3",
+      "owner": "Eliav",
+      "brand": "toyota",
+      "year": "2018",
+      "fuel": "95",
+      "Model": "CHR",
+      "price per day": "30",
+      "price per week": "25",
+      "price per month": "20",
+      "is rented": "false"
+    },
+    {
+      "ID": "4",
+      "owner": "Lea Shoshnik",
+      "brand": "ford",
+      "year": "2016",
+      "fuel": "95",
+      "Model": "focus",
+      "price per day": "100",
+      "price per week": "70",
+      "price per month": "60",
+      "is rented": "true"
+    },
+    {
+      "ID": "5",
+      "owner": "Oded Margalit",
+      "brand": "Skoda",
+      "year": "1989",
+      "fuel": "Soler",
+      "Model": "Superb",
+      "price per day": "10",
+      "price per week": "7",
+      "price per month": "5",
+      "is rented": "false"
+    }
+  ]
+}
