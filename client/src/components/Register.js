@@ -10,7 +10,7 @@ export default function Register() {
   const addNewUser = async (e) => {
     const form = e.target;
     e.preventDefault();
-    if (passwordRef !== passwordValidationRef) {
+    if (passwordRef.current.value !== passwordValidationRef.current.value) {
       return "fuck you";
     }
     try {
@@ -23,7 +23,7 @@ export default function Register() {
       await axios.post("/api/v1/users/register", { newUser: user });
       console.log("User Saved!");
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
   return (
@@ -44,7 +44,7 @@ export default function Register() {
           <label>
             phone:
             <input
-              name="phone"
+              name="phoneNumber"
               type="phone"
               placeholder="enter your phone"
               required
