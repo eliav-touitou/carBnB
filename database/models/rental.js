@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       rental_id: {
         type: DataTypes.STRING,
-        allowNull: false,
         primaryKey: true,
       },
       car_id: DataTypes.INTEGER,

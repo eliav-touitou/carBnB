@@ -22,7 +22,7 @@ function App() {
   };
   const uploadCar = async () => {
     const newCar = {
-      owner: owner.current.value,
+      ownerName: owner.current.value,
       brand: brand.current.value,
       model: model.current.value,
       year: year.current.value,
