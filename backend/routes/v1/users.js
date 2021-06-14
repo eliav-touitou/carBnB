@@ -3,8 +3,8 @@ const users = Router();
 const {
   getAllItems,
   getItem,
-  addToUsers,
-  addToAuth,
+  addToUsersDB,
+  addToAuthDB,
 } = require("../../../database");
 const { User } = require("../../../database/models");
 const { hashSync, genSaltSync, compareSync } = require("bcrypt");
@@ -44,8 +44,8 @@ users.post("/register", async (req, res) => {
 
     if (!(await getItem("auth", "email", email))) {
       newUser.password = hashSync(newUser.password, genSaltSync(10));
-      await addToUsers({ firstName, lastName, address, phoneNumber, email });
-      await addToAuth({
+      await addToUsersDB({ firstName, lastName, address, phoneNumber, email });
+      await addToAuthDB({
         password: newUser.password,
         email,
         firstName,

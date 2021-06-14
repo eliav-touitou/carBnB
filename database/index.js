@@ -27,7 +27,7 @@ const getAllItems = async (model) => {
 };
 
 //Add new car to users db
-const addToCars = async (obj) => {
+const addToCarsDB = async (obj) => {
   try {
     await Car.create({
       owner_email: obj.ownerEmail,
@@ -47,7 +47,7 @@ const addToCars = async (obj) => {
 };
 
 //Add new user to users db
-const addToUsers = async (obj) => {
+const addToUsersDB = async (obj) => {
   try {
     const { phoneNumber, firstName, lastName, email, address } = obj;
     await User.create({
@@ -64,7 +64,7 @@ const addToUsers = async (obj) => {
 };
 
 //Add new auth details of user
-const addToAuth = async (obj) => {
+const addToAuthDB = async (obj) => {
   try {
     const { firstName, lastName, email, password } = obj;
     await User.create({
@@ -78,4 +78,10 @@ const addToAuth = async (obj) => {
   }
 };
 
-module.exports = { getItem, getAllItems, addCarToDB, addToUsers };
+module.exports = {
+  getItem,
+  getAllItems,
+  addToCarsDB,
+  addToUsersDB,
+  addToAuthDB,
+};
