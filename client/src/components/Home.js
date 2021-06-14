@@ -44,6 +44,15 @@ export default function Home() {
     }
   };
 
+  // Logout handler
+  const logoutHandler = async () => {
+    try {
+      await axios.post("/api/v1/users/logout");
+    } catch (error) {
+      console.log("error logout");
+    }
+  };
+
   return (
     <div>
       {" "}
@@ -84,6 +93,7 @@ export default function Home() {
         <Link to="/login">
           <button>login</button>
         </Link>
+        <button onClick={logoutHandler}>logout</button>
       </div>
     </div>
   );
