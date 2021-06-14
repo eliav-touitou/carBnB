@@ -1,22 +1,36 @@
 const models = require("./models");
-// const { Car } = require("./models");
+const { User, Car, Rental } = require("./models");
 const { Op, Sequelize, where } = require("sequelize");
 const { sequelize } = require("./models");
 
 const getItem = async (table, row, id) => {
   const query = `SELECT * FROM ${table} where ${row} = ${id}`;
-  // const query = "fish";
   try {
     const result = await sequelize.query({
       query,
     });
-    return result;
+    return JSON.stringify(result, null, 2);
   } catch (err) {
     throw err;
   }
 };
 
-getItem("users", "user_id", 5).then((x) => {
+const getAllItems = async (table) => {
+  try {
+    const data = await table.findAll();
+    return JSON.stringify(data, null, 2);
+  } catch (err) {
+    throw err;
+  }
+};
+
+//test 1
+getItem("users", "user_id", 2).then((x) => {
+  console.log(x);
+});
+
+//test 2
+getAllItems(Car).then((x) => {
   console.log(x);
 });
 
