@@ -9,7 +9,8 @@ const getItem = async (table, row, id) => {
     const result = await sequelize.query({
       query,
     });
-    return JSON.stringify(result, null, 2);
+    // return JSON.stringify(result, null, 2);
+    return result;
   } catch (err) {
     throw err;
   }
@@ -18,20 +19,21 @@ const getItem = async (table, row, id) => {
 const getAllItems = async (table) => {
   try {
     const data = await table.findAll();
-    return JSON.stringify(data, null, 2);
+    return data;
+    // return JSON.stringify(data, null, 2);
   } catch (err) {
     throw err;
   }
 };
 
-//test 1
-getItem("users", "user_id", 2).then((x) => {
-  console.log(x);
-});
+// //test 1
+// getItem("users", "user_id", 2).then((x) => {
+//   console.log(x);
+// });
 
-//test 2
-getAllItems(Car).then((x) => {
-  console.log(x);
-});
+// //test 2
+// getAllItems(Car).then((x) => {
+//   console.log(x);
+// });
 
-module.exports = { getItem };
+module.exports = { getItem, getAllItems };
