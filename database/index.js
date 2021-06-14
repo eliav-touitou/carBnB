@@ -26,6 +26,27 @@ const getAllItems = async (model) => {
   }
 };
 
+const addCarToDB = async (obj) => {
+  console.log(obj);
+  const ownerName = obj.ownerName;
+  const ownerId = await User.findOne({
+    where: { name: ownerName },
+    attributes: ["user_id"],
+  });
+  console.log(ownerId);
+  await Car.create({
+    owner_id: ownerId,
+    brand: obj.brand,
+    year: obj.year,
+    model: obj.model,
+    fuel: obj.fuel,
+    price_per_day: obj.pricePerDay,
+    price_per_week: obj.pricePerWeek,
+    price_per_month: obj.pricePerMonth,
+    is_rented: false,
+  });
+};
+
 // //test 1
 // getItem("users", "user_id", 2).then((x) => {
 //   console.log(x);
@@ -36,4 +57,4 @@ const getAllItems = async (model) => {
 //   console.log(x);
 // });
 
-module.exports = { getItem, getAllItems };
+module.exports = { getItem, getAllItems, addCarToDB };

@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const cars = Router();
-const { getAllItems, getItem } = require("../../../database");
+const { getAllItems, getItem, addCarToDB } = require("../../../database");
 const { Car } = require("../../../database/models");
 
 // Gets a unique car
@@ -10,7 +10,7 @@ cars.post("/uniquecar", async (req, res) => {
   try {
     const car = await getItem("cars", "car_id", id);
     console.log(car);
-    res.status(200).json(car);
+    res.status(200).json({ success: true, data: car });
   } catch (err) {
     console.log(err.message);
     res.status(404).json({ message: "NOT FOUND", error: err.message });
@@ -22,9 +22,20 @@ cars.get("/allcars", async (req, res) => {
   try {
     const cars = await getAllItems(Car);
     console.log(cars);
-    res.status(200).json(cars);
+    res.status(200).json({ success: true, data: cars });
   } catch (err) {
     console.log(err.message);
+    res.status(404).json({ message: "NOT FOUND", error: err.message });
+  }
+});
+
+cars.post("/upload", async (req, res) => {
+  try {
+    const { newCar } = req.body;
+    await addCarToDB(newCar);
+    res.status(200).json({ success: true, data: newCar });
+  } catch (err) {
+    console.log(err);
     res.status(404).json({ message: "NOT FOUND", error: err.message });
   }
 });
