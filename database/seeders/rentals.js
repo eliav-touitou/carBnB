@@ -6,8 +6,8 @@ module.exports = {
         {
           transaction_id: 1,
           car_id: 3,
-          owner_id: 3,
-          renter_id: 1,
+          owner_email: "eliav@gmail.com",
+          renter_email: "eyal@gmail.com",
           start_date: new Date(23 - 04 - 2021),
           end_date: new Date(06 - 05 - 2021),
           total_price: 70,
@@ -18,8 +18,8 @@ module.exports = {
         {
           transaction_id: 2,
           car_id: 5,
-          owner_id: 5,
-          renter_id: 4,
+          owner_email: "oded.mar@hotmail.com",
+          owner_email: "lea.shosh@walla.co.il",
           start_date: new Date(25 - 05 - 2021),
           end_date: new Date(27 - 06 - 2021),
           total_price: 110,

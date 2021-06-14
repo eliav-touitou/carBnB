@@ -5,7 +5,7 @@ module.exports = {
       [
         {
           car_id: 1,
-          owner_id: 1,
+          owner_email: "eyal@gmail.com",
           brand: "Reno",
           year: 2009,
           model: "Megan",
@@ -19,7 +19,7 @@ module.exports = {
         },
         {
           car_id: 2,
-          owner_id: 2,
+          owner_email: "jino@gmail.com",
           brand: "Suzuki",
           year: 2014,
           fuel: "95",
@@ -33,7 +33,7 @@ module.exports = {
         },
         {
           car_id: 3,
-          owner_id: 3,
+          owner_email: "eliav@gmail.com",
           brand: "toyota",
           year: 2018,
           fuel: "95",
@@ -47,7 +47,7 @@ module.exports = {
         },
         {
           car_id: 4,
-          owner_id: 4,
+          owner_email: "lea.shosh@walla.co.il",
           brand: "ford",
           year: 2016,
           fuel: "95",
@@ -61,7 +61,7 @@ module.exports = {
         },
         {
           car_id: 5,
-          owner_id: 5,
+          owner_email: "oded.mar@hotmail.com",
           brand: "Skoda",
           year: 1989,
           fuel: "Soler",
