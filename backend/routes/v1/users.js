@@ -8,9 +8,9 @@ users.post("/uniqueuser", async (req, res) => {
   const { id } = req.body;
   console.log(id);
   try {
-    const car = await getItem("users", "user_id", id);
-    console.log(car);
-    res.status(200).json(car);
+    const user = await getItem("users", "user_id", id);
+    console.log(user);
+    res.status(200).json({ success: true, data: user });
   } catch (err) {
     console.log(err.message);
     res.status(404).json({ message: "NOT FOUND", error: err.message });
@@ -22,7 +22,7 @@ users.get("/allusers", async (req, res) => {
   try {
     const users = await getAllItems(User);
     console.log(users);
-    res.status(200).json(car);
+    res.status(200).json({ success: true, data: users });
   } catch (err) {
     console.log(err.message);
     res.status(404).json({ message: "NOT FOUND", error: err.message });

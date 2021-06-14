@@ -7,7 +7,7 @@ function App() {
   const getCars = async () => {
     try {
       const { data } = await axios.get("api/v1/cars/allcars");
-      setCars(data);
+      setCars(data.data);
     } catch (e) {
       console.log(e.message);
     }
@@ -17,15 +17,14 @@ function App() {
     <div className="App">
       <button onClick={getCars}>Get cars</button>
 
-      {cars &&
-        cars?.map((car, i) => (
-          <div>
-            <h3>{car.brand}</h3>
-            <div>{car.model}</div>
-            <div>{car.year}</div>
-            <hr />
-          </div>
-        ))}
+      {cars?.map((car, i) => (
+        <div>
+          <h3>{car.brand}</h3>
+          <div>{car.model}</div>
+          <div>{car.year}</div>
+          <hr />
+        </div>
+      ))}
     </div>
   );
 }
