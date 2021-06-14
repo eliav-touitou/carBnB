@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
       },
       password: DataTypes.STRING,
       full_name: DataTypes.STRING,
@@ -28,5 +28,5 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
-  return auth;
+  return Auth;
 };
