@@ -11,8 +11,14 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
+
   Car.init(
     {
+      car_id: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        primaryKey: true,
+      },
       owner_id: DataTypes.INTEGER,
       brand: DataTypes.STRING,
       year: DataTypes.INTEGER,
@@ -21,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       price_per_day: DataTypes.FLOAT,
       price_per_week: DataTypes.FLOAT,
       price_per_month: DataTypes.FLOAT,
-      is_ranted: DataTypes.BOOLEAN,
+      is_rented: DataTypes.BOOLEAN,
     },
     {
       sequelize,
