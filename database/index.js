@@ -26,16 +26,11 @@ const getAllItems = async (model) => {
   }
 };
 
-const addCarToDB = async (obj) => {
+//Add new car to users db
+const addToCars = async (obj) => {
   try {
-    const ownerName = obj.ownerName;
-    const ownerId = await User.findOne({
-      where: { name: ownerName },
-      attributes: ["user_id"],
-    });
-    console.log(ownerId);
     await Car.create({
-      owner_id: ownerId,
+      owner_email: obj.ownerEmail,
       brand: obj.brand,
       year: obj.year,
       model: obj.model,
@@ -51,34 +46,36 @@ const addCarToDB = async (obj) => {
   }
 };
 
-//Add new user to DB
-const addUserToDB = async (obj) => {
+//Add new user to users db
+const addToUsers = async (obj) => {
   try {
-    const { phoneNumber } = obj;
-    const user = await User.findOne({
-      where: { phone_number: phoneNumber },
+    const { phoneNumber, firstName, lastName, email, address } = obj;
+    await User.create({
+      user_email: email,
+      first_name: firstName,
+      last_name: lastName,
+      phone_number: phoneNumber,
+      address: address,
     });
-    if (!user) {
-      await User.create({
-        name: obj.name,
-        phone_number: obj.phoneNumber,
-        address: obj.address,
-      });
-    }
   } catch (err) {
     console.log(err.message);
     throw err;
   }
 };
 
-// //test 1
-// getItem("users", "user_id", 2).then((x) => {
-//   console.log(x);
-// });
+//Add new auth details of user
+const addToAuth = async (obj) => {
+  try {
+    const { firstName, lastName, email, password } = obj;
+    await User.create({
+      email: email,
+      password: password,
+      full_name: firstName + " " + lastName,
+    });
+  } catch (err) {
+    console.log(err.message);
+    throw err;
+  }
+};
 
-// //test 2
-// getAllItems(Car).then((x) => {
-//   console.log(x);
-// });
-
-module.exports = { getItem, getAllItems, addCarToDB, addUserToDB };
+module.exports = { getItem, getAllItems, addCarToDB, addToUsers };

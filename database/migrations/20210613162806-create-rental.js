@@ -11,11 +11,11 @@ module.exports = {
       car_id: {
         type: Sequelize.INTEGER,
       },
-      owner_id: {
-        type: Sequelize.INTEGER,
+      owner_email: {
+        type: Sequelize.STRING,
       },
-      renter_id: {
-        type: Sequelize.INTEGER,
+      renter_email: {
+        type: Sequelize.STRING,
       },
       start_date: {
         type: Sequelize.DATE,
