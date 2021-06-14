@@ -14,14 +14,17 @@ export default function Home() {
   const pricePerWeek = useRef();
   const pricePerMonth = useRef();
 
+  // Get all cars
   const getCars = async () => {
     try {
       const { data } = await axios.get("api/v1/cars/allcars");
       setCars(data.data);
-    } catch (e) {
-      console.log(e.message);
+    } catch (error) {
+      console.log(error.message);
     }
   };
+
+  // Upload new car to database
   const uploadCar = async () => {
     const newCar = {
       ownerName: owner.current.value,
@@ -36,8 +39,8 @@ export default function Home() {
     try {
       await axios.post("api/v1/cars/upload", { newCar: newCar });
       console.log("Car Saved!");
-    } catch (e) {
-      console.log(e.message);
+    } catch (error) {
+      console.log(error.message);
     }
   };
 

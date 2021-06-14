@@ -6,6 +6,7 @@ export default function Register() {
   const passwordRef = useRef();
   const passwordValidationRef = useRef();
 
+  // Function to save new user to database
   const addNewUser = async (e) => {
     const form = e.target;
     e.preventDefault();

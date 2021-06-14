@@ -6,6 +6,7 @@ export default function Login() {
   const userNameRef = useRef();
   const passwordRef = useRef();
 
+  // Send login data, user name and password
   const onLoginHandler = async () => {
     if (userNameRef === "" || passwordRef === "") {
       return;
@@ -17,8 +18,9 @@ export default function Login() {
 
     try {
       await axios.post("/api/v1/users/login", user);
+      console.log("Success Login");
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
   return (
