@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const users = Router();
-const { getAllItems, getItem } = require("../../../database");
+const { getAllItems, getItem, addUserToDB } = require("../../../database");
 const { User } = require("../../../database/models");
 
 // Gets a unique user
@@ -25,6 +25,18 @@ users.get("/allusers", async (req, res) => {
     res.status(200).json({ success: true, data: users });
   } catch (err) {
     console.log(err.message);
+    res.status(404).json({ message: "NOT FOUND", error: err.message });
+  }
+});
+
+users.post("/upload", async (req, res) => {
+  try {
+    const { newUser } = req.body;
+    console.log(req.body);
+    console.log(newUser);
+    await addUserToDB(newUser);
+    res.status(200).json({ success: true, data: newUser });
+  } catch (err) {
     res.status(404).json({ message: "NOT FOUND", error: err.message });
   }
 });
