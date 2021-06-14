@@ -16,9 +16,9 @@ const getItem = async (table, row, id) => {
   }
 };
 
-const getAllItems = async (table) => {
+const getAllItems = async (model) => {
   try {
-    const data = await table.findAll();
+    const data = await model.findAll();
     return data;
     // return JSON.stringify(data, null, 2);
   } catch (err) {
