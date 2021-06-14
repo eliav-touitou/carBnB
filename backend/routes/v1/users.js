@@ -1,7 +1,14 @@
 const { Router } = require("express");
 const users = Router();
-const { getAllItems, getItem, addUserToDB } = require("../../../database");
+const {
+  getAllItems,
+  getItem,
+  addToUsers,
+  addToAuth,
+} = require("../../../database");
 const { User } = require("../../../database/models");
+const { hashSync, genSaltSync, compareSync } = require("bcrypt");
+const { sign } = require("jsonwebtoken");
 
 // Gets a unique user
 users.post("/uniqueuser", async (req, res) => {
@@ -29,15 +36,27 @@ users.get("/allusers", async (req, res) => {
   }
 });
 
-users.post("/upload", async (req, res) => {
+// Create new user
+users.post("/register", async (req, res) => {
   try {
     const { newUser } = req.body;
-    console.log(req.body);
-    console.log(newUser);
-    await addUserToDB(newUser);
-    res.status(200).json({ success: true, data: newUser });
+    const { firstName, lastName, address, phoneNumber, email } = newUser;
+
+    if (!(await getItem("auth", "email", email))) {
+      newUser.password = hashSync(newUser.password, genSaltSync(10));
+      await addToUsers({ firstName, lastName, address, phoneNumber, email });
+      await addToAuth({
+        password: newUser.password,
+        email,
+        firstName,
+        lastName,
+      });
+      res.status(200).json({ success: true, data: newUser });
+    } else {
+      res.status(409).json({ success: true, message: "User already exist" });
+    }
   } catch (err) {
-    res.status(404).json({ message: "NOT FOUND", error: err.message });
+    res.status(500).json({ message: "NOT FOUND", error: err.message });
   }
 });
 
