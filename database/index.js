@@ -27,13 +27,14 @@ const getAllItems = async (model) => {
 };
 
 const addCarToDB = async (obj) => {
+  console.log(obj);
   const ownerName = obj.ownerName;
   const ownerId = await User.findOne({
-    attributes: ["user_id"],
     where: { name: ownerName },
+    attributes: ["user_id"],
   });
+  console.log(ownerId);
   await Car.create({
-    car_id: obj.carId,
     owner_id: ownerId,
     brand: obj.brand,
     year: obj.year,

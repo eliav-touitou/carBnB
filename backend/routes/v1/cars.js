@@ -34,8 +34,8 @@ cars.post("/upload", async (req, res) => {
     const { newCar } = req.body;
     await addCarToDB(newCar);
     res.status(200).json({ success: true, data: newCar });
-  } catch (error) {
-    console.log(err.message);
+  } catch (err) {
+    console.log(err);
     res.status(404).json({ message: "NOT FOUND", error: err.message });
   }
 });
