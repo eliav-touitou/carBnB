@@ -1,13 +1,13 @@
 const { Router } = require("express");
-const cars = Router();
+const rentals = Router();
 const { getAllItems, getItem } = require("../../../database");
-const { Car } = require("../../../database/models");
+const { Rental } = require("../../../database/models");
 
-cars.post("/uniquecar", async (req, res) => {
+rentals.post("/uniquerental", async (req, res) => {
   const { id } = req.body;
   console.log(id);
   try {
-    const car = await getItem("cars", "car_id", id);
+    const car = await getItem("rentals", "rental_id", id);
     console.log(car);
     res.status(200).json(car);
   } catch (err) {
@@ -15,15 +15,15 @@ cars.post("/uniquecar", async (req, res) => {
     res.status(404).json("NOT FOUND");
   }
 });
-cars.get("/allcars", async (req, res) => {
+rentals.get("/allrentals", async (req, res) => {
   try {
-    const cars = await getAllItems(Car);
-    console.log(cars);
-    res.status(200).json(cars);
+    const rentals = await getAllItems(Rental);
+    console.log(rentals);
+    res.status(200).json(car);
   } catch (err) {
     console.log(err.message);
     res.status(404).json("NOT FOUND");
   }
 });
 
-module.exports = cars;
+module.exports = rentals;
