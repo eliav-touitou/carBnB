@@ -1,16 +1,23 @@
-const { Car } = require("./models");
+const models = require("./models");
+// const { Car } = require("./models");
 const { Op, Sequelize, where } = require("sequelize");
+const { sequelize } = require("./models");
 
-const getCar = async (carId) => {
+const getItem = async (table, row, id) => {
+  const query = `SELECT * FROM ${table} where ${row} = ${id}`;
+  // const query = "fish";
   try {
-    const result = await Car.findOne({
-      subQuery: false,
-      where: { car_id: carId },
+    const result = await sequelize.query({
+      query,
     });
-    console.log(result);
+    return result;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 
-getCar(2);
+getItem("users", "user_id", 5).then((x) => {
+  console.log(x);
+});
+
+module.exports = { getItem };
