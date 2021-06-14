@@ -3,6 +3,7 @@ const users = Router();
 const { getAllItems, getItem } = require("../../../database");
 const { User } = require("../../../database/models");
 
+// Gets a unique user
 users.post("/uniqueuser", async (req, res) => {
   const { id } = req.body;
   console.log(id);
@@ -12,9 +13,11 @@ users.post("/uniqueuser", async (req, res) => {
     res.status(200).json(car);
   } catch (err) {
     console.log(err.message);
-    res.status(404).json("NOT FOUND");
+    res.status(404).json({ message: "NOT FOUND", error: err.message });
   }
 });
+
+// Get all users
 users.get("/allusers", async (req, res) => {
   try {
     const users = await getAllItems(User);
@@ -22,7 +25,7 @@ users.get("/allusers", async (req, res) => {
     res.status(200).json(car);
   } catch (err) {
     console.log(err.message);
-    res.status(404).json("NOT FOUND");
+    res.status(404).json({ message: "NOT FOUND", error: err.message });
   }
 });
 

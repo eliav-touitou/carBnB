@@ -26,6 +26,9 @@ module.exports = {
       total_price: {
         type: Sequelize.FLOAT,
       },
+      is_active: {
+        type: Sequelize.BOOLEAN,
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
