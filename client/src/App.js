@@ -5,12 +5,10 @@ const axios = require("axios");
 function App() {
   const [cars, setCars] = useState();
 
-  const getCars = () => {
+  const getCars = async () => {
     try {
-      axios.get("/cars", async (req, res) => {
-        const cars = await res.body;
-        setCars(cars);
-      });
+      const { data } = await axios.get("api/v1/cars/allcars");
+      setCars(data);
     } catch (e) {
       console.log(e.message);
     }
@@ -19,7 +17,16 @@ function App() {
   return (
     <div className="App">
       <button onClick={getCars}>Get cars</button>
-      {/* <cars && cars */}
+
+      {cars &&
+        cars?.map((car, i) => (
+          <div>
+            <h3>{car.brand}</h3>
+            <div>{car.model}</div>
+            <div>{car.year}</div>
+            <hr />
+          </div>
+        ))}
     </div>
   );
 }

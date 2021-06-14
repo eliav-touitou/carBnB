@@ -1,13 +1,13 @@
 const { Router } = require("express");
-const cars = Router();
+const users = Router();
 const { getAllItems, getItem } = require("../../../database");
-const { Car } = require("../../../database/models");
+const { User } = require("../../../database/models");
 
-cars.post("/uniquecar", async (req, res) => {
+users.post("/uniqueuser", async (req, res) => {
   const { id } = req.body;
   console.log(id);
   try {
-    const car = await getItem("cars", "car_id", id);
+    const car = await getItem("users", "user_id", id);
     console.log(car);
     res.status(200).json(car);
   } catch (err) {
@@ -15,15 +15,15 @@ cars.post("/uniquecar", async (req, res) => {
     res.status(404).json("NOT FOUND");
   }
 });
-cars.get("/allcars", async (req, res) => {
+users.get("/allusers", async (req, res) => {
   try {
-    const cars = await getAllItems(Car);
-    console.log(cars);
-    res.status(200).json(cars);
+    const users = await getAllItems(User);
+    console.log(users);
+    res.status(200).json(car);
   } catch (err) {
     console.log(err.message);
     res.status(404).json("NOT FOUND");
   }
 });
 
-module.exports = cars;
+module.exports = users;
