@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 export default function Register() {
   const passwordRef = useRef();

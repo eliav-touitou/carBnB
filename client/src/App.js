@@ -1,16 +1,13 @@
 import "./App.css";
-import { useState } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Home from "./components/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import NotFound from "./components/NotFound";
-const axios = require("axios");
 
 function App() {
-  const [userExists, setUserExists] = useState(false);
-
   return (
     <div className="App">
       <BrowserRouter>
