@@ -6,27 +6,66 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import NotFound from "./components/NotFound";
+import allReducers from "./reducers";
+import { applyMiddleware, compose, createStore } from "redux";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// STORE
+const store = createStore(allReducers, composeEnhancer(applyMiddleware(thunk)));
+
+// ACTION INCREMENT
+// const increment = () => {
+//   return {
+//     type: "INCREMENT",
+//   };
+// };
+
+// const decrement = () => {
+//   return {
+//     type: "DECREMENT",
+//   };
+// };
+
+// // REDUCERS
+// const counter = (state = 5, action) => {
+//   switch (action.type) {
+//     case "INCREMENT":
+//       return state + 1;
+//     case "DECREMENT":
+//       return state - 1;
+//   }
+// };
+
+// Display it on console
+// store.subscribe(() => console.log(store.getState()));
+
+// DISPATCH
+// store.dispatch(increment());
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/register">
-            <Register />
-          </Route>
-          <Route exact path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/" component={NotFound} />
-        </Switch>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path="/register">
+              <Register />
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/" component={NotFound} />
+          </Switch>
+        </BrowserRouter>
+      </Provider>
     </div>
   );
 }
