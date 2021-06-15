@@ -1,6 +1,10 @@
 const { Router } = require("express");
 const cars = Router();
-const { getAllItems, getItem, addCarToDB } = require("../../../database");
+const {
+  getAllItems,
+  getCar,
+  addToCarsDB,
+} = require("../../../database/queries");
 const { Car } = require("../../../database/models");
 
 // Gets a unique car
@@ -8,7 +12,7 @@ cars.post("/uniquecar", async (req, res) => {
   const { id } = req.body;
   console.log(id);
   try {
-    const car = await getItem("cars", "car_id", id);
+    const car = await getCar(id);
     console.log(car);
     res.status(200).json({ success: true, data: car });
   } catch (err) {
@@ -32,7 +36,7 @@ cars.get("/allcars", async (req, res) => {
 cars.post("/upload", async (req, res) => {
   try {
     const { newCar } = req.body;
-    await addCarToDB(newCar);
+    await addToCarsDB(newCar);
     res.status(200).json({ success: true, data: newCar });
   } catch (err) {
     console.log(err);

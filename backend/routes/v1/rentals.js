@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const rentals = Router();
-const { getAllItems, getItem } = require("../../../database");
+const { getAllItems, getRental } = require("../../../database/queries");
 const { Rental } = require("../../../database/models");
 
 // Gets a unique rental
@@ -8,7 +8,7 @@ rentals.post("/uniquerental", async (req, res) => {
   const { id } = req.body;
   console.log(id);
   try {
-    const rental = await getItem("rentals", "rental_id", id);
+    const rental = await getRental(id);
     console.log(rental);
     res.status(200).json({ success: true, data: rental });
   } catch (err) {

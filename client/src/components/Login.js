@@ -8,16 +8,16 @@ export default function Login() {
 
   // Send login data, user name and password
   const onLoginHandler = async () => {
-    if (userNameRef === "" || passwordRef === "") {
+    if (userNameRef.current.value === "" || passwordRef.current.value === "") {
       return;
     }
     const user = {
-      name: userNameRef,
-      password: passwordRef,
+      email: userNameRef.current.value,
+      password: passwordRef.current.value,
     };
 
     try {
-      await axios.post("/api/v1/users/login", user);
+      await axios.post("/api/v1/users/login", { user: user });
       console.log("Success Login");
     } catch (error) {
       console.log(error.message);
