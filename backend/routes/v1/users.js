@@ -133,4 +133,9 @@ users.post("/logout", async (req, res) => {
   }
 });
 
+// Check if user logged in at first entry to website
+users.get("/checklogged", validToken, async (req, res) => {
+  return res.status(200).json({ message: true });
+});
+
 module.exports = users;
