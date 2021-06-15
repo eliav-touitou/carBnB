@@ -16,4 +16,45 @@ const createRefreshToken = (user) => {
   });
 };
 
-module.exports = { createAccessToken, createRefreshToken };
+// Check token validation
+const validToken = async (req, res, next) => {
+  let accessToken = await req.cookies["Access-Token"];
+  let refreshToken = await req.cookies["Refresh-Token"];
+
+  if (!accessToken || !refreshToken) {
+    return res.status(401).json({ message: "Access denied invalid token" });
+  }
+  accessToken = accessToken.slice(7);
+  refreshToken = refreshToken.slice(7);
+  jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+    if (err) {
+      if (err.message === "jwt expired") {
+        jwt.verify(
+          refreshToken,
+          process.env.REFRESH_TOKEN_SECRET,
+          (err, decoded) => {
+            if (err) {
+              return res
+                .status(401)
+                .json({ message: "Access denied invalid token" });
+            } else {
+              const newAccessToken = createAccessToken(decoded);
+              console.log(newAccessToken);
+              res
+                .clearCookie("Access-Token")
+                .cookie("Access-Token", `Bearer ${newAccessToken}`);
+              next();
+            }
+          }
+        );
+      } else {
+        return res.status(401).json({ message: "Access denied invalid token" });
+      }
+    } else {
+      req.decoded = decoded;
+      next();
+    }
+  });
+};
+
+module.exports = { createAccessToken, createRefreshToken, validToken };

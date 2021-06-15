@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement, logged } from "../actions";
+
 const axios = require("axios");
 
 export default function Home() {
@@ -13,6 +16,7 @@ export default function Home() {
   const pricePerDay = useRef();
   const pricePerWeek = useRef();
   const pricePerMonth = useRef();
+  const dispatch = useDispatch();
 
   // Get all cars
   const getCars = async () => {
@@ -53,9 +57,14 @@ export default function Home() {
     }
   };
 
+  const counter = useSelector((state) => state.counter);
+
+  console.log(counter);
   return (
     <div>
-      {" "}
+      <p>counter {counter}</p>
+      <button onClick={() => dispatch(increment(3))}>+</button>
+      <button onClick={() => dispatch(decrement())}>-</button>
       <button onClick={getCars}>Get cars</button>
       {cars?.map((car, i) => (
         <div>
