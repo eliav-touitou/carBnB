@@ -133,8 +133,4 @@ users.post("/logout", async (req, res) => {
   }
 });
 
-users.get("/checklogged", validToken, async (req, res) => {
-  return res.status(200).json({ message: true });
-});
-
 module.exports = users;
