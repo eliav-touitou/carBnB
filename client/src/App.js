@@ -6,6 +6,8 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import NotFound from "./components/NotFound";
+import AddNewCar from "./components/AddNewCar";
+import SearchBar from "./components/SearchBar";
 import allReducers from "./reducers";
 import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
@@ -30,8 +32,14 @@ function App() {
             <Route exact path="/register">
               <Register />
             </Route>
+            <Route exact path="/addnewcar">
+              <AddNewCar />
+            </Route>
             <Route exact path="/profile">
               <Profile />
+            </Route>
+            <Route exact path="/searchbar">
+              <SearchBar />
             </Route>
             <Route path="/" component={NotFound} />
           </Switch>
