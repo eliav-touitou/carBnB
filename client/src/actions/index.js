@@ -1,5 +1,5 @@
 // ACTION INCREMENT
-export const allCars = (carsObj) => {
+export const cars = (carsObj) => {
   return {
     type: "ALLCARS",
     payload: carsObj,
