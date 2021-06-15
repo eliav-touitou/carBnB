@@ -2,7 +2,11 @@ const { Router } = require("express");
 const users = Router();
 const { hashSync, genSaltSync, compareSync } = require("bcrypt");
 const { User, Auth } = require("../../../database/models");
-const { createAccessToken, createRefreshToken } = require("../../cookieUtils");
+const {
+  createAccessToken,
+  createRefreshToken,
+  validToken,
+} = require("../../cookieUtils");
 const {
   getAllItems,
   getUserOrAuth,
@@ -127,6 +131,11 @@ users.post("/logout", async (req, res) => {
       .status(500)
       .json({ message: "Problems with our server", error: error.message });
   }
+});
+
+// Check if user logged in at first entry to website
+users.get("/checklogged", validToken, async (req, res) => {
+  return res.status(200).json({ message: true });
 });
 
 module.exports = users;
