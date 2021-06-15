@@ -1,20 +1,14 @@
 // ACTION INCREMENT
-export const increment = (number) => {
+export const allCars = (carsObj) => {
   return {
-    type: "INCREMENT",
-    payload: number,
-  };
-};
-
-export const decrement = () => {
-  return {
-    type: "DECREMENT",
+    type: "ALLCARS",
+    payload: carsObj,
   };
 };
 
 export const logged = (isLogged) => {
   return {
-    type: "LOGGED",
+    type: "ISLOGGED",
     payload: isLogged,
   };
 };

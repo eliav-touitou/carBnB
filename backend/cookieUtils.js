@@ -35,7 +35,7 @@ const validToken = async (req, res, next) => {
           (err, decoded) => {
             if (err) {
               return res
-                .status(401)
+                .status(403)
                 .json({ message: "Access denied invalid token" });
             } else {
               const newAccessToken = createAccessToken(decoded);
@@ -48,7 +48,7 @@ const validToken = async (req, res, next) => {
           }
         );
       } else {
-        return res.status(401).json({ message: "Access denied invalid token" });
+        return res.status(403).json({ message: "Access denied invalid token" });
       }
     } else {
       req.decoded = decoded;
