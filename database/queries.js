@@ -1,6 +1,5 @@
-const models = require("./models");
 const { User, Car, Rental, Auth } = require("./models");
-const { Op, Sequelize, where } = require("sequelize");
+const { Op, Sequelize, where, col } = require("sequelize");
 const { sequelize } = require("./models");
 
 // Get unique car
@@ -72,7 +71,7 @@ const addToCarsDB = async (obj) => {
 const addToUsersDB = async (obj) => {
   try {
     const { phoneNumber, firstName, lastName, email, address } = obj;
-    await User.create({
+    return await User.create({
       phone_number: phoneNumber,
       user_email: email,
       first_name: firstName,
@@ -102,6 +101,23 @@ const addToAuthDB = async (obj) => {
   }
 };
 
+const updateItemToDB = async (obj) => {
+  try {
+    const { table, column, primaryKey, primaryKeyValue, content } = obj;
+    const query = {};
+
+    column.forEach(async (col, i) => {
+      query[col] = content[i];
+    });
+
+    await table.update(query, {
+      where: { [primaryKey]: primaryKeyValue },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getCar,
   getRental,
@@ -110,4 +126,5 @@ module.exports = {
   addToCarsDB,
   addToUsersDB,
   addToAuthDB,
+  updateItemToDB,
 };
