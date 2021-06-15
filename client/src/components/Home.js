@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logged, allCars } from "../actions";
+import { logged, cars } from "../actions";
 
 const axios = require("axios");
 
@@ -28,7 +28,7 @@ export default function Home() {
   const getCars = async () => {
     try {
       const { data } = await axios.get("api/v1/cars/allcars");
-      dispatch(allCars(data.data));
+      dispatch(cars(data.data));
     } catch (error) {
       console.log(error.message);
     }
@@ -71,7 +71,7 @@ export default function Home() {
       <p>logged {String(isLogged)}</p>
       <button onClick={getCars}>Get cars</button>
       {allCars?.map((car, i) => (
-        <div>
+        <div key={`car` + i}>
           {console.log(car)}
           <h3>{car.brand}</h3>
           <div>{car.model}</div>
