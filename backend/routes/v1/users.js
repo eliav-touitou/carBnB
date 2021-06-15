@@ -1,7 +1,8 @@
 const { Router } = require("express");
 const users = Router();
 const { hashSync, genSaltSync, compareSync } = require("bcrypt");
-const { User, Auth } = require("../../../database/models");
+const { User, Auth, Car, Rental } = require("../../../database/models");
+const models = require("../../../database/models");
 const {
   createAccessToken,
   createRefreshToken,
@@ -12,7 +13,15 @@ const {
   getUserOrAuth,
   addToUsersDB,
   addToAuthDB,
+  updateItemToDB,
 } = require("../../../database/queries");
+
+const primaryKeys = {
+  User: "user_email",
+  Car: "car_id",
+  Auth: "user_email",
+  Rental: "transaction_id",
+};
 
 // Gets a unique user
 users.post("/uniqueuser", async (req, res) => {
@@ -136,6 +145,29 @@ users.post("/logout", async (req, res) => {
 // Check if user logged in at first entry to website
 users.get("/checklogged", validToken, async (req, res) => {
   return res.status(200).json({ message: true });
+});
+
+users.post("/updateitems", async (req, res) => {
+  const { data } = req.body;
+  try {
+    const table = models[`${data[0]}`];
+
+    const objToUpdate = {
+      table: table,
+      column: data[1],
+      primaryKey: primaryKeys[data[0]],
+      primaryKeyValue: data[2],
+      content: data[3],
+    };
+
+    await updateItemToDB(objToUpdate);
+    return res.status(200).json({ message: "Success to update!" });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ message: "Problems with our server", error: error.message });
+  }
 });
 
 module.exports = users;
