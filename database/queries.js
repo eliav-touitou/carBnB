@@ -1,28 +1,49 @@
 const models = require("./models");
-const { User, Car, Rental } = require("./models");
+const { User, Car, Rental, Auth } = require("./models");
 const { Op, Sequelize, where } = require("sequelize");
 const { sequelize } = require("./models");
 
-const getItem = async (table, row, id) => {
-  const query = `SELECT * FROM ${table} where ${row} = ${id}`;
+// Get unique car
+const getCar = async (id) => {
   try {
-    const result = await sequelize.query({
-      query,
-    });
-    // return JSON.stringify(result, null, 2);
+    const result = await Car.findOne({ where: { car_id: id } });
+
     return result;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 };
 
+// Get unique rental
+const getRental = async (id) => {
+  try {
+    const result = await Rental.findOne({ where: { transaction_id: id } });
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Get unique user / auth
+const getUserOrAuth = async (model, email) => {
+  try {
+    const result = await model.findOne({ where: { user_email: email } });
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Get all items from each table
 const getAllItems = async (model) => {
   try {
     const data = await model.findAll();
     return data;
     // return JSON.stringify(data, null, 2);
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 };
 
@@ -40,9 +61,9 @@ const addToCarsDB = async (obj) => {
       price_per_month: obj.pricePerMonth,
       is_rented: false,
     });
-  } catch (err) {
-    console.log(err.message);
-    throw err;
+  } catch (error) {
+    console.log(error.message);
+    throw error;
   }
 };
 
@@ -51,15 +72,17 @@ const addToUsersDB = async (obj) => {
   try {
     const { phoneNumber, firstName, lastName, email, address } = obj;
     await User.create({
+      phone_number: phoneNumber,
       user_email: email,
       first_name: firstName,
       last_name: lastName,
-      phone_number: phoneNumber,
       address: address,
+      rating: null,
+      number_of_votes: 0,
     });
-  } catch (err) {
-    console.log(err.message);
-    throw err;
+  } catch (error) {
+    console.log(error.message);
+    throw error;
   }
 };
 
@@ -67,19 +90,21 @@ const addToUsersDB = async (obj) => {
 const addToAuthDB = async (obj) => {
   try {
     const { firstName, lastName, email, password } = obj;
-    await User.create({
-      email: email,
+    await Auth.create({
+      user_email: email,
       password: password,
       full_name: firstName + " " + lastName,
     });
-  } catch (err) {
-    console.log(err.message);
-    throw err;
+  } catch (error) {
+    console.log(error.message);
+    throw error;
   }
 };
 
 module.exports = {
-  getItem,
+  getCar,
+  getRental,
+  getUserOrAuth,
   getAllItems,
   addToCarsDB,
   addToUsersDB,

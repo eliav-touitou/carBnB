@@ -6,27 +6,37 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import NotFound from "./components/NotFound";
+import allReducers from "./reducers";
+import { applyMiddleware, compose, createStore } from "redux";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+// STORE
+const store = createStore(allReducers, composeEnhancer(applyMiddleware(thunk)));
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/register">
-            <Register />
-          </Route>
-          <Route exact path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/" component={NotFound} />
-        </Switch>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path="/register">
+              <Register />
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/" component={NotFound} />
+          </Switch>
+        </BrowserRouter>
+      </Provider>
     </div>
   );
 }

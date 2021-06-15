@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Rental.init(
     {
-      rental_id: {
+      transaction_id: {
         type: DataTypes.STRING,
         primaryKey: true,
       },
