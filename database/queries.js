@@ -56,6 +56,7 @@ const addToCarsDB = async (obj) => {
       year: obj.year,
       model: obj.model,
       fuel: obj.fuel,
+      passengers: obj.passengers,
       price_per_day: obj.pricePerDay,
       price_per_week: obj.pricePerWeek,
       price_per_month: obj.pricePerMonth,
