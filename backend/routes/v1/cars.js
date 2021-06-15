@@ -43,6 +43,7 @@ cars.get("/allcars", async (req, res) => {
   }
 });
 
+// Upload new car
 cars.post("/upload", async (req, res) => {
   try {
     const { newCar } = req.body;

@@ -88,6 +88,7 @@ users.post("/register", async (req, res) => {
   }
 });
 
+// Login for exist user
 users.post("/login", async (req, res) => {
   const { email, password } = req.body.user; // ##need to change maybe
   try {
