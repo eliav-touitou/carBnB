@@ -2,7 +2,11 @@ const { Router } = require("express");
 const users = Router();
 const { hashSync, genSaltSync, compareSync } = require("bcrypt");
 const { User, Auth } = require("../../../database/models");
-const { createAccessToken, createRefreshToken } = require("../../cookieUtils");
+const {
+  createAccessToken,
+  createRefreshToken,
+  validToken,
+} = require("../../cookieUtils");
 const {
   getAllItems,
   getUserOrAuth,
