@@ -3,6 +3,7 @@ const { User, Car, Rental, Auth } = require("./models");
 const { Op, Sequelize, where } = require("sequelize");
 const { sequelize } = require("./models");
 
+// Get unique car
 const getCar = async (id) => {
   try {
     const result = await Car.findOne({ where: { car_id: id } });
@@ -12,6 +13,8 @@ const getCar = async (id) => {
     throw error;
   }
 };
+
+// Get unique rental
 const getRental = async (id) => {
   try {
     const result = await Rental.findOne({ where: { transaction_id: id } });
@@ -21,6 +24,8 @@ const getRental = async (id) => {
     throw error;
   }
 };
+
+// Get unique user / auth
 const getUserOrAuth = async (model, email) => {
   try {
     const result = await model.findOne({ where: { user_email: email } });
@@ -31,6 +36,7 @@ const getUserOrAuth = async (model, email) => {
   }
 };
 
+// Get all items from each table
 const getAllItems = async (model) => {
   try {
     const data = await model.findAll();
@@ -72,6 +78,7 @@ const addToUsersDB = async (obj) => {
       last_name: lastName,
       address: address,
       rating: null,
+      number_of_votes: 0,
     });
   } catch (error) {
     console.log(error.message);
