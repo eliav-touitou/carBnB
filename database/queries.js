@@ -72,6 +72,7 @@ const addToUsersDB = async (obj) => {
       last_name: lastName,
       address: address,
       rating: null,
+      number_of_votes: 0,
     });
   } catch (error) {
     console.log(error.message);
