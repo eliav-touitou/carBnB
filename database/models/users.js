@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       address: DataTypes.STRING,
       rating: DataTypes.FLOAT,
       number_of_votes: DataTypes.INTEGER,
+      license: DataTypes.TEXT,
     },
     {
       sequelize,
