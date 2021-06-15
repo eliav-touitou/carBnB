@@ -88,6 +88,7 @@ users.post("/register", async (req, res) => {
   }
 });
 
+// Login for exist user
 users.post("/login", async (req, res) => {
   const { email, password } = req.body.user; // ##need to change maybe
   try {
@@ -130,10 +131,6 @@ users.post("/logout", async (req, res) => {
       .status(500)
       .json({ message: "Problems with our server", error: error.message });
   }
-});
-
-users.get("/checklogged", validToken, async (req, res) => {
-  return res.status(200).json({ message: true });
 });
 
 module.exports = users;
