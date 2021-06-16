@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logged } from "../actions";
+import { setLogged } from "../actions";
 
 export default function Login() {
   const userNameRef = useRef();
@@ -23,10 +23,10 @@ export default function Login() {
 
     try {
       await axios.post("/api/v1/users/login", { user: user });
-      dispatch(logged(true));
+      dispatch(setLogged(true));
       console.log("Success Login");
     } catch (error) {
-      dispatch(logged(false));
+      dispatch(setLogged(false));
       console.log(error.message);
     }
   };

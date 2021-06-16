@@ -1,5 +1,5 @@
 // ACTION INCREMENT
-export const cars = (carsObj) => {
+export const setCars = (carsObj) => {
   return {
     type: "ALLCARS",
     payload: carsObj,
@@ -12,7 +12,7 @@ export const setAllCarsApi = (dataApi) => {
   };
 };
 
-export const logged = (isLogged) => {
+export const setLogged = (isLogged) => {
   return {
     type: "ISLOGGED",
     payload: isLogged,
