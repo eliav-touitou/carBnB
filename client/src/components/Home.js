@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logged, cars } from "../actions";
+import { setLogged, setCars } from "../actions";
 import SearchBar from "./SearchBar";
 const axios = require("axios");
 
 export default function Home() {
   const dispatch = useDispatch();
+  const isLogged = useSelector((state) => state.isLogged);
+  const allCars = useSelector((state) => state.allCars);
 
   useEffect(() => {
     axios.get("api/v1/users/checklogged").then((result) => {
-      if (result.status === 200) dispatch(logged(true));
+      if (result.status === 200) dispatch(setLogged(true));
     });
   }, []);
 
@@ -18,7 +20,7 @@ export default function Home() {
   const getCars = async () => {
     try {
       const { data } = await axios.get("api/v1/cars/allcars");
-      dispatch(cars(data.data));
+      dispatch(setCars(data.data));
     } catch (error) {
       console.log(error.message);
     }
@@ -32,9 +34,6 @@ export default function Home() {
       console.log("error logout");
     }
   };
-
-  const isLogged = useSelector((state) => state.isLogged);
-  const allCars = useSelector((state) => state.allCars);
 
   return (
     <div>
