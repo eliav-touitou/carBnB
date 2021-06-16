@@ -5,6 +5,12 @@ export const cars = (carsObj) => {
     payload: carsObj,
   };
 };
+export const setAllCarsApi = (dataApi) => {
+  return {
+    type: "ALLCARSAPI",
+    payload: dataApi,
+  };
+};
 
 export const logged = (isLogged) => {
   return {

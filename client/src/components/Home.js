@@ -1,11 +1,8 @@
 import React, { useEffect } from "react";
-import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logged, cars } from "../actions";
-import AddNewCar from "./AddNewCar";
 import SearchBar from "./SearchBar";
-
 const axios = require("axios");
 
 export default function Home() {
