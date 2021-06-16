@@ -41,6 +41,7 @@ export default function Home() {
 
   return (
     <div>
+      <SearchBar />
       <p>logged {String(isLogged)}</p>
       <button onClick={getCars}>Get cars</button>
       {allCars?.map((car, i) => (
