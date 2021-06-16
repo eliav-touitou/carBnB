@@ -136,6 +136,62 @@ const updateItemToDB = async (obj) => {
   }
 };
 
+const getByCity = async (obj) => {
+  const { address } = obj;
+  try {
+    return await User.findAll({
+      where: { address: { [Op.like]: `%${address}%` } },
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getExistCars = async (obj) => {
+  const arrOfEmails = obj.emails;
+  const numOfPassengers = obj.passengers;
+  const startDate = obj.dates.start;
+  const endDate = obj.dates.end;
+
+  const result = await Car.findAll({
+    where: {
+      [Op.and]: {
+        available_from: {
+          [Op.lte]: startDate,
+        },
+
+        available_until: {
+          [Op.gte]: endDate,
+        },
+
+        passengers: { [Op.gte]: numOfPassengers },
+        owner_email: { [Op.in]: arrOfEmails },
+      },
+    },
+  });
+  return result;
+};
+
+const whatCarsAreTaken = async (obj) => {
+  const arrOfCarsId = obj.carsId;
+  const startDate = obj.dates.start;
+  const endDate = obj.dates.end;
+
+  Rental.findAll({
+    where: {
+      [Op.and]: {
+        car_id: { [Op.in]: arrOfCarsId },
+        start_date: {
+          [Op.lte]: startDate,
+        },
+        end_date: {
+          [Op.gte]: endDate,
+        },
+      },
+    },
+  });
+};
+
 module.exports = {
   getCar,
   getRental,
@@ -145,5 +201,7 @@ module.exports = {
   addToUsersDB,
   addToAuthDB,
   updateItemToDB,
-  getItemFromDB,
+  getByCity,
+  getExistCars,
+  whatCarsAreTaken,
 };
