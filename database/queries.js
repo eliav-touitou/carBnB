@@ -35,6 +35,24 @@ const getUserOrAuth = async (model, email) => {
   }
 };
 
+// Get item from DB by specific column-value
+const getItemFromDB = async (obj) => {
+  const { model, column, columnValue } = obj;
+  const query = {};
+
+  column.forEach(async (col, i) => {
+    query[col] = columnValue[i];
+  });
+  // console.log(query);
+  try {
+    const data = await model.findAll({ where: query });
+    console.log(data);
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
 // Get all items from each table
 const getAllItems = async (model) => {
   try {
@@ -127,4 +145,5 @@ module.exports = {
   addToUsersDB,
   addToAuthDB,
   updateItemToDB,
+  getItemFromDB,
 };
