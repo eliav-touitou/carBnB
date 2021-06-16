@@ -4,11 +4,12 @@ const {
   getItemFromDB,
   whatCarsAreTaken,
   getByCity,
-  getExistCars,
+  GetCarsByParameters,
 } = require("../../../database/queries");
 const { User, Auth, Car, Rental } = require("../../../database/models");
 const models = require("../../../database/models");
 
+// Get any items from any table.
 search.post("/getitem", async (req, res) => {
   const { data } = req.body;
   //   console.log(data);
@@ -30,46 +31,62 @@ search.post("/getitem", async (req, res) => {
   }
 });
 
+// Search car by basic parameters.
 search.post("/initial", async (req, res) => {
   const { data } = req.body;
   const emails = [];
   try {
-    const users = await getByCity(data.city);
+    // Get users by city
+    const users = await getByCity({ address: data.city });
+
     if (users.length === 0) {
       return res
         .status(404)
         .json({ message: `THERE IS NO AVAILABLE CAR IN ${data.city}` });
     }
 
-    users.forEach((user) => emails.push(user.email));
+    users.forEach((user) => emails.push(user.user_email));
     const objToSearchBy = {
       emails: emails,
       passengers: data.passengers,
       dates: { start: new Date(data.startDate), end: new Date(data.endDate) },
     };
 
-    const existCars = await getExistCars(objToSearchBy);
-    if (existCars.length === 0) {
+    // Get existing cars by parameter (objToSearchBy).
+    const carsByParameters = await GetCarsByParameters(objToSearchBy);
+
+    if (carsByParameters.length === 0) {
       return res.status(404).json({
         message: `THERE IS NO AVAILABLE CAR THAT MATCH TO CHOSEN OPTIONS`,
       });
     }
 
+    // Insert into 'carsId' Array id's of taken cars.
+    // Check what cars are taken.
     const carsId = [];
-    existCars.forEach((car) => carsId.push(car.car_id));
+    carsByParameters.forEach((car) => carsId.push(car.car_id));
     const takenCars = await whatCarsAreTaken({
       carsId: carsId,
       dates: { start: new Date(data.startDate), end: new Date(data.endDate) },
     });
 
+    // If there is no taken cars return 'carsByParameters'.
+    if (takenCars.length === 0) {
+      return res
+        .status(200)
+        .json({ message: "successful", data: carsByParameters });
+    }
+
+    // Generates new Array of available cars.
     const carsAvailable = [];
     const takenCarsId = [];
     takenCars.forEach((car) => takenCarsId.push(car.car_id));
-    existCars.forEach((car) => {
+    carsByParameters.forEach((car) => {
       if (!takenCarsId.includes(car.car_id)) carsAvailable.push(car);
     });
 
-    if (takenCars.length === ex) {
+    // If there is no available cars return message.
+    if (carsAvailable.length === 0) {
       return res
         .status(404)
         .json({ message: `THERE IS NO AVAILABLE CAR IN THOSE DATES` });
@@ -77,6 +94,7 @@ search.post("/initial", async (req, res) => {
 
     return res.status(200).json({ message: "successful", data: carsAvailable });
   } catch (err) {
+    console.log(err);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: err.message });

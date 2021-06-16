@@ -147,7 +147,7 @@ const getByCity = async (obj) => {
   }
 };
 
-const getExistCars = async (obj) => {
+const GetCarsByParameters = async (obj) => {
   const arrOfEmails = obj.emails;
   const numOfPassengers = obj.passengers;
   const startDate = obj.dates.start;
@@ -177,16 +177,18 @@ const whatCarsAreTaken = async (obj) => {
   const startDate = obj.dates.start;
   const endDate = obj.dates.end;
 
-  Rental.findAll({
+  return await Rental.findAll({
     where: {
       [Op.and]: {
+        [Op.or]: {
+          start_date: {
+            [Op.lte]: startDate,
+          },
+          end_date: {
+            [Op.gte]: endDate,
+          },
+        },
         car_id: { [Op.in]: arrOfCarsId },
-        start_date: {
-          [Op.lte]: startDate,
-        },
-        end_date: {
-          [Op.gte]: endDate,
-        },
       },
     },
   });
@@ -202,6 +204,7 @@ module.exports = {
   addToAuthDB,
   updateItemToDB,
   getByCity,
-  getExistCars,
+  GetCarsByParameters,
   whatCarsAreTaken,
+  getItemFromDB,
 };

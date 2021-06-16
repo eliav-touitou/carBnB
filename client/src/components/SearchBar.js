@@ -24,19 +24,20 @@ export default function SearchBar() {
   //     cleanup;
   //   };
   // }, []);
+
   const search = async () => {
     const city = cityRef.current.value;
-    const passengers = passengersRef.current.value;
+    const passengers = Number(passengersRef.current.value.slice(0, -1));
     const startDate = startDateRef.current.value;
     const endDate = endDateRef.current.value;
     const searchParameters = {
-      data: [city, startDate, endDate, passengers],
+      data: { city, startDate, endDate, passengers },
     };
     try {
       const res = await axios.post("api/v1/search/initial", searchParameters);
-      console.log(res);
+      console.log(res.data.data);
     } catch (err) {
-      console.log(err.message);
+      console.log(err.response.data.message);
     }
   };
   return (
