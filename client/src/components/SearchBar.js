@@ -9,7 +9,8 @@ export default function SearchBar() {
       data: ["Car", ["brand"], [`${brand}`]],
     };
     try {
-      await axios.post("api/v1/getitem", searchParameters);
+      const res = await axios.post("api/v1/getitem", searchParameters);
+      console.log(res);
     } catch (err) {
       console.log(err.message);
     }
@@ -19,11 +20,21 @@ export default function SearchBar() {
       do you know what car do you want?:
       <input list="cars" ref={brandRef}></input>
       <datalist id="cars">
-        <option value="BMW" />
-        <option value="Bentley" />
-        <option value="Mercedes" />
-        <option value="Audi" />
-        <option value="Volkswagen" />
+        <option value="Reno" />
+        <option value="Suzuki" />
+        <option value="Toyota" />
+        <option value="Ford" />
+        <option value="Skoda" />
+      </datalist>
+      <button onClick={search}>search!</button>
+      do you what size of car you need?
+      <input list="passengers" ref={brandRef}></input>
+      <datalist id="passengers">
+        <option value="Reno" />
+        <option value="Suzuki" />
+        <option value="Toyota" />
+        <option value="Ford" />
+        <option value="Skoda" />
       </datalist>
       <button onClick={search}>search!</button>
     </div>
