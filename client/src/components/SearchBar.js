@@ -1,8 +1,13 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 export default function SearchBar() {
   const cityRef = useRef();
+  let today = new Date().toISOString().slice(0, 10);
+  let tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow = tomorrow.toISOString().slice(0, 10);
+
   const passengersRef = useRef();
   const endDateRef = useRef();
   const startDateRef = useRef();
@@ -41,8 +46,8 @@ export default function SearchBar() {
             ref={startDateRef}
             type="date"
             name="rent-start"
-            // value={new Date()}
-            min="2018-01-01"
+            value={today}
+            min={today}
             max="2022-01-01"
           ></input>
         </div>
@@ -52,8 +57,8 @@ export default function SearchBar() {
             ref={endDateRef}
             type="date"
             name="rent-end"
-            // value="2018-07-22"
-            min="2018-01-01"
+            value={tomorrow}
+            min={tomorrow}
             max="2022-02-01"
           ></input>
         </div>
