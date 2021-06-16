@@ -31,6 +31,9 @@ module.exports = (sequelize, DataTypes) => {
       price_per_week: DataTypes.FLOAT,
       price_per_month: DataTypes.FLOAT,
       is_rented: DataTypes.BOOLEAN,
+      available_from: DataTypes.DATE,
+      available_until: DataTypes.DATE,
+      gear: DataTypes.STRING,
     },
     {
       sequelize,
