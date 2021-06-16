@@ -9,14 +9,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasOne(models.Auth, { foreignKey: "user_email" });
-      this.hasMany(models.Car, { foreignKey: "user_email" });
+      this.hasMany(models.Car, {
+        foreignKey: "owner_email",
+        sourceKey: "user_email",
+      });
     }
   }
   User.init(
     {
-      phone_number: { type: DataTypes.STRING, primaryKey: true },
+      phone_number: DataTypes.STRING,
       first_name: DataTypes.STRING,
-      user_email: DataTypes.STRING,
+      user_email: { type: DataTypes.STRING, primaryKey: true },
       last_name: DataTypes.STRING,
       address: DataTypes.STRING,
       rating: DataTypes.FLOAT,
