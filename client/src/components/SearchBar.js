@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 
 export default function SearchBar() {
   const cityRef = useRef();

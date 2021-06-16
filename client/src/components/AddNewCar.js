@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useRef } from "react";
+import { useSelector } from "react-redux";
 
 export default function AddNewCar() {
   const owner = useRef();
@@ -11,6 +12,7 @@ export default function AddNewCar() {
   const pricePerWeek = useRef();
   const pricePerMonth = useRef();
   const passengers = useRef();
+  const allCarsApi = useSelector((state) => state.allCarsApi);
 
   // Upload new car to database
   const uploadCar = async () => {
@@ -36,7 +38,15 @@ export default function AddNewCar() {
   return (
     <div>
       <input ref={owner} placeholder="Enter Email"></input>
-      <input ref={brand} placeholder="Enter Car's Brand"></input>
+      <div>
+        pick your car brand
+        <input list="cars"></input>
+        <datalist id="cars">
+          {allCarsApi?.map((car) => (
+            <option value={`${car.MakeName}`} />
+          ))}
+        </datalist>
+      </div>
       <input ref={model} placeholder="Enter Car's model"></input>
       <input ref={year} placeholder="Enter Car's manufacture year"></input>
       <input ref={fuel} placeholder="Enter Car's gas type"></input>
