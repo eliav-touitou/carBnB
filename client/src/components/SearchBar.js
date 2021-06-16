@@ -3,14 +3,27 @@ import React, { useRef, useState } from "react";
 
 export default function SearchBar() {
   const cityRef = useRef();
-  let today = new Date().toISOString().slice(0, 10);
-  let tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  tomorrow = tomorrow.toISOString().slice(0, 10);
-
   const passengersRef = useRef();
   const endDateRef = useRef();
   const startDateRef = useRef();
+  let day = new Date();
+  let today = day.toISOString().slice(0, 10);
+  let tomorrow = day;
+  tomorrow.setDate(day.getDate() + 1);
+  tomorrow = tomorrow.toISOString().slice(0, 10);
+
+  //////////
+  // const [tomorrow, setTomorrow] = useState();
+  // let daysOnly = parseInt(startDateRef.slice(-2));
+  // let newDate = (daysOnly += 1);
+
+  // startDateRef.substring(0, startDateRef.length - 2) + `${newDate}`;
+  // ////////
+  // useEffect(() => {
+  //   return () => {
+  //     cleanup;
+  //   };
+  // }, []);
   const search = async () => {
     const city = cityRef.current.value;
     const passengers = passengersRef.current.value;
@@ -46,7 +59,7 @@ export default function SearchBar() {
             ref={startDateRef}
             type="date"
             name="rent-start"
-            value={today}
+            // value={today}
             min={today}
             max="2022-01-01"
           ></input>
@@ -57,7 +70,7 @@ export default function SearchBar() {
             ref={endDateRef}
             type="date"
             name="rent-end"
-            value={tomorrow}
+            // value={tomorrow}
             min={tomorrow}
             max="2022-02-01"
           ></input>
