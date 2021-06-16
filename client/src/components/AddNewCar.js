@@ -1,21 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setAllModelsApi } from "../actions";
 
 export default function AddNewCar() {
-  const ownerRef = useRef();
-  const brandRef = useRef();
-  const modelRef = useRef();
-  const yearRef = useRef();
-  const fuelRef = useRef();
-  const pricePerDayRef = useRef();
-  const pricePerWeekRef = useRef();
-  const pricePerMonthRef = useRef();
-  const passengersRef = useRef();
+  const dispatch = useDispatch();
   const allCarsApi = useSelector((state) => state.allCarsApi);
-  const apiCars = "https://vpic.nhtsa.dot.gov/api";
-  const [allModels, setAllModels] = useState();
+  const allModelsApi = useSelector((state) => state.allModelsApi);
+
   const [yearsArr, setYearsArr] = useState([]);
+  const [percentage, setPercentage] = useState([]);
+
+  const apiCars = "https://vpic.nhtsa.dot.gov/api";
+  const gearOptions = ["Manual", "Auto"];
+  const seatsOptions = ["2", "4", "5", "6", "7", "9", "else"];
   const fuelTypes = [
     "Octan-95",
     "Octan-96",
@@ -24,8 +22,17 @@ export default function AddNewCar() {
     "Electric",
     "Gas",
   ];
-  const [percentage, setPercentage] = useState([]);
-  const seatsOptions = ["2", "4", "5", "6", "7", "9", "else"];
+
+  const ownerRef = useRef();
+  const brandRef = useRef();
+  const modelRef = useRef();
+  const gearRef = useRef();
+  const yearRef = useRef();
+  const fuelRef = useRef();
+  const pricePerDayRef = useRef();
+  const pricePerWeekRef = useRef();
+  const pricePerMonthRef = useRef();
+  const passengersRef = useRef();
 
   useEffect(() => {
     let temp = [];
@@ -41,7 +48,7 @@ export default function AddNewCar() {
     setPercentage(temp);
   }, []);
 
-  const onChangeHandler = async () => {
+  const onBrandChangeHandler = async () => {
     allCarsApi?.forEach((car) => {
       if (car.MakeName.toLowerCase() === brandRef.current.value.toLowerCase()) {
         axios
@@ -49,7 +56,7 @@ export default function AddNewCar() {
             apiCars + `/vehicles/GetModelsForMake/${car.MakeName}?format=json`
           )
           .then(({ data }) => {
-            setAllModels(data.Results);
+            dispatch(setAllModelsApi(data.Results));
           })
           .catch((err) => console.log(err));
       } else {
@@ -64,6 +71,7 @@ export default function AddNewCar() {
       ownerEmail: ownerRef.current.value,
       brand: brandRef.current.value,
       model: modelRef.current.value,
+      gear: gearRef.current.value,
       year: yearRef.current.value,
       fuel: fuelRef.current.value,
       passengers: parseInt(passengersRef.current.value),
@@ -77,17 +85,21 @@ export default function AddNewCar() {
     } catch (error) {
       console.log(error.message);
     }
-    console.log(newCar);
   };
+
   return (
     <div>
       <input ref={ownerRef} placeholder="Enter Email"></input>
       <div>
         pick your car brand
-        <input ref={brandRef} list="brand" onChange={onChangeHandler}></input>
+        <input
+          ref={brandRef}
+          list="brand"
+          onChange={onBrandChangeHandler}
+        ></input>
         <datalist id="brand">
-          {allCarsApi?.map((car) => (
-            <option value={`${car.MakeName}`} />
+          {allCarsApi?.map((car, i) => (
+            <option key={`brand-${i}`} value={`${car.MakeName}`} />
           ))}
         </datalist>
       </div>
@@ -95,8 +107,17 @@ export default function AddNewCar() {
         pick your car model
         <input ref={modelRef} list="model"></input>
         <datalist id="model">
-          {allModels?.map((model) => (
-            <option value={`${model.Model_Name}`} />
+          {allModelsApi?.map((model, i) => (
+            <option key={`model-${i}`} value={`${model.Model_Name}`} />
+          ))}
+        </datalist>
+      </div>
+      <div>
+        pick your car gear
+        <input ref={gearRef} list="gear"></input>
+        <datalist id="gear">
+          {gearOptions?.map((gear, i) => (
+            <option key={`gear-${i}`} value={gear} />
           ))}
         </datalist>
       </div>
@@ -104,8 +125,8 @@ export default function AddNewCar() {
         pick your car year
         <input ref={yearRef} list="year"></input>
         <datalist id="year">
-          {yearsArr?.map((year) => (
-            <option value={year} />
+          {yearsArr?.map((year, i) => (
+            <option key={`year-${i}`} value={year} />
           ))}
         </datalist>
       </div>
@@ -113,8 +134,8 @@ export default function AddNewCar() {
         pick your car gas type
         <input ref={fuelRef} list="fuel"></input>
         <datalist id="fuel">
-          {fuelTypes?.map((fuel) => (
-            <option value={fuel} />
+          {fuelTypes?.map((fuel, i) => (
+            <option key={`fuel-${i}`} value={fuel} />
           ))}
         </datalist>
       </div>
@@ -122,8 +143,8 @@ export default function AddNewCar() {
         number of seats
         <input ref={passengersRef} list="passengers"></input>
         <datalist id="passengers">
-          {seatsOptions?.map((seat) => (
-            <option value={seat} />
+          {seatsOptions?.map((seat, i) => (
+            <option key={`passengers-${i}`} value={seat} />
           ))}
         </datalist>
       </div>
@@ -138,8 +159,8 @@ export default function AddNewCar() {
         percent of discount per week
         <input ref={pricePerWeekRef} list="pricePerWeek"></input>
         <datalist id="pricePerWeek">
-          {percentage?.map((percent) => (
-            <option value={percent} />
+          {percentage?.map((percent, i) => (
+            <option key={`pricePerWeek-${i}`} value={percent} />
           ))}
         </datalist>
       </div>
@@ -147,8 +168,8 @@ export default function AddNewCar() {
         percent of discount per month
         <input ref={pricePerMonthRef} list="pricePerMonth"></input>
         <datalist id="pricePerMonth">
-          {percentage?.map((percent) => (
-            <option value={percent} />
+          {percentage?.map((percent, i) => (
+            <option key={`pricePerMonth-${i}`} value={percent} />
           ))}
         </datalist>
       </div>

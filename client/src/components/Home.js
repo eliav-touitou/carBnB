@@ -7,6 +7,7 @@ const axios = require("axios");
 
 export default function Home() {
   const dispatch = useDispatch();
+
   const isLogged = useSelector((state) => state.isLogged);
   const allCars = useSelector((state) => state.allCars);
 

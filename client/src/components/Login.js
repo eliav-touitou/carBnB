@@ -5,11 +5,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { setLogged } from "../actions";
 
 export default function Login() {
-  const userNameRef = useRef();
-  const passwordRef = useRef();
+  const dispatch = useDispatch();
 
   const isLogged = useSelector((state) => state.isLogged);
-  const dispatch = useDispatch();
+
+  const userNameRef = useRef();
+  const passwordRef = useRef();
 
   // Send login data, user name and password
   const onLoginHandler = async () => {
