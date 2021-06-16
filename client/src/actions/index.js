@@ -11,6 +11,12 @@ export const setAllCarsApi = (dataApi) => {
     payload: dataApi,
   };
 };
+export const setAllModelsApi = (dataApi) => {
+  return {
+    type: "ALLMODELSAPI",
+    payload: dataApi,
+  };
+};
 
 export const setLogged = (isLogged) => {
   return {
