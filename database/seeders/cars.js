@@ -1,3 +1,4 @@
+const date = new Date();
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert(
@@ -14,8 +15,10 @@ module.exports = {
           price_per_week: 20,
           price_per_month: 10,
           is_rented: false,
-
           passengers: 5,
+          available_from: new Date(),
+          available_until: new Date(date.setMonth(date.getMonth() + 2)),
+          gear: "Manual",
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -31,6 +34,9 @@ module.exports = {
           price_per_month: 15,
           is_rented: false,
           passengers: 4,
+          available_from: new Date(),
+          available_until: new Date(date.setMonth(date.getMonth() + 1)),
+          gear: "Auto",
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -46,6 +52,9 @@ module.exports = {
           price_per_month: 20,
           is_rented: true,
           passengers: 5,
+          available_from: new Date(),
+          available_until: new Date(date.setMonth(date.getMonth() + 3)),
+          gear: "Manual",
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -61,6 +70,9 @@ module.exports = {
           price_per_month: 60,
           is_rented: false,
           passengers: 5,
+          available_from: new Date(),
+          available_until: new Date(date.setMonth(date.getMonth() + 4)),
+          gear: "Manual",
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -76,6 +88,9 @@ module.exports = {
           price_per_month: 5,
           is_rented: true,
           passengers: 5,
+          available_from: new Date(),
+          available_until: new Date(date.setMonth(date.getMonth() + 1)),
+          gear: "Auto",
           created_at: new Date(),
           updated_at: new Date(),
         },

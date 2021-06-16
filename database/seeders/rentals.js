@@ -19,7 +19,7 @@ module.exports = {
           transaction_id: 2,
           car_id: 5,
           owner_email: "oded.mar@hotmail.com",
-          owner_email: "lea.shosh@walla.co.il",
+          renter_email: "lea.shosh@walla.co.il",
           start_date: new Date(25 - 05 - 2021),
           end_date: new Date(27 - 06 - 2021),
           total_price: 110,
