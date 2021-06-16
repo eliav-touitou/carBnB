@@ -10,6 +10,7 @@ export default function SearchBar() {
   const searchParameters = {
     data: ["", [], []],
   };
+
   const search = async () => {
     const brand = brandRef.current.value;
     const passengers = passengersRef.current.value;

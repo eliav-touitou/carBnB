@@ -1,11 +1,12 @@
 const { Router } = require("express");
 const cars = Router();
+const { Car } = require("../../../database/models");
+const { calculateDiscount } = require("../../helperFunctions");
 const {
   getAllItems,
   getCar,
   addToCarsDB,
 } = require("../../../database/queries");
-const { Car } = require("../../../database/models");
 
 // Gets a unique car
 cars.post("/uniquecar", async (req, res) => {
@@ -47,6 +48,11 @@ cars.get("/allcars", async (req, res) => {
 cars.post("/upload", async (req, res) => {
   try {
     const { newCar } = req.body;
+    let { pricePerWeek, pricePerMonth, pricePerDay } = newCar;
+
+    newCar.pricePerWeek = calculateDiscount(pricePerDay, pricePerWeek, 7);
+    newCar.pricePerMonth = calculateDiscount(pricePerDay, pricePerMonth, 30);
+
     await addToCarsDB(newCar);
     return res.status(200).json({ success: true, data: newCar });
   } catch (error) {

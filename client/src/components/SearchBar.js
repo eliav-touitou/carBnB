@@ -55,7 +55,7 @@ export default function SearchBar() {
       </div>
       <div className="choose-dates">
         <div className="start-date">
-          <label for="start">Start date:</label>
+          <label htmlFor="start">Start date:</label>
           <input
             ref={startDateRef}
             type="date"
@@ -66,7 +66,7 @@ export default function SearchBar() {
           ></input>
         </div>
         <div className="end-date">
-          <label for="start">End date:</label>
+          <label htmlFor="start">End date:</label>
           <input
             ref={endDateRef}
             type="date"

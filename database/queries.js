@@ -71,6 +71,7 @@ const addToCarsDB = async (obj) => {
       owner_email: obj.ownerEmail,
       brand: obj.brand,
       year: obj.year,
+      gear: obj.gear,
       model: obj.model,
       fuel: obj.fuel,
       passengers: obj.passengers,
