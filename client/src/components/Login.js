@@ -3,11 +3,11 @@ import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setAuth, setAuthOut } from "../actions";
+import GoogleLogin from "react-google-login";
 
 export default function Login() {
   const dispatch = useDispatch();
 
-  const isLogged = useSelector((state) => state.isLogged);
   const auth = useSelector((state) => state.auth);
 
   const userNameRef = useRef();
@@ -34,6 +34,20 @@ export default function Login() {
       console.log(error.message);
     }
   };
+
+  const responseSuccessGoogle = async (response) => {
+    console.log(response);
+    console.log("sds");
+    try {
+      const res = await axios.post("/api/v1/googlelogin", {
+        tokenId: response.tokenId,
+      });
+      console.log("google login success" + res);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+  const responseErrorGoogle = (response) => {};
   return (
     <div>
       <input
@@ -47,6 +61,13 @@ export default function Login() {
         placeholder="enter your password"
       ></input>
       <button onClick={onLoginHandler}>login</button>
+      <GoogleLogin
+        clientId="186150944842-sg6rcdti8hqtq2td43gv4jo2t1jmc8hj.apps.googleusercontent.com"
+        buttonText="Login"
+        onSuccess={responseSuccessGoogle}
+        onFailure={responseErrorGoogle}
+        cookiePolicy={"single_host_origin"}
+      />
       <Link to="/register">
         <button>go to register</button>
       </Link>
