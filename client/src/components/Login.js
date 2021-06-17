@@ -81,11 +81,13 @@ export default function Login() {
   return (
     <div>
       <input
+        className="username-input-login"
         ref={userNameRef}
         type="text"
         placeholder="enter your username"
       ></input>
       <input
+        className="password-input-login"
         ref={passwordRef}
         type="password"
         placeholder="enter your password"

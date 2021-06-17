@@ -33,6 +33,7 @@ export default function Register() {
           <label>
             email
             <input
+              className="email-input-register"
               name="email"
               type="email"
               placeholder="enter your email"
@@ -44,6 +45,7 @@ export default function Register() {
           <label>
             phone:
             <input
+              className="phone-input-register"
               name="phoneNumber"
               type="phone"
               placeholder="enter your phone"
@@ -55,6 +57,7 @@ export default function Register() {
           <label>
             first name
             <input
+              className="firstName-input-register"
               name="firstName"
               type="text"
               placeholder="enter your first name"
@@ -66,6 +69,7 @@ export default function Register() {
           <label>
             last name
             <input
+              className="lastName-input-register"
               name="lastName"
               type="text"
               placeholder="enter your last name"
@@ -77,6 +81,7 @@ export default function Register() {
           <label>
             address
             <input
+              className="address-input-register"
               name="address"
               type="text"
               placeholder="enter your address"
@@ -88,6 +93,7 @@ export default function Register() {
           <label>
             password
             <input
+              className="password-input-register"
               ref={passwordRef}
               name="password"
               type="password"
@@ -100,6 +106,7 @@ export default function Register() {
           <label>
             validate password
             <input
+              className="validPassword-input-register"
               ref={passwordValidationRef}
               type="password"
               placeholder="enter your password again"
