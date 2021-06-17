@@ -29,7 +29,8 @@ users.post("/uniqueuser", async (req, res) => {
   const { email } = req.body;
   console.log(email);
   try {
-    const user = await getUserOrAuth(User, email);
+    const objToSearchBy = { model: User, email: email };
+    const user = await getUserOrAuth(objToSearchBy);
     console.log(user);
     if (!user) {
       return res.status(404).json({ message: "NOT FOUND" });
@@ -65,7 +66,8 @@ users.post("/register", async (req, res) => {
   try {
     const { newUser } = req.body;
     const { firstName, lastName, address, phoneNumber, email } = newUser;
-    const auth = await getUserOrAuth(Auth, email);
+    const objToSearchBy = { model: Auth, email: email };
+    const auth = await getUserOrAuth(objToSearchBy);
 
     if (auth) {
       return res
@@ -102,7 +104,8 @@ users.post("/register", async (req, res) => {
 users.post("/login", async (req, res) => {
   const { email, password } = req.body.user; // ##need to change maybe
   try {
-    const auth = await getUserOrAuth(Auth, email);
+    const objToSearchBy = { model: Auth, email: email };
+    const auth = await getUserOrAuth(objToSearchBy);
 
     if (!auth) {
       return res
@@ -119,7 +122,8 @@ users.post("/login", async (req, res) => {
       const refreshToken = createRefreshToken(req.body);
       res.cookie("Access-Token", `Bearer ${accessToken}`);
       res.cookie("Refresh-Token", `Bearer ${refreshToken}`);
-      const userDetails = await getUserOrAuth(User, email);
+      const objToSearchBy = { model: User, email: email };
+      const userDetails = await getUserOrAuth(objToSearchBy);
       return res
         .status(200)
         .json({ message: "Login Successfully!", data: userDetails });

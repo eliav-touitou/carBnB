@@ -9,7 +9,8 @@ googleLogin.post("/", googleLoginVerified, async (req, res) => {
   let { user } = req;
 
   try {
-    if (!user) user = await getUserOrAuth(User, userEmail);
+    const objToSearchBy = { model: User, email: userEmail };
+    if (!user) user = await getUserOrAuth(objToSearchBy);
     res.status(200).json({ success: true, data: user });
   } catch (err) {
     console.log(error.message);

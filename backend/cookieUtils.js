@@ -80,7 +80,8 @@ const googleLoginVerified = async (req, res, next) => {
 
   try {
     if (email_verified) {
-      const user = await getUserOrAuth(Auth, email);
+      const objToSearchBy = { model: Auth, email: email };
+      const user = await getUserOrAuth(objToSearchBy);
 
       // If user exist create new token and push to cookie.
       // Else create new user and auth in DB and push new token to cookie.
