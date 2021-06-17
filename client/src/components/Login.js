@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setAuth, setAuthOut } from "../actions";
 import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -35,11 +36,15 @@ export default function Login() {
     }
   };
 
+  // Response if login with google success
   const responseSuccessGoogle = async (response) => {
     try {
-      const { data: userDetails } = await axios.post("/api/v1/googlelogin", {
-        tokenId: response.tokenId,
-      });
+      const { data: userDetails } = await axios.post(
+        "/api/v1/auth/googleLogin",
+        {
+          tokenId: response.tokenId,
+        }
+      );
       dispatch(setAuth(userDetails.data));
       console.log("google login success");
     } catch (err) {
@@ -48,6 +53,26 @@ export default function Login() {
     }
   };
 
+  // Response if login with facebook success
+  const responseFacebook = async (response) => {
+    console.log(response);
+    try {
+      const { data: userDetails } = await axios.post(
+        "/api/v1/auth/facebookLogin",
+        {
+          accessToken: response.accessToken,
+          userId: response.userID,
+        }
+      );
+      dispatch(setAuth(userDetails.data));
+      console.log("facebook login success");
+    } catch (err) {
+      dispatch(setAuthOut());
+      console.log(err.message);
+    }
+  };
+
+  // Response if login with google failed
   const responseErrorGoogle = (response) => {
     dispatch(setAuthOut());
     console.error("ERROR LOGIN WITH GOOGLE");
@@ -73,6 +98,12 @@ export default function Login() {
         onFailure={responseErrorGoogle}
         cookiePolicy={"single_host_origin"}
       />
+      <FacebookLogin
+        appId="830912607629776"
+        autoLoad={false}
+        callback={responseFacebook}
+      />
+
       <Link to="/register">
         <button>go to register</button>
       </Link>

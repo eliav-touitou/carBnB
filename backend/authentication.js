@@ -1,12 +1,13 @@
+const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const { OAuth2Client } = require("google-auth-library");
+const { hashSync, genSaltSync } = require("bcrypt");
+const { Auth } = require("../database/models");
 const {
   getUserOrAuth,
   addToAuthDB,
   addToUsersDB,
 } = require("../database/queries");
-const { hashSync, genSaltSync } = require("bcrypt");
-const { Auth } = require("../database/models");
 
 const client = new OAuth2Client(process.env.CLIENT_ID);
 
@@ -67,7 +68,7 @@ const validToken = async (req, res, next) => {
   });
 };
 
-// Responsible for gmail authentication.
+// Function to login with google.
 const googleLoginVerified = async (req, res, next) => {
   const { tokenId } = req.body;
 
@@ -80,7 +81,8 @@ const googleLoginVerified = async (req, res, next) => {
 
   try {
     if (email_verified) {
-      const user = await getUserOrAuth(Auth, email);
+      const objToSearchBy = { model: Auth, email: email };
+      const user = await getUserOrAuth(objToSearchBy);
 
       // If user exist create new token and push to cookie.
       // Else create new user and auth in DB and push new token to cookie.
@@ -123,9 +125,65 @@ const googleLoginVerified = async (req, res, next) => {
   }
 };
 
+// Function to login with facebook.
+const facebookLoginValidation = async (req, res, next) => {
+  const { userId, accessToken } = req.body;
+
+  // Verify the user token
+  try {
+    let urlGraphFacebook = `https://graph.facebook.com/v2.11/${userId}/?fields=id,name,email&access_token=${accessToken}`;
+    const { data } = await axios.get(urlGraphFacebook);
+    const { email, name } = data;
+
+    const objToSearchBy = { model: Auth, email: email };
+    const user = await getUserOrAuth(objToSearchBy);
+
+    // If user exist create new token and push to cookie.
+    // Else create new user and auth in DB and push new token to cookie.
+    if (user) {
+      user.password = "generate-password";
+      const token = createAccessToken(user);
+      res.cookie("Access-Token", `Bearer ${token}`);
+      req.user = null;
+      req.userEmail = email;
+      next();
+      return;
+    } else {
+      let password = email + process.env.ACCESS_TOKEN_SECRET;
+      password = hashSync(password, genSaltSync(10));
+      const firstAndLastNames = name.split(" ");
+
+      const newUser = await addToUsersDB({
+        phoneNumber: null,
+        firstName: firstAndLastNames[0],
+        lastName: firstAndLastNames[1],
+        email,
+        address: null,
+      });
+      await addToAuthDB({
+        firstName: firstAndLastNames[0],
+        lastName: firstAndLastNames[1],
+        email,
+        password,
+      });
+      newUser.password = "generate-password";
+      const token = createAccessToken(newUser);
+      res.cookie("Access-Token", `Bearer ${token}`);
+      req.user = newUser;
+      req.userEmail = null;
+      next();
+      return;
+    }
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).json({ error: "Something went wrong..." });
+  }
+};
+
 module.exports = {
   createAccessToken,
   createRefreshToken,
   validToken,
   googleLoginVerified,
+  facebookLoginValidation,
 };

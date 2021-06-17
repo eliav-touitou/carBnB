@@ -25,7 +25,8 @@ const getRental = async (id) => {
 };
 
 // Get unique user / auth
-const getUserOrAuth = async (model, email) => {
+const getUserOrAuth = async (obj) => {
+  const { model, email } = obj;
   try {
     const result = await model.findOne({ where: { user_email: email } });
 
