@@ -33,7 +33,11 @@ export default function Rental() {
   return (
     <div>
       <div>
-        <input type="file" onChange={(e) => imageToBinary(e)}></input>
+        <input
+          className="upload-photo-rental"
+          type="file"
+          onChange={(e) => imageToBinary(e)}
+        ></input>
       </div>
       <button onClick={SaveImage}>upload image</button>
       <img src={`data:image/jpeg;base64,${image}`} />

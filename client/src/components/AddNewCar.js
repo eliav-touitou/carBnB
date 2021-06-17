@@ -48,6 +48,7 @@ export default function AddNewCar() {
     setPercentage(temp);
   }, []);
 
+  // After car brand selected, axios request to get all models of this brand
   const onBrandChangeHandler = async () => {
     allCarsApi?.forEach((car) => {
       if (car.MakeName.toLowerCase() === brandRef.current.value.toLowerCase()) {
@@ -89,10 +90,15 @@ export default function AddNewCar() {
 
   return (
     <div>
-      <input ref={ownerRef} placeholder="Enter Email"></input>
+      <input
+        className="email-input-addNewCar"
+        ref={ownerRef}
+        placeholder="Enter Email"
+      ></input>
       <div>
         pick your car brand
         <input
+          className="brand-input-addNewCar"
           ref={brandRef}
           list="brand"
           onChange={onBrandChangeHandler}
@@ -105,7 +111,11 @@ export default function AddNewCar() {
       </div>
       <div>
         pick your car model
-        <input ref={modelRef} list="model"></input>
+        <input
+          className="model-input-addNewCar"
+          ref={modelRef}
+          list="model"
+        ></input>
         <datalist id="model">
           {allModelsApi?.map((model, i) => (
             <option key={`model-${i}`} value={`${model.Model_Name}`} />
@@ -114,7 +124,11 @@ export default function AddNewCar() {
       </div>
       <div>
         pick your car gear
-        <input ref={gearRef} list="gear"></input>
+        <input
+          className="gear-input-addNewCar"
+          ref={gearRef}
+          list="gear"
+        ></input>
         <datalist id="gear">
           {gearOptions?.map((gear, i) => (
             <option key={`gear-${i}`} value={gear} />
@@ -123,7 +137,11 @@ export default function AddNewCar() {
       </div>
       <div>
         pick your car year
-        <input ref={yearRef} list="year"></input>
+        <input
+          className="year-input-addNewCar"
+          ref={yearRef}
+          list="year"
+        ></input>
         <datalist id="year">
           {yearsArr?.map((year, i) => (
             <option key={`year-${i}`} value={year} />
@@ -132,7 +150,11 @@ export default function AddNewCar() {
       </div>
       <div>
         pick your car gas type
-        <input ref={fuelRef} list="fuel"></input>
+        <input
+          className="fuel-input-addNewCar"
+          ref={fuelRef}
+          list="fuel"
+        ></input>
         <datalist id="fuel">
           {fuelTypes?.map((fuel, i) => (
             <option key={`fuel-${i}`} value={fuel} />
@@ -141,7 +163,11 @@ export default function AddNewCar() {
       </div>
       <div>
         number of seats
-        <input ref={passengersRef} list="passengers"></input>
+        <input
+          className="seats-input-addNewCar"
+          ref={passengersRef}
+          list="passengers"
+        ></input>
         <datalist id="passengers">
           {seatsOptions?.map((seat, i) => (
             <option key={`passengers-${i}`} value={seat} />
@@ -151,13 +177,18 @@ export default function AddNewCar() {
       <div>
         Enter wanted tariff per day
         <input
+          className="tariff-input-addNewCar"
           ref={pricePerDayRef}
           placeholder="Enter wanted tariff per day"
         ></input>
       </div>
       <div>
         percent of discount per week
-        <input ref={pricePerWeekRef} list="pricePerWeek"></input>
+        <input
+          className="discount-week-input-addNewCar"
+          ref={pricePerWeekRef}
+          list="pricePerWeek"
+        ></input>
         <datalist id="pricePerWeek">
           {percentage?.map((percent, i) => (
             <option key={`pricePerWeek-${i}`} value={percent} />
@@ -166,7 +197,11 @@ export default function AddNewCar() {
       </div>
       <div>
         percent of discount per month
-        <input ref={pricePerMonthRef} list="pricePerMonth"></input>
+        <input
+          className="discount-month-input-addNewCar"
+          ref={pricePerMonthRef}
+          list="pricePerMonth"
+        ></input>
         <datalist id="pricePerMonth">
           {percentage?.map((percent, i) => (
             <option key={`pricePerMonth-${i}`} value={percent} />
