@@ -38,3 +38,23 @@ export const setAvailableCars = (availableCars) => {
     payload: availableCars,
   };
 };
+
+export const setFilterYears = (arr) => {
+  return {
+    type: "SETYEARS",
+    payload: arr,
+  };
+};
+
+export const setFilterPrice = (arr) => {
+  return {
+    type: "SETPRICE",
+    payload: arr,
+  };
+};
+// export const setFilterRate = (arr) => {
+//   return {
+//     type: "SETFILTERRATE",
+//     payload: arr,
+//   };
+// };

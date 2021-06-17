@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setCars, setAuthOut, setAuth } from "../actions";
 import SearchBar from "./SearchBar";
+import FilterBar from "./FilterBar";
 const axios = require("axios");
 
 export default function Home() {
@@ -52,6 +53,7 @@ export default function Home() {
           <hr />
         </div>
       ))}
+      <FilterBar />
 
       <Link to="/register">
         <button>register</button>
