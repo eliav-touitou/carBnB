@@ -7,7 +7,7 @@ const {
   createAccessToken,
   createRefreshToken,
   validToken,
-} = require("../../cookieUtils");
+} = require("../../authentication");
 const {
   getAllItems,
   getUserOrAuth,
