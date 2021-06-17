@@ -62,7 +62,7 @@ export default function Login() {
       ></input>
       <button onClick={onLoginHandler}>login</button>
       <GoogleLogin
-        clientId="186150944842-sg6rcdti8hqtq2td43gv4jo2t1jmc8hj.apps.googleusercontent.com"
+        clientId={process.env.CLIENT_ID}
         buttonText="Login"
         onSuccess={responseSuccessGoogle}
         onFailure={responseErrorGoogle}
