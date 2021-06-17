@@ -1,14 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAllModelsApi } from "../actions";
+// import { setAllModelsApi } from "../actions";
 import PriceSlider from "./PriceSlider";
 import YearsSlider from "./YearsSlider";
 import RatingSlider from "./RatingSlider";
 import { setAvailableCars } from "../actions";
 
 export default function FilterBar() {
-  const [filteredCars, setFilteredCars] = useState([]);
+  const [modelCars, setModelCars] = useState([]);
   const availableCars = useSelector((state) => state.availableCars);
   const dispatch = useDispatch();
   const allCarsApi = useSelector((state) => state.allCarsApi);
@@ -43,34 +43,13 @@ export default function FilterBar() {
   }, []);
 
   const onBrandChangeHandler = async () => {
-    allCarsApi?.forEach((car) => {
-      if (car.MakeName.toLowerCase() === brandRef.current.value.toLowerCase()) {
-        axios
-          .get(
-            apiCars + `/vehicles/GetModelsForMake/${car.MakeName}?format=json`
-          )
-          .then(({ data }) => {
-            dispatch(setAllModelsApi(data.Results));
-          })
-          .catch((err) => console.log(err));
-      } else {
-        modelRef.current.value = "";
+    const temp = [];
+    availableCars.forEach((car) => {
+      if (car.brand.toLowerCase() === brandRef.current.value.toLowerCase()) {
+        temp.push(car);
       }
+      setModelCars(temp);
     });
-  };
-
-  // Upload new car to database
-  const filterCars = async () => {
-    const filteredCars = [];
-    const parameters = {
-      brand: brandRef.current.value,
-      model: modelRef.current.value,
-      gear: gearRef.current.value,
-      year: yearRef.current.value,
-      fuel: fuelRef.current.value,
-      pricePerDay: pricePerDayRef.current.value,
-    };
-    console.log(availableCars);
   };
 
   return (
@@ -83,8 +62,8 @@ export default function FilterBar() {
           onChange={onBrandChangeHandler}
         ></input>
         <datalist id="brand">
-          {allCarsApi?.map((car, i) => (
-            <option key={`brand-${i}`} value={`${car.MakeName}`} />
+          {availableCars?.map((car, i) => (
+            <option key={`brand-${i}`} value={`${car.brand}`} />
           ))}
         </datalist>
       </div>
@@ -92,8 +71,8 @@ export default function FilterBar() {
         pick your car model
         <input ref={modelRef} list="model"></input>
         <datalist id="model">
-          {allModelsApi?.map((model, i) => (
-            <option key={`model-${i}`} value={`${model.Model_Name}`} />
+          {modelCars.map((car, i) => (
+            <option key={`model-${i}`} value={`${car.model}`} />
           ))}
         </datalist>
       </div>
@@ -123,12 +102,9 @@ export default function FilterBar() {
         Enter wanted tariff per day
         <PriceSlider />
       </div>
-      {/* <div>
+      <div>
         Rating Of Cars Owners:
         <RatingSlider />
-      </div> */}
-      <div>
-        <button onClick={filterCars}>Filter!</button>
       </div>
     </div>
   );

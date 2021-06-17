@@ -16,7 +16,7 @@ const allReducers = combineReducers({
   availableCars: availableCarsReducer,
   yearsFilter: yearFilterReducer,
   priceFilter: priceFilterReducer,
-  // ratingFilter: ratingFilterReducer,
+  ratingFilter: ratingFilterReducer,
 });
 
 export default allReducers;
