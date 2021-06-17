@@ -43,7 +43,7 @@ const getItemFromDB = async (obj) => {
   column.forEach(async (col, i) => {
     query[col] = columnValue[i];
   });
-  // console.log(query);
+
   try {
     const data = await model.findAll({ where: query });
     console.log(data);
@@ -58,7 +58,6 @@ const getAllItems = async (model) => {
   try {
     const data = await model.findAll();
     return data;
-    // return JSON.stringify(data, null, 2);
   } catch (error) {
     throw error;
   }
@@ -153,46 +152,53 @@ const GetCarsByParameters = async (obj) => {
   const numOfPassengers = obj.passengers;
   const startDate = obj.dates.start;
   const endDate = obj.dates.end;
+  try {
+    const result = await Car.findAll({
+      where: {
+        [Op.and]: {
+          available_from: {
+            [Op.lte]: startDate,
+          },
 
-  const result = await Car.findAll({
-    where: {
-      [Op.and]: {
-        available_from: {
-          [Op.lte]: startDate,
+          available_until: {
+            [Op.gte]: endDate,
+          },
+
+          passengers: { [Op.gte]: numOfPassengers },
+          owner_email: { [Op.in]: arrOfEmails },
         },
-
-        available_until: {
-          [Op.gte]: endDate,
-        },
-
-        passengers: { [Op.gte]: numOfPassengers },
-        owner_email: { [Op.in]: arrOfEmails },
       },
-    },
-  });
-  return result;
+    });
+    return result;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const whatCarsAreTaken = async (obj) => {
   const arrOfCarsId = obj.carsId;
   const startDate = obj.dates.start;
   const endDate = obj.dates.end;
-
-  return await Rental.findAll({
-    where: {
-      [Op.and]: {
-        [Op.or]: {
-          start_date: {
-            [Op.lte]: startDate,
+  try {
+    const takenCars = await Rental.findAll({
+      where: {
+        [Op.and]: {
+          [Op.or]: {
+            start_date: {
+              [Op.lte]: startDate,
+            },
+            end_date: {
+              [Op.gte]: endDate,
+            },
           },
-          end_date: {
-            [Op.gte]: endDate,
-          },
+          car_id: { [Op.in]: arrOfCarsId },
         },
-        car_id: { [Op.in]: arrOfCarsId },
       },
-    },
-  });
+    });
+    return takenCars;
+  } catch (error) {
+    throw error;
+  }
 };
 
 module.exports = {
