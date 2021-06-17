@@ -36,18 +36,23 @@ export default function Login() {
   };
 
   const responseSuccessGoogle = async (response) => {
-    console.log(response);
-    console.log("sds");
     try {
-      const res = await axios.post("/api/v1/googlelogin", {
+      const { data: userDetails } = await axios.post("/api/v1/googlelogin", {
         tokenId: response.tokenId,
       });
-      console.log("google login success" + res);
+      dispatch(setAuth(userDetails.data));
+      console.log("google login success");
     } catch (err) {
+      dispatch(setAuthOut());
       console.log(err.message);
     }
   };
-  const responseErrorGoogle = (response) => {};
+
+  const responseErrorGoogle = (response) => {
+    dispatch(setAuthOut());
+    console.error("ERROR LOGIN WITH GOOGLE");
+  };
+
   return (
     <div>
       <input
@@ -62,7 +67,7 @@ export default function Login() {
       ></input>
       <button onClick={onLoginHandler}>login</button>
       <GoogleLogin
-        clientId={process.env.CLIENT_ID}
+        clientId="186150944842-sg6rcdti8hqtq2td43gv4jo2t1jmc8hj.apps.googleusercontent.com"
         buttonText="Login"
         onSuccess={responseSuccessGoogle}
         onFailure={responseErrorGoogle}
