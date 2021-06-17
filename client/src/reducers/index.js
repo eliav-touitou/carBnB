@@ -17,6 +17,7 @@ const allReducers = combineReducers({
   yearsFilter: yearFilterReducer,
   priceFilter: priceFilterReducer,
   ratingFilter: ratingFilterReducer,
+
 });
 
 export default allReducers;

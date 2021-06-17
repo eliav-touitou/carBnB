@@ -1,11 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 // import { setAllModelsApi } from "../actions";
+
+
 import PriceSlider from "./PriceSlider";
 import YearsSlider from "./YearsSlider";
 import RatingSlider from "./RatingSlider";
 import { setAvailableCars } from "../actions";
+
 
 export default function FilterBar() {
   const [modelCars, setModelCars] = useState([]);
@@ -62,8 +66,10 @@ export default function FilterBar() {
           onChange={onBrandChangeHandler}
         ></input>
         <datalist id="brand">
+
           {availableCars?.map((car, i) => (
             <option key={`brand-${i}`} value={`${car.brand}`} />
+
           ))}
         </datalist>
       </div>
@@ -71,8 +77,10 @@ export default function FilterBar() {
         pick your car model
         <input ref={modelRef} list="model"></input>
         <datalist id="model">
+
           {modelCars.map((car, i) => (
             <option key={`model-${i}`} value={`${car.model}`} />
+
           ))}
         </datalist>
       </div>
@@ -102,9 +110,11 @@ export default function FilterBar() {
         Enter wanted tariff per day
         <PriceSlider />
       </div>
+
       <div>
         Rating Of Cars Owners:
         <RatingSlider />
+
       </div>
     </div>
   );
