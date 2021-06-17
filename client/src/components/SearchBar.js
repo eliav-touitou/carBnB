@@ -1,29 +1,28 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setAvailableCars } from "../actions";
 
 export default function SearchBar() {
+  const dispatch = useDispatch();
   const cityRef = useRef();
   const passengersRef = useRef();
   const endDateRef = useRef();
   const startDateRef = useRef();
-  let day = new Date();
-  let today = day.toISOString().slice(0, 10);
-  let tomorrow = day;
-  tomorrow.setDate(day.getDate() + 1);
-  tomorrow = tomorrow.toISOString().slice(0, 10);
+  const [tomorrow, setTomorrow] = useState();
+  const today = new Date().toISOString().slice(0, 10);
 
-  //////////
-  // const [tomorrow, setTomorrow] = useState();
-  // let daysOnly = parseInt(startDateRef.slice(-2));
-  // let newDate = (daysOnly += 1);
+  useEffect(() => {
+    let tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    setTomorrow(tomorrow.toISOString().slice(0, 10));
+  }, []);
 
-  // startDateRef.substring(0, startDateRef.length - 2) + `${newDate}`;
-  // ////////
-  // useEffect(() => {
-  //   return () => {
-  //     cleanup;
-  //   };
-  // }, []);
+  const updateTomorrow = () => {
+    let startDate = new Date(startDateRef.current.value);
+    startDate.setDate(startDate.getDate() + 1);
+    setTomorrow(startDate.toISOString().slice(0, 10));
+  };
 
   const search = async () => {
     const city = cityRef.current.value;
@@ -34,8 +33,11 @@ export default function SearchBar() {
       data: { city, startDate, endDate, passengers },
     };
     try {
-      const res = await axios.post("api/v1/search/initial", searchParameters);
-      console.log(res.data.data);
+      const { data: availableCars } = await axios.post(
+        "api/v1/search/initial",
+        searchParameters
+      );
+      dispatch(setAvailableCars(availableCars.data));
     } catch (err) {
       console.log(err.response.data.message);
     }
@@ -57,6 +59,7 @@ export default function SearchBar() {
         <div className="start-date">
           <label htmlFor="start">Start date:</label>
           <input
+            onChange={updateTomorrow}
             ref={startDateRef}
             type="date"
             name="rent-start"
@@ -85,7 +88,7 @@ export default function SearchBar() {
           <option value="4+" />
           <option value="5+" />
           <option value="7+" />
-          <option value="else..." />
+          {/* <option value="else..." /> */}
         </datalist>
       </div>
       <button onClick={search}>search!</button>

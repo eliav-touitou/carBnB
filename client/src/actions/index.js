@@ -18,9 +18,23 @@ export const setAllModelsApi = (dataApi) => {
   };
 };
 
-export const setLogged = (isLogged) => {
+export const setAuth = (userDetails) => {
   return {
-    type: "ISLOGGED",
-    payload: isLogged,
+    type: "SIGN-IN",
+    payload: userDetails,
+  };
+};
+
+export const setAuthOut = () => {
+  return {
+    type: "LOG-OUT",
+    payload: false,
+  };
+};
+
+export const setAvailableCars = (availableCars) => {
+  return {
+    type: "SETAVAILABLE",
+    payload: availableCars,
   };
 };

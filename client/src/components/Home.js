@@ -1,20 +1,22 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setLogged, setCars } from "../actions";
+import { setCars, setAuthOut, setAuth } from "../actions";
 import SearchBar from "./SearchBar";
 const axios = require("axios");
 
 export default function Home() {
   const dispatch = useDispatch();
 
-  const isLogged = useSelector((state) => state.isLogged);
   const allCars = useSelector((state) => state.allCars);
 
   useEffect(() => {
-    axios.get("api/v1/users/checklogged").then((result) => {
-      if (result.status === 200) dispatch(setLogged(true));
-    });
+    axios
+      .get("api/v1/users/checklogged")
+      .then((result) => {
+        if (result.status === 200) dispatch(setAuth(result.data.data));
+      })
+      .catch((err) => console.log(err.message));
   }, []);
 
   // Get all cars
@@ -30,7 +32,8 @@ export default function Home() {
   // Logout handler
   const logoutHandler = async () => {
     try {
-      await axios.post("/api/v1/users/logout");
+      console.log(await axios.post("/api/v1/users/logout"));
+      dispatch(setAuthOut());
     } catch (error) {
       console.log("error logout");
     }
@@ -39,7 +42,6 @@ export default function Home() {
   return (
     <div>
       <SearchBar />
-      <p>logged {String(isLogged)}</p>
       <button onClick={getCars}>Get cars</button>
       {allCars?.map((car, i) => (
         <div key={`car` + i}>

@@ -14,6 +14,7 @@ const {
   addToUsersDB,
   addToAuthDB,
   updateItemToDB,
+  getItemFromDB,
 } = require("../../../database/queries");
 
 const primaryKeys = {
@@ -118,7 +119,10 @@ users.post("/login", async (req, res) => {
       const refreshToken = createRefreshToken(req.body);
       res.cookie("Access-Token", `Bearer ${accessToken}`);
       res.cookie("Refresh-Token", `Bearer ${refreshToken}`);
-      return res.status(200).json({ message: "Login Successfully!" });
+      const userDetails = await getUserOrAuth(User, email);
+      return res
+        .status(200)
+        .json({ message: "Login Successfully!", data: userDetails });
     }
   } catch (error) {
     console.log(error);
