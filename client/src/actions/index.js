@@ -52,9 +52,10 @@ export const setFilterPrice = (arr) => {
     payload: arr,
   };
 };
-// export const setFilterRate = (arr) => {
-//   return {
-//     type: "SETFILTERRATE",
-//     payload: arr,
-//   };
-// };
+
+export const setFilterRate = (arr) => {
+  return {
+    type: "SETFILTERRATE",
+    payload: arr,
+  };
+};
