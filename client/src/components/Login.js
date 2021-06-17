@@ -2,12 +2,13 @@ import axios from "axios";
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setLogged } from "../actions";
+import { setAuth, setAuthOut } from "../actions";
 
 export default function Login() {
   const dispatch = useDispatch();
 
   const isLogged = useSelector((state) => state.isLogged);
+  const auth = useSelector((state) => state.auth);
 
   const userNameRef = useRef();
   const passwordRef = useRef();
@@ -23,18 +24,18 @@ export default function Login() {
     };
 
     try {
-      await axios.post("/api/v1/users/login", { user: user });
-      dispatch(setLogged(true));
+      const { data: userDetails } = await axios.post("/api/v1/users/login", {
+        user: user,
+      });
+      dispatch(setAuth(userDetails.data));
       console.log("Success Login");
     } catch (error) {
-      dispatch(setLogged(false));
+      dispatch(setAuthOut());
       console.log(error.message);
     }
   };
   return (
     <div>
-      <p>isLogged {String(isLogged)}</p>
-
       <input
         ref={userNameRef}
         type="text"
