@@ -1,4 +1,14 @@
 const jwt = require("jsonwebtoken");
+const { OAuth2Client } = require("google-auth-library");
+const {
+  getUserOrAuth,
+  addToAuthDB,
+  addToUsersDB,
+} = require("../database/queries");
+const { hashSync, genSaltSync } = require("bcrypt");
+const { Auth } = require("../database/models");
+
+const client = new OAuth2Client(process.env.CLIENT_ID);
 
 // Create json web token
 const createAccessToken = (user) => {
@@ -57,4 +67,65 @@ const validToken = async (req, res, next) => {
   });
 };
 
-module.exports = { createAccessToken, createRefreshToken, validToken };
+// Responsible for gmail authentication.
+const googleLoginVerified = async (req, res, next) => {
+  const { tokenId } = req.body;
+
+  // Verify the user token
+  const response = await client.verifyIdToken({
+    idToken: tokenId,
+    audience: process.env.CLIENT_ID,
+  });
+  const { email_verified, email, given_name, family_name } = response.payload;
+
+  try {
+    if (email_verified) {
+      const user = await getUserOrAuth(Auth, email);
+
+      // If user exist create new token and push to cookie.
+      // Else create new user and auth in DB and push new token to cookie.
+      if (user) {
+        user.password = "generate-password";
+        const token = createAccessToken(user);
+        res.cookie("Access-Token", `Bearer ${token}`);
+        req.user = null;
+        req.userEmail = email;
+        next();
+        return;
+      } else {
+        let password = email + process.env.ACCESS_TOKEN_SECRET;
+        password = hashSync(password, genSaltSync(10));
+        const newUser = await addToUsersDB({
+          phoneNumber: null,
+          firstName: given_name,
+          lastName: family_name,
+          email,
+          address: null,
+        });
+        await addToAuthDB({
+          firstName: given_name,
+          lastName: family_name,
+          email,
+          password,
+        });
+        newUser.password = "generate-password";
+        const token = createAccessToken(newUser);
+        res.cookie("Access-Token", `Bearer ${token}`);
+        req.user = newUser;
+        req.userEmail = null;
+        next();
+        return;
+      }
+    }
+  } catch (err) {
+    console.log(err.message);
+    res.status(400).json({ error: "Something went wrong..." });
+  }
+};
+
+module.exports = {
+  createAccessToken,
+  createRefreshToken,
+  validToken,
+  googleLoginVerified,
+};
