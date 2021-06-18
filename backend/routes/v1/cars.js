@@ -31,7 +31,6 @@ cars.post("/uniquecar", async (req, res) => {
 cars.get("/allcars", async (req, res) => {
   try {
     const cars = await getAllItems(Car);
-    console.log(cars);
     if (!cars) {
       return res.status(404).json({ message: "NOT FOUND" });
     }
@@ -49,7 +48,6 @@ cars.post("/upload", async (req, res) => {
   try {
     const { newCar } = req.body;
     let { pricePerWeek, pricePerMonth, pricePerDay } = newCar;
-
     newCar.pricePerWeek = calculateDiscount(pricePerDay, pricePerWeek, 7);
     newCar.pricePerMonth = calculateDiscount(pricePerDay, pricePerMonth, 30);
 
