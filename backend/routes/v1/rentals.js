@@ -6,7 +6,7 @@ const { Rental } = require("../../../database/models");
 // Gets a unique rental
 rentals.post("/uniquerental", async (req, res) => {
   const { id } = req.body;
-  console.log(id);
+  // console.log(id);
   try {
     const rental = await getRental(id);
     console.log(rental);
@@ -26,8 +26,8 @@ rentals.post("/uniquerental", async (req, res) => {
 rentals.get("/allrentals", async (req, res) => {
   try {
     const rentals = await getAllItems(Rental);
-    console.log(rentals);
-    if (!rentals) {
+
+    if (rentals.length === 0) {
       return res.status(404).json({ message: "NOT FOUND" });
     }
     return res.status(200).json({ success: true, data: rentals });
