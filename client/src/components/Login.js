@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setAuth, setAuthOut } from "../actions";
 import GoogleLogin from "react-google-login";
@@ -81,11 +81,13 @@ export default function Login() {
   return (
     <div>
       <input
+        className="username-input-login"
         ref={userNameRef}
         type="text"
         placeholder="enter your username"
       ></input>
       <input
+        className="password-input-login"
         ref={passwordRef}
         type="password"
         placeholder="enter your password"
@@ -107,6 +109,7 @@ export default function Login() {
       <Link to="/register">
         <button>go to register</button>
       </Link>
+      {auth && <Redirect to="/" />}
     </div>
   );
 }

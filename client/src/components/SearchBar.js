@@ -43,7 +43,7 @@ export default function SearchBar() {
     }
   };
   return (
-    <div>
+    <div className="search-bar-container">
       <div className="choose-city">
         Where do you want a car?:
         <input list="Cities" ref={cityRef}></input>
@@ -91,7 +91,9 @@ export default function SearchBar() {
           {/* <option value="else..." /> */}
         </datalist>
       </div>
-      <button onClick={search}>search!</button>
+      <button className="search-btn" onClick={search}>
+        search!
+      </button>
     </div>
   );
 }

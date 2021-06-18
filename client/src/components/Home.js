@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCars, setAuthOut, setAuth } from "../actions";
 import SearchBar from "./SearchBar";
 import FilterBar from "./FilterBar";
+import Avatar from "./Avatar";
 const axios = require("axios");
 
 export default function Home() {
@@ -42,6 +43,7 @@ export default function Home() {
 
   return (
     <div>
+      <Avatar />
       <SearchBar />
       <button onClick={getCars}>Get cars</button>
       {allCars?.map((car, i) => (
