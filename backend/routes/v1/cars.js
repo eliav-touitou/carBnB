@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const cars = Router();
 const { Car } = require("../../../database/models");
-const { calculateDiscount } = require("../../helperFunctions");
+const { calculateDiscount } = require("../../utils/helperFunctions");
 const {
   getAllItems,
   getCar,
@@ -14,7 +14,7 @@ cars.post("/uniquecar", async (req, res) => {
   console.log(id);
   try {
     const car = await getCar(id);
-    console.log(car);
+    // console.log(car);
     if (!car) {
       return res.status(404).json({ message: "NOT FOUND" });
     }
