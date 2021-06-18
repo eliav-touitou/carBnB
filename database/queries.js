@@ -202,6 +202,22 @@ const whatCarsAreTaken = async (obj) => {
   }
 };
 
+const getUserByRating = async (minRate) => {
+  try {
+    const ratedUser = await User.findAll({
+      where: {
+        rating: {
+          [Op.gte]: minRate,
+        },
+      },
+    });
+    console.log(ratedUser);
+    return ratedUser;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getCar,
   getRental,
@@ -215,4 +231,5 @@ module.exports = {
   GetCarsByParameters,
   whatCarsAreTaken,
   getItemFromDB,
+  getUserByRating,
 };
