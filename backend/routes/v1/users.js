@@ -15,6 +15,7 @@ const {
   addToAuthDB,
   updateItemToDB,
   getItemFromDB,
+  getUserByRating,
 } = require("../../../database/queries");
 
 const primaryKeys = {
@@ -36,6 +37,22 @@ users.post("/uniqueuser", async (req, res) => {
       return res.status(404).json({ message: "NOT FOUND" });
     }
     return res.status(200).json({ success: true, data: user });
+  } catch (error) {
+    console.log(error.message);
+    return res
+      .status(500)
+      .json({ message: "Problems with our server", error: error.message });
+  }
+});
+// Gets all users with given rating
+users.post("/rated", async (req, res) => {
+  const { minRate } = req.body;
+  try {
+    const ratedUsers = await getUserByRating(minRate);
+    if (!ratedUsers) {
+      return res.status(404).json({ message: "NOT FOUND" });
+    }
+    return res.status(200).json({ success: true, data: ratedUsers });
   } catch (error) {
     console.log(error.message);
     return res
