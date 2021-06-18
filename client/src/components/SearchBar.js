@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 import { setAvailableCars } from "../actions";
 
 export default function SearchBar() {
@@ -10,7 +11,9 @@ export default function SearchBar() {
   const endDateRef = useRef();
   const startDateRef = useRef();
   const [tomorrow, setTomorrow] = useState();
+  const [resultsPage, setResultsPage] = useState("/");
   const today = new Date().toISOString().slice(0, 10);
+  const availableCars = useSelector((state) => state.availableCars);
 
   useEffect(() => {
     let tomorrow = new Date();
@@ -29,6 +32,10 @@ export default function SearchBar() {
     const passengers = Number(passengersRef.current.value.slice(0, -1));
     const startDate = startDateRef.current.value;
     const endDate = endDateRef.current.value;
+    if (!city || !passengers || !startDate || !endDate) return;
+
+    setResultsPage("/results");
+
     const searchParameters = {
       data: { city, startDate, endDate, passengers },
     };
@@ -91,9 +98,11 @@ export default function SearchBar() {
           {/* <option value="else..." /> */}
         </datalist>
       </div>
+
       <button className="search-btn" onClick={search}>
         search!
       </button>
+      <Redirect to={`${resultsPage}`} />
     </div>
   );
 }
