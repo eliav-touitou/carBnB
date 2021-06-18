@@ -9,7 +9,8 @@ const {
 } = require("../../../database/queries");
 
 favorite.post("/add", async (req, res) => {
-  const { userEmail, carId } = req.body.data;
+  const { carId, userEmail } = req.body.data;
+  console.log(req.body.data);
   try {
     const favorite = await addToFavoriteDB({ userEmail, carId });
     res.status(201).json({ message: "Favorite saved!", data: favorite });
