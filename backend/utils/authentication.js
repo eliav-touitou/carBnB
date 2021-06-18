@@ -2,12 +2,12 @@ const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const { OAuth2Client } = require("google-auth-library");
 const { hashSync, genSaltSync } = require("bcrypt");
-const { Auth } = require("../database/models");
+const { Auth } = require("../../database/models");
 const {
   getUserOrAuth,
   addToAuthDB,
   addToUsersDB,
-} = require("../database/queries");
+} = require("../../database/queries");
 
 const client = new OAuth2Client(process.env.CLIENT_ID);
 
