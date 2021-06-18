@@ -201,6 +201,22 @@ const whatCarsAreTaken = async (obj) => {
   }
 };
 
+const getUserByRating = async (minRate) => {
+  try {
+    const ratedUser = await User.findAll({
+      where: {
+        rating: {
+          [Op.gte]: minRate,
+        },
+      },
+    });
+    console.log(ratedUser);
+    return ratedUser;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const addToFavoriteDB = async ({ userEmail, carId }) => {
   try {
     return await Favorite.create({
@@ -239,6 +255,7 @@ module.exports = {
   GetCarsByParameters,
   whatCarsAreTaken,
   getItemFromDB,
+  getUserByRating,
   addToFavoriteDB,
   removeFromFavoriteDB,
 };
