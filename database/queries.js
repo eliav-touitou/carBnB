@@ -1,4 +1,4 @@
-const { User, Car, Rental, Auth } = require("./models");
+const { User, Car, Rental, Auth, Favorite } = require("./models");
 const { Op, Sequelize, where, col } = require("sequelize");
 const { sequelize } = require("./models");
 
@@ -47,7 +47,6 @@ const getItemFromDB = async (obj) => {
 
   try {
     const data = await model.findAll({ where: query });
-    console.log(data);
     return data;
   } catch (err) {
     throw err;
@@ -202,6 +201,31 @@ const whatCarsAreTaken = async (obj) => {
   }
 };
 
+const addToFavoriteDB = async ({ userEmail, carId }) => {
+  try {
+    return await Favorite.create({
+      user_email: userEmail,
+      car_id: carId,
+    });
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+};
+
+const removeFromFavoriteDB = async ({ userEmail, carId }) => {
+  try {
+    return await Favorite.destroy({
+      where: {
+        [Op.and]: { user_email: userEmail, car_id: carId },
+      },
+    });
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+};
+
 module.exports = {
   getCar,
   getRental,
@@ -215,4 +239,6 @@ module.exports = {
   GetCarsByParameters,
   whatCarsAreTaken,
   getItemFromDB,
+  addToFavoriteDB,
+  removeFromFavoriteDB,
 };

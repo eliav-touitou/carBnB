@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "owner_email",
         targetKey: "user_email",
       });
+      this.belongsToMany(models.User, {
+        through: "Favorite",
+        foreignKey: "car_id",
+      });
     }
   }
 
