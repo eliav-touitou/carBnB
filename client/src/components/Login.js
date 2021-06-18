@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setAuth, setAuthOut } from "../actions";
 import GoogleLogin from "react-google-login";
@@ -109,6 +109,7 @@ export default function Login() {
       <Link to="/register">
         <button>go to register</button>
       </Link>
+      {auth && <Redirect to="/" />}
     </div>
   );
 }
