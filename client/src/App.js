@@ -9,8 +9,10 @@ import NotFound from "./components/NotFound";
 import AddNewCar from "./components/AddNewCar";
 import SearchBar from "./components/SearchBar";
 import Rental from "./components/Rental";
+import Results from "./components/Results";
 import { setAllCarsApi } from "./actions";
 import { useDispatch } from "react-redux";
+import CarDetails from "./components/CarDetails";
 
 const axios = require("axios");
 const apiCars = "https://vpic.nhtsa.dot.gov/api";
@@ -51,6 +53,11 @@ function App() {
           <Route exact path="/rental">
             <Rental />
           </Route>
+          <Route exact path="/results">
+            <Results />
+          </Route>
+          <Route exact path="/result/:resultId" component={CarDetails} />
+
           <Route path="/" component={NotFound} />
         </Switch>
       </BrowserRouter>
