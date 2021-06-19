@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
 import FilterBar from "./FilterBar";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
@@ -21,7 +22,20 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TemporaryDrawer() {
+export default function TemporaryDrawer({ setAvailableCarsNumberTwo }) {
+  const [filterObj, setFilterObj] = useState({});
+  const yearsFilter = useSelector((state) => state.yearsFilter);
+  const priceFilter = useSelector((state) => state.priceFilter);
+  const availableCars = useSelector((state) => state.availableCars);
+
+  // Useref for filter inputs
+  const brandRef = useRef();
+  const modelRef = useRef();
+  const gearRef = useRef();
+  const yearRef = useRef();
+  const fuelRef = useRef();
+  const pricePerDayRef = useRef();
+
   const classes = useStyles();
   const [state, setState] = useState({ left: false });
 
@@ -31,6 +45,38 @@ export default function TemporaryDrawer() {
       (event.key === "Tab" || event.key === "Shift")
     ) {
       return;
+    }
+
+    // Check if the side bar were closed => if yes =>
+    // Saved all the data from the filter and show only the filtered results
+    if (open === false) {
+      const tempToShow = [];
+      const objToSave = {
+        brandFilter: brandRef.current.value,
+        modelFilter: modelRef.current.value,
+        gearFilter: gearRef.current.value,
+        fuelFilter: fuelRef.current.value,
+        yearsFilter: yearsFilter,
+        priceFilter: priceFilter,
+      };
+      availableCars?.forEach((car) => {
+        if (
+          (car.brand === objToSave.brandFilter ||
+            objToSave.brandFilter === "") &&
+          (car.model === objToSave.modelFilter ||
+            objToSave.modelFilter === "") &&
+          (car.gear === objToSave.gearFilter || objToSave.gearFilter === "") &&
+          (car.fuel === objToSave.fuelFilter || objToSave.fuelFilter === "") &&
+          car.year >= objToSave.yearsFilter[0] &&
+          car.year <= objToSave.yearsFilter[1] &&
+          car.price_per_day >= objToSave.priceFilter[0] &&
+          car.price_per_day <= objToSave.priceFilter[1]
+        ) {
+          tempToShow.push(car);
+        }
+      });
+      setAvailableCarsNumberTwo(tempToShow);
+      setFilterObj(objToSave);
     }
     setState({ left: open });
   };
@@ -46,7 +92,12 @@ export default function TemporaryDrawer() {
     >
       <List>
         <ListItem>
-          <FilterBar />
+          <FilterBar
+            brandRef={brandRef}
+            modelRef={modelRef}
+            gearRef={gearRef}
+            fuelRef={fuelRef}
+          />
         </ListItem>
       </List>
       <Divider />
