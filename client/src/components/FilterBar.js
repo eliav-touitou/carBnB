@@ -9,7 +9,7 @@ import YearsSlider from "./YearsSlider";
 import RatingSlider from "./RatingSlider";
 import { setAvailableCars } from "../actions";
 
-export default function FilterBar() {
+export default function FilterBar({ brandRef, modelRef, gearRef, fuelRef }) {
   const [modelCars, setModelCars] = useState([]);
   const availableCars = useSelector((state) => state.availableCars);
   const dispatch = useDispatch();
@@ -27,13 +27,6 @@ export default function FilterBar() {
     "Electric",
     "Gas",
   ];
-
-  const brandRef = useRef();
-  const modelRef = useRef();
-  const gearRef = useRef();
-  const yearRef = useRef();
-  const fuelRef = useRef();
-  const pricePerDayRef = useRef();
 
   useEffect(() => {
     let temp = [];

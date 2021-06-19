@@ -4,11 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCars, setAuthOut, setAuth } from "../actions";
 import SearchBar from "./SearchBar";
 import FilterBar from "./FilterBar";
-import SideBar from "./SideBar";
 import Avatar from "./Avatar";
 const axios = require("axios");
 
-export default function Home() {
+export default function Home({ setAvailableCarsNumberTwo }) {
   const dispatch = useDispatch();
 
   const allCars = useSelector((state) => state.allCars);
@@ -45,7 +44,7 @@ export default function Home() {
   return (
     <div>
       <Avatar />
-      <SearchBar />
+      <SearchBar setAvailableCarsNumberTwo={setAvailableCarsNumberTwo} />
       <button onClick={getCars}>Get cars</button>
       {allCars?.map((car, i) => (
         <div key={`car` + i}>
@@ -64,7 +63,6 @@ export default function Home() {
         <button>login</button>
       </Link>
       <button onClick={logoutHandler}>logout</button>
-      <SideBar />
     </div>
   );
 }

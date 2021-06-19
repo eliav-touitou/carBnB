@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { setAvailableCars } from "../actions";
 
-export default function SearchBar() {
+export default function SearchBar({ setAvailableCarsNumberTwo }) {
   const dispatch = useDispatch();
   const cityRef = useRef();
   const passengersRef = useRef();
@@ -14,7 +14,6 @@ export default function SearchBar() {
   const [resultsPage, setResultsPage] = useState("/");
   const today = new Date().toISOString().slice(0, 10);
   const availableCars = useSelector((state) => state.availableCars);
-
   useEffect(() => {
     let tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -45,8 +44,9 @@ export default function SearchBar() {
         searchParameters
       );
       dispatch(setAvailableCars(availableCars.data));
+      setAvailableCarsNumberTwo(availableCars.data);
     } catch (err) {
-      console.log(err.response.data.message);
+      console.log(err);
     }
   };
   return (

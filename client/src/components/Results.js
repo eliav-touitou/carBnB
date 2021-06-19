@@ -1,17 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { setAvailableCars } from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Result from "./Result";
+import SideBar from "./SideBar";
 
-export default function Results() {
+export default function Results({
+  availableCarsNumberTwo,
+  setAvailableCarsNumberTwo,
+}) {
   const dispatch = useDispatch();
   const availableCars = useSelector((state) => state.availableCars);
 
   return (
     <div>
       <h1>Results</h1>
-      {availableCars.map((car, i) => (
+      {availableCarsNumberTwo?.map((car, i) => (
         <Result
           key={`car-${i}`}
           resultId={i}
@@ -21,6 +25,7 @@ export default function Results() {
         />
       ))}
       {/* {availableCars.length === 0 ? <Redirect to="/" /> : null} */}
+      <SideBar setAvailableCarsNumberTwo={setAvailableCarsNumberTwo} />
     </div>
   );
 }
