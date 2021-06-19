@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import Register from "./components/Register";
@@ -19,6 +19,10 @@ const apiCars = "https://vpic.nhtsa.dot.gov/api";
 
 function App() {
   const dispatch = useDispatch();
+
+  // state for filter, need to change to redux
+  const [availableCarsNumberTwo, setAvailableCarsNumberTwo] = useState();
+
   useEffect(() => {
     axios
       .get(apiCars + "/vehicles/GetMakesForVehicleType/car?format=json")
@@ -33,7 +37,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Home setAvailableCarsNumberTwo={setAvailableCarsNumberTwo} />
           </Route>
           <Route exact path="/login">
             <Login />
@@ -48,13 +52,16 @@ function App() {
             <Profile />
           </Route>
           <Route exact path="/searchbar">
-            <SearchBar />
+            <SearchBar setAvailableCarsNumberTwo={setAvailableCarsNumberTwo} />
           </Route>
           <Route exact path="/rental">
             <Rental />
           </Route>
           <Route exact path="/results">
-            <Results />
+            <Results
+              availableCarsNumberTwo={availableCarsNumberTwo}
+              setAvailableCarsNumberTwo={setAvailableCarsNumberTwo}
+            />
           </Route>
           <Route exact path="/result/:resultId" component={CarDetails} />
 

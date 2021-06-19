@@ -15,11 +15,15 @@ function valuetext(value) {
 }
 
 export default function RangeSlider() {
-  const [maxPrice, setMaxPrice] = useState(100);
   const dispatch = useDispatch();
+  const classes = useStyles();
+
+  // Redux states
   const priceFilter = useSelector((state) => state.priceFilter);
 
-  const classes = useStyles();
+  // Use states
+  const [maxPrice, setMaxPrice] = useState(100);
+
   const handleChange = (event, newValue) => {
     dispatch(setFilterPrice(newValue));
   };

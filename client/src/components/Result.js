@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Result({ brand, passengers, carId, resultId }) {
+  // Redux states
   const auth = useSelector((state) => state.auth);
 
   const saveToFavorite = async (carId) => {

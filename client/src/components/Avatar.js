@@ -5,30 +5,32 @@ import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { setAuthOut } from "../actions";
 import axios from "axios";
+const useStyles = makeStyles((theme) => ({
+  root: {
+    position: "relative",
+  },
+  dropdown: {
+    position: "absolute",
+    top: 28,
+    right: 0,
+    left: 0,
+    zIndex: 1,
+    border: "1px solid",
+    padding: theme.spacing(1),
+    width: "min-content",
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
 
 export default function Avatar() {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
-  const [open, setOpen] = useState(false);
-
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      position: "relative",
-    },
-    dropdown: {
-      position: "absolute",
-      top: 28,
-      right: 0,
-      left: 0,
-      zIndex: 1,
-      border: "1px solid",
-      padding: theme.spacing(1),
-      width: "min-content",
-      backgroundColor: theme.palette.background.paper,
-    },
-  }));
-
   const classes = useStyles();
+
+  // Redux states
+  const auth = useSelector((state) => state.auth);
+
+  // Use states
+  const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     setOpen((prev) => !prev);

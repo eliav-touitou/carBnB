@@ -3,6 +3,7 @@ import React from "react";
 import { useRef } from "react";
 
 export default function Register() {
+  // UseRefs
   const passwordRef = useRef();
   const passwordValidationRef = useRef();
 

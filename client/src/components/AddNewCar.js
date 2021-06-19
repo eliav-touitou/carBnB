@@ -5,12 +5,16 @@ import { setAllModelsApi } from "../actions";
 
 export default function AddNewCar() {
   const dispatch = useDispatch();
+
+  // Redux states
   const allCarsApi = useSelector((state) => state.allCarsApi);
   const allModelsApi = useSelector((state) => state.allModelsApi);
 
+  // Use states
   const [yearsArr, setYearsArr] = useState([]);
   const [percentage, setPercentage] = useState([]);
 
+  // Global variables
   const apiCars = "https://vpic.nhtsa.dot.gov/api";
   const gearOptions = ["Manual", "Auto"];
   const seatsOptions = ["2", "4", "5", "6", "7", "9", "else"];
@@ -23,6 +27,7 @@ export default function AddNewCar() {
     "Gas",
   ];
 
+  // UseRefs
   const ownerRef = useRef();
   const brandRef = useRef();
   const modelRef = useRef();

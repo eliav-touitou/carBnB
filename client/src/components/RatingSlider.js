@@ -44,8 +44,10 @@ const marks = [
 
 export default function RatingSlider() {
   const dispatch = useDispatch();
-  const ratingFilter = useSelector((state) => state.ratingFilter);
   const classes = useStyles();
+
+  // Redux states
+  const ratingFilter = useSelector((state) => state.ratingFilter);
 
   const filterCarByOwnerRate = async (event, newValue) => {
     dispatch(setFilterRate(newValue));

@@ -4,16 +4,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { setAvailableCars } from "../actions";
 
-export default function SearchBar() {
+export default function SearchBar({ setAvailableCarsNumberTwo }) {
   const dispatch = useDispatch();
+
+  // Redux states
+  const availableCars = useSelector((state) => state.availableCars);
+
+  // Use states
+  const [tomorrow, setTomorrow] = useState();
+  const [resultsPage, setResultsPage] = useState("/");
+
+  // Global variable
+  const today = new Date().toISOString().slice(0, 10);
+
+  // UseRefs
   const cityRef = useRef();
   const passengersRef = useRef();
   const endDateRef = useRef();
   const startDateRef = useRef();
-  const [tomorrow, setTomorrow] = useState();
-  const [resultsPage, setResultsPage] = useState("/");
-  const today = new Date().toISOString().slice(0, 10);
-  const availableCars = useSelector((state) => state.availableCars);
 
   useEffect(() => {
     let tomorrow = new Date();
@@ -45,8 +53,9 @@ export default function SearchBar() {
         searchParameters
       );
       dispatch(setAvailableCars(availableCars.data));
+      setAvailableCarsNumberTwo(availableCars.data);
     } catch (err) {
-      console.log(err.response.data.message);
+      console.log(err);
     }
   };
   return (
