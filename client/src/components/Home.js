@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCars, setAuthOut, setAuth } from "../actions";
 import SearchBar from "./SearchBar";
 import FilterBar from "./FilterBar";
+import SideBar from "./SideBar";
 import Avatar from "./Avatar";
 const axios = require("axios");
 
@@ -55,7 +56,6 @@ export default function Home() {
           <hr />
         </div>
       ))}
-      <FilterBar />
 
       <Link to="/register">
         <button>register</button>
@@ -64,6 +64,7 @@ export default function Home() {
         <button>login</button>
       </Link>
       <button onClick={logoutHandler}>logout</button>
+      <SideBar />
     </div>
   );
 }

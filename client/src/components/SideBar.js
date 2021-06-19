@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
+import FilterBar from "./FilterBar";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
@@ -22,9 +23,7 @@ const useStyles = makeStyles({
 
 export default function TemporaryDrawer() {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    left: false,
-  });
+  const [state, setState] = useState({ left: false });
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -33,8 +32,7 @@ export default function TemporaryDrawer() {
     ) {
       return;
     }
-
-    setState({ ...state, [anchor]: open });
+    setState({ left: open });
   };
 
   const list = (anchor) => (
@@ -43,30 +41,16 @@ export default function TemporaryDrawer() {
       //     [classes.fullList]: anchor === "top" || anchor === "bottom",
       //   })}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      // onClick={toggleDrawer(anchor, false)}
+      // onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem>
+          <FilterBar />
+        </ListItem>
       </List>
       <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      <Button onClick={toggleDrawer(anchor, false)}>Close and save</Button>
     </div>
   );
 
@@ -74,7 +58,7 @@ export default function TemporaryDrawer() {
     <div>
       {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+          <Button onClick={toggleDrawer(anchor, true)}>Filter Bar</Button>
           <Drawer
             anchor={anchor}
             open={state[anchor]}
