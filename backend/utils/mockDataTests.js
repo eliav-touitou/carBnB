@@ -88,8 +88,6 @@ const mockBodyResponseAllRentals = {
       start_date: "1969-12-31T23:59:57.000Z",
       end_date: "1969-12-31T23:59:57.000Z",
       total_price: 70,
-      createdAt: "2021-06-17T10:49:19.000Z",
-      updatedAt: "2021-06-17T10:49:19.000Z",
     },
     {
       transaction_id: 2,
@@ -99,8 +97,6 @@ const mockBodyResponseAllRentals = {
       start_date: "1969-12-31T23:59:57.000Z",
       end_date: "1969-12-31T23:59:58.000Z",
       total_price: 110,
-      createdAt: "2021-06-17T10:49:19.000Z",
-      updatedAt: "2021-06-17T10:49:19.000Z",
     },
   ],
 };

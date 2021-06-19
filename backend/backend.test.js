@@ -18,6 +18,7 @@ const {
 } = require("./utils/mockDataTestsSeeders");
 
 describe("Cars route", () => {
+  //seeding data before each test
   beforeEach(async () => {
     console.log("before each");
     try {
@@ -27,6 +28,7 @@ describe("Cars route", () => {
     }
   });
 
+  //remove data before each test
   afterEach(async () => {
     console.log("after each");
     try {
@@ -54,11 +56,11 @@ describe("Cars route", () => {
 
     // Is the status code 200
     expect(response.status).toBe(200);
-
+    // Is the response equals to mock response
     expect(arrToCheck).toEqual(mockBodyResponseAllCars);
   });
 
-  it("Should return a unique car from DB", async () => {
+  it("Should return a unique car from DB by id", async () => {
     const response = await request(app)
       .post("/api/v1/cars/uniquecar")
       .send(uniqueCarId);
@@ -77,7 +79,7 @@ describe("Cars route", () => {
 
     // Is the status code 200
     expect(response.status).toBe(200);
-
+    // Is the response equals to mock response
     expect(data).toEqual(mockBodyResponseUniqueCar);
   });
 
@@ -93,7 +95,7 @@ describe("Cars route", () => {
 
     // Is the status code 200
     expect(response.status).toBe(200);
-
+    // Is the response equals to mock response
     expect(response.body).toEqual(mockBodyResponseForUpload);
 
     // Check if the length of all cars before upload is less then after
@@ -101,16 +103,52 @@ describe("Cars route", () => {
       responseAllCarsAfter.body.data.length
     );
   });
+  // Checks error side
+  describe("Inner Car route", () => {
+    beforeEach(async () => {
+      console.log("before each");
+      try {
+        await Car.destroy({ where: {} });
+      } catch (err) {
+        console.log(err);
+      }
+    });
+
+    it("Should return 404 error if there no car that have the id", async () => {
+      const response = await request(app)
+        .post("/api/v1/cars/uniquecar")
+        .send({ id: 8 });
+
+      // Is the status code 404
+      expect(response.status).toBe(404);
+      // Is the response equals to mock response
+      expect(response.body).toEqual(notFoundMessage);
+    });
+  });
 });
 
 describe("Rental route", () => {
   it("Should return all rentals from DB", async () => {
     const response = await request(app).get("/api/v1/rentals/allrentals");
 
+    const arrToCheck = { success: true, data: [] };
+    response.body.data.forEach((rental) => {
+      const temp = {
+        transaction_id: rental.transaction_id,
+        car_id: rental.car_id,
+        owner_email: rental.owner_email,
+        renter_email: rental.renter_email,
+        start_date: rental.start_date,
+        end_date: rental.end_date,
+        total_price: rental.total_price,
+      };
+      arrToCheck.data.push(temp);
+    });
+
     // Is the status code 200
     expect(response.status).toBe(200);
-
-    expect(response.body).toEqual(mockBodyResponseAllRentals);
+    // Is the response equals to mock response
+    expect(arrToCheck).toEqual(mockBodyResponseAllRentals);
   });
 
   // ############### need to change ############### //
@@ -125,6 +163,8 @@ describe("Rental route", () => {
 
   //     expect(response.body).toEqual(mockBodyResponseUniqueRental);
   //   });
+
+  // Checks error side
   describe("Inner Rental route", () => {
     beforeEach(async () => {
       console.log("before each");
@@ -146,10 +186,10 @@ describe("Rental route", () => {
 
     it("Should return 404 error if there no rental", async () => {
       const response = await request(app).get("/api/v1/rentals/allrentals");
-      console.log(response);
-      // Is the status code 200
-      expect(response.status).toBe(404);
 
+      // Is the status code 404
+      expect(response.status).toBe(404);
+      // Is the response equals to mock response
       expect(response.body).toEqual(notFoundMessage);
     });
   });
