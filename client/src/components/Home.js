@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 import Avatar from "./Avatar";
 const axios = require("axios");
 
-export default function Home({ setAvailableCarsNumberTwo }) {
+export default function Home() {
   const dispatch = useDispatch();
 
   // Redux states
@@ -44,7 +44,7 @@ export default function Home({ setAvailableCarsNumberTwo }) {
   return (
     <div>
       <Avatar />
-      <SearchBar setAvailableCarsNumberTwo={setAvailableCarsNumberTwo} />
+      <SearchBar />
       <button onClick={getCars}>Get cars</button>
       {allCars?.map((car, i) => (
         <div key={`car` + i}>

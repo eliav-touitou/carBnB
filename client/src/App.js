@@ -20,9 +20,6 @@ const apiCars = "https://vpic.nhtsa.dot.gov/api";
 function App() {
   const dispatch = useDispatch();
 
-  // state for filter, need to change to redux
-  const [availableCarsNumberTwo, setAvailableCarsNumberTwo] = useState();
-
   useEffect(() => {
     axios
       .get(apiCars + "/vehicles/GetMakesForVehicleType/car?format=json")
@@ -37,7 +34,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            <Home setAvailableCarsNumberTwo={setAvailableCarsNumberTwo} />
+            <Home />
           </Route>
           <Route exact path="/login">
             <Login />
@@ -52,16 +49,13 @@ function App() {
             <Profile />
           </Route>
           <Route exact path="/searchbar">
-            <SearchBar setAvailableCarsNumberTwo={setAvailableCarsNumberTwo} />
+            <SearchBar />
           </Route>
           <Route exact path="/rental">
             <Rental />
           </Route>
           <Route exact path="/results">
-            <Results
-              availableCarsNumberTwo={availableCarsNumberTwo}
-              setAvailableCarsNumberTwo={setAvailableCarsNumberTwo}
-            />
+            <Results />
           </Route>
           <Route exact path="/result/:resultId" component={CarDetails} />
 
