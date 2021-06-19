@@ -1,13 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-// import { setAllModelsApi } from "../actions";
-
 import PriceSlider from "./PriceSlider";
 import YearsSlider from "./YearsSlider";
 import RatingSlider from "./RatingSlider";
 import { setAvailableCars } from "../actions";
+// import { setAllModelsApi } from "../actions";
 
 export default function FilterBar({ brandRef, modelRef, gearRef, fuelRef }) {
   const dispatch = useDispatch();
