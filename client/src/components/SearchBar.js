@@ -6,14 +6,23 @@ import { setAvailableCars } from "../actions";
 
 export default function SearchBar({ setAvailableCarsNumberTwo }) {
   const dispatch = useDispatch();
+
+  // Redux states
+  const availableCars = useSelector((state) => state.availableCars);
+
+  // Use states
+  const [tomorrow, setTomorrow] = useState();
+  const [resultsPage, setResultsPage] = useState("/");
+
+  // Global variable
+  const today = new Date().toISOString().slice(0, 10);
+
+  // UseRefs
   const cityRef = useRef();
   const passengersRef = useRef();
   const endDateRef = useRef();
   const startDateRef = useRef();
-  const [tomorrow, setTomorrow] = useState();
-  const [resultsPage, setResultsPage] = useState("/");
-  const today = new Date().toISOString().slice(0, 10);
-  const availableCars = useSelector((state) => state.availableCars);
+
   useEffect(() => {
     let tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);

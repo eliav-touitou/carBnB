@@ -10,6 +10,8 @@ export default function Results({
   setAvailableCarsNumberTwo,
 }) {
   const dispatch = useDispatch();
+
+  // Redux states
   const availableCars = useSelector((state) => state.availableCars);
 
   return (

@@ -8,7 +8,12 @@ import axios from "axios";
 
 export default function Avatar() {
   const dispatch = useDispatch();
+  const classes = useStyles();
+
+  // Redux states
   const auth = useSelector((state) => state.auth);
+
+  // Use states
   const [open, setOpen] = useState(false);
 
   const useStyles = makeStyles((theme) => ({
@@ -27,8 +32,6 @@ export default function Avatar() {
       backgroundColor: theme.palette.background.paper,
     },
   }));
-
-  const classes = useStyles();
 
   const handleClick = () => {
     setOpen((prev) => !prev);

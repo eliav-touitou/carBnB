@@ -9,8 +9,10 @@ import FacebookLogin from "react-facebook-login";
 export default function Login() {
   const dispatch = useDispatch();
 
+  // Redux states
   const auth = useSelector((state) => state.auth);
 
+  // UseRefs
   const userNameRef = useRef();
   const passwordRef = useRef();
 

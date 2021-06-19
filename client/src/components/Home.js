@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setCars, setAuthOut, setAuth } from "../actions";
 import SearchBar from "./SearchBar";
-import FilterBar from "./FilterBar";
 import Avatar from "./Avatar";
 const axios = require("axios");
 
 export default function Home({ setAvailableCarsNumberTwo }) {
   const dispatch = useDispatch();
 
+  // Redux states
   const allCars = useSelector((state) => state.allCars);
 
   useEffect(() => {

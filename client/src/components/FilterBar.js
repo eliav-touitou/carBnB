@@ -10,13 +10,18 @@ import RatingSlider from "./RatingSlider";
 import { setAvailableCars } from "../actions";
 
 export default function FilterBar({ brandRef, modelRef, gearRef, fuelRef }) {
-  const [modelCars, setModelCars] = useState([]);
-  const availableCars = useSelector((state) => state.availableCars);
   const dispatch = useDispatch();
+
+  // Redux states
+  const availableCars = useSelector((state) => state.availableCars);
   const allCarsApi = useSelector((state) => state.allCarsApi);
   const allModelsApi = useSelector((state) => state.allModelsApi);
 
+  // Use states
+  const [modelCars, setModelCars] = useState([]);
   const [yearsArr, setYearsArr] = useState([]);
+
+  // Global variables
   const apiCars = "https://vpic.nhtsa.dot.gov/api";
   const gearOptions = ["Manual", "Auto"];
   const fuelTypes = [

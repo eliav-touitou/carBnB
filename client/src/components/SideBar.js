@@ -23,21 +23,24 @@ const useStyles = makeStyles({
 });
 
 export default function TemporaryDrawer({ setAvailableCarsNumberTwo }) {
-  const [filterObj, setFilterObj] = useState({});
+  const classes = useStyles();
+
+  // Redux states
   const yearsFilter = useSelector((state) => state.yearsFilter);
   const priceFilter = useSelector((state) => state.priceFilter);
   const availableCars = useSelector((state) => state.availableCars);
 
-  // Useref for filter inputs
+  // Use states
+  const [filterObj, setFilterObj] = useState({});
+  const [state, setState] = useState({ left: false });
+
+  // UseRefs for filter inputs
   const brandRef = useRef();
   const modelRef = useRef();
   const gearRef = useRef();
   const yearRef = useRef();
   const fuelRef = useRef();
   const pricePerDayRef = useRef();
-
-  const classes = useStyles();
-  const [state, setState] = useState({ left: false });
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (

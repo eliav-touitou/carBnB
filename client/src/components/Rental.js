@@ -2,7 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 
 export default function Rental() {
+  // Use states
   const [image, setImage] = useState("");
+
+  // Function to convert image to binary
   const imageToBinary = async (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -16,14 +19,12 @@ export default function Rental() {
     reader.readAsDataURL(file);
   };
 
+  // Function to save license image into DB
   const SaveImage = async () => {
-    // table: User,
-    //   column: ["first_name", "last_name"],
-    //   primaryKey: "user_email",
-    //   primaryKeyValue: "eliav@gmail.com",
-    //   content: ["mose", "levy"],
-
     try {
+      // Need to change, (no to do it hardcoded)
+      // const arr = [table, ["column"], "PK=user_email", [image]];
+
       const arr = ["User", ["license"], "eliav@gmail.com", [image]];
       await axios.post("api/v1/users/updateitems", { data: arr });
     } catch (error) {
