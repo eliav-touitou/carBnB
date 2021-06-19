@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FilterBar from "./FilterBar";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
@@ -12,6 +12,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 // import InboxIcon from "@material-ui/icons/MoveToInbox";
 // import MailIcon from "@material-ui/icons/Mail";
+import { setFilteredCars } from "../actions";
 
 const useStyles = makeStyles({
   list: {
@@ -22,8 +23,9 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TemporaryDrawer({ setAvailableCarsNumberTwo }) {
+export default function TemporaryDrawer() {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   // Redux states
   const yearsFilter = useSelector((state) => state.yearsFilter);
@@ -78,7 +80,7 @@ export default function TemporaryDrawer({ setAvailableCarsNumberTwo }) {
           tempToShow.push(car);
         }
       });
-      setAvailableCarsNumberTwo(tempToShow);
+      dispatch(setFilteredCars(tempToShow));
       setFilterObj(objToSave);
     }
     setState({ left: open });

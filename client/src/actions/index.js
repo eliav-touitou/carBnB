@@ -59,3 +59,9 @@ export const setFilterRate = (arr) => {
     payload: arr,
   };
 };
+export const setFilteredCars = (arr) => {
+  return {
+    type: "SETFILTEREDCARS",
+    payload: arr,
+  };
+};

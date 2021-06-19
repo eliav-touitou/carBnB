@@ -3,12 +3,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { setAvailableCars } from "../actions";
+import { setFilteredCars } from "../actions";
 
-export default function SearchBar({ setAvailableCarsNumberTwo }) {
+export default function SearchBar() {
   const dispatch = useDispatch();
 
   // Redux states
   const availableCars = useSelector((state) => state.availableCars);
+  const filteredCars = useSelector((state) => state.filteredCars);
 
   // Use states
   const [tomorrow, setTomorrow] = useState();
@@ -53,7 +55,7 @@ export default function SearchBar({ setAvailableCarsNumberTwo }) {
         searchParameters
       );
       dispatch(setAvailableCars(availableCars.data));
-      setAvailableCarsNumberTwo(availableCars.data);
+      dispatch(setFilteredCars(availableCars.data));
     } catch (err) {
       console.log(err);
     }
