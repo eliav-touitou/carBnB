@@ -65,6 +65,16 @@ search.post("/initial", async (req, res) => {
     // Check what cars are taken.
     const carsId = [];
     carsByParameters.forEach((car) => carsId.push(car.car_id));
+
+    carsByParameters.forEach((car) => {
+      users.forEach((user) => {
+        if (car.owner_email === user.user_email) {
+          car.dataValues.owner_rating = user.rating;
+          return;
+        }
+      });
+    });
+
     const takenCars = await whatCarsAreTaken({
       carsId: carsId,
       dates: { start: new Date(data.startDate), end: new Date(data.endDate) },

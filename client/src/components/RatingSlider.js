@@ -50,12 +50,9 @@ export default function RatingSlider() {
   const ratingFilter = useSelector((state) => state.ratingFilter);
 
   const filterCarByOwnerRate = async (event, newValue) => {
-    dispatch(setFilterRate(newValue));
-    const { data } = await axios.post("api/v1/users/rated", {
-      minRate: newValue,
-    });
-    const ratedUser = data.data;
-    console.log(ratedUser);
+    if (newValue !== ratingFilter) {
+      dispatch(setFilterRate(newValue));
+    }
   };
 
   return (

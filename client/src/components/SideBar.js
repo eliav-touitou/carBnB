@@ -31,6 +31,7 @@ export default function TemporaryDrawer() {
   const yearsFilter = useSelector((state) => state.yearsFilter);
   const priceFilter = useSelector((state) => state.priceFilter);
   const availableCars = useSelector((state) => state.availableCars);
+  const ratingFilter = useSelector((state) => state.ratingFilter);
 
   // Use states
   const [filterObj, setFilterObj] = useState({});
@@ -75,11 +76,15 @@ export default function TemporaryDrawer() {
           car.year >= objToSave.yearsFilter[0] &&
           car.year <= objToSave.yearsFilter[1] &&
           car.price_per_day >= objToSave.priceFilter[0] &&
-          car.price_per_day <= objToSave.priceFilter[1]
+          car.price_per_day <= objToSave.priceFilter[1] &&
+          car.owner_rating >= ratingFilter
         ) {
           tempToShow.push(car);
         }
       });
+      if (tempToShow.length === 0) {
+        console.log("No Results");
+      }
       dispatch(setFilteredCars(tempToShow));
       setFilterObj(objToSave);
     }
