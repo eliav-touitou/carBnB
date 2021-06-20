@@ -1,6 +1,12 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  NavLink,
+  useLocation,
+} from "react-router-dom";
 import Home from "./components/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -11,7 +17,7 @@ import SearchBar from "./components/SearchBar";
 import Rental from "./components/Rental";
 import Results from "./components/Results";
 import { setAllCarsApi } from "./actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CarDetails from "./components/CarDetails";
 
 const axios = require("axios");
@@ -19,6 +25,13 @@ const apiCars = "https://vpic.nhtsa.dot.gov/api";
 
 function App() {
   const dispatch = useDispatch();
+
+  const auth = useSelector((state) => state.auth);
+  const isLoginPage = useSelector((state) => state.isLoginPage);
+
+  useEffect(() => {
+    console.log(window.location.pathname);
+  });
 
   useEffect(() => {
     axios
@@ -32,6 +45,14 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        {!isLoginPage && (
+          <nav className="nav-bar">
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/searchbar">Search</NavLink>
+            <NavLink to="/addnewcar">Add New Car</NavLink>
+            {!auth && <NavLink to="/login">Login</NavLink>}
+          </nav>
+        )}
         <Switch>
           <Route exact path="/">
             <Home />

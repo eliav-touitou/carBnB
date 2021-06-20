@@ -59,9 +59,17 @@ export const setFilterRate = (arr) => {
     payload: arr,
   };
 };
+
 export const setFilteredCars = (arr) => {
   return {
     type: "SETFILTEREDCARS",
     payload: arr,
+  };
+};
+
+export const setOnLoginPage = (bool) => {
+  return {
+    type: "LOGINPAGE",
+    payload: bool,
   };
 };

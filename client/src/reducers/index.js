@@ -8,6 +8,7 @@ import { yearFilterReducer } from "./yearsFilter";
 import { priceFilterReducer } from "./priceFilter";
 import { ratingFilterReducer } from "./ratingFilter";
 import { filteredCarsReducer } from "./filteredCars";
+import { onLoginReducer } from "./onLoginPage";
 
 const allReducers = combineReducers({
   allCars: carsReducer,
@@ -19,6 +20,7 @@ const allReducers = combineReducers({
   priceFilter: priceFilterReducer,
   ratingFilter: ratingFilterReducer,
   filteredCars: filteredCarsReducer,
+  isLoginPage: onLoginReducer,
 });
 
 export default allReducers;
