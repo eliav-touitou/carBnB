@@ -65,3 +65,9 @@ export const setFilteredCars = (arr) => {
     payload: arr,
   };
 };
+export const setInitialSearch = (obj) => {
+  return {
+    type: "SETINITIALSEARCH",
+    payload: obj,
+  };
+};

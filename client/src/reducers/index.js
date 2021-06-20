@@ -8,6 +8,7 @@ import { yearFilterReducer } from "./yearsFilter";
 import { priceFilterReducer } from "./priceFilter";
 import { ratingFilterReducer } from "./ratingFilter";
 import { filteredCarsReducer } from "./filteredCars";
+import { initialSearchReducer } from "./initialSearch";
 
 const allReducers = combineReducers({
   allCars: carsReducer,
@@ -19,6 +20,7 @@ const allReducers = combineReducers({
   priceFilter: priceFilterReducer,
   ratingFilter: ratingFilterReducer,
   filteredCars: filteredCarsReducer,
+  initialSearch: initialSearchReducer,
 });
 
 export default allReducers;
