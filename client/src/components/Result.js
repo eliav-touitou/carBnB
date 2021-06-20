@@ -21,11 +21,7 @@ export default function Result({ brand, passengers, carId, resultId }) {
     <div className="car-details">
       <Link to={`/result/${resultId}`}>
         <div className="car-brand">Brand: {brand}</div>
-        {/* <div className="car-year">Year: {car.year}</div> */}
-        {/* <div className="car-model">Model: {car.model}</div> */}
-        {/* <div className="car-gear">Gear: {car.gear}</div> */}
         <div className="car-passengers">Passengers: {passengers}</div>
-        {/* <div className="car-fuel">Fuel: {car.fuel}</div> */}
         <button onClick={() => saveToFavorite(carId)}>❤</button>
       </Link>
       <hr />

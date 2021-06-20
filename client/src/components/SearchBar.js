@@ -44,8 +44,6 @@ export default function SearchBar() {
     const endDate = endDateRef.current.value;
     if (!city || !passengers || !startDate || !endDate) return;
 
-    setResultsPage("/results");
-
     const searchParameters = {
       data: { city, startDate, endDate, passengers },
     };
@@ -56,6 +54,9 @@ export default function SearchBar() {
       );
       dispatch(setAvailableCars(availableCars.data));
       dispatch(setFilteredCars(availableCars.data));
+      if (availableCars.data.length !== 0) {
+        setResultsPage("/results");
+      }
     } catch (err) {
       console.log(err);
     }
