@@ -70,7 +70,8 @@ export const setInitialSearch = (obj) => {
   return {
     type: "SETINITIALSEARCH",
     payload: obj,
-
+  };
+};
 export const setOnLoginPage = (bool) => {
   return {
     type: "LOGINPAGE",
