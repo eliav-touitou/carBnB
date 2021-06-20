@@ -48,7 +48,6 @@ export default function Home() {
       <button onClick={getCars}>Get cars</button>
       {allCars?.map((car, i) => (
         <div key={`car` + i}>
-          {console.log(car)}
           <h3>{car.brand}</h3>
           <div>{car.model}</div>
           <div>{car.year}</div>
