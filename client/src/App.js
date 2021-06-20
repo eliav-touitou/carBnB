@@ -1,12 +1,6 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-  NavLink,
-  useLocation,
-} from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
 import Home from "./components/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -22,18 +16,18 @@ import CarDetails from "./components/CarDetails";
 import { setAuth } from "./actions";
 
 const axios = require("axios");
-const apiCars = "https://vpic.nhtsa.dot.gov/api";
 
 function App() {
   const dispatch = useDispatch();
 
+  // Global API URL.
+  const apiCars = "https://vpic.nhtsa.dot.gov/api";
+
+  // Redux state
   const auth = useSelector((state) => state.auth);
   const isLoginPage = useSelector((state) => state.isLoginPage);
 
-  useEffect(() => {
-    console.log(window.location.pathname);
-  });
-
+  // Check if user logged, if true update auth state.
   useEffect(() => {
     axios
       .get("api/v1/users/checklogged")
@@ -43,6 +37,7 @@ function App() {
       .catch((err) => console.log(err.message));
   }, []);
 
+  // Get all cars brand from API.
   useEffect(() => {
     axios
       .get(apiCars + "/vehicles/GetMakesForVehicleType/car?format=json")
