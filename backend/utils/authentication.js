@@ -111,8 +111,8 @@ const googleLoginVerified = async (req, res, next) => {
           password,
         });
         newUser.password = "generate-password";
-        const accessToken = createAccessToken(user);
-        const refreshToken = createRefreshToken(user);
+        const accessToken = createAccessToken(newUser);
+        const refreshToken = createRefreshToken(newUser);
         res.cookie("Access-Token", `Bearer ${accessToken}`);
         res.cookie("Refresh-Token", `Bearer ${refreshToken}`);
         req.user = newUser;
@@ -171,11 +171,10 @@ const facebookLoginValidation = async (req, res, next) => {
         password,
       });
       newUser.password = "generate-password";
-      const accessToken = createAccessToken(user);
-      const refreshToken = createRefreshToken(user);
+      const accessToken = createAccessToken(newUser);
+      const refreshToken = createRefreshToken(newUser);
       res.cookie("Access-Token", `Bearer ${accessToken}`);
       res.cookie("Refresh-Token", `Bearer ${refreshToken}`);
-      req.user = null;
       req.user = newUser;
       req.userEmail = null;
       next();
