@@ -242,6 +242,20 @@ const removeFromFavoriteDB = async ({ userEmail, carId }) => {
   }
 };
 
+const addNewRentalToDB = async (obj) => {
+  const objToSave = {
+    car_id: obj.carId,
+    owner_email: obj.ownerEmail,
+    renter_email: obj.renterEmail,
+    start_date: obj.startDate,
+    end_date: obj.endDate,
+    total_price: obj.totalPrice,
+    is_active: true,
+  };
+  await Rental.create(objToSave);
+  return objToSave;
+};
+
 module.exports = {
   getCar,
   getRental,
@@ -258,4 +272,5 @@ module.exports = {
   getUserByRating,
   addToFavoriteDB,
   removeFromFavoriteDB,
+  addNewRentalToDB,
 };
