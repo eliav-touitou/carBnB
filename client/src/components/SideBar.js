@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import clsx from "clsx";
+// import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import FilterBar from "./FilterBar";
@@ -8,23 +8,23 @@ import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+import { setFilteredCars } from "../actions";
+// import ListItemIcon from "@material-ui/core/ListItemIcon";
+// import ListItemText from "@material-ui/core/ListItemText";
 // import InboxIcon from "@material-ui/icons/MoveToInbox";
 // import MailIcon from "@material-ui/icons/Mail";
-import { setFilteredCars } from "../actions";
 
-const useStyles = makeStyles({
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: "auto",
-  },
-});
+// const useStyles = makeStyles({
+//   list: {
+//     width: 250,
+//   },
+//   fullList: {
+//     width: "auto",
+//   },
+// });
 
 export default function TemporaryDrawer() {
-  const classes = useStyles();
+  // const classes = useStyles();
   const dispatch = useDispatch();
 
   // Redux states
@@ -41,9 +41,7 @@ export default function TemporaryDrawer() {
   const brandRef = useRef();
   const modelRef = useRef();
   const gearRef = useRef();
-  const yearRef = useRef();
   const fuelRef = useRef();
-  const pricePerDayRef = useRef();
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (

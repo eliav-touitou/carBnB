@@ -2,12 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setAuth,
-  setAuthOut,
-  setOnLoginPage,
-  setPromptOrNormal,
-} from "../actions";
+import { setAuth, setAuthOut, setOnLoginPage } from "../actions";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 
@@ -28,6 +23,7 @@ export default function Login() {
       dispatch(setOnLoginPage(false));
     };
   }, []);
+
   // Send login data, user name and password
   const onLoginHandler = async () => {
     if (userNameRef.current.value === "" || passwordRef.current.value === "") {

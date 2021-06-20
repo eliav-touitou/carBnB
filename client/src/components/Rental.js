@@ -48,7 +48,7 @@ export default function Rental() {
         ></input>
       </div>
       <button onClick={SaveImage}>upload image</button>
-      <img src={`data:image/jpeg;base64,${image}`} />
+      <img alt="license" src={`data:image/jpeg;base64,${image}`} />
     </div>
   );
 }

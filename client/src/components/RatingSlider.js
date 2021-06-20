@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
-import { setAvailableCars, setFilterRate } from "../actions";
+import { setFilterRate } from "../actions";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {

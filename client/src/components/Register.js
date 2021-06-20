@@ -1,11 +1,9 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React from "react";
 import { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function Register() {
-  const dispatch = useDispatch();
-
   // UseRefs
   const passwordRef = useRef();
   const passwordValidationRef = useRef();
