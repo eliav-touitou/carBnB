@@ -2,7 +2,12 @@ import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setAuth, setAuthOut, setOnLoginPage } from "../actions";
+import {
+  setAuth,
+  setAuthOut,
+  setOnLoginPage,
+  setPromptOrNormal,
+} from "../actions";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 
@@ -11,6 +16,7 @@ export default function Login() {
 
   // Redux states
   const auth = useSelector((state) => state.auth);
+  const promptOrNormal = useSelector((state) => state.promptOrNormal);
 
   // UseRefs
   const userNameRef = useRef();
@@ -89,13 +95,13 @@ export default function Login() {
   return (
     <div>
       <input
-        className="username-input-login"
+        className={`username-input-login-${promptOrNormal}`}
         ref={userNameRef}
         type="text"
         placeholder="enter your username"
       ></input>
       <input
-        className="password-input-login"
+        className={`password-input-login-${promptOrNormal}`}
         ref={passwordRef}
         type="password"
         placeholder="enter your password"
@@ -115,7 +121,9 @@ export default function Login() {
       />
 
       <Link to="/register">
-        <button>go to register</button>
+        <button className={`register-btn-login-${promptOrNormal}`}>
+          go to register
+        </button>
       </Link>
       {auth && <Redirect to="/" />}
     </div>

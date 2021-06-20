@@ -1,11 +1,17 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Register() {
+  const dispatch = useDispatch();
+
   // UseRefs
   const passwordRef = useRef();
   const passwordValidationRef = useRef();
+
+  // Redux states
+  const promptOrNormal = useSelector((state) => state.promptOrNormal);
 
   // Function to save new user to database
   const addNewUser = async (e) => {
@@ -34,7 +40,7 @@ export default function Register() {
           <label>
             email
             <input
-              className="email-input-register"
+              className={`email-input-register-${promptOrNormal}`}
               name="email"
               type="email"
               placeholder="enter your email"
@@ -46,7 +52,7 @@ export default function Register() {
           <label>
             phone:
             <input
-              className="phone-input-register"
+              className={`phone-input-register-${promptOrNormal}`}
               name="phoneNumber"
               type="phone"
               placeholder="enter your phone"
@@ -58,7 +64,7 @@ export default function Register() {
           <label>
             first name
             <input
-              className="firstName-input-register"
+              className={`firstName-input-register-${promptOrNormal}`}
               name="firstName"
               type="text"
               placeholder="enter your first name"
@@ -70,7 +76,7 @@ export default function Register() {
           <label>
             last name
             <input
-              className="lastName-input-register"
+              className={`lastName-input-register-${promptOrNormal}`}
               name="lastName"
               type="text"
               placeholder="enter your last name"
@@ -82,7 +88,7 @@ export default function Register() {
           <label>
             address
             <input
-              className="address-input-register"
+              className={`address-input-register-${promptOrNormal}`}
               name="address"
               type="text"
               placeholder="enter your address"
@@ -94,7 +100,7 @@ export default function Register() {
           <label>
             password
             <input
-              className="password-input-register"
+              className={`password-input-register-${promptOrNormal}`}
               ref={passwordRef}
               name="password"
               type="password"
@@ -107,7 +113,7 @@ export default function Register() {
           <label>
             validate password
             <input
-              className="validPassword-input-register"
+              className={`validPassword-input-register-${promptOrNormal}`}
               ref={passwordValidationRef}
               type="password"
               placeholder="enter your password again"

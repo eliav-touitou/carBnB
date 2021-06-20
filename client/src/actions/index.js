@@ -73,3 +73,10 @@ export const setOnLoginPage = (bool) => {
     payload: bool,
   };
 };
+
+export const setPromptOrNormal = (str) => {
+  return {
+    type: "SETPROMPTORNORMAL",
+    payload: str,
+  };
+};
