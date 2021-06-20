@@ -3,17 +3,27 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { setAvailableCars } from "../actions";
+import { setFilteredCars } from "../actions";
 
 export default function SearchBar() {
   const dispatch = useDispatch();
+
+  // Redux states
+  const availableCars = useSelector((state) => state.availableCars);
+  const filteredCars = useSelector((state) => state.filteredCars);
+
+  // Use states
+  const [tomorrow, setTomorrow] = useState();
+  const [resultsPage, setResultsPage] = useState("/");
+
+  // Global variable
+  const today = new Date().toISOString().slice(0, 10);
+
+  // UseRefs
   const cityRef = useRef();
   const passengersRef = useRef();
   const endDateRef = useRef();
   const startDateRef = useRef();
-  const [tomorrow, setTomorrow] = useState();
-  const [resultsPage, setResultsPage] = useState("/");
-  const today = new Date().toISOString().slice(0, 10);
-  const availableCars = useSelector((state) => state.availableCars);
 
   useEffect(() => {
     let tomorrow = new Date();
@@ -45,8 +55,9 @@ export default function SearchBar() {
         searchParameters
       );
       dispatch(setAvailableCars(availableCars.data));
+      dispatch(setFilteredCars(availableCars.data));
     } catch (err) {
-      console.log(err.response.data.message);
+      console.log(err);
     }
   };
   return (

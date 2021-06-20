@@ -7,6 +7,7 @@ import { allModelsApiReducer } from "./modelsApi";
 import { yearFilterReducer } from "./yearsFilter";
 import { priceFilterReducer } from "./priceFilter";
 import { ratingFilterReducer } from "./ratingFilter";
+import { filteredCarsReducer } from "./filteredCars";
 
 const allReducers = combineReducers({
   allCars: carsReducer,
@@ -17,7 +18,7 @@ const allReducers = combineReducers({
   yearsFilter: yearFilterReducer,
   priceFilter: priceFilterReducer,
   ratingFilter: ratingFilterReducer,
-
+  filteredCars: filteredCarsReducer,
 });
 
 export default allReducers;

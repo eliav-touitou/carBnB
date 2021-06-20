@@ -1,22 +1,25 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-// import { setAllModelsApi } from "../actions";
-
 import PriceSlider from "./PriceSlider";
 import YearsSlider from "./YearsSlider";
 import RatingSlider from "./RatingSlider";
 import { setAvailableCars } from "../actions";
+// import { setAllModelsApi } from "../actions";
 
-export default function FilterBar() {
-  const [modelCars, setModelCars] = useState([]);
-  const availableCars = useSelector((state) => state.availableCars);
+export default function FilterBar({ brandRef, modelRef, gearRef, fuelRef }) {
   const dispatch = useDispatch();
+
+  // Redux states
+  const availableCars = useSelector((state) => state.availableCars);
   const allCarsApi = useSelector((state) => state.allCarsApi);
   const allModelsApi = useSelector((state) => state.allModelsApi);
 
+  // Use states
+  const [modelCars, setModelCars] = useState([]);
   const [yearsArr, setYearsArr] = useState([]);
+
+  // Global variables
   const apiCars = "https://vpic.nhtsa.dot.gov/api";
   const gearOptions = ["Manual", "Auto"];
   const fuelTypes = [
@@ -27,13 +30,6 @@ export default function FilterBar() {
     "Electric",
     "Gas",
   ];
-
-  const brandRef = useRef();
-  const modelRef = useRef();
-  const gearRef = useRef();
-  const yearRef = useRef();
-  const fuelRef = useRef();
-  const pricePerDayRef = useRef();
 
   useEffect(() => {
     let temp = [];

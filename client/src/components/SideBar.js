@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch, useSelector } from "react-redux";
+import FilterBar from "./FilterBar";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
@@ -10,6 +12,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 // import InboxIcon from "@material-ui/icons/MoveToInbox";
 // import MailIcon from "@material-ui/icons/Mail";
+import { setFilteredCars } from "../actions";
 
 const useStyles = makeStyles({
   list: {
@@ -22,9 +25,24 @@ const useStyles = makeStyles({
 
 export default function TemporaryDrawer() {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    left: false,
-  });
+  const dispatch = useDispatch();
+
+  // Redux states
+  const yearsFilter = useSelector((state) => state.yearsFilter);
+  const priceFilter = useSelector((state) => state.priceFilter);
+  const availableCars = useSelector((state) => state.availableCars);
+
+  // Use states
+  const [filterObj, setFilterObj] = useState({});
+  const [state, setState] = useState({ left: false });
+
+  // UseRefs for filter inputs
+  const brandRef = useRef();
+  const modelRef = useRef();
+  const gearRef = useRef();
+  const yearRef = useRef();
+  const fuelRef = useRef();
+  const pricePerDayRef = useRef();
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -34,7 +52,38 @@ export default function TemporaryDrawer() {
       return;
     }
 
-    setState({ ...state, [anchor]: open });
+    // Check if the side bar were closed => if yes =>
+    // Saved all the data from the filter and show only the filtered results
+    if (open === false) {
+      const tempToShow = [];
+      const objToSave = {
+        brandFilter: brandRef.current.value,
+        modelFilter: modelRef.current.value,
+        gearFilter: gearRef.current.value,
+        fuelFilter: fuelRef.current.value,
+        yearsFilter: yearsFilter,
+        priceFilter: priceFilter,
+      };
+      availableCars?.forEach((car) => {
+        if (
+          (car.brand === objToSave.brandFilter ||
+            objToSave.brandFilter === "") &&
+          (car.model === objToSave.modelFilter ||
+            objToSave.modelFilter === "") &&
+          (car.gear === objToSave.gearFilter || objToSave.gearFilter === "") &&
+          (car.fuel === objToSave.fuelFilter || objToSave.fuelFilter === "") &&
+          car.year >= objToSave.yearsFilter[0] &&
+          car.year <= objToSave.yearsFilter[1] &&
+          car.price_per_day >= objToSave.priceFilter[0] &&
+          car.price_per_day <= objToSave.priceFilter[1]
+        ) {
+          tempToShow.push(car);
+        }
+      });
+      dispatch(setFilteredCars(tempToShow));
+      setFilterObj(objToSave);
+    }
+    setState({ left: open });
   };
 
   const list = (anchor) => (
@@ -43,30 +92,21 @@ export default function TemporaryDrawer() {
       //     [classes.fullList]: anchor === "top" || anchor === "bottom",
       //   })}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      // onClick={toggleDrawer(anchor, false)}
+      // onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem>
+          <FilterBar
+            brandRef={brandRef}
+            modelRef={modelRef}
+            gearRef={gearRef}
+            fuelRef={fuelRef}
+          />
+        </ListItem>
       </List>
       <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      <Button onClick={toggleDrawer(anchor, false)}>Close and save</Button>
     </div>
   );
 
@@ -74,7 +114,7 @@ export default function TemporaryDrawer() {
     <div>
       {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+          <Button onClick={toggleDrawer(anchor, true)}>Filter Bar</Button>
           <Drawer
             anchor={anchor}
             open={state[anchor]}

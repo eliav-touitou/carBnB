@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import Register from "./components/Register";
@@ -19,6 +19,7 @@ const apiCars = "https://vpic.nhtsa.dot.gov/api";
 
 function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     axios
       .get(apiCars + "/vehicles/GetMakesForVehicleType/car?format=json")

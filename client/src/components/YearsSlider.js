@@ -16,9 +16,11 @@ function valuetext(value) {
 
 export default function RangeSlider() {
   const dispatch = useDispatch();
+  const classes = useStyles();
+
+  // Redux states
   const yearsFilter = useSelector((state) => state.yearsFilter);
 
-  const classes = useStyles();
   const handleChange = (event, newValue) => {
     dispatch(setFilterYears(newValue));
   };

@@ -1,9 +1,9 @@
 const { Router } = require("express");
 const auth = Router();
-const { facebookLoginValidation } = require("../../authentication");
+const { facebookLoginValidation } = require("../../utils/authentication");
 const { getUserOrAuth } = require("../../../database/queries");
 const { User } = require("../../../database/models");
-const { googleLoginVerified } = require("../../authentication");
+const { googleLoginVerified } = require("../../utils/authentication");
 
 // Route to login with facebook
 auth.post("/facebookLogin", facebookLoginValidation, async (req, res) => {
