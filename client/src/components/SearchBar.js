@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { setAvailableCars } from "../actions";
 import { setFilteredCars } from "../actions";
+import { setInitialSearch } from "../actions";
 
 export default function SearchBar() {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ export default function SearchBar() {
   // Redux states
   const availableCars = useSelector((state) => state.availableCars);
   const filteredCars = useSelector((state) => state.filteredCars);
+  const initialSearch = useSelector((state) => state.initialSearch);
 
   // Use states
   const [tomorrow, setTomorrow] = useState();
@@ -47,6 +49,7 @@ export default function SearchBar() {
     const searchParameters = {
       data: { city, startDate, endDate, passengers },
     };
+    dispatch(setInitialSearch(searchParameters.data));
     try {
       const { data: availableCars } = await axios.post(
         "api/v1/search/initial",
