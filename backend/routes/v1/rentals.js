@@ -1,6 +1,10 @@
 const { Router } = require("express");
 const rentals = Router();
-const { getAllItems, getRental } = require("../../../database/queries");
+const {
+  getAllItems,
+  getRental,
+  addNewRentalToDB,
+} = require("../../../database/queries");
 const { Rental } = require("../../../database/models");
 const { buildPatterns } = require("../../utils/helperFunctions");
 const nodemailer = require("nodemailer");
@@ -61,21 +65,21 @@ rentals.post("/new", async (req, res) => {
     // Build pattern texts for emails
     const { textPatternToRenter, textPatternToOwner } = buildPatterns({
       transactionId: String(result.transaction_id),
-      startDate: data.start_date,
-      endDate: data.end_date,
+      startDate: data.startDate,
+      endDate: data.endDate,
     });
 
     /// ## Can build those obj with outer function ## ///
     const mailsOption = [
       (mailToRenterOptions = {
         from: adminEmail,
-        to: data.renter_email,
+        to: data.renterEmail,
         subject: "Order summery",
         text: textPatternToRenter,
       }),
       (mailToOwnerOptions = {
         from: adminEmail,
-        to: data.owner_email,
+        to: data.ownerEmail,
         subject: "New Order",
         text: textPatternToOwner,
       }),

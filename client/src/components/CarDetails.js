@@ -6,10 +6,12 @@ import { useParams } from "react-router-dom";
 export default function CarDetails() {
   const { resultId } = useParams();
 
+  // Redux States
   const availableCars = useSelector((state) => state.availableCars);
   const initialSearch = useSelector((state) => state.initialSearch);
   const auth = useSelector((state) => state.auth);
 
+  // Send new rental to save
   const rentalCar = async () => {
     const data = {
       carId: availableCars[resultId].car_id,
@@ -26,6 +28,7 @@ export default function CarDetails() {
     }
   };
 
+  // Function for get numbers of days rental
   const getNumberOfRentalDays = () => {
     const numberOfDaysToRent = Math.round(
       (new Date(initialSearch.endDate) - new Date(initialSearch.startDate)) /
@@ -35,6 +38,7 @@ export default function CarDetails() {
     return numberOfDaysToRent;
   };
 
+  // Function for calculate price for rental
   const calculateDiscount = () => {
     const pricePerDay = availableCars[resultId].price_per_day;
     const discountAboveWeek = availableCars[resultId].price_per_week;
