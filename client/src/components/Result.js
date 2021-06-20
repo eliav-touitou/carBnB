@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -9,10 +9,14 @@ export default function Result({ brand, passengers, carId, resultId }) {
 
   const saveToFavorite = async (carId) => {
     try {
-      const result = await axios.post("/api/v1/favorite/add", {
-        data: { carId: carId, userEmail: auth.user_email },
-      });
-      console.log(result);
+      if (auth) {
+        const result = await axios.post("/api/v1/favorite/add", {
+          data: { carId: carId, userEmail: auth.user_email },
+        });
+        console.log(result);
+      } else {
+        // need to prompt login promp component
+      }
     } catch (err) {
       console.log(err);
     }

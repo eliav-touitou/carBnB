@@ -54,8 +54,8 @@ const mockNewCarToUpload = {
     fuel: "Octan-95",
     passengers: 5,
     pricePerDay: 100,
-    pricePerWeek: "5%",
-    pricePerMonth: "10%",
+    discountPerWeek: "5%",
+    discountPerMonth: "10%",
   },
 };
 const mockBodyResponseForUpload = {
@@ -69,8 +69,8 @@ const mockBodyResponseForUpload = {
     fuel: "Octan-95",
     passengers: 5,
     pricePerDay: 100,
-    pricePerWeek: 665,
-    pricePerMonth: 2700,
+    discountPerWeek: "5%",
+    discountPerMonth: "10%",
   },
 };
 

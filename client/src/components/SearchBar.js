@@ -1,18 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { setAvailableCars } from "../actions";
 import { setFilteredCars } from "../actions";
 import { setInitialSearch } from "../actions";
 
 export default function SearchBar() {
   const dispatch = useDispatch();
-
-  // Redux states
-  const availableCars = useSelector((state) => state.availableCars);
-  const filteredCars = useSelector((state) => state.filteredCars);
-  const initialSearch = useSelector((state) => state.initialSearch);
 
   // Use states
   const [tomorrow, setTomorrow] = useState();

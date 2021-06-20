@@ -1,7 +1,6 @@
 const { Router } = require("express");
 const cars = Router();
 const { Car } = require("../../../database/models");
-const { calculateDiscount } = require("../../utils/helperFunctions");
 const { validToken } = require("../../utils/authentication");
 const {
   getAllItems,
@@ -48,9 +47,6 @@ cars.get("/allcars", async (req, res) => {
 cars.post("/upload", validToken, async (req, res) => {
   try {
     const { newCar } = req.body;
-    let { pricePerWeek, pricePerMonth, pricePerDay } = newCar;
-    newCar.pricePerWeek = calculateDiscount(pricePerDay, pricePerWeek, 7);
-    newCar.pricePerMonth = calculateDiscount(pricePerDay, pricePerMonth, 30);
 
     await addToCarsDB(newCar);
     return res.status(200).json({ success: true, data: newCar });

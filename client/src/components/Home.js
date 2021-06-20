@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setPromptOrNormal, setCars, setAuthOut, setAuth } from "../actions";
+import { setPromptOrNormal, setCars, setAuthOut } from "../actions";
 import SearchBar from "./SearchBar";
 import Avatar from "./Avatar";
 const axios = require("axios");

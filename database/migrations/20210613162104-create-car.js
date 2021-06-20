@@ -25,11 +25,11 @@ module.exports = {
       price_per_day: {
         type: Sequelize.FLOAT,
       },
-      price_per_week: {
-        type: Sequelize.FLOAT,
+      discount_for_week: {
+        type: Sequelize.STRING,
       },
-      price_per_month: {
-        type: Sequelize.FLOAT,
+      discount_for_month: {
+        type: Sequelize.STRING,
       },
       is_rented: {
         type: Sequelize.BOOLEAN,

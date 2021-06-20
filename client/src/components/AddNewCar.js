@@ -9,6 +9,7 @@ export default function AddNewCar() {
   // Redux states
   const allCarsApi = useSelector((state) => state.allCarsApi);
   const allModelsApi = useSelector((state) => state.allModelsApi);
+  const auth = useSelector((state) => state.auth);
 
   // Use states
   const [yearsArr, setYearsArr] = useState([]);
@@ -35,8 +36,8 @@ export default function AddNewCar() {
   const yearRef = useRef();
   const fuelRef = useRef();
   const pricePerDayRef = useRef();
-  const pricePerWeekRef = useRef();
-  const pricePerMonthRef = useRef();
+  const discountPerWeekRef = useRef();
+  const discountPerMonthRef = useRef();
   const passengersRef = useRef();
 
   useEffect(() => {
@@ -82,12 +83,16 @@ export default function AddNewCar() {
       fuel: fuelRef.current.value,
       passengers: parseInt(passengersRef.current.value),
       pricePerDay: pricePerDayRef.current.value,
-      pricePerWeek: pricePerWeekRef.current.value,
-      pricePerMonth: pricePerMonthRef.current.value,
+      discountPerWeek: discountPerWeekRef.current.value,
+      discountPerMonth: discountPerMonthRef.current.value,
     };
     try {
-      await axios.post("api/v1/cars/upload", { newCar: newCar });
-      console.log("Car Saved!");
+      if (auth) {
+        await axios.post("api/v1/cars/upload", { newCar: newCar });
+        console.log("Car Saved!");
+      } else {
+        // need to prompt login promp component
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -191,12 +196,12 @@ export default function AddNewCar() {
         percent of discount per week
         <input
           className="discount-week-input-addNewCar"
-          ref={pricePerWeekRef}
-          list="pricePerWeek"
+          ref={discountPerWeekRef}
+          list="discountPerWeek"
         ></input>
-        <datalist id="pricePerWeek">
+        <datalist id="discountPerWeek">
           {percentage?.map((percent, i) => (
-            <option key={`pricePerWeek-${i}`} value={percent} />
+            <option key={`discountPerWeek-${i}`} value={percent} />
           ))}
         </datalist>
       </div>
@@ -204,12 +209,12 @@ export default function AddNewCar() {
         percent of discount per month
         <input
           className="discount-month-input-addNewCar"
-          ref={pricePerMonthRef}
-          list="pricePerMonth"
+          ref={discountPerMonthRef}
+          list="discountPerMonth"
         ></input>
-        <datalist id="pricePerMonth">
+        <datalist id="discountPerMonth">
           {percentage?.map((percent, i) => (
-            <option key={`pricePerMonth-${i}`} value={percent} />
+            <option key={`discountPerMonth-${i}`} value={percent} />
           ))}
         </datalist>
       </div>

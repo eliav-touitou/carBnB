@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,9 +20,23 @@ export default function RangeSlider() {
 
   // Redux states
   const priceFilter = useSelector((state) => state.priceFilter);
+  const availableCars = useSelector((state) => state.availableCars);
 
   // Use states
   const [maxPrice, setMaxPrice] = useState(100);
+
+  useEffect(() => {
+    const temp = [];
+    availableCars?.forEach((car) => {
+      temp.push(car.price_per_day);
+    });
+    if (temp.length > 0) {
+      const maxPriceFromDB = Math.max(...temp);
+      setMaxPrice(maxPriceFromDB);
+    } else {
+      setMaxPrice(100);
+    }
+  }, []);
 
   const handleChange = (event, newValue) => {
     dispatch(setFilterPrice(newValue));

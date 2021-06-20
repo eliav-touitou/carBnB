@@ -16,12 +16,12 @@ export default function PromptLogin() {
 
   return (
     <div>
-      {!register ? <Login /> : <Register />}
+      {register ? <Register /> : <Login />}
       or:
-      {!register ? (
-        <button onClick={() => setRegister(true)}> Create A new User</button>
-      ) : (
+      {register ? (
         <button onClick={() => setRegister(false)}> Back To Login</button>
+      ) : (
+        <button onClick={() => setRegister(true)}> Create A new User</button>
       )}
     </div>
   );

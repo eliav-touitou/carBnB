@@ -22,7 +22,11 @@ export default function CarDetails() {
       totalPrice: calculateDiscount().price,
     };
     try {
-      await axios.post("/api/v1/rentals/new", { data: data });
+      if (auth) {
+        await axios.post("/api/v1/rentals/new", { data: data });
+      } else {
+        // need to prompt login promp component
+      }
     } catch (error) {
       console.log(error);
     }
@@ -41,8 +45,8 @@ export default function CarDetails() {
   // Function for calculate price for rental
   const calculateDiscount = () => {
     const pricePerDay = availableCars[resultId].price_per_day;
-    const discountAboveWeek = availableCars[resultId].price_per_week;
-    const discountAboveMonth = availableCars[resultId].price_per_month;
+    const discountAboveWeek = availableCars[resultId].discount_for_week;
+    const discountAboveMonth = availableCars[resultId].discount_for_month;
     const numberOfDaysToRent = getNumberOfRentalDays();
     let newPrice = 0;
 
@@ -55,14 +59,14 @@ export default function CarDetails() {
       const percent = discountAboveWeek.slice(0, -1);
       newPrice =
         (pricePerDay - (percent / 100) * pricePerDay) * numberOfDaysToRent;
-      return { price: newPrice, percent: `${percent}%` };
+      return { price: newPrice, percent: `${percent}%`, days: "week" };
     }
 
     if (numberOfDaysToRent >= 30) {
       const percent = discountAboveMonth.slice(0, -1);
       newPrice =
         (pricePerDay - (percent / 100) * pricePerDay) * numberOfDaysToRent;
-      return { price: newPrice, percent: `${percent}%` };
+      return { price: newPrice, percent: `${percent}%`, days: "month" };
     }
   };
 
@@ -77,12 +81,17 @@ export default function CarDetails() {
       <p>gear: {availableCars[resultId].gear} </p>
       <p>passengers: {availableCars[resultId].passengers} </p>
       <p>
-        {`initial price: ${getNumberOfRentalDays()} X
+        {`initial price: ${getNumberOfRentalDays()} x
         ${availableCars[resultId].price_per_day} =
         ${getNumberOfRentalDays() * availableCars[resultId].price_per_day}`}
       </p>
       {calculateDiscount().percent && (
-        <p>{`discount for you: ${calculateDiscount().percent}`}</p>
+        <p>{`discount for order over ${calculateDiscount().days}: ${
+          calculateDiscount().percent
+        } , - ${
+          getNumberOfRentalDays() * availableCars[resultId].price_per_day -
+          calculateDiscount().price
+        } $`}</p>
       )}
       <p>{`Total price: ${calculateDiscount().price}`}</p>
       <button onClick={rentalCar}>Order this car</button>

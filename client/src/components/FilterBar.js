@@ -1,26 +1,18 @@
-import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import PriceSlider from "./PriceSlider";
 import YearsSlider from "./YearsSlider";
 import RatingSlider from "./RatingSlider";
-import { setAvailableCars } from "../actions";
-// import { setAllModelsApi } from "../actions";
 
 export default function FilterBar({ brandRef, modelRef, gearRef, fuelRef }) {
-  const dispatch = useDispatch();
-
   // Redux states
   const availableCars = useSelector((state) => state.availableCars);
-  const allCarsApi = useSelector((state) => state.allCarsApi);
-  const allModelsApi = useSelector((state) => state.allModelsApi);
 
   // Use states
   const [modelCars, setModelCars] = useState([]);
   const [yearsArr, setYearsArr] = useState([]);
 
   // Global variables
-  const apiCars = "https://vpic.nhtsa.dot.gov/api";
   const gearOptions = ["Manual", "Auto"];
   const fuelTypes = [
     "Octan-95",
