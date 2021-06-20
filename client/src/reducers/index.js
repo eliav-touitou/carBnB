@@ -9,6 +9,7 @@ import { priceFilterReducer } from "./priceFilter";
 import { ratingFilterReducer } from "./ratingFilter";
 import { filteredCarsReducer } from "./filteredCars";
 import { initialSearchReducer } from "./initialSearch";
+import { onLoginReducer } from "./onLoginPage";
 
 const allReducers = combineReducers({
   allCars: carsReducer,
@@ -21,6 +22,7 @@ const allReducers = combineReducers({
   ratingFilter: ratingFilterReducer,
   filteredCars: filteredCarsReducer,
   initialSearch: initialSearchReducer,
+  isLoginPage: onLoginReducer,
 });
 
 export default allReducers;

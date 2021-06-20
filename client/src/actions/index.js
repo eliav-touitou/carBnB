@@ -59,6 +59,7 @@ export const setFilterRate = (arr) => {
     payload: arr,
   };
 };
+
 export const setFilteredCars = (arr) => {
   return {
     type: "SETFILTEREDCARS",
@@ -69,5 +70,10 @@ export const setInitialSearch = (obj) => {
   return {
     type: "SETINITIALSEARCH",
     payload: obj,
+
+export const setOnLoginPage = (bool) => {
+  return {
+    type: "LOGINPAGE",
+    payload: bool,
   };
 };

@@ -11,7 +11,7 @@ const favorite = require("./favorite");
 
 v1.use("/cars", cars);
 v1.use("/users", users);
-v1.use("/rentals", validToken, rentals);
+v1.use("/rentals", rentals);
 v1.use("/search", search);
 v1.use("/auth", auth);
 v1.use("/favorite", validToken, favorite);

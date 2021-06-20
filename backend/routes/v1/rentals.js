@@ -2,6 +2,17 @@ const { Router } = require("express");
 const rentals = Router();
 const { getAllItems, getRental } = require("../../../database/queries");
 const { Rental } = require("../../../database/models");
+const { buildPatterns } = require("../../utils/helperFunctions");
+const nodemailer = require("nodemailer");
+const adminEmail = "rozjino@gmail.com";
+
+transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "rozjino@gmail.com",
+    pass: "jino12345",
+  },
+});
 
 // Gets a unique rental
 rentals.post("/uniquerental", async (req, res) => {
@@ -39,4 +50,53 @@ rentals.get("/allrentals", async (req, res) => {
   }
 });
 
+// Add new rental to rentals DB
+rentals.post("/new", async (req, res) => {
+  const { data } = req.body;
+  console.log(data);
+  try {
+    // Save rental detail to DB
+    const result = await addNewRentalToDB(data);
+
+    // Build pattern texts for emails
+    const { textPatternToRenter, textPatternToOwner } = buildPatterns({
+      transactionId: String(result.transaction_id),
+      startDate: data.start_date,
+      endDate: data.end_date,
+    });
+
+    /// ## Can build those obj with outer function ## ///
+    const mailsOption = [
+      (mailToRenterOptions = {
+        from: adminEmail,
+        to: data.renter_email,
+        subject: "Order summery",
+        text: textPatternToRenter,
+      }),
+      (mailToOwnerOptions = {
+        from: adminEmail,
+        to: data.owner_email,
+        subject: "New Order",
+        text: textPatternToOwner,
+      }),
+    ];
+
+    mailsOption.forEach((mail) => {
+      transporter.sendMail(mail, (error, info) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(info);
+        }
+      });
+    });
+
+    res.status(201).json({ message: "Successes" });
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(500)
+      .json({ message: "Problems with our server", error: err.message });
+  }
+});
 module.exports = rentals;
