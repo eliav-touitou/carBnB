@@ -75,8 +75,8 @@ const addToCarsDB = async (obj) => {
       fuel: obj.fuel,
       passengers: obj.passengers,
       price_per_day: obj.pricePerDay,
-      price_per_week: obj.pricePerWeek,
-      price_per_month: obj.pricePerMonth,
+      discount_for_week: obj.discountPerWeek,
+      discount_for_month: obj.discountPerMonth,
       is_rented: false,
     });
   } catch (error) {

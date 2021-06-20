@@ -1,9 +1,3 @@
-const calculateDiscount = (tariff, percent, period) => {
-  percent = percent.slice(0, -1);
-  const newPrice = (tariff - (percent / 100) * tariff) * period;
-  return newPrice;
-};
-
 const buildPatterns = ({ transactionId, startDate, endDate }) => {
   const textPatternToRenter = `Dear valued User,
   Your order Num ${transactionId} was successfully made!
@@ -20,4 +14,4 @@ const buildPatterns = ({ transactionId, startDate, endDate }) => {
 
   return { textPatternToRenter, textPatternToOwner };
 };
-module.exports = { calculateDiscount, buildPatterns };
+module.exports = { buildPatterns };

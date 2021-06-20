@@ -41,8 +41,8 @@ export default function CarDetails() {
   // Function for calculate price for rental
   const calculateDiscount = () => {
     const pricePerDay = availableCars[resultId].price_per_day;
-    const discountAboveWeek = availableCars[resultId].price_per_week;
-    const discountAboveMonth = availableCars[resultId].price_per_month;
+    const discountAboveWeek = availableCars[resultId].discount_for_week;
+    const discountAboveMonth = availableCars[resultId].discount_for_month;
     const numberOfDaysToRent = getNumberOfRentalDays();
     let newPrice = 0;
 
