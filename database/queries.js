@@ -252,7 +252,11 @@ const addNewRentalToDB = async (obj) => {
     total_price: obj.totalPrice,
     is_active: true,
   };
-  return await Rental.create(objToSave);
+  try {
+    return await Rental.create(objToSave);
+  } catch (error) {
+    throw error;
+  }
 };
 
 module.exports = {
