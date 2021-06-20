@@ -2,6 +2,7 @@ const { Router } = require("express");
 const cars = Router();
 const { Car } = require("../../../database/models");
 const { calculateDiscount } = require("../../utils/helperFunctions");
+const { validToken } = require("../../utils/authentication");
 const {
   getAllItems,
   getCar,
@@ -44,7 +45,7 @@ cars.get("/allcars", async (req, res) => {
 });
 
 // Upload new car
-cars.post("/upload", async (req, res) => {
+cars.post("/upload", validToken, async (req, res) => {
   try {
     const { newCar } = req.body;
     let { pricePerWeek, pricePerMonth, pricePerDay } = newCar;

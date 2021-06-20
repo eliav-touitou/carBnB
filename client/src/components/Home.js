@@ -12,15 +12,6 @@ export default function Home() {
   // Redux states
   const allCars = useSelector((state) => state.allCars);
 
-  useEffect(() => {
-    axios
-      .get("api/v1/users/checklogged")
-      .then((result) => {
-        if (result.status === 200) dispatch(setAuth(result.data.data));
-      })
-      .catch((err) => console.log(err.message));
-  }, []);
-
   // Get all cars
   const getCars = async () => {
     try {

@@ -13,12 +13,22 @@ import Results from "./components/Results";
 import { setAllCarsApi } from "./actions";
 import { useDispatch } from "react-redux";
 import CarDetails from "./components/CarDetails";
+import { setAuth } from "./actions";
 
 const axios = require("axios");
 const apiCars = "https://vpic.nhtsa.dot.gov/api";
 
 function App() {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    axios
+      .get("api/v1/users/checklogged")
+      .then((result) => {
+        if (result.status === 200) dispatch(setAuth(result.data.data));
+      })
+      .catch((err) => console.log(err.message));
+  }, []);
 
   useEffect(() => {
     axios
