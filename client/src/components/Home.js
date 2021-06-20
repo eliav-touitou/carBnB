@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setCars, setAuthOut, setAuth } from "../actions";
+import { setPromptOrNormal, setCars, setAuthOut, setAuth } from "../actions";
 import SearchBar from "./SearchBar";
 import Avatar from "./Avatar";
 const axios = require("axios");
@@ -32,6 +32,10 @@ export default function Home() {
     }
   };
 
+  const setNormal = () => {
+    dispatch(setPromptOrNormal("normal"));
+  };
+
   return (
     <div>
       <Avatar />
@@ -47,10 +51,10 @@ export default function Home() {
       ))}
 
       <Link to="/register">
-        <button>register</button>
+        <button onClick={setNormal}>register</button>
       </Link>
       <Link to="/login">
-        <button>login</button>
+        <button onClick={setNormal}>login</button>
       </Link>
       <button onClick={logoutHandler}>logout</button>
     </div>
