@@ -31,7 +31,6 @@ const createRefreshToken = (user) => {
 const validToken = async (req, res, next) => {
   let accessToken = await req.cookies["Access-Token"];
   let refreshToken = await req.cookies["Refresh-Token"];
-
   if (!accessToken || !refreshToken) {
     return res.status(401).json({ message: "Access denied invalid token" });
   }
@@ -83,13 +82,14 @@ const googleLoginVerified = async (req, res, next) => {
     if (email_verified) {
       const objToSearchBy = { model: Auth, email: email };
       const user = await getUserOrAuth(objToSearchBy);
-
       // If user exist create new token and push to cookie.
       // Else create new user and auth in DB and push new token to cookie.
       if (user) {
         user.password = "generate-password";
-        const token = createAccessToken(user);
-        res.cookie("Access-Token", `Bearer ${token}`);
+        const accessToken = createAccessToken(user);
+        const refreshToken = createRefreshToken(user);
+        res.cookie("Access-Token", `Bearer ${accessToken}`);
+        res.cookie("Refresh-Token", `Bearer ${refreshToken}`);
         req.user = null;
         req.userEmail = email;
         next();
@@ -111,8 +111,10 @@ const googleLoginVerified = async (req, res, next) => {
           password,
         });
         newUser.password = "generate-password";
-        const token = createAccessToken(newUser);
-        res.cookie("Access-Token", `Bearer ${token}`);
+        const accessToken = createAccessToken(user);
+        const refreshToken = createRefreshToken(user);
+        res.cookie("Access-Token", `Bearer ${accessToken}`);
+        res.cookie("Refresh-Token", `Bearer ${refreshToken}`);
         req.user = newUser;
         req.userEmail = null;
         next();
@@ -142,8 +144,10 @@ const facebookLoginValidation = async (req, res, next) => {
     // Else create new user and auth in DB and push new token to cookie.
     if (user) {
       user.password = "generate-password";
-      const token = createAccessToken(user);
-      res.cookie("Access-Token", `Bearer ${token}`);
+      const accessToken = createAccessToken(user);
+      const refreshToken = createRefreshToken(user);
+      res.cookie("Access-Token", `Bearer ${accessToken}`);
+      res.cookie("Refresh-Token", `Bearer ${refreshToken}`);
       req.user = null;
       req.userEmail = email;
       next();
@@ -167,8 +171,11 @@ const facebookLoginValidation = async (req, res, next) => {
         password,
       });
       newUser.password = "generate-password";
-      const token = createAccessToken(newUser);
-      res.cookie("Access-Token", `Bearer ${token}`);
+      const accessToken = createAccessToken(user);
+      const refreshToken = createRefreshToken(user);
+      res.cookie("Access-Token", `Bearer ${accessToken}`);
+      res.cookie("Refresh-Token", `Bearer ${refreshToken}`);
+      req.user = null;
       req.user = newUser;
       req.userEmail = null;
       next();
