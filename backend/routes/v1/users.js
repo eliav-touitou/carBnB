@@ -44,6 +44,7 @@ users.post("/uniqueuser", async (req, res) => {
       .json({ message: "Problems with our server", error: error.message });
   }
 });
+
 // Gets all users with given rating
 users.post("/rated", async (req, res) => {
   const { minRate } = req.body;
@@ -169,10 +170,15 @@ users.post("/logout", async (req, res) => {
 
 // Check if user logged in at first entry to website
 users.get("/checklogged", validToken, async (req, res) => {
-  return res.status(200).json({ message: true });
+  const userEmail = req.decoded.user.user_email;
+
+  const objToSearchBy = { model: User, email: userEmail };
+  const user = await getUserOrAuth(objToSearchBy);
+
+  return res.status(200).json({ message: true, data: user });
 });
 
-users.post("/updateitems", async (req, res) => {
+users.post("/updateitems", validToken, async (req, res) => {
   const { data } = req.body;
   try {
     const table = models[`${data[0]}`];
