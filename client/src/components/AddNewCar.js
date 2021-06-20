@@ -9,6 +9,7 @@ export default function AddNewCar() {
   // Redux states
   const allCarsApi = useSelector((state) => state.allCarsApi);
   const allModelsApi = useSelector((state) => state.allModelsApi);
+  const auth = useSelector((state) => state.auth);
 
   // Use states
   const [yearsArr, setYearsArr] = useState([]);
@@ -86,8 +87,12 @@ export default function AddNewCar() {
       discountPerMonth: discountPerMonthRef.current.value,
     };
     try {
-      await axios.post("api/v1/cars/upload", { newCar: newCar });
-      console.log("Car Saved!");
+      if (auth) {
+        await axios.post("api/v1/cars/upload", { newCar: newCar });
+        console.log("Car Saved!");
+      } else {
+        // need to prompt login promp component
+      }
     } catch (error) {
       console.log(error.message);
     }

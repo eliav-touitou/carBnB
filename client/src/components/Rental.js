@@ -1,9 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Rental() {
   // Use states
   const [image, setImage] = useState("");
+
+  // Redux states
+  const auth = useSelector((state) => state.auth);
 
   // Function to convert image to binary
   const imageToBinary = async (e) => {
@@ -24,9 +28,12 @@ export default function Rental() {
     try {
       // Need to change, (no to do it hardcoded)
       // const arr = [table, ["column"], "PK=user_email", [image]];
-
-      const arr = ["User", ["license"], "eliav@gmail.com", [image]];
-      await axios.post("api/v1/users/updateitems", { data: arr });
+      if (auth) {
+        const arr = ["User", ["license"], auth.user_email, [image]];
+        await axios.post("api/v1/users/updateitems", { data: arr });
+      } else {
+        // need to prompt login promp component
+      }
     } catch (error) {
       console.log(error.message);
     }

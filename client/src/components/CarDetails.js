@@ -22,7 +22,11 @@ export default function CarDetails() {
       totalPrice: calculateDiscount().price,
     };
     try {
-      await axios.post("/api/v1/rentals/new", { data: data });
+      if (auth) {
+        await axios.post("/api/v1/rentals/new", { data: data });
+      } else {
+        // need to prompt login promp component
+      }
     } catch (error) {
       console.log(error);
     }
