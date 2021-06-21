@@ -28,7 +28,7 @@ const allReducers = combineReducers({
   isLoginPage: onLoginReducer,
   promptOrNormal: promptOrNormalReducer,
   rentalDetails: rentalDetailsReducer,
-  notification: notificationsReducer,
+  notifications: notificationsReducer,
 });
 
 export default allReducers;

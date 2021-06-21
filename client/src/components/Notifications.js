@@ -14,17 +14,18 @@ export default function Notifications() {
       .post("/api/v1/notification/messages", {
         data: { email: auth.user_email },
       })
-      .then((messages) => {
-        dispatch(setNotifications(messages));
+      .then(({ data: messages }) => {
+        dispatch(setNotifications(messages.data));
       })
       .catch((err) => console.log(err.message));
   }, []);
 
   return (
     <div>
-      {notifications?.map((message, i) => {
-        <Messages message={message} key={`message-${i}`} messageId={i} />;
-      })}
+      "test"
+      {notifications?.map((message, i) => (
+        <Messages message={message} key={`message-${i}`} messageId={i} />
+      ))}
     </div>
   );
 }
