@@ -31,4 +31,14 @@ const allReducers = combineReducers({
   notifications: notificationsReducer,
 });
 
-export default allReducers;
+const rootReducer = (state, action) => {
+  // when a logout action is dispatched it will reset redux state
+  if (action.type === "LOG-OUT") {
+    window.localStorage.removeItem("persist:root");
+    state = undefined;
+  }
+
+  return allReducers(state, action);
+};
+
+export default rootReducer;

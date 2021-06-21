@@ -1,43 +1,47 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useParams, useHistory } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import {
   setRentalDetails,
   setAvailableCars,
   setFilteredCars,
+  setInitialSearch,
 } from "../actions";
 
 export default function CarDetails() {
-  const { resultId } = useParams();
-  const [redirect, setRedirect] = useState(false);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const { resultId } = useParams();
+
+  // Use states
+  const [redirect, setRedirect] = useState(`/result/${resultId}`);
 
   // Redux States
   const availableCars = useSelector((state) => state.availableCars);
   const initialSearch = useSelector((state) => state.initialSearch);
-  const filteredCars = useSelector((state) => state.filteredCars);
-
   const auth = useSelector((state) => state.auth);
 
+  // Handle with difference cases
   const resetAvailableCars = async () => {
-    // console.log(availableCars);
-    // console.log(filteredCars);
     try {
       const { data: availableCars } = await axios.post(
         "api/v1/search/initial",
         { data: initialSearch }
       );
-      if (availableCars.length === 0) {
-        return <Redirect push to="/" />;
-      }
+
+      // If still there are available Cars, redirect to results
       dispatch(setAvailableCars(availableCars.data));
       dispatch(setFilteredCars(availableCars.data));
+      setRedirect("/results");
     } catch (err) {
-      // if (err.response.status === 404) {
-      //   history.goBack();
-      // }
+      // If still there no available Cars, redirect to home
+      if (err.response.status === 404) {
+        setRedirect("/");
+        dispatch(setAvailableCars([]));
+        dispatch(setFilteredCars([]));
+        dispatch(setInitialSearch([]));
+      }
+      console.log(err);
     }
   };
 
@@ -53,25 +57,23 @@ export default function CarDetails() {
     };
     try {
       if (auth) {
-        const rental = await axios.post("/api/v1/rentals/new", { data: data });
+        const rental = await axios.post("/api/v1/rentals/new", {
+          data: data,
+        });
 
-        console.log(rental.data);
-        console.log(rental.status);
+        // If order succeed redirect to summery
         if (rental.status === 201) {
-          dispatch(setRentalDetails(rental.data));
-          setRedirect("success");
+          dispatch(setRentalDetails(rental.data.data));
+          setRedirect("/summery");
         }
       } else {
+        // need to prompt login component
         console.log("must log in first!");
       }
     } catch (error) {
+      // If in the middle of the order, someone else took this car
       if (error.response.status === 400) {
         await resetAvailableCars();
-        alert("Oops... the car is already taken 😥");
-        setRedirect("fail");
-        // const temp = filteredCars;
-        // temp.splice(resultId, 1);
-        // dispatch(setFilteredCars(temp));
       }
       console.log(error);
     }
@@ -138,12 +140,7 @@ export default function CarDetails() {
       )}
       <p>{`Total price: ${calculateDiscount().price}`}</p>
       <button onClick={rentalCar}>Order this car</button>
-      {redirect &&
-        (redirect === "success" ? (
-          <Redirect push to={`/summery`} />
-        ) : (
-          <Redirect push to={`/results`} />
-        ))}
+      <Redirect push to={redirect} />
     </div>
   );
 }

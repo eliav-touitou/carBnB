@@ -26,8 +26,8 @@ export default function Result({ brand, passengers, carId, resultId }) {
       <Link to={`/result/${resultId}`}>
         <div className="car-brand">Brand: {brand}</div>
         <div className="car-passengers">Passengers: {passengers}</div>
-        <button onClick={() => saveToFavorite(carId)}>❤</button>
       </Link>
+      <button onClick={() => saveToFavorite(carId)}>❤</button>
       <hr />
     </div>
   );

@@ -26,14 +26,11 @@ export default function Home() {
   // Logout handler
   const logoutHandler = async () => {
     try {
-      console.log(await axios.post("/api/v1/users/logout"));
-      setTimeout(async () => {
-        await persistor.purge();
-        window.localStorage.clear();
-      }, 200);
+      await axios.post("/api/v1/users/logout");
       dispatch(setAuthOut());
+      console.log("Success logout");
     } catch (error) {
-      console.log("error logout");
+      console.log("Failed logout");
     }
   };
 

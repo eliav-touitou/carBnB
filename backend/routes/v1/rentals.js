@@ -118,7 +118,7 @@ rentals.post("/new", async (req, res) => {
       content: textPatternToOwner,
     });
 
-    res.status(201).json({ message: "Successes" });
+    res.status(201).json({ message: "Successes", data: result });
   } catch (err) {
     console.log(err);
     return res
