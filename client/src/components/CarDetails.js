@@ -1,10 +1,12 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 
 export default function CarDetails() {
   const { resultId } = useParams();
+  const [redirect, setRedirect] = useState(false);
+  const [rentalId, setRentalId] = useState();
 
   // Redux States
   const availableCars = useSelector((state) => state.availableCars);
@@ -23,7 +25,10 @@ export default function CarDetails() {
     };
     try {
       if (auth) {
-        await axios.post("/api/v1/rentals/new", { data: data });
+        const rental = await axios.post("/api/v1/rentals/new", { data: data });
+        console.log(rental);
+        // setRentalId(rental.transaction_id);
+        // setRedirect(true);
       } else {
         // need to prompt login promp component
       }
@@ -38,7 +43,6 @@ export default function CarDetails() {
       (new Date(initialSearch.endDate) - new Date(initialSearch.startDate)) /
         (1000 * 60 * 60 * 24)
     );
-
     return numberOfDaysToRent;
   };
 
@@ -55,18 +59,17 @@ export default function CarDetails() {
       return { price: newPrice };
     }
 
-    if (numberOfDaysToRent >= 7 && numberOfDaysToRent < 30) {
-      const percent = discountAboveWeek.slice(0, -1);
-      newPrice =
-        (pricePerDay - (percent / 100) * pricePerDay) * numberOfDaysToRent;
-      return { price: newPrice, percent: `${percent}%`, days: "week" };
-    }
-
     if (numberOfDaysToRent >= 30) {
       const percent = discountAboveMonth.slice(0, -1);
       newPrice =
         (pricePerDay - (percent / 100) * pricePerDay) * numberOfDaysToRent;
       return { price: newPrice, percent: `${percent}%`, days: "month" };
+    }
+    if (numberOfDaysToRent >= 7) {
+      const percent = discountAboveWeek.slice(0, -1);
+      newPrice =
+        (pricePerDay - (percent / 100) * pricePerDay) * numberOfDaysToRent;
+      return { price: newPrice, percent: `${percent}%`, days: "week" };
     }
   };
 
@@ -95,6 +98,7 @@ export default function CarDetails() {
       )}
       <p>{`Total price: ${calculateDiscount().price}`}</p>
       <button onClick={rentalCar}>Order this car</button>
+      {redirect && <Redirect push to={`summery/${rentalId}`} />}
     </div>
   );
 }

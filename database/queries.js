@@ -63,7 +63,7 @@ const getAllItems = async (model) => {
   }
 };
 
-//Add new car to users db
+//  Add new car to users db
 const addToCarsDB = async (obj) => {
   try {
     await Car.create({
@@ -85,7 +85,7 @@ const addToCarsDB = async (obj) => {
   }
 };
 
-//Add new user to users db
+//  Add new user to users db
 const addToUsersDB = async (obj) => {
   try {
     const { phoneNumber, firstName, lastName, email, address } = obj;
@@ -104,7 +104,7 @@ const addToUsersDB = async (obj) => {
   }
 };
 
-//Add new auth details of user
+//  Add new auth details of user
 const addToAuthDB = async (obj) => {
   try {
     const { firstName, lastName, email, password } = obj;
@@ -253,11 +253,22 @@ const addNewRentalToDB = async (obj) => {
     is_active: true,
   };
   try {
-    return await Rental.create(objToSave);
+    const rental = await Rental.create(objToSave);
+    rental.dataValues.transaction_id = rental.null;
+    return rental;
   } catch (error) {
     throw error;
   }
 };
+
+//  addNewRentalToDB({
+//    carId: 1,
+//    ownerEmail: "eyal@gmail.com",
+//    renterEmail: "eliav@gmail.com",
+//    startDate: 21 / 05 / 2021,
+//    endDate: 23 / 05 / 2021,
+//    totalPrice: 500,
+//  })
 
 module.exports = {
   getCar,
