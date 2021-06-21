@@ -183,9 +183,15 @@ const whatCarsAreTaken = async (obj) => {
     const takenCars = await Rental.findAll({
       where: {
         [Op.and]: {
+          start_date: {
+            [Op.lte]: startDate,
+          },
+          end_date: {
+            [Op.gte]: startDate,
+          },
           [Op.or]: {
             start_date: {
-              [Op.lte]: startDate,
+              [Op.lte]: endDate,
             },
             end_date: {
               [Op.gte]: endDate,
