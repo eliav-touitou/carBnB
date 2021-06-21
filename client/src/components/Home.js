@@ -5,6 +5,7 @@ import { setPromptOrNormal, setCars, setAuthOut } from "../actions";
 import SearchBar from "./SearchBar";
 import Avatar from "./Avatar";
 import { persistor } from "../index";
+import Notifications from "./Notifications";
 const axios = require("axios");
 
 export default function Home() {
@@ -43,6 +44,7 @@ export default function Home() {
 
   return (
     <div>
+      <Notifications />
       <Avatar />
       <SearchBar />
       <button onClick={getCars}>Get cars</button>
