@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setPromptOrNormal, setCars, setAuthOut } from "../actions";
 import SearchBar from "./SearchBar";
 import Avatar from "./Avatar";
+import { persistor } from "../index";
 const axios = require("axios");
 
 export default function Home() {
@@ -26,6 +27,10 @@ export default function Home() {
   const logoutHandler = async () => {
     try {
       console.log(await axios.post("/api/v1/users/logout"));
+      setTimeout(async () => {
+        await persistor.purge();
+        window.localStorage.clear();
+      }, 200);
       dispatch(setAuthOut());
     } catch (error) {
       console.log("error logout");

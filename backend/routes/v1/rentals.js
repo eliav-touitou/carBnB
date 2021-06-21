@@ -4,6 +4,7 @@ const {
   getAllItems,
   getRental,
   addNewRentalToDB,
+  whatCarsAreTaken,
 } = require("../../../database/queries");
 const { Rental } = require("../../../database/models");
 const { buildPatterns } = require("../../utils/helperFunctions");
@@ -59,6 +60,19 @@ rentals.post("/new", async (req, res) => {
   const { data } = req.body;
   console.log(data);
   try {
+    // Checks if car already ordered in this dates => if true ⬇
+    const takenCars = await whatCarsAreTaken({
+      carsId: [data.carId],
+      dates: { start: new Date(data.startDate), end: new Date(data.endDate) },
+    });
+
+    // Return message that the car already ordered
+    if (takenCars.length !== 0) {
+      return res
+        .status(400)
+        .json({ message: "Oops... the car is already taken 😥" });
+    }
+
     // Save rental detail to DB
     const result = await addNewRentalToDB(data);
 
