@@ -85,9 +85,17 @@ export const setPromptOrNormal = (str) => {
     payload: str,
   };
 };
+
 export const setRentalDetails = (str) => {
   return {
     type: "SETRENTALDETAILS",
     payload: str,
+  };
+};
+
+export const setNotifications = (messages) => {
+  return {
+    type: "SETNOTIFICATIONS",
+    payload: messages,
   };
 };

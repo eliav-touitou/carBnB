@@ -6,8 +6,9 @@ const {
   getRental,
   addNewRentalToDB,
   whatCarsAreTaken,
+  addNewNotification,
 } = require("../../../database/queries");
-const { Rental } = require("../../../database/models");
+const { Rental, User } = require("../../../database/models");
 const { buildPatterns } = require("../../utils/helperFunctions");
 const nodemailer = require("nodemailer");
 const adminEmail = "rozjino@gmail.com";
@@ -59,7 +60,7 @@ rentals.get("/allrentals", async (req, res) => {
 // Add new rental to rentals DB
 rentals.post("/new", async (req, res) => {
   const { data } = req.body;
-  console.log(data);
+
   try {
     // Checks if car already ordered in this dates => if true ⬇
     const takenCars = await whatCarsAreTaken({
@@ -110,7 +111,14 @@ rentals.post("/new", async (req, res) => {
       });
     });
 
-    res.status(201).json(result);
+    await addNewNotification({
+      messageFrom: data.renterEmail,
+      messageTo: data.ownerEmail,
+      title: "New Order incoming",
+      content: textPatternToOwner,
+    });
+
+    res.status(201).json({ message: "Successes" });
   } catch (err) {
     console.log(err);
     return res
