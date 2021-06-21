@@ -21,4 +21,26 @@ notification.post("/messages", async (req, res) => {
   }
 });
 
+notification.patch("/updateread", async (req, res) => {
+  const { data } = req.body;
+
+  //////// need to change - get content changes from params or body //////
+  const objToUpdate = {
+    table: Notification,
+    column: ["read"],
+    primaryKey: data.id,
+    content: true,
+  };
+  try {
+    await updateItemToDB(objToUpdate);
+    return res
+      .status(200)
+      .json({ success: true, message: "Success to update" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Problems with our server", error: error.message });
+  }
+});
+
 module.exports = notification;
