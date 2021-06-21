@@ -5,7 +5,6 @@ import { setPromptOrNormal, setCars, setAuthOut } from "../actions";
 import SearchBar from "./SearchBar";
 import Avatar from "./Avatar";
 import { persistor } from "../index";
-import Notifications from "./Notifications";
 const axios = require("axios");
 
 export default function Home() {
@@ -27,14 +26,11 @@ export default function Home() {
   // Logout handler
   const logoutHandler = async () => {
     try {
-      console.log(await axios.post("/api/v1/users/logout"));
-      setTimeout(async () => {
-        await persistor.purge();
-        window.localStorage.clear();
-      }, 200);
+      await axios.post("/api/v1/users/logout");
       dispatch(setAuthOut());
+      console.log("Success logout");
     } catch (error) {
-      console.log("error logout");
+      console.log("Failed logout");
     }
   };
 
@@ -44,7 +40,6 @@ export default function Home() {
 
   return (
     <div>
-      <Notifications />
       <Avatar />
       <SearchBar />
       <button onClick={getCars}>Get cars</button>

@@ -14,4 +14,5 @@ const buildPatterns = ({ transactionId, startDate, endDate }) => {
 
   return { textPatternToRenter, textPatternToOwner };
 };
+
 module.exports = { buildPatterns };

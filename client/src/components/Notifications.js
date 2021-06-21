@@ -1,14 +1,31 @@
-import React, { useState, useEffect } from "react";
-import io from "socket.io-client";
-const socket = io("localhost:3001");
+import axios from "axios";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setNotifications } from "../actions";
+import Messages from "./Messages";
 
 export default function Notifications() {
+  const auth = useSelector((state) => state.auth);
+  const notifications = useSelector((state) => state.notifications);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    socket.on("renters", (data) => {
-      console.log(data);
-    });
-    socket.emit("sendToServer", "client to server");
+    axios
+      .post("/api/v1/notification/messages", {
+        data: { email: auth.user_email },
+      })
+      .then(({ data: messages }) => {
+        dispatch(setNotifications(messages.data));
+      })
+      .catch((err) => console.log(err.message));
   }, []);
 
-  return <div>{}</div>;
+  return (
+    <div>
+      "test"
+      {notifications?.map((message, i) => (
+        <Messages message={message} key={`message-${i}`} messageId={i} />
+      ))}
+    </div>
+  );
 }

@@ -13,8 +13,9 @@ import Results from "./components/Results";
 import { setAllCarsApi } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 import CarDetails from "./components/CarDetails";
-import { setAuth } from "./actions";
 import OrderSummery from "./components/OrderSummery";
+import MessageDetails from "./components/MessageDetails";
+import Notifications from "./components/Notifications";
 
 const axios = require("axios");
 
@@ -46,6 +47,7 @@ function App() {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/searchbar">Search</NavLink>
             <NavLink to="/addnewcar">Add New Car</NavLink>
+            <NavLink to="/notifications">🔔</NavLink>
             {!auth && <NavLink to="/login">Login</NavLink>}
           </nav>
         )}
@@ -77,7 +79,11 @@ function App() {
           <Route exact path="/summery">
             <OrderSummery />
           </Route>
+          <Route exact path="/notifications">
+            <Notifications />
+          </Route>
           <Route exact path="/result/:resultId" component={CarDetails} />
+          <Route exact path="/message/:messageId" component={MessageDetails} />
 
           <Route path="/" component={NotFound} />
         </Switch>

@@ -2,9 +2,11 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { setAvailableCars } from "../actions";
-import { setFilteredCars } from "../actions";
-import { setInitialSearch } from "../actions";
+import {
+  setFilteredCars,
+  setAvailableCars,
+  setInitialSearch,
+} from "../actions";
 
 export default function SearchBar() {
   const dispatch = useDispatch();
