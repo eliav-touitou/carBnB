@@ -7,7 +7,7 @@ export default function Notifications() {
     socket.on("renters", (data) => {
       console.log(data);
     });
-    socket.emit("sendToServer", "client to server");
+    socket.emit(`sendToServer`, "client to server");
   }, []);
 
   return <div>{}</div>;
