@@ -11,6 +11,7 @@ import { filteredCarsReducer } from "./filteredCars";
 import { initialSearchReducer } from "./initialSearch";
 import { onLoginReducer } from "./onLoginPage";
 import { promptOrNormalReducer } from "./promptOrNormal";
+import { rentalDetailsReducer } from "./rentalDetails";
 
 const allReducers = combineReducers({
   allCars: carsReducer,
@@ -25,6 +26,7 @@ const allReducers = combineReducers({
   initialSearch: initialSearchReducer,
   isLoginPage: onLoginReducer,
   promptOrNormal: promptOrNormalReducer,
+  rentalDetails: rentalDetailsReducer,
 });
 
 export default allReducers;

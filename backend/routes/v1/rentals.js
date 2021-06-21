@@ -110,7 +110,7 @@ rentals.post("/new", async (req, res) => {
       });
     });
 
-    res.status(201).json({ message: "Successes" });
+    res.status(201).json(result);
   } catch (err) {
     console.log(err);
     return res
