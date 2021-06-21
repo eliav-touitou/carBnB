@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import Result from "./Result";
 import SideBar from "./SideBar";
 
 export default function Results() {
+  // const [, set] = useState(initialState)
+  const history = useHistory();
   // Redux states
   const filteredCars = useSelector((state) => state.filteredCars);
 
+  useEffect(() => {
+    console.log(history);
+  }, []);
   return (
     <div>
       <h1>Results</h1>
