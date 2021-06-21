@@ -6,7 +6,7 @@ export default function Messages({ message, messageId }) {
     <div>
       <Link to={`message/${messageId}`}>
         <p>title: {message.title}</p>
-        <p>{message.create_at}</p>
+        <p>{new Date(message.createdAt).toDateString()}</p>
       </Link>
     </div>
   );
