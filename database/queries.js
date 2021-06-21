@@ -1,4 +1,4 @@
-const { User, Car, Rental, Auth, Favorite } = require("./models");
+const { User, Car, Rental, Auth, Favorite, Notification } = require("./models");
 const { Op, Sequelize, where, col } = require("sequelize");
 const { sequelize } = require("./models");
 
@@ -267,14 +267,20 @@ const addNewRentalToDB = async (obj) => {
   }
 };
 
-//  addNewRentalToDB({
-//    carId: 1,
-//    ownerEmail: "eyal@gmail.com",
-//    renterEmail: "eliav@gmail.com",
-//    startDate: 21 / 05 / 2021,
-//    endDate: 23 / 05 / 2021,
-//    totalPrice: 500,
-//  })
+const addNewNotification = async (obj) => {
+  const objToSave = {
+    message_from: obj.messageFrom,
+    message_to: obj.messageTo,
+    title: obj.title,
+    content: obj.content,
+    read: false,
+  };
+  try {
+    await Notification.create(objToSave);
+  } catch (error) {
+    throw error;
+  }
+};
 
 module.exports = {
   getCar,
@@ -293,4 +299,5 @@ module.exports = {
   addToFavoriteDB,
   removeFromFavoriteDB,
   addNewRentalToDB,
+  addNewNotification,
 };
