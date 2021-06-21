@@ -14,6 +14,7 @@ import { setAllCarsApi } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 import CarDetails from "./components/CarDetails";
 import { setAuth } from "./actions";
+import OrderSummery from "./components/OrderSummery";
 
 const axios = require("axios");
 
@@ -72,6 +73,9 @@ function App() {
           </Route>
           <Route exact path="/results">
             <Results />
+          </Route>
+          <Route exact path="/summery">
+            <OrderSummery />
           </Route>
           <Route exact path="/result/:resultId" component={CarDetails} />
 
