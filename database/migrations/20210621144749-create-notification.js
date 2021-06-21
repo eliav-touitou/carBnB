@@ -18,10 +18,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       content: {
-        type: Sequelize.TEXT,
-      },
-      read: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING,
       },
       created_at: {
         allowNull: false,

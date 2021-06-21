@@ -12,6 +12,7 @@ import { initialSearchReducer } from "./initialSearch";
 import { onLoginReducer } from "./onLoginPage";
 import { promptOrNormalReducer } from "./promptOrNormal";
 import { rentalDetailsReducer } from "./rentalDetails";
+import { notificationsReducer } from "./notifications";
 
 const allReducers = combineReducers({
   allCars: carsReducer,
@@ -27,6 +28,17 @@ const allReducers = combineReducers({
   isLoginPage: onLoginReducer,
   promptOrNormal: promptOrNormalReducer,
   rentalDetails: rentalDetailsReducer,
+  notifications: notificationsReducer,
 });
 
-export default allReducers;
+const rootReducer = (state, action) => {
+  // when a logout action is dispatched it will reset redux state
+  if (action.type === "LOG-OUT") {
+    window.localStorage.removeItem("persist:root");
+    state = undefined;
+  }
+
+  return allReducers(state, action);
+};
+
+export default rootReducer;
