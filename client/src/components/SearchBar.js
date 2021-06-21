@@ -112,7 +112,7 @@ export default function SearchBar() {
       <button className="search-btn" onClick={search}>
         search!
       </button>
-      <Redirect to={`${resultsPage}`} />
+      <Redirect push={true} to={`${resultsPage}`} />
     </div>
   );
 }

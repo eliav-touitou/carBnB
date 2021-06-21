@@ -85,3 +85,9 @@ export const setPromptOrNormal = (str) => {
     payload: str,
   };
 };
+export const setRentalDetails = (str) => {
+  return {
+    type: "SETRENTALDETAILS",
+    payload: str,
+  };
+};
