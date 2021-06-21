@@ -27,16 +27,6 @@ function App() {
   const auth = useSelector((state) => state.auth);
   const isLoginPage = useSelector((state) => state.isLoginPage);
 
-  // Check if user logged, if true update auth state.
-  useEffect(() => {
-    axios
-      .get("api/v1/users/checklogged")
-      .then((result) => {
-        if (result.status === 200) dispatch(setAuth(result.data.data));
-      })
-      .catch((err) => console.log(err.message));
-  }, []);
-
   // Get all cars brand from API.
   useEffect(() => {
     axios

@@ -168,16 +168,6 @@ users.post("/logout", async (req, res) => {
   }
 });
 
-// Check if user logged in at first entry to website
-users.get("/checklogged", validToken, async (req, res) => {
-  const userEmail = req.decoded.user.user_email;
-
-  const objToSearchBy = { model: User, email: userEmail };
-  const user = await getUserOrAuth(objToSearchBy);
-
-  return res.status(200).json({ message: true, data: user });
-});
-
 users.post("/updateitems", validToken, async (req, res) => {
   const { data } = req.body;
   try {
