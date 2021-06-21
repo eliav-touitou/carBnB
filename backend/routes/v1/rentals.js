@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { Router } = require("express");
 const rentals = Router();
 const {
@@ -15,7 +16,7 @@ transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "rozjino@gmail.com",
-    pass: "jino12345",
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
