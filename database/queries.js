@@ -282,9 +282,15 @@ const addNewNotification = async (obj) => {
   }
 };
 
+//delete any wanted items from any wanted table by any wanted row
+const deleteItems = async (model, row, items) => {
+  model.destroy({ where: { [row]: items } }).then((del) => console.log(del));
+};
+
 module.exports = {
   getCar,
   getRental,
+  deleteItems,
   getUserOrAuth,
   getAllItems,
   addToCarsDB,
