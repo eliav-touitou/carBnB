@@ -9,23 +9,30 @@ export default function Notifications() {
   const notifications = useSelector((state) => state.notifications);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    axios
-      .post("/api/v1/notification/messages", {
-        data: { email: auth.user_email },
-      })
-      .then(({ data: messages }) => {
+  const getAllNewMessages = async () => {
+    try {
+      if (auth) {
+        const { data: messages } = await axios.post(
+          "/api/v1/notification/messages",
+          {
+            data: { email: auth.user_email },
+          }
+        );
         dispatch(setNotifications(messages.data));
-      })
-      .catch((err) => console.log(err.message));
-  }, []);
+      } else {
+        // need to prompt login component
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
-      "test"
       {notifications?.map((message, i) => (
         <Messages message={message} key={`message-${i}`} messageId={i} />
       ))}
+      <button onClick={getAllNewMessages}>refresh</button>
     </div>
   );
 }
