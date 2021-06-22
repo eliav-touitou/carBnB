@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       start_date: DataTypes.DATE,
       end_date: DataTypes.DATE,
       total_price: DataTypes.FLOAT,
-      is_active: DataTypes.BOOLEAN,
+      is_active: DataTypes.STRING,
     },
     {
       sequelize,

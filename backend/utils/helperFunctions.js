@@ -14,5 +14,16 @@ const buildPatterns = ({ transactionId, startDate, endDate }) => {
 
   return { textPatternToRenter, textPatternToOwner };
 };
+const buildPatternsForCanceledRentals = ({ transactionId }) => {
+  const textToCanceledRenter = `Dear valued User,
+  Your order Num ${transactionId} was canceled because the cars owner didn't complete the process after 12 hours.
+  we deeply apologize for the inconvenience
+  kind regards, carBnB team`;
+  const textToCanceledOwner = `Dear valued User,
+  the order Num ${transactionId}, for your car was canceled because you didn't complete the process and approved the order within our 12H policy .
+  kind regards, carBnB team`;
 
-module.exports = { buildPatterns };
+  return { textToCanceledRenter, textToCanceledOwner };
+};
+
+module.exports = { buildPatterns, buildPatternsForCanceledRentals };
