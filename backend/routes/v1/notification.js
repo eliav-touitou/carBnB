@@ -23,14 +23,26 @@ notification.post("/messages", async (req, res) => {
 
 notification.patch("/updateread", async (req, res) => {
   const { data } = req.body;
-
+  let objToUpdate = {};
   //////// need to change - get content changes from params or body //////
-  const objToUpdate = {
-    table: Notification,
-    column: ["read"],
-    primaryKey: data.id,
-    content: true,
-  };
+  if (data.status === "read") {
+    objToUpdate = {
+      table: Notification,
+      column: ["read"],
+      primaryKey: "id",
+      primaryKeyValue: data.id,
+      content: [true],
+    };
+  } else {
+    objToUpdate = {
+      table: Notification,
+      column: ["read"],
+      primaryKey: "id",
+      primaryKeyValue: data.id,
+      content: [false],
+    };
+  }
+  console.log(objToUpdate);
   try {
     await updateItemToDB(objToUpdate);
     return res
