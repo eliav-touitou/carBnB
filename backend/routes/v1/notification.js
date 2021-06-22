@@ -24,7 +24,7 @@ notification.post("/messages", async (req, res) => {
 notification.patch("/updateread", async (req, res) => {
   const { data } = req.body;
   let objToUpdate = {};
-  //////// need to change - get content changes from params or body //////
+
   if (data.status === "read") {
     objToUpdate = {
       table: Notification,
