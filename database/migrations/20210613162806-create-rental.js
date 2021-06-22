@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.FLOAT,
       },
       is_active: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING,
       },
       created_at: {
         allowNull: false,
