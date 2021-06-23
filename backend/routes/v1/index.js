@@ -16,6 +16,6 @@ v1.use("/rentals", rentals);
 v1.use("/search", search);
 v1.use("/auth", auth);
 v1.use("/favorite", validToken, favorite);
-v1.use("/notification", notification);
+v1.use("/notification", validToken, notification);
 
 module.exports = v1;

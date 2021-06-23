@@ -12,13 +12,11 @@ const models = require("../../../database/models");
 // Get any items from any table.
 search.post("/getitem", async (req, res) => {
   const { data } = req.body;
-  //   console.log(data);
   const model = models[`${data[0]}`];
 
   const objToSearchBy = { model: model, column: data[1], columnValue: data[2] };
   try {
     const itemFound = await getItemFromDB(objToSearchBy);
-    console.log(itemFound);
     if (itemFound.length === 0) {
       return res.status(404).json({ message: "NOT FOUND" });
     }
