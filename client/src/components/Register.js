@@ -32,7 +32,7 @@ export default function Register() {
     }
   };
   return (
-    <div>
+    <div className={`register-container-${promptOrNormal}`}>
       <form onSubmit={addNewUser}>
         <div>
           <label>
