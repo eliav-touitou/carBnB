@@ -121,7 +121,7 @@ export default function Login() {
           go to register
         </button>
       </Link>
-      {auth && <Redirect to="/" />}
+      {promptOrNormal === "normal" && auth && <Redirect to="/" />}
     </div>
   );
 }

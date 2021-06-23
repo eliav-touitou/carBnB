@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setNotifications } from "../actions";
 import Messages from "./Messages";
-import PromptLogin from "./PromptLogin";
 
 export default function Notifications() {
   const auth = useSelector((state) => state.auth);
