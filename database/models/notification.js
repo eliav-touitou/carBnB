@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.STRING,
       content: DataTypes.TEXT,
       read: DataTypes.BOOLEAN,
+      transaction_id: DataTypes.INTEGER,
     },
     {
       sequelize,

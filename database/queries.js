@@ -215,6 +215,7 @@ const whatCarsAreTaken = async (obj) => {
             },
           },
           car_id: { [Op.in]: arrOfCarsId },
+          [Op.or]: { is_active: "pending", is_active: "confirm" },
         },
       },
     });
@@ -273,7 +274,7 @@ const addNewRentalToDB = async (obj) => {
     start_date: obj.startDate,
     end_date: obj.endDate,
     total_price: obj.totalPrice,
-    is_active: true,
+    is_active: "pending",
   };
   try {
     const rental = await Rental.create(objToSave);
@@ -290,6 +291,7 @@ const addNewNotification = async (obj) => {
     message_to: obj.messageTo,
     title: obj.title,
     content: obj.content,
+    transactionId: result.transaction_id,
     read: false,
   };
   try {

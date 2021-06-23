@@ -56,4 +56,7 @@ const scrapeDB = async () => {
     console.log(error);
   }
 };
-scrapeDB();
+
+setInterval(async () => {
+  await scrapeDB();
+}, 3600000);
