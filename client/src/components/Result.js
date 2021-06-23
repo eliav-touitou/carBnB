@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import PromptLogin from "./PromptLogin";
@@ -7,6 +7,10 @@ import PromptLogin from "./PromptLogin";
 export default function Result({ brand, passengers, carId, resultId }) {
   // Redux states
   const auth = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (auth) setShowLogin(false);
+  }, [auth]);
 
   // Use states
   const [showLogin, setShowLogin] = useState(false);

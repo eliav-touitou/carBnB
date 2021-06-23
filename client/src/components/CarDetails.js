@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import {
@@ -23,6 +23,10 @@ export default function CarDetails() {
   const availableCars = useSelector((state) => state.availableCars);
   const initialSearch = useSelector((state) => state.initialSearch);
   const auth = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (auth) setShowLogin(false);
+  }, [auth]);
 
   // Handle with difference cases
   const resetAvailableCars = async () => {
