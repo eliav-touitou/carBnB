@@ -61,9 +61,11 @@ function App() {
           <Route exact path="/register">
             <Register />
           </Route>
-          <Route exact path="/addnewcar">
-            <AddNewCar />
-          </Route>
+          {auth && (
+            <Route exact path="/addnewcar">
+              <AddNewCar />
+            </Route>
+          )}
           {auth && (
             <Route exact path="/profile">
               <Profile />

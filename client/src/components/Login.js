@@ -122,9 +122,6 @@ export default function Login() {
         </button>
       </Link>
       {promptOrNormal === "normal" && auth && <Redirect to="/" />}
-      {promptOrNormal === "prompt" &&
-        auth &&
-        window.location.replace(window.location.href)}
     </div>
   );
 }

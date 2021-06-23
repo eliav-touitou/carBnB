@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllModelsApi } from "../actions";
-import PromptLogin from "./PromptLogin";
 
 export default function AddNewCar() {
   const dispatch = useDispatch();
@@ -94,7 +93,6 @@ export default function AddNewCar() {
         console.log("Car Saved!");
       } else {
         // need to prompt login promp component
-        setShowLogin(true);
       }
     } catch (error) {
       console.log(error.message);
@@ -103,7 +101,6 @@ export default function AddNewCar() {
 
   return (
     <div>
-      {showLogin && <PromptLogin />}
       <div>
         pick your car brand
         <input
