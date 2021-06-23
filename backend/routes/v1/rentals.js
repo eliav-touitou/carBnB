@@ -11,6 +11,8 @@ const {
 } = require("../../../database/queries");
 const { Rental } = require("../../../database/models");
 const { buildPatterns, sendMail } = require("../../utils/helperFunctions");
+const PDFDocument = require("pdfkit");
+const fs = require("fs");
 
 // Gets a unique rental
 rentals.post("/uniquerental", async (req, res) => {
@@ -69,11 +71,36 @@ rentals.post("/new", async (req, res) => {
     // Save rental detail to DB
     const result = await addNewRentalToDB(data);
 
+    /////////### Need change this!   ###//////
+    const array = Object.entries(result.toJSON());
+    let string = "";
+    let url;
+
+    array?.map(([key, val], i) => (string += key + ": " + val + "\n"));
+    const doc = new PDFDocument();
+    doc.pipe(fs.createWriteStream("output.pdf"));
+    doc
+      .fontSize(25)
+      .font("Courier-Bold")
+      .fillColor("blue")
+      .underline(100, 80, 80, 27, { color: "#0000FF" })
+      .text("car", 100, 80, { continued: true })
+      .fillColor("red")
+      .text("B", { continued: true })
+      .fillColor("blue")
+      .text("n", { continued: true })
+      .fillColor("red")
+      .text("B");
+    doc.fontSize(15).fillColor("black").font("Courier").text(string, 100, 130);
+    doc.end();
+    /////////### Need change this!   ###//////
+
     // Build pattern texts for emails
     const { textPatternToRenter, textPatternToOwner } = buildPatterns({
       transactionId: String(result.transaction_id),
       startDate: data.startDate,
       endDate: data.endDate,
+      url,
     });
 
     sendMail({
