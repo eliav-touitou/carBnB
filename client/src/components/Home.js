@@ -9,6 +9,7 @@ import {
   setCars,
   setAuthOut,
   setNotifications,
+  setNotFoundMessage,
 } from "../actions";
 
 export default function Home() {
@@ -66,6 +67,14 @@ export default function Home() {
         .catch((err) => console.log(err.message));
     }
   }, []);
+
+  useEffect(() => {
+    if (notFoundMessage) {
+      setTimeout(() => {
+        dispatch(setNotFoundMessage(null));
+      }, 4500);
+    }
+  }, [notFoundMessage]);
 
   return (
     <div>
