@@ -1,3 +1,13 @@
+const nodemailer = require("nodemailer");
+
+transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "rozjino@gmail.com",
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
+
 const buildPatterns = ({ transactionId, startDate, endDate }) => {
   const textPatternToRenter = `Dear valued User,
   Your order Num ${transactionId} was successfully made!
@@ -14,6 +24,7 @@ const buildPatterns = ({ transactionId, startDate, endDate }) => {
 
   return { textPatternToRenter, textPatternToOwner };
 };
+
 const buildPatternsForCanceledRentals = ({ transactionId }) => {
   const textToCanceledRenter = `Dear valued User,
   Your order Num ${transactionId} was canceled because the cars owner didn't complete the process after 12 hours.
@@ -26,4 +37,26 @@ const buildPatternsForCanceledRentals = ({ transactionId }) => {
   return { textToCanceledRenter, textToCanceledOwner };
 };
 
-module.exports = { buildPatterns, buildPatternsForCanceledRentals };
+const sendMail = ({ from, to, subject, text }) => {
+  mailOption = {
+    from: from,
+    to: to,
+    subject: subject,
+    text: text,
+  };
+
+  transporter.sendMail(mailOption, (error, info) => {
+    if (error) {
+      throw error;
+    } else {
+      console.log(info);
+      return true;
+    }
+  });
+};
+
+module.exports = {
+  buildPatterns,
+  buildPatternsForCanceledRentals,
+  sendMail,
+};

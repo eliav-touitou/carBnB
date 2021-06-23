@@ -1,4 +1,4 @@
-// require("dotenv").config();
+require("dotenv").config();
 const { Rental } = require("../database/models");
 const {
   getAllItems,
@@ -7,18 +7,8 @@ const {
 } = require("../database/queries");
 const {
   buildPatternsForCanceledRentals,
+  sendMail,
 } = require("../backend/utils/helperFunctions");
-
-const nodemailer = require("nodemailer");
-const adminEmail = "rozjino@gmail.com";
-
-transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "rozjino@gmail.com",
-    pass: process.env.EMAIL_PASSWORD,
-  },
-});
 
 const scrapeDB = async () => {
   const rentalToRemoveIds = [];
@@ -36,51 +26,31 @@ const scrapeDB = async () => {
 
     await deleteItems(Rental, "transaction_id", rentalToRemoveIds);
 
-    rentalToRemove.forEach((rental) => {
+    rentalToRemove.forEach(async (rental) => {
       // Build pattern texts for emails
       const { textToCanceledRenter, textToCanceledOwner } =
         buildPatternsForCanceledRentals({
           transactionId: String(result.transaction_id),
         });
 
-      /// ## Can build those obj with outer function ## ///
-      const mailsOption = [
-        (mailToRenterOptions = {
-          from: adminEmail,
-          to: rental.renter_email,
-          subject: "Order Canceled",
-          text: textToCanceledRenter,
-        }),
-        (mailToOwnerOptions = {
-          from: adminEmail,
-          to: rental.owner_email,
-          subject: "Order Canceled",
-          text: textToCanceledOwner,
-        }),
-      ];
+      forRenter = {
+        from: process.env.ADMIN_MAIL,
+        to: rental.renter_email,
+        subject: "Order Canceled",
+        text: textToCanceledRenter,
+      };
 
-      mailsOption.forEach((mail) => {
-        transporter.sendMail(mail, (error, info) => {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log(info);
-          }
-        });
-      });
+      forOwner = {
+        from: process.env.ADMIN_MAIL,
+        to: rental.owner_email,
+        subject: "Order Canceled",
+        text: textToCanceledOwner,
+      };
 
-      await addNewNotification({
-        messageFrom: adminEmail,
-        messageTo: rental.renter_email,
-        title: "Order Canceled",
-        content: textToCanceledRenter,
-      });
-      await addNewNotification({
-        messageFrom: adminEmail,
-        messageTo: rental.owner_email,
-        title: "Order Canceled",
-        content: textToCanceledOwner,
-      });
+      sendMail(forRenter);
+      sendMail(forOwner);
+      await addNewNotification(forRenter);
+      await addNewNotification(forOwner);
     });
   } catch (error) {
     console.log(error);
