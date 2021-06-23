@@ -1,3 +1,4 @@
+require("dotenv").config();
 const nodemailer = require("nodemailer");
 
 transporter = nodemailer.createTransport({
@@ -47,7 +48,7 @@ const sendMail = ({ from, to, subject, text }) => {
     attachments: [
       {
         filename: "Receipt.pdf",
-        path: "C:/Users/yone5/Desktop/Cyber4s/carBnB/backend/output.pdf",
+        path: process.env.PDF_PATH,
         contentType: "application/pdf",
       },
     ],
