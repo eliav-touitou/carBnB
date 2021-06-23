@@ -291,7 +291,7 @@ const addNewNotification = async (obj) => {
     message_to: obj.messageTo,
     title: obj.title,
     content: obj.content,
-    transactionId: result.transaction_id,
+    transactionId: obj.transaction_id,
     read: false,
   };
   try {
@@ -308,6 +308,17 @@ const deleteItems = async (model, row, items) => {
 // const saveItems = async (model, row, items) => {
 //   model.destroy({ where: { [row]: items } }).then((del) => console.log(del));
 // };
+
+const getAllCarsByIdsArr = async (arr) => {
+  try {
+    const carsOfMyOrders = await Car.findAll({
+      where: { car_id: { [Op.in]: arr } },
+    });
+    return carsOfMyOrders;
+  } catch (error) {
+    throw error;
+  }
+};
 
 module.exports = {
   getCar,
@@ -329,4 +340,5 @@ module.exports = {
   removeFromFavoriteDB,
   addNewRentalToDB,
   addNewNotification,
+  getAllCarsByIdsArr,
 };
