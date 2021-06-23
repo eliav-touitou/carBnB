@@ -291,7 +291,7 @@ const addNewNotification = async (obj) => {
     message_to: obj.messageTo,
     title: obj.title,
     content: obj.content,
-    transactionId: result.transaction_id,
+    transactionId: obj.transaction_id,
     read: false,
   };
   try {
