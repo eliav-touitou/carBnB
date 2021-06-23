@@ -1,4 +1,12 @@
-const { User, Car, Rental, Auth, Favorite, Notification } = require("./models");
+const {
+  User,
+  Car,
+  Rental,
+  Auth,
+  Favorite,
+  Notification,
+  Photo,
+} = require("./models");
 const { Op, Sequelize, where, col } = require("sequelize");
 const { sequelize } = require("./models");
 
@@ -113,6 +121,15 @@ const addToAuthDB = async (obj) => {
       password: password,
       full_name: firstName + " " + lastName,
     });
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+};
+//  Add new Photos To the db
+const addToPhotosDB = async (arr) => {
+  try {
+    await Photo.bulkCreate(arr, { returning: true });
   } catch (error) {
     console.log(error.message);
     throw error;
@@ -286,6 +303,9 @@ const addNewNotification = async (obj) => {
 const deleteItems = async (model, row, items) => {
   model.destroy({ where: { [row]: items } }).then((del) => console.log(del));
 };
+// const saveItems = async (model, row, items) => {
+//   model.destroy({ where: { [row]: items } }).then((del) => console.log(del));
+// };
 
 module.exports = {
   getCar,
@@ -296,6 +316,7 @@ module.exports = {
   addToCarsDB,
   addToUsersDB,
   addToAuthDB,
+  addToPhotosDB,
   updateItemToDB,
   getByCity,
   GetCarsByParameters,
