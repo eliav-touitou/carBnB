@@ -8,8 +8,8 @@ export default function OrderSummery() {
   return (
     <div>
       <h1>Your order was successfully made! </h1>
-      {array?.map(([key, val]) => (
-        <div>{key + ": " + val}</div>
+      {array?.map(([key, val], i) => (
+        <div key={`line-${i}`}>{key + ": " + val}</div>
       ))}
     </div>
   );

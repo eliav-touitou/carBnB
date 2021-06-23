@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Register from "./components/Register";
-import Login from "./components/Login";
+import Register from "./Register";
+import Login from "./Login";
 import { useDispatch } from "react-redux";
 import { setPromptOrNormal } from "../actions";
 
 export default function PromptLogin() {
-  const [register, setRegister] = useState(false);
   const dispatch = useDispatch();
+
+  // Redux states
+  const [register, setRegister] = useState(false);
+
+  // Showing prompt login page
   useEffect(() => {
     dispatch(setPromptOrNormal("prompt"));
     return () => {

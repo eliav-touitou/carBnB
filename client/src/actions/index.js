@@ -99,3 +99,9 @@ export const setNotifications = (messages) => {
     payload: messages,
   };
 };
+export const setNotFoundMessage = (messages) => {
+  return {
+    type: "SETNOTFOUNDMESSAGE",
+    payload: messages,
+  };
+};
