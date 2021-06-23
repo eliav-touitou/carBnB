@@ -126,7 +126,7 @@ const addToAuthDB = async (obj) => {
     throw error;
   }
 };
-//  Add new Photos To the db
+// Add new Photos To the db
 const addToPhotosDB = async (arr) => {
   try {
     await Photo.bulkCreate(arr, { returning: true });
