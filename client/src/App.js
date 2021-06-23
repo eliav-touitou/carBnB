@@ -47,7 +47,7 @@ function App() {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/searchbar">Search</NavLink>
             <NavLink to="/addnewcar">Add New Car</NavLink>
-            <NavLink to="/notifications">🔔</NavLink>
+            {auth && <NavLink to="/notifications">🔔</NavLink>}
             {!auth && <NavLink to="/login">Login</NavLink>}
           </nav>
         )}
@@ -64,9 +64,11 @@ function App() {
           <Route exact path="/addnewcar">
             <AddNewCar />
           </Route>
-          <Route exact path="/profile">
-            <Profile />
-          </Route>
+          {auth && (
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
+          )}
           <Route exact path="/searchbar">
             <SearchBar />
           </Route>
@@ -79,9 +81,11 @@ function App() {
           <Route exact path="/summery">
             <OrderSummery />
           </Route>
-          <Route exact path="/notifications">
-            <Notifications />
-          </Route>
+          {auth && (
+            <Route exact path="/notifications">
+              <Notifications />
+            </Route>
+          )}
           <Route exact path="/result/:resultId" component={CarDetails} />
           <Route exact path="/message/:messageId" component={MessageDetails} />
 

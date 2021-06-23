@@ -7,6 +7,7 @@ const {
   addNewRentalToDB,
   whatCarsAreTaken,
   addNewNotification,
+  updateItemToDB,
 } = require("../../../database/queries");
 const { Rental } = require("../../../database/models");
 const { buildPatterns, sendMail } = require("../../utils/helperFunctions");
@@ -94,9 +95,30 @@ rentals.post("/new", async (req, res) => {
       messageTo: data.ownerEmail,
       title: "New Order incoming",
       content: textPatternToOwner,
+      transactionId: result.transaction_id,
     });
 
     res.status(201).json({ message: "Successes", data: result });
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(500)
+      .json({ message: "Problems with our server", error: err.message });
+  }
+});
+
+rentals.patch("/status", async (req, res) => {
+  const { transactionId, status } = req.body.data;
+  try {
+    await updateItemToDB({
+      table: Rental,
+      column: ["is_active"],
+      primaryKey: "transaction_id",
+      primaryKeyValue: transactionId,
+      content: [status],
+    });
+
+    res.status(200).json({ message: "Successes" });
   } catch (err) {
     console.log(err);
     return res
