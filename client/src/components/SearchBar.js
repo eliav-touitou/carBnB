@@ -6,6 +6,7 @@ import {
   setFilteredCars,
   setAvailableCars,
   setInitialSearch,
+  setNotFoundMessage,
 } from "../actions";
 
 export default function SearchBar() {
@@ -58,6 +59,7 @@ export default function SearchBar() {
         setResultsPage("/results");
       }
     } catch (err) {
+      dispatch(setNotFoundMessage(err.response.data.message));
       console.log(err);
     }
   };

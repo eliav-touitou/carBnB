@@ -7,6 +7,7 @@ import {
   setAvailableCars,
   setFilteredCars,
   setInitialSearch,
+  setNotFoundMessage,
 } from "../actions";
 
 export default function CarDetails() {
@@ -73,6 +74,7 @@ export default function CarDetails() {
     } catch (error) {
       // If in the middle of the order, someone else took this car
       if (error.response.status === 400) {
+        dispatch(setNotFoundMessage(error.response.data.message));
         await resetAvailableCars();
       }
       console.log(error);

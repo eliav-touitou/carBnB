@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setPromptOrNormal, setCars, setAuthOut } from "../actions";
-import { setNotifications } from "../actions";
 import SearchBar from "./SearchBar";
 import Avatar from "./Avatar";
-const axios = require("axios");
+import {
+  setPromptOrNormal,
+  setCars,
+  setAuthOut,
+  setNotifications,
+} from "../actions";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -13,6 +17,7 @@ export default function Home() {
   // Redux states
   const allCars = useSelector((state) => state.allCars);
   const auth = useSelector((state) => state.auth);
+  const notFoundMessage = useSelector((state) => state.notFoundMessage);
 
   // Use states
   const [counter, setCounter] = useState();
@@ -66,6 +71,7 @@ export default function Home() {
     <div>
       <Avatar />
       <SearchBar />
+      {notFoundMessage && <div>{notFoundMessage}</div>}
       <p>messages thet not read: {counter}</p>
       <button onClick={getCars}>Get cars</button>
       {allCars?.map((car, i) => (
