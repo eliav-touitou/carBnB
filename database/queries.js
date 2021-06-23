@@ -215,7 +215,7 @@ const whatCarsAreTaken = async (obj) => {
             },
           },
           car_id: { [Op.in]: arrOfCarsId },
-          [Op.or]: { is_active: "pending", is_active: "confirm" },
+          [Op.or]: [{ is_active: "pending" }, { is_active: "confirm" }],
         },
       },
     });
