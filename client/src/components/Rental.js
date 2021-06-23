@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import PromptLogin from "./PromptLogin";
 
 export default function Rental() {
   // Use states
   const [image, setImage] = useState("");
+  const [showLogin, setShowLogin] = useState(false);
 
   // Redux states
   const auth = useSelector((state) => state.auth);
@@ -33,6 +35,7 @@ export default function Rental() {
         await axios.post("api/v1/users/updateitems", { data: arr });
       } else {
         // need to prompt login promp component
+        setShowLogin(true);
       }
     } catch (error) {
       console.log(error.message);
@@ -40,6 +43,7 @@ export default function Rental() {
   };
   return (
     <div>
+      {showLogin && <PromptLogin />}
       <div>
         <input
           className="upload-photo-rental"

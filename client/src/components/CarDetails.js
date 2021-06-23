@@ -7,7 +7,9 @@ import {
   setAvailableCars,
   setFilteredCars,
   setInitialSearch,
+  setNotFoundMessage,
 } from "../actions";
+import PromptLogin from "./PromptLogin";
 
 export default function CarDetails() {
   const dispatch = useDispatch();
@@ -15,6 +17,7 @@ export default function CarDetails() {
 
   // Use states
   const [redirect, setRedirect] = useState(`/result/${resultId}`);
+  const [showLogin, setShowLogin] = useState(false);
 
   // Redux States
   const availableCars = useSelector((state) => state.availableCars);
@@ -68,11 +71,13 @@ export default function CarDetails() {
         }
       } else {
         // need to prompt login component
+        setShowLogin(true);
         console.log("must log in first!");
       }
     } catch (error) {
       // If in the middle of the order, someone else took this car
       if (error.response.status === 400) {
+        dispatch(setNotFoundMessage(error.response.data.message));
         await resetAvailableCars();
       }
       console.log(error);
@@ -117,6 +122,8 @@ export default function CarDetails() {
 
   return (
     <div>
+      {showLogin && <PromptLogin />}
+
       <p>מלא פרטים על הרכב 😃😃🍏🍏</p>
       <a href={`mailto:${availableCars[resultId].owner_email}`}>owner email</a>
       <p>barnd: {availableCars[resultId].brand} </p>

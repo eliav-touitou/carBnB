@@ -89,7 +89,7 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className={`login-container-${promptOrNormal}`}>
       <input
         className={`username-input-login-${promptOrNormal}`}
         ref={userNameRef}
