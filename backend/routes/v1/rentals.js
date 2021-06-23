@@ -8,18 +8,8 @@ const {
   whatCarsAreTaken,
   addNewNotification,
 } = require("../../../database/queries");
-const { Rental, User } = require("../../../database/models");
-const { buildPatterns } = require("../../utils/helperFunctions");
-const nodemailer = require("nodemailer");
-const adminEmail = "rozjino@gmail.com";
-
-transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "rozjino@gmail.com",
-    pass: process.env.EMAIL_PASSWORD,
-  },
-});
+const { Rental } = require("../../../database/models");
+const { buildPatterns, sendMail } = require("../../utils/helperFunctions");
 
 // Gets a unique rental
 rentals.post("/uniquerental", async (req, res) => {
@@ -85,30 +75,18 @@ rentals.post("/new", async (req, res) => {
       endDate: data.endDate,
     });
 
-    /// ## Can build those obj with outer function ## ///
-    const mailsOption = [
-      (mailToRenterOptions = {
-        from: adminEmail,
-        to: data.renterEmail,
-        subject: "Order summery",
-        text: textPatternToRenter,
-      }),
-      (mailToOwnerOptions = {
-        from: adminEmail,
-        to: data.ownerEmail,
-        subject: "New Order",
-        text: textPatternToOwner,
-      }),
-    ];
+    sendMail({
+      from: process.env.ADMIN_MAIL,
+      to: data.renterEmail,
+      subject: "Order summery",
+      text: textPatternToRenter,
+    });
 
-    mailsOption.forEach((mail) => {
-      transporter.sendMail(mail, (error, info) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(info);
-        }
-      });
+    sendMail({
+      from: process.env.ADMIN_MAIL,
+      to: data.ownerEmail,
+      subject: "New Order",
+      text: textPatternToOwner,
     });
 
     await addNewNotification({
@@ -126,4 +104,5 @@ rentals.post("/new", async (req, res) => {
       .json({ message: "Problems with our server", error: err.message });
   }
 });
+
 module.exports = rentals;
