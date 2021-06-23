@@ -16,6 +16,8 @@ import CarDetails from "./components/CarDetails";
 import OrderSummery from "./components/OrderSummery";
 import MessageDetails from "./components/MessageDetails";
 import Notifications from "./components/Notifications";
+import MyOrders from "./components/MyOrders";
+import OrderDetails from "./components/OrderDetails";
 
 const axios = require("axios");
 
@@ -90,6 +92,8 @@ function App() {
           )}
           <Route exact path="/result/:resultId" component={CarDetails} />
           <Route exact path="/message/:messageId" component={MessageDetails} />
+          <Route exact path="/allmyorders/:type" component={MyOrders} />
+          <Route exact path="/order/:orderId" component={OrderDetails} />
 
           <Route path="/" component={NotFound} />
         </Switch>

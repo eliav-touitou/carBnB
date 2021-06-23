@@ -309,6 +309,17 @@ const deleteItems = async (model, row, items) => {
 //   model.destroy({ where: { [row]: items } }).then((del) => console.log(del));
 // };
 
+const getAllCarsByIdsArr = async (arr) => {
+  try {
+    const carsOfMyOrders = await Car.findAll({
+      where: { car_id: { [Op.in]: arr } },
+    });
+    return carsOfMyOrders;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getCar,
   getRental,
@@ -329,4 +340,5 @@ module.exports = {
   removeFromFavoriteDB,
   addNewRentalToDB,
   addNewNotification,
+  getAllCarsByIdsArr,
 };
