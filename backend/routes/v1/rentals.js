@@ -8,8 +8,10 @@ const {
   whatCarsAreTaken,
   addNewNotification,
   updateItemToDB,
+  getItemFromDB,
+  getAllCarsByIdsArr,
 } = require("../../../database/queries");
-const { Rental } = require("../../../database/models");
+const { Rental, Car } = require("../../../database/models");
 const { buildPatterns, sendMail } = require("../../utils/helperFunctions");
 
 // Gets a unique rental
@@ -126,5 +128,57 @@ rentals.patch("/status", async (req, res) => {
       .json({ message: "Problems with our server", error: err.message });
   }
 });
+
+rentals.post("/myorders", async (req, res) => {
+  const { data } = req.body;
+  try {
+    // Get all my orders
+    const myOrders = await getItemFromDB({
+      model: Rental,
+      column: [data[1]],
+      columnValue: [data[0]],
+    });
+
+    // Get ids of my ordered cars
+    const carsIds = [];
+    myOrders.forEach((order) => {
+      if (!carsIds.includes(order.car_id)) {
+        carsIds.push(order.car_id);
+      }
+    });
+
+    // Get all my orders cars
+    const carsOfMyOrders = await getAllCarsByIdsArr(carsIds);
+
+    const arrOfOrdersToClient = [];
+    myOrders.forEach((order) => {
+      carsOfMyOrders.forEach((car) => {
+        if (order.car_id === car.car_id) {
+          const orderObj = {
+            transactionId: order.transaction_id,
+            totalPrice: order.total_price,
+            ownerEmail: order.owner_email,
+            startDate: order.start_date,
+            endDate: order.end_date,
+            isActive: order.is_active,
+            brand: car.brand,
+            model: car.model,
+            year: car.year,
+            gear: car.gear,
+            passengers: car.passengers,
+          };
+          arrOfOrdersToClient.push(orderObj);
+        }
+      });
+    });
+    return res
+      .status(200)
+      .json({ message: "Successes", data: arrOfOrdersToClient });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// rentals.post("/ordersfromme", async (req, res) => {});
 
 module.exports = rentals;
