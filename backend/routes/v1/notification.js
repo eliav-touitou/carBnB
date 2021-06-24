@@ -42,7 +42,6 @@ notification.patch("/updateread", async (req, res) => {
       content: [false],
     };
   }
-  console.log(objToUpdate);
   try {
     await updateItemToDB(objToUpdate);
     return res

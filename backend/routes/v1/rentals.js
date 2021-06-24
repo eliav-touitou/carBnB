@@ -12,17 +12,22 @@ const {
   getAllCarsByIdsArr,
 } = require("../../../database/queries");
 const { Rental, Car } = require("../../../database/models");
-const { buildPatterns, sendMail } = require("../../utils/helperFunctions");
-const PDFDocument = require("pdfkit");
-const fs = require("fs");
+const {
+  buildPatterns,
+  sendMail,
+  createPDFToSend,
+  buildInvoice,
+} = require("../../utils/helperFunctions");
+const path =
+  "C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/backend/output.pdf";
 
 // Gets a unique rental
 rentals.post("/uniquerental", async (req, res) => {
   const { id } = req.body;
-  // console.log(id);
+
   try {
     const rental = await getRental(id);
-    console.log(rental);
+
     if (!rental) {
       return res.status(404).json({ message: "NOT FOUND" });
     }
@@ -54,13 +59,15 @@ rentals.get("/allrentals", async (req, res) => {
 
 // Add new rental to rentals DB
 rentals.post("/new", async (req, res) => {
-  const { data } = req.body;
-
+  const { rentalDetails, userDetails } = req.body.data;
   try {
     // Checks if car already ordered in this dates => if true ⬇
     const takenCars = await whatCarsAreTaken({
-      carsId: [data.carId],
-      dates: { start: new Date(data.startDate), end: new Date(data.endDate) },
+      carsId: [rentalDetails.carId],
+      dates: {
+        start: new Date(rentalDetails.startDate),
+        end: new Date(rentalDetails.endDate),
+      },
     });
 
     // Return message that the car already ordered
@@ -71,63 +78,51 @@ rentals.post("/new", async (req, res) => {
     }
 
     // Save rental detail to DB
-    const result = await addNewRentalToDB(data);
+    const result = await addNewRentalToDB(rentalDetails);
 
-    /////////### Need change this!   ###//////
-    const array = Object.entries(result.toJSON());
-    let string = "";
-    let url;
+    // Get details of ordered car
+    let orderedCar = await getItemFromDB({
+      model: Car,
+      column: ["car_id"],
+      columnValue: [result.car_id],
+    });
+    orderedCar = orderedCar[0].toJSON();
 
-    array?.map(([key, val], i) => (string += key + ": " + val + "\n"));
-    const doc = new PDFDocument();
-    doc.pipe(fs.createWriteStream("output.pdf"));
-    doc
-      .fontSize(25)
-      .font("Courier-Bold")
-      .fillColor("blue")
-      .underline(100, 80, 80, 27, { color: "#0000FF" })
-      .text("car", 100, 80, { continued: true })
-      .fillColor("red")
-      .text("B", { continued: true })
-      .fillColor("blue")
-      .text("n", { continued: true })
-      .fillColor("red")
-      .text("B");
-    doc.fontSize(15).fillColor("black").font("Courier").text(string, 100, 130);
-    doc.end();
-    /////////### Need change this!   ###//////
+    // Create invoice and send pdf to user
+    const invoice = await buildInvoice(userDetails, result, orderedCar);
+
+    await createPDFToSend(invoice, path);
 
     // Build pattern texts for emails
     const { textPatternToRenter, textPatternToOwner } = buildPatterns({
       transactionId: String(result.transaction_id),
-      startDate: data.startDate,
-      endDate: data.endDate,
-      url,
+      startDate: rentalDetails.startDate,
+      endDate: rentalDetails.endDate,
     });
 
     sendMail({
       from: process.env.ADMIN_MAIL,
-      to: data.renterEmail,
+      to: rentalDetails.renterEmail,
       subject: "Order summery",
       text: textPatternToRenter,
     });
 
     sendMail({
       from: process.env.ADMIN_MAIL,
-      to: data.ownerEmail,
+      to: rentalDetails.ownerEmail,
       subject: "New Order",
       text: textPatternToOwner,
     });
 
     await addNewNotification({
-      messageFrom: data.renterEmail,
-      messageTo: data.ownerEmail,
+      messageFrom: rentalDetails.renterEmail,
+      messageTo: rentalDetails.ownerEmail,
       title: "New Order incoming",
       content: textPatternToOwner,
       transactionId: result.transaction_id,
     });
 
-    res.status(201).json({ message: "Successes", data: result });
+    return res.status(201).json({ message: "Successes", data: result });
   } catch (err) {
     console.log(err);
     return res
@@ -147,7 +142,7 @@ rentals.patch("/status", async (req, res) => {
       content: [status],
     });
 
-    res.status(200).json({ message: "Successes" });
+    return res.status(200).json({ message: "Successes" });
   } catch (err) {
     console.log(err);
     return res
