@@ -8,6 +8,7 @@ export default function OrderDetails() {
   const order = state.order;
   return (
     <div>
+      {console.log(order)}
       <h3>transaction number: {order.transactionId} </h3>
       <a href={`mailto:${order.ownerEmail}`}>owner email</a>
       <p>barnd: {order.brand} </p>
