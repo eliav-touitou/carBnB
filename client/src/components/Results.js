@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Result from "./Result";
 import SideBar from "./SideBar";
+import FilterCheck from "./FilterCheck";
 
 export default function Results() {
   // Redux states
@@ -20,6 +21,7 @@ export default function Results() {
         />
       ))}
       <SideBar />
+      <FilterCheck />
     </div>
   );
 }
