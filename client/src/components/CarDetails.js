@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
+import { setPhotosArray } from "../actions";
 
 import {
   setRentalDetails,
@@ -13,7 +14,6 @@ import {
 import PromptLogin from "./PromptLogin";
 
 export default function CarDetails() {
-  const [gallery, setGallery] = useState([]);
   const dispatch = useDispatch();
   const { resultId } = useParams();
 
@@ -22,7 +22,7 @@ export default function CarDetails() {
     axios
       .post("/api/v1/search/getitem", { data: photosData })
       .then(({ data }) => {
-        setGallery(data.data);
+        dispatch(setPhotosArray(data.data));
       })
       .catch((err) => console.log(err.message));
   }, []);
@@ -34,6 +34,7 @@ export default function CarDetails() {
   // Redux States
   const availableCars = useSelector((state) => state.availableCars);
   const initialSearch = useSelector((state) => state.initialSearch);
+  const photosArray = useSelector((state) => state.photosArray);
   const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -163,7 +164,7 @@ export default function CarDetails() {
       )}
       <p>{`Total price: ${calculateDiscount().price}`}</p>
       <div className="gallery">
-        {gallery?.map((photo, i) => (
+        {photosArray?.map((photo, i) => (
           <img
             alt="license"
             key={`photo-${i}`}
