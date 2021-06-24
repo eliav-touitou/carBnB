@@ -17,6 +17,7 @@ export default function CarDetails() {
   const dispatch = useDispatch();
   const { resultId } = useParams();
 
+  //bringing the photos of the corresponding car, and emptying it on component down
   useEffect(() => {
     const photosData = ["Photo", ["car_id"], [availableCars[resultId].car_id]];
     axios
@@ -25,6 +26,9 @@ export default function CarDetails() {
         dispatch(setPhotosArray(data.data));
       })
       .catch((err) => console.log(err.message));
+    return () => {
+      dispatch(setPhotosArray([]));
+    };
   }, []);
 
   // Use states
