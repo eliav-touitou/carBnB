@@ -69,7 +69,7 @@ export default function Home() {
   useEffect(() => {
     if (notFoundMessage) {
       setTimeout(() => {
-        dispatch(setNotFoundMessage(null));
+        dispatch(setNotFoundMessage(false));
       }, 4500);
     }
   }, [notFoundMessage]);

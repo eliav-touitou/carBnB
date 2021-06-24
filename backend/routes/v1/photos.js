@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { Router } = require("express");
 const photos = Router();
-const { addToPhotosDB } = require("../../../database/queries");
+const { addToPhotosDB, getItemFromDB } = require("../../../database/queries");
 const { Photo } = require("../../../database/models");
 
 // Gets a unique rental
@@ -19,5 +19,20 @@ photos.post("/savephotos", async (req, res) => {
       .json({ message: "Problems with our server", error: error.message });
   }
 });
+
+// photos.post("/get", async (req, res) => {
+//   const car_id = req.body;
+//   try {
+//     const photos = await getItemFromDB();
+//     console.log(isSaved);
+
+//     return res.status(200).json({ success: true, data: isSaved });
+//   } catch (error) {
+//     console.log(error.message);
+//     return res
+//       .status(500)
+//       .json({ message: "Problems with our server", error: error.message });
+//   }
+// });
 
 module.exports = photos;
