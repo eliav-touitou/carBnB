@@ -74,7 +74,7 @@ const getAllItems = async (model) => {
 //  Add new car to users db
 const addToCarsDB = async (obj) => {
   try {
-    await Car.create({
+    const savedCar = await Car.create({
       owner_email: obj.ownerEmail,
       brand: obj.brand,
       year: obj.year,
@@ -87,6 +87,7 @@ const addToCarsDB = async (obj) => {
       discount_for_month: obj.discountPerMonth,
       is_rented: false,
     });
+    return savedCar;
   } catch (error) {
     console.log(error.message);
     throw error;
@@ -291,7 +292,7 @@ const addNewNotification = async (obj) => {
     message_to: obj.messageTo,
     title: obj.title,
     content: obj.content,
-    transaction_id: obj.transactionId,
+    transactionId: obj.transaction_id,
     read: false,
   };
   try {
