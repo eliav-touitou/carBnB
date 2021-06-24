@@ -19,10 +19,10 @@ const fs = require("fs");
 // Gets a unique rental
 rentals.post("/uniquerental", async (req, res) => {
   const { id } = req.body;
-  // console.log(id);
+
   try {
     const rental = await getRental(id);
-    console.log(rental);
+
     if (!rental) {
       return res.status(404).json({ message: "NOT FOUND" });
     }
@@ -127,7 +127,7 @@ rentals.post("/new", async (req, res) => {
       transactionId: result.transaction_id,
     });
 
-    res.status(201).json({ message: "Successes", data: result });
+    return res.status(201).json({ message: "Successes", data: result });
   } catch (err) {
     console.log(err);
     return res
@@ -147,7 +147,7 @@ rentals.patch("/status", async (req, res) => {
       content: [status],
     });
 
-    res.status(200).json({ message: "Successes" });
+    return res.status(200).json({ message: "Successes" });
   } catch (err) {
     console.log(err);
     return res
