@@ -1,15 +1,20 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAllModelsApi } from "../actions";
+import { setAllModelsApi, setAllCarsApi, setPhotosArray } from "../actions";
+import PromptLogin from "./PromptLogin";
+import UploadPhoto from "./UploadPhoto";
 
 export default function AddNewCar() {
   const dispatch = useDispatch();
+
+  let id;
 
   // Redux states
   const allCarsApi = useSelector((state) => state.allCarsApi);
   const allModelsApi = useSelector((state) => state.allModelsApi);
   const auth = useSelector((state) => state.auth);
+  const photosArray = useSelector((state) => state.photosArray);
 
   // Use states
   const [yearsArr, setYearsArr] = useState([]);
@@ -41,6 +46,16 @@ export default function AddNewCar() {
   const discountPerMonthRef = useRef();
   const passengersRef = useRef();
 
+  // Get all cars brand from API.
+  useEffect(() => {
+    axios
+      .get(apiCars + "/vehicles/GetMakesForVehicleType/car?format=json")
+      .then(({ data }) => {
+        console.log(data);
+        dispatch(setAllCarsApi(data.Results));
+      });
+  }, []);
+
   useEffect(() => {
     let temp = [];
     const endYear = parseInt(new Date().getFullYear());
@@ -53,6 +68,13 @@ export default function AddNewCar() {
       temp.push(j + "%");
     }
     setPercentage(temp);
+  }, []);
+
+  //emptying the photo array
+  useEffect(() => {
+    return () => {
+      dispatch(setPhotosArray([]));
+    };
   }, []);
 
   // After car brand selected, axios request to get all models of this brand
@@ -76,7 +98,7 @@ export default function AddNewCar() {
   // Upload new car to database
   const uploadCar = async () => {
     const newCar = {
-      ownerEmail: ownerRef.current.value,
+      ownerEmail: auth.user_email,
       brand: brandRef.current.value,
       model: modelRef.current.value,
       gear: gearRef.current.value,
@@ -89,8 +111,14 @@ export default function AddNewCar() {
     };
     try {
       if (auth) {
-        await axios.post("api/v1/cars/upload", { newCar: newCar });
-        console.log("Car Saved!");
+        const { data: savedCar } = await axios.post("api/v1/cars/upload", {
+          newCar: newCar,
+        });
+        // console.log(savedCar);
+        id = savedCar.data.car_id;
+        photosArray.forEach((photo) => (photo.car_id = id));
+        dispatch(setPhotosArray(photosArray));
+        await axios.post("api/v1/photos/savephotos", photosArray);
       } else {
         // need to prompt login promp component
       }
@@ -214,6 +242,7 @@ export default function AddNewCar() {
           ))}
         </datalist>
       </div>
+      <UploadPhoto id={id} />
       <div>
         <button onClick={uploadCar}>Upload Car</button>
       </div>

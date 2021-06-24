@@ -8,11 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      file: {
+        type: Sequelize.TEXT("long"),
+      },
       car_id: {
         type: Sequelize.INTEGER,
-      },
-      file: {
-        type: Sequelize.TEXT,
       },
       created_at: {
         allowNull: false,

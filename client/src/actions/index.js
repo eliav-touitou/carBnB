@@ -113,3 +113,9 @@ export const setNotificationCounter = (number) => {
     payload: number,
   };
 };
+export const setPhotosArray = (arr) => {
+  return {
+    type: "SETPHOTOSARRAY",
+    payload: arr,
+  };
+};

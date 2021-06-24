@@ -47,9 +47,9 @@ cars.get("/allcars", async (req, res) => {
 cars.post("/upload", validToken, async (req, res) => {
   try {
     const { newCar } = req.body;
-
-    await addToCarsDB(newCar);
-    return res.status(200).json({ success: true, data: newCar });
+    const savedCar = await addToCarsDB(newCar);
+    savedCar.dataValues.car_id = savedCar.null;
+    return res.status(200).json({ success: true, data: savedCar });
   } catch (error) {
     console.log(error);
     return res

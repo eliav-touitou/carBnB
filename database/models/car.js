@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "owner_email",
         targetKey: "user_email",
       });
+      this.hasMany(models.Photo, {
+        foreignKey: "car_id",
+        sourceKey: "car_id",
+      });
       this.belongsToMany(models.User, {
         through: "Favorite",
         foreignKey: "car_id",
