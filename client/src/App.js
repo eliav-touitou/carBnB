@@ -10,7 +10,7 @@ import AddNewCar from "./components/AddNewCar";
 import SearchBar from "./components/SearchBar";
 import Rental from "./components/Rental";
 import Results from "./components/Results";
-import { setAllCarsApi } from "./actions";
+import { setAllCarsApi, setAuthOut } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 import CarDetails from "./components/CarDetails";
 import OrderSummery from "./components/OrderSummery";
@@ -45,6 +45,17 @@ function App() {
       });
   }, []);
 
+  // Logout handler
+  const logoutHandler = async () => {
+    try {
+      await axios.post("/api/v1/users/logout");
+      dispatch(setAuthOut());
+      console.log("Success logout");
+    } catch (error) {
+      console.log("Failed logout");
+    }
+  };
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -61,6 +72,7 @@ function App() {
               </NavLink>
             )}
             {!auth && <NavLink to="/login">Login</NavLink>}
+            {auth && <button onClick={logoutHandler}>Logout</button>}
           </nav>
         )}
         <Switch>
