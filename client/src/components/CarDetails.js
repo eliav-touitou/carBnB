@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
+
 import {
   setRentalDetails,
   setAvailableCars,
@@ -12,8 +13,19 @@ import {
 import PromptLogin from "./PromptLogin";
 
 export default function CarDetails() {
+  const [gallery, setGallery] = useState([]);
   const dispatch = useDispatch();
   const { resultId } = useParams();
+
+  useEffect(() => {
+    const photosData = ["Photo", ["car_id"], [availableCars[resultId].car_id]];
+    axios
+      .post("/api/v1/search/getitem", { data: photosData })
+      .then(({ data }) => {
+        setGallery(data.data);
+      })
+      .catch((err) => console.log(err.message));
+  }, []);
 
   // Use states
   const [redirect, setRedirect] = useState(`/result/${resultId}`);
@@ -150,6 +162,16 @@ export default function CarDetails() {
         } $`}</p>
       )}
       <p>{`Total price: ${calculateDiscount().price}`}</p>
+      <div className="gallery">
+        {gallery?.map((photo, i) => (
+          <img
+            alt="license"
+            key={`photo-${i}`}
+            src={`data:image/jpeg;base64,${photo.file}`}
+            height={100}
+          />
+        ))}
+      </div>
       <button onClick={rentalCar}>Order this car</button>
       <Redirect push to={redirect} />
     </div>

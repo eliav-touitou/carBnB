@@ -6,7 +6,7 @@ const {
   getByCity,
   GetCarsByParameters,
 } = require("../../../database/queries");
-const { User, Auth, Car, Rental } = require("../../../database/models");
+const { User, Auth, Car, Rental, Photo } = require("../../../database/models");
 const models = require("../../../database/models");
 
 // Get any items from any table.
