@@ -14,6 +14,7 @@ import { promptOrNormalReducer } from "./promptOrNormal";
 import { rentalDetailsReducer } from "./rentalDetails";
 import { notificationsReducer } from "./notifications";
 import { notFoundMessageReducer } from "./notFoundMessage";
+import { notificationCounterReducer } from "./notificationCounter";
 
 const allReducers = combineReducers({
   allCars: carsReducer,
@@ -31,6 +32,7 @@ const allReducers = combineReducers({
   rentalDetails: rentalDetailsReducer,
   notifications: notificationsReducer,
   notFoundMessage: notFoundMessageReducer,
+  notificationCounter: notificationCounterReducer,
 });
 
 const rootReducer = (state, action) => {

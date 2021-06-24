@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 export default function Register() {
   // UseRefs
@@ -10,6 +11,7 @@ export default function Register() {
 
   // Redux states
   const promptOrNormal = useSelector((state) => state.promptOrNormal);
+  const auth = useSelector((state) => state.auth);
 
   // Function to save new user to database
   const addNewUser = async (e) => {
@@ -121,6 +123,7 @@ export default function Register() {
         </div>
         <button type="submit">register</button>
       </form>
+      {promptOrNormal === "normal" && auth && <Redirect to="/" />}
     </div>
   );
 }

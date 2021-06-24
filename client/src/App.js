@@ -10,7 +10,7 @@ import AddNewCar from "./components/AddNewCar";
 import SearchBar from "./components/SearchBar";
 import Rental from "./components/Rental";
 import Results from "./components/Results";
-import { setAllCarsApi } from "./actions";
+import { setAllCarsApi, setAuthOut } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 import CarDetails from "./components/CarDetails";
 import OrderSummery from "./components/OrderSummery";
@@ -18,11 +18,15 @@ import MessageDetails from "./components/MessageDetails";
 import Notifications from "./components/Notifications";
 import MyOrders from "./components/MyOrders";
 import OrderDetails from "./components/OrderDetails";
+import { Badge } from "@material-ui/core";
+import MailIcon from "@material-ui/icons/Mail";
 
 const axios = require("axios");
 
 function App() {
   const dispatch = useDispatch();
+
+  const notificationCounter = useSelector((state) => state.notificationCounter);
 
   // Global API URL.
   const apiCars = "https://vpic.nhtsa.dot.gov/api";
@@ -41,6 +45,17 @@ function App() {
       });
   }, []);
 
+  // Logout handler
+  const logoutHandler = async () => {
+    try {
+      await axios.post("/api/v1/users/logout");
+      dispatch(setAuthOut());
+      console.log("Success logout");
+    } catch (error) {
+      console.log("Failed logout");
+    }
+  };
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -49,8 +64,15 @@ function App() {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/searchbar">Search</NavLink>
             <NavLink to="/addnewcar">Add New Car</NavLink>
-            {auth && <NavLink to="/notifications">🔔</NavLink>}
+            {auth && (
+              <NavLink to="/notifications">
+                <Badge badgeContent={notificationCounter} color="primary">
+                  <MailIcon />
+                </Badge>
+              </NavLink>
+            )}
             {!auth && <NavLink to="/login">Login</NavLink>}
+            {auth && <button onClick={logoutHandler}>Logout</button>}
           </nav>
         )}
         <Switch>
