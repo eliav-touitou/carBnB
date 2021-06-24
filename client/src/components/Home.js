@@ -9,6 +9,7 @@ import {
   setCars,
   setAuthOut,
   setNotifications,
+  setNotificationCounter,
 } from "../actions";
 
 export default function Home() {
@@ -18,9 +19,6 @@ export default function Home() {
   const allCars = useSelector((state) => state.allCars);
   const auth = useSelector((state) => state.auth);
   const notFoundMessage = useSelector((state) => state.notFoundMessage);
-
-  // Use states
-  const [counter, setCounter] = useState();
 
   // Get all cars
   const getCars = async () => {
@@ -60,7 +58,7 @@ export default function Home() {
               count++;
             }
           });
-          setCounter(count);
+          dispatch(setNotificationCounter(count));
           dispatch(setNotifications(messages.data));
         })
         .catch((err) => console.log(err.message));
@@ -72,7 +70,7 @@ export default function Home() {
       <Avatar />
       <SearchBar />
       {notFoundMessage && <div>{notFoundMessage}</div>}
-      <p>messages thet not read: {counter}</p>
+      {/* <p>messages thet not read: {counter}</p> */}
       <button onClick={getCars}>Get cars</button>
       {allCars?.map((car, i) => (
         <div key={`car` + i}>

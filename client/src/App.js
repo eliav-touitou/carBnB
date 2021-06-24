@@ -18,11 +18,15 @@ import MessageDetails from "./components/MessageDetails";
 import Notifications from "./components/Notifications";
 import MyOrders from "./components/MyOrders";
 import OrderDetails from "./components/OrderDetails";
+import { Badge } from "@material-ui/core";
+import MailIcon from "@material-ui/icons/Mail";
 
 const axios = require("axios");
 
 function App() {
   const dispatch = useDispatch();
+
+  const notificationCounter = useSelector((state) => state.notificationCounter);
 
   // Global API URL.
   const apiCars = "https://vpic.nhtsa.dot.gov/api";
@@ -49,7 +53,13 @@ function App() {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/searchbar">Search</NavLink>
             <NavLink to="/addnewcar">Add New Car</NavLink>
-            {auth && <NavLink to="/notifications">🔔</NavLink>}
+            {auth && (
+              <NavLink to="/notifications">
+                <Badge badgeContent={notificationCounter} color="primary">
+                  <MailIcon />
+                </Badge>
+              </NavLink>
+            )}
             {!auth && <NavLink to="/login">Login</NavLink>}
           </nav>
         )}
