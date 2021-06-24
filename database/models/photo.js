@@ -8,13 +8,16 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.belongsTo(models.Car, {
+        foreignKey: "car_id",
+        targetKey: "car_id",
+      });
     }
   }
   Photo.init(
     {
+      file: DataTypes.TEXT("long"),
       car_id: DataTypes.INTEGER,
-      file: DataTypes.TEXT,
     },
     {
       sequelize,
