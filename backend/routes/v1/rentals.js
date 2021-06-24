@@ -193,6 +193,7 @@ rentals.post("/myorders", async (req, res) => {
             year: car.year,
             gear: car.gear,
             passengers: car.passengers,
+            fuel: car.fuel,
           };
           arrOfOrdersToClient.push(orderObj);
         }
@@ -205,7 +206,5 @@ rentals.post("/myorders", async (req, res) => {
     console.log(error);
   }
 });
-
-// rentals.post("/ordersfromme", async (req, res) => {});
 
 module.exports = rentals;
