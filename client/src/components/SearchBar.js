@@ -9,7 +9,7 @@ import {
   setNotFoundMessage,
 } from "../actions";
 
-export default function SearchBar() {
+export default function SearchBar({ allCitiesApi }) {
   const dispatch = useDispatch();
 
   // Use states
@@ -69,11 +69,9 @@ export default function SearchBar() {
         Where do you want a car?:
         <input list="Cities" ref={cityRef}></input>
         <datalist id="Cities">
-          <option value="Modiin" />
-          <option value="Efrat" />
-          <option value="Pisgat_zeev" />
-          <option value="cfar haroee" />
-          <option value="Yokneam" />
+          {allCitiesApi?.map((city, i) => (
+            <option key={`city-${i}`} value={city} />
+          ))}
         </datalist>
       </div>
       <div className="choose-dates">
