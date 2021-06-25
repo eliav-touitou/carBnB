@@ -20,6 +20,7 @@ import MyOrders from "./components/MyOrders";
 import OrderDetails from "./components/OrderDetails";
 import { Badge } from "@material-ui/core";
 import MailIcon from "@material-ui/icons/Mail";
+import PromptLogin from "./components/PromptLogin";
 
 const axios = require("axios");
 
@@ -80,7 +81,7 @@ function App() {
             <Home />
           </Route>
           <Route exact path="/login">
-            <Login />
+            <PromptLogin />
           </Route>
           <Route exact path="/register">
             <Register />
