@@ -34,12 +34,12 @@ export default function FilterCheck() {
     { label: "Auto", value: "Auto" },
   ];
   const fuelTypes = [
-    { label: "Octan-95", value: "Octan-95" },
-    { label: "Octan-96", value: "Octan-96" },
-    { label: "Octan-98", value: "Octan-98" },
-    { label: "Soler", value: "Soler" },
-    { label: "Electric", value: "Electric" },
-    { label: "Gas", value: "Gas" },
+    { label: "OCTAN-95", value: "OCTAN-95" },
+    { label: "OCTAN-96", value: "OCTAN-96" },
+    { label: "OCTAN-98", value: "OCTAN-98" },
+    { label: "SOLER", value: "SOLER" },
+    { label: "ELECTRIC", value: "ELECTRIC" },
+    { label: "GAS", value: "GAS" },
   ];
 
   useEffect(() => {
