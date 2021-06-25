@@ -83,7 +83,7 @@ export default function CarDetails() {
     try {
       if (auth) {
         const rental = await axios.post("/api/v1/rentals/new", {
-          data: data,
+          data: { rentalDetails: data, userDetails: auth },
         });
 
         // If order succeed redirect to summery

@@ -11,10 +11,10 @@ const {
 // Gets a unique car
 cars.post("/uniquecar", async (req, res) => {
   const { id } = req.body;
-  console.log(id);
+
   try {
     const car = await getCar(id);
-    // console.log(car);
+
     if (!car) {
       return res.status(404).json({ message: "NOT FOUND" });
     }

@@ -13,7 +13,7 @@ auth.post("/facebookLogin", facebookLoginValidation, async (req, res) => {
   try {
     const objToSearchBy = { model: User, email: userEmail };
     if (!user) user = await getUserOrAuth(objToSearchBy);
-    res.status(200).json({ success: true, data: user });
+    return res.status(200).json({ success: true, data: user });
   } catch (err) {
     console.log(error.message);
     return res
@@ -30,7 +30,7 @@ auth.post("/googleLogin", googleLoginVerified, async (req, res) => {
   try {
     const objToSearchBy = { model: User, email: userEmail };
     if (!user) user = await getUserOrAuth(objToSearchBy);
-    res.status(200).json({ success: true, data: user });
+    return res.status(200).json({ success: true, data: user });
   } catch (err) {
     console.log(error.message);
     return res

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,16 +20,34 @@ export default function RangeSlider() {
 
   // Redux states
   const yearsFilter = useSelector((state) => state.yearsFilter);
+  const availableCars = useSelector((state) => state.availableCars);
+
+  // Use states
+  const [maxYear, setMaxYear] = useState(100);
+  const [minYear, setMinYear] = useState(100);
 
   const handleChange = (event, newValue) => {
     dispatch(setFilterYears(newValue));
   };
 
+  useEffect(() => {
+    const temp = [];
+    availableCars?.forEach((car) => {
+      temp.push(car.year);
+    });
+    if (temp.length > 0) {
+      const maxYearFromDB = Math.max(...temp);
+      const minYearFromDB = Math.min(...temp);
+      setMaxYear(maxYearFromDB);
+      setMinYear(minYearFromDB);
+    }
+  }, []);
+
   return (
     <div className={classes.root}>
       <Slider
-        min={1980}
-        max={2021}
+        min={minYear - 10}
+        max={maxYear + 10}
         value={yearsFilter}
         onChange={handleChange}
         valueLabelDisplay="auto"

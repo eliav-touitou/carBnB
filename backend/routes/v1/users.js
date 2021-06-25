@@ -28,11 +28,11 @@ const primaryKeys = {
 // Gets a unique user
 users.post("/uniqueuser", async (req, res) => {
   const { email } = req.body;
-  console.log(email);
+
   try {
     const objToSearchBy = { model: User, email: email };
     const user = await getUserOrAuth(objToSearchBy);
-    console.log(user);
+
     if (!user) {
       return res.status(404).json({ message: "NOT FOUND" });
     }
@@ -66,7 +66,7 @@ users.post("/rated", async (req, res) => {
 users.get("/allusers", async (req, res) => {
   try {
     const users = await getAllItems(User);
-    console.log(users);
+
     if (!users) {
       return res.status(404).json({ message: "NOT FOUND" });
     }

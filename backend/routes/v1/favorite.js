@@ -10,10 +10,10 @@ const {
 
 favorite.post("/add", async (req, res) => {
   const { carId, userEmail } = req.body.data;
-  console.log(req.body.data);
+
   try {
     const favorite = await addToFavoriteDB({ userEmail, carId });
-    res.status(201).json({ message: "Favorite saved!", data: favorite });
+    return res.status(201).json({ message: "Favorite saved!", data: favorite });
   } catch (err) {
     console.log(err);
     return res
@@ -26,7 +26,7 @@ favorite.post("/remove", async (req, res) => {
   const { userEmail, carId } = req.body.data;
   try {
     await removeFromFavoriteDB({ userEmail, carId });
-    res.status(200).json({ message: "Favorite removed!" });
+    return res.status(200).json({ message: "Favorite removed!" });
   } catch (err) {
     console.log(err);
     return res
@@ -44,7 +44,7 @@ favorite.post("/all", async (req, res) => {
       column: ["user_email"],
       columnValue: [userEmail],
     });
-    res.status(201).json({ message: "Successes", data: allFavorite });
+    return res.status(201).json({ message: "Successes", data: allFavorite });
   } catch (err) {
     console.log(err);
     return res
