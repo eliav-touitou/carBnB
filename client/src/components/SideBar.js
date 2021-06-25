@@ -9,6 +9,7 @@ import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import { setFilteredCars } from "../actions";
+import FilterCheck from "./FilterCheck";
 // import ListItemIcon from "@material-ui/core/ListItemIcon";
 // import ListItemText from "@material-ui/core/ListItemText";
 // import InboxIcon from "@material-ui/icons/MoveToInbox";
@@ -53,39 +54,6 @@ export default function TemporaryDrawer() {
 
     // Check if the side bar were closed => if yes =>
     // Saved all the data from the filter and show only the filtered results
-    if (open === false) {
-      const tempToShow = [];
-      const objToSave = {
-        brandFilter: brandRef.current.value,
-        modelFilter: modelRef.current.value,
-        gearFilter: gearRef.current.value,
-        fuelFilter: fuelRef.current.value,
-        yearsFilter: yearsFilter,
-        priceFilter: priceFilter,
-      };
-      availableCars?.forEach((car) => {
-        if (
-          (car.brand === objToSave.brandFilter ||
-            objToSave.brandFilter === "") &&
-          (car.model === objToSave.modelFilter ||
-            objToSave.modelFilter === "") &&
-          (car.gear === objToSave.gearFilter || objToSave.gearFilter === "") &&
-          (car.fuel === objToSave.fuelFilter || objToSave.fuelFilter === "") &&
-          car.year >= objToSave.yearsFilter[0] &&
-          car.year <= objToSave.yearsFilter[1] &&
-          car.price_per_day >= objToSave.priceFilter[0] &&
-          car.price_per_day <= objToSave.priceFilter[1] &&
-          car.owner_rating >= ratingFilter
-        ) {
-          tempToShow.push(car);
-        }
-      });
-      if (tempToShow.length === 0) {
-        console.log("No Results");
-      }
-      dispatch(setFilteredCars(tempToShow));
-      setFilterObj(objToSave);
-    }
     setState({ left: open });
   };
 
@@ -100,12 +68,13 @@ export default function TemporaryDrawer() {
     >
       <List>
         <ListItem>
-          <FilterBar
+          {/* <FilterBar
             brandRef={brandRef}
             modelRef={modelRef}
             gearRef={gearRef}
             fuelRef={fuelRef}
-          />
+          /> */}
+          <FilterCheck />
         </ListItem>
       </List>
       <Divider />

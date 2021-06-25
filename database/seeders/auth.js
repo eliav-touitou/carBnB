@@ -38,6 +38,41 @@ module.exports = {
           created_at: new Date(),
           updated_at: new Date(),
         },
+        {
+          user_email: "yone@gmail.com",
+          full_name: "jino rozma",
+          password: "1232131231345",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          user_email: "zimermaneyal@gmail.com",
+          full_name: "eyal zim",
+          password: "4243534636345",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          user_email: "rozjino@hotmail.com",
+          full_name: "rozi jinobigo",
+          password: "423rewr45",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          user_email: "mosemose@hotmail.com",
+          full_name: "mose mose",
+          password: "423887784hh45",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          user_email: "gil@hotmail.com",
+          full_name: "gil naaman",
+          password: "liav",
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
       ],
       {}
     );

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Select from "react-select";
 import PriceSlider from "./PriceSlider";
 import YearsSlider from "./YearsSlider";
 import RatingSlider from "./RatingSlider";
+import { setFilteredCars } from "../actions";
 
 export default function FilterCheck() {
+  const dispatch = useDispatch();
+
   // Redux states
   const availableCars = useSelector((state) => state.availableCars);
   const yearsFilter = useSelector((state) => state.yearsFilter);
@@ -31,12 +34,12 @@ export default function FilterCheck() {
     { label: "Auto", value: "Auto" },
   ];
   const fuelTypes = [
-    { label: "Octan-95", value: "Octan-95" },
-    { label: "Octan-96", value: "Octan-96" },
-    { label: "Octan-98", value: "Octan-98" },
-    { label: "Soler", value: "Soler" },
-    { label: "Electric", value: "Electric" },
-    { label: "Gas", value: "Gas" },
+    { label: "OCTAN-95", value: "OCTAN-95" },
+    { label: "OCTAN-96", value: "OCTAN-96" },
+    { label: "OCTAN-98", value: "OCTAN-98" },
+    { label: "SOLER", value: "SOLER" },
+    { label: "ELECTRIC", value: "ELECTRIC" },
+    { label: "GAS", value: "GAS" },
   ];
 
   useEffect(() => {
@@ -62,61 +65,83 @@ export default function FilterCheck() {
   }, []);
 
   useEffect(() => {
-    let tempResults = [];
-    /////////////////////// ---------   NEED TO FIX + FINISH   --------- ///////////////////////
+    let tempResults = availableCars;
     if (selectedBrandFilterArr.length > 0) {
-      tempResults = availableCars?.map((car) => {
-        return selectedBrandFilterArr.map((filter) => {
+      const temp = [];
+      tempResults.forEach((car) => {
+        selectedBrandFilterArr.forEach((filter) => {
           if (car.brand === filter.label) {
-            return car;
+            temp.push(car);
           }
         });
       });
+      tempResults = temp;
     }
-    if (selectedModelFilterArr.length > 0) {
-      tempResults = tempResults[0]?.map((car) => {
-        return selectedModelFilterArr.map((filter) => {
-          if (car.model === filter.label) {
-            return car;
-          }
-        });
-      });
-    }
-    if (selectedGearFilterArr.length > 0) {
-      tempResults = tempResults[0]?.map((car) => {
-        return selectedGearFilterArr.map((filter) => {
-          if (car.gear === filter.label) {
-            return car;
-          }
-        });
-      });
-    }
-    if (selectedFuelFilterArr.length > 0) {
-      tempResults = tempResults[0]?.map((car) => {
-        return selectedFuelFilterArr.map((filter) => {
-          if (car.fuel === filter.label) {
-            return car;
-          }
-        });
-      });
-    }
-    /////////////////////// ---------   NEED TO FIX + FINISH   --------- ///////////////////////
-    // tempResults = tempResults[0]?.map((car) => {
-    //   if (car.year >= yearsFilter[0] && car.year <= yearsFilter[1]) {
-    //     return car;
-    //   }
-    // });
 
-    // tempResults = tempResults[0]?.map((car) => {
-    //   if (car.price_per_day <= priceFilter) {
-    //     return car;
-    //   }
-    // });
-    // tempResults = tempResults[0]?.map((car) => {
-    //   if (car.owner_rating >= ratingFilter) {
-    //     return car;
-    //   }
-    // });
+    if (selectedModelFilterArr.length > 0) {
+      const temp = [];
+      tempResults.forEach((car) => {
+        selectedModelFilterArr.forEach((filter) => {
+          if (car.model === filter.label) {
+            temp.push(car);
+          }
+        });
+      });
+      tempResults = temp;
+    }
+
+    if (selectedGearFilterArr.length > 0) {
+      const temp = [];
+      tempResults.forEach((car) => {
+        selectedGearFilterArr.forEach((filter) => {
+          if (car.gear === filter.label) {
+            temp.push(car);
+          }
+        });
+      });
+      tempResults = temp;
+    }
+
+    if (selectedFuelFilterArr.length > 0) {
+      const temp = [];
+      tempResults?.forEach((car) => {
+        selectedFuelFilterArr?.forEach((filter) => {
+          if (car.fuel === filter.label) {
+            temp.push(car);
+          }
+        });
+      });
+      tempResults = temp;
+    }
+
+    let temp = [];
+    tempResults?.forEach((car) => {
+      if (car.year >= yearsFilter[0] && car.year <= yearsFilter[1]) {
+        temp.push(car);
+      }
+    });
+    tempResults = temp;
+
+    temp = [];
+    tempResults?.forEach((car) => {
+      if (
+        car.price_per_day >= priceFilter[0] &&
+        car.price_per_day <= priceFilter[1]
+      ) {
+        temp.push(car);
+      }
+    });
+    tempResults = temp;
+
+    temp = [];
+    tempResults?.forEach((car) => {
+      if (car.owner_rating >= ratingFilter) {
+        temp.push(car);
+      }
+    });
+    tempResults = temp;
+
+    dispatch(setFilteredCars(tempResults));
   }, [
     selectedBrandFilterArr,
     selectedModelFilterArr,
