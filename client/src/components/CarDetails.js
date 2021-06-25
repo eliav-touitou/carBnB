@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { setPhotosArray } from "../actions";
+import Carousel from "react-elastic-carousel";
 
 import {
   setRentalDetails,
@@ -167,7 +168,8 @@ export default function CarDetails() {
         } $`}</p>
       )}
       <p>{`Total price: ${calculateDiscount().price}`}</p>
-      <div className="gallery">
+      <div className="gallery"></div>
+      <Carousel>
         {photosArray?.map((photo, i) => (
           <img
             alt="license"
@@ -176,9 +178,11 @@ export default function CarDetails() {
             height={100}
           />
         ))}
-      </div>
+      </Carousel>
+
       <button onClick={rentalCar}>Order this car</button>
       <Redirect push to={redirect} />
     </div>
   );
 }
+////////////////////////////////////////

@@ -20,19 +20,4 @@ photos.post("/savephotos", async (req, res) => {
   }
 });
 
-// photos.post("/get", async (req, res) => {
-//   const car_id = req.body;
-//   try {
-//     const photos = await getItemFromDB();
-//     console.log(isSaved);
-
-//     return res.status(200).json({ success: true, data: isSaved });
-//   } catch (error) {
-//     console.log(error.message);
-//     return res
-//       .status(500)
-//       .json({ message: "Problems with our server", error: error.message });
-//   }
-// });
-
 module.exports = photos;
