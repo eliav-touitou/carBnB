@@ -30,6 +30,7 @@ export default function Result({ brand, passengers, carId, resultId }) {
       console.log(err);
     }
   };
+
   return (
     <div className="car-details">
       {showLogin && <PromptLogin />}
