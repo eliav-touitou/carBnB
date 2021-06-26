@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
+import SearchIcon from "@material-ui/icons/Search";
 import {
   setFilteredCars,
   setAvailableCars,
@@ -65,18 +66,26 @@ export default function SearchBar({ allCitiesApi }) {
   };
   return (
     <div className="search-bar-container">
-      <div className="choose-city">
-        Where do you want a car?:
-        <input list="Cities" ref={cityRef}></input>
-        <datalist id="Cities">
-          {allCitiesApi?.map((city, i) => (
-            <option key={`city-${i}`} value={city} />
-          ))}
-        </datalist>
+      <div class="search-inputs">
+        <label for="cities">
+          <div class="label">City:</div>
+          <input
+            name="cities"
+            list="cities"
+            ref={cityRef}
+            placeholder="Wanted City"
+          ></input>
+          <datalist id="cities">
+            {allCitiesApi?.map((city, i) => (
+              <option key={`city-${i}`} value={city} />
+            ))}
+          </datalist>
+        </label>
       </div>
-      <div className="choose-dates">
-        <div className="start-date">
-          <label htmlFor="start">Start date:</label>
+      <div className="separator"></div>
+      <div class="search-inputs">
+        <label for="rent-start">
+          <div class="label">Start date:</div>
           <input
             onChange={updateTomorrow}
             ref={startDateRef}
@@ -85,10 +94,14 @@ export default function SearchBar({ allCitiesApi }) {
             // value={today}
             min={today}
             max="2022-01-01"
+            placeholder="Add dates"
           ></input>
-        </div>
-        <div className="end-date">
-          <label htmlFor="start">End date:</label>
+        </label>
+      </div>
+      <div className="separator"></div>
+      <div class="search-inputs">
+        <label for="rent-end">
+          <div class="label">End date:</div>
           <input
             ref={endDateRef}
             type="date"
@@ -96,24 +109,35 @@ export default function SearchBar({ allCitiesApi }) {
             // value={tomorrow}
             min={tomorrow}
             max="2022-02-01"
+            placeholder="Add dates"
           ></input>
-        </div>
+        </label>
       </div>
-      <div>
-        what size of car you need?
-        <input list="passengers" ref={passengersRef}></input>
-        <datalist id="passengers">
-          <option value="2+" />
-          <option value="4+" />
-          <option value="5+" />
-          <option value="7+" />
-          {/* <option value="else..." /> */}
-        </datalist>
+      <div className="separator"></div>
+      <div class="search-inputs">
+        <label for="passengers">
+          <div class="label">What size of car you need?</div>
+          <input
+            name="passengers"
+            list="passengers"
+            ref={passengersRef}
+            placeholder="Size"
+          ></input>
+          <datalist id="passengers">
+            <option value="2+" />
+            <option value="4+" />
+            <option value="5+" />
+            <option value="7+" />
+            {/* <option value="else..." /> */}
+          </datalist>
+        </label>
+      </div>
+      <div class="search-button">
+        <button className="search-btn" onClick={search}>
+          <SearchIcon />
+        </button>
       </div>
 
-      <button className="search-btn" onClick={search}>
-        search!
-      </button>
       <Redirect push={true} to={`${resultsPage}`} />
     </div>
   );
