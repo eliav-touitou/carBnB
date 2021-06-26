@@ -44,12 +44,12 @@ export default function AddNewCar() {
   const gearOptions = ["Manual", "Auto"];
   const seatsOptions = ["2", "4", "5", "6", "7", "9", "else"];
   const fuelTypes = [
-    "Octan-95",
-    "Octan-96",
-    "Octan-98",
-    "Soler",
-    "Electric",
-    "Gas",
+    "OCTAN-95",
+    "OCTAN-96",
+    "OCTAN-98",
+    "SOLER",
+    "ELECTRIC",
+    "GAS",
   ];
 
   // UseRefs
@@ -82,7 +82,7 @@ export default function AddNewCar() {
     }
     setYearsArr(temp);
     temp = [];
-    for (let j = 5; j <= 50; j += 5) {
+    for (let j = 0; j <= 50; j += 5) {
       temp.push(j + "%");
     }
     setPercentage(temp);

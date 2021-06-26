@@ -134,7 +134,7 @@ export default function CarDetails() {
         (pricePerDay - (percent / 100) * pricePerDay) * numberOfDaysToRent;
       return { price: newPrice, percent: `${percent}%`, days: "month" };
     }
-    if (numberOfDaysToRent >= 7) {
+    if (numberOfDaysToRent >= 7 && numberOfDaysToRent < 30) {
       const percent = discountAboveWeek.slice(0, -1);
       newPrice =
         (pricePerDay - (percent / 100) * pricePerDay) * numberOfDaysToRent;
