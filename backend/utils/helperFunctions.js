@@ -2,8 +2,7 @@ require("dotenv").config();
 const nodemailer = require("nodemailer");
 const PDFDocument = require("pdfkit");
 const fs = require("fs");
-const logo =
-  "C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/backend/utils/carBnB-logo.png";
+const logo = process.env.LOGO_PATH;
 
 transporter = nodemailer.createTransport({
   service: "gmail",
