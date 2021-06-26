@@ -1,40 +1,45 @@
 body {
   background-color: rgb(252, 226, 188);
+  margin: 0;
 }
 
-.search-bar-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-content: stretch;
-  align-items: flex-start;
-  width: 70%;
-  background: rgb(250, 246, 246);
-  margin: 0 auto;
-  padding: 1em;
+* {
+  box-sizing: border-box;
 }
-input {
-  min-width: 7vw;
-  padding: 0.3em;
-  // margin-left: 2vw;
-  border: 1px solid #666;
-  border-radius: 1em;
-  height: 4vh;
-  order: 0;
-  align-self: auto;
-}
-.search-btn {
-  cursor: pointer;
-  padding: 8px 16px;
-  min-height: 48px;
-  min-width: 10px;
-  word-wrap: nowrap;
-  background: #000;
-  color: #fff;
-  border: 1px solid #fff;
-  border-radius: 5px;
-}
+
+// .search-bar-container {
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: nowrap;
+//   justify-content: flex-start;
+//   align-content: stretch;
+//   align-items: flex-start;
+//   width: 70%;
+//   background: rgb(250, 246, 246);
+//   margin: 0 auto;
+//   padding: 1em;
+// }
+// input {
+//   min-width: 7vw;
+//   padding: 0.3em;
+//   // margin-left: 2vw;
+//   border: 1px solid #666;
+//   border-radius: 1em;
+//   height: 4vh;
+//   order: 0;
+//   align-self: auto;
+// }
+// .search-btn {
+//   cursor: pointer;
+//   padding: 8px 16px;
+//   min-height: 48px;
+//   min-width: 10px;
+//   word-wrap: nowrap;
+//   background: #000;
+//   color: #fff;
+//   border: 1px solid #fff;
+//   border-radius: 5px;
+// }
 
 .login-container-prompt {
   height: 100vh;
@@ -283,4 +288,150 @@ form {
   margin: 0 5px;
   height: 40px;
   width: 40px;
+.search-bar-container {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  background: white;
+  width: 70%;
+  height: 10vh;
+  margin: 0 auto;
+  border-radius: 3em;
+  overflow: hidden;
+}
+
+.search-bar-container .label {
+  display: block;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.search-inputs {
+  flex: 1 0 auto;
+  padding: 1em 3em;
+}
+.search-inputs:hover {
+  cursor: pointer;
+  background-color: rgb(236, 236, 236);
+  border-radius: 3em;
+  &.search-inputs input {
+    cursor: pointer;
+    background-color: rgb(236, 236, 236);
+    border-radius: 3em;
+  }
+}
+
+.search-inputs:nth-child(1) {
+  flex: 1.5 0 0%;
+}
+
+.search-inputs:nth-child(2),
+.search-inputs:nth-child(3) {
+  flex: 1 0 0%;
+}
+
+.search-inputs:nth-child(4) {
+  flex: 0.85 0 0%;
+}
+
+.search-inputs input {
+  border: none;
+  display: block;
+}
+
+.search-button {
+  flex: 0 0 auto;
+  padding: 0.8em 0.8em 0.8em 0;
+  cursor: pointer;
+}
+
+.search-button button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 4em;
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 1em;
+  border: none;
+  background: rgb(79, 90, 192);
+  color: white;
+  cursor: pointer;
+}
+
+.separator {
+  align-self: center !important;
+  border-right: 2px solid #c2c2c2 !important;
+  flex: 0 0 0px !important;
+  height: 32px !important;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  align-items: center;
+  font-size: larger;
+  height: 8vh;
+  background-color: lightgray;
+  color: black;
+  font-weight: bold;
+  & a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    border: none;
+    width: fit-content;
+    font-size: 1em;
+    transition: transform 1s;
+  }
+}
+
+.nav-bar a:hover {
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  text-shadow: 5px 5px 5px black;
+}
+
+/* Float four columns side by side */
+.car-details {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+  margin-bottom: 2vh;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {
+  // margin: 0 -5px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .car-details {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the counter cards */
+.first-details {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 0.7em;
+  text-align: center;
+  background-color: #f1f1f1;
 }

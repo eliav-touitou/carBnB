@@ -40,7 +40,7 @@ export default function RangeSlider() {
       const minYearFromDB = Math.min(...temp);
       setMaxYear(maxYearFromDB);
       setMinYear(minYearFromDB);
-      dispatch(setFilterYears([minYearFromDB - 10, maxYearFromDB + 10]));
+      dispatch(setFilterYears([minYearFromDB - 5, maxYearFromDB + 5]));
     }
   }, []);
 

@@ -10,16 +10,19 @@ export default function Results() {
 
   return (
     <div>
-      <h1>Results</h1>
-      {filteredCars?.map((car, i) => (
-        <Result
-          key={`car-${i}`}
-          resultId={i}
-          brand={car.brand}
-          passengers={car.passengers}
-          carId={car.car_id}
-        />
-      ))}
+      <div className="row">
+        <h1>Results</h1>
+        {filteredCars?.map((car, i) => (
+          <Result
+            key={`car-${i}`}
+            resultId={i}
+            brand={car.brand}
+            model={car.model}
+            passengers={car.passengers}
+            carId={car.car_id}
+          />
+        ))}
+      </div>
       <SideBar />
       <FilterCheck />
     </div>

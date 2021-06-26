@@ -62,17 +62,27 @@ function App() {
       <BrowserRouter>
         {!isLoginPage && (
           <nav className="nav-bar">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/searchbar">Search</NavLink>
-            <NavLink to="/addnewcar">Add New Car</NavLink>
+            <NavLink activeStyle={{ color: "navy" }} to="/">
+              Home
+            </NavLink>
+            <NavLink activeStyle={{ color: "navy" }} to="/searchbar">
+              Search
+            </NavLink>
+            <NavLink activeStyle={{ color: "navy" }} to="/addnewcar">
+              Add New Car
+            </NavLink>
             {auth && (
-              <NavLink to="/notifications">
+              <NavLink activeStyle={{ color: "navy" }} to="/notifications">
                 <Badge badgeContent={notificationCounter} color="primary">
                   <MailIcon />
                 </Badge>
               </NavLink>
             )}
-            {!auth && <NavLink to="/login">Login</NavLink>}
+            {!auth && (
+              <NavLink activeStyle={{ color: "navy" }} to="/login">
+                Login
+              </NavLink>
+            )}
             {auth && <button onClick={logoutHandler}>Logout</button>}
           </nav>
         )}
