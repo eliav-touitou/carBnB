@@ -66,9 +66,9 @@ export default function SearchBar({ allCitiesApi }) {
   };
   return (
     <div className="search-bar-container">
-      <div class="search-inputs">
-        <label for="cities">
-          <div class="label">City:</div>
+      <div className="search-inputs">
+        <label htmlFor="cities">
+          <div className="label">City:</div>
           <input
             name="cities"
             list="cities"
@@ -83,9 +83,9 @@ export default function SearchBar({ allCitiesApi }) {
         </label>
       </div>
       <div className="separator"></div>
-      <div class="search-inputs">
-        <label for="rent-start">
-          <div class="label">Start date:</div>
+      <div className="search-inputs">
+        <label htmlFor="rent-start">
+          <div className="label">Start date:</div>
           <input
             onChange={updateTomorrow}
             ref={startDateRef}
@@ -99,9 +99,9 @@ export default function SearchBar({ allCitiesApi }) {
         </label>
       </div>
       <div className="separator"></div>
-      <div class="search-inputs">
-        <label for="rent-end">
-          <div class="label">End date:</div>
+      <div className="search-inputs">
+        <label htmlFor="rent-end">
+          <div className="label">End date:</div>
           <input
             ref={endDateRef}
             type="date"
@@ -114,9 +114,9 @@ export default function SearchBar({ allCitiesApi }) {
         </label>
       </div>
       <div className="separator"></div>
-      <div class="search-inputs">
-        <label for="passengers">
-          <div class="label">What size of car you need?</div>
+      <div className="search-inputs">
+        <label htmlFor="passengers">
+          <div className="label">What size of car you need?</div>
           <input
             name="passengers"
             list="passengers"
@@ -132,7 +132,7 @@ export default function SearchBar({ allCitiesApi }) {
           </datalist>
         </label>
       </div>
-      <div class="search-button">
+      <div className="search-button">
         <button className="search-btn" onClick={search}>
           <SearchIcon />
         </button>
