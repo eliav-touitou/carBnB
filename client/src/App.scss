@@ -73,15 +73,6 @@ $color: #4d61b9;
 
 body {
   background: #f6f5f7;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
@@ -90,7 +81,29 @@ body {
   height: 100vh;
   margin: -20px 0 50px;
 }
-
+.App,
+.login-page {
+  min-width: 100vw;
+  min-height: 100vh;
+  //   position: fixed;
+  //   display: flex;
+  //   flex-direction: column;
+  //   -webkit-box-pack: center;
+  //   -ms-flex-pack: center;
+  //   justify-content: center;
+  //   -webkit-box-align: center;
+  //   -ms-flex-align: center;
+  //   align-items: center;
+}
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-container {
+  position: fixed;
+  margin: auto;
+}
 .login-form-title {
   font-weight: bold;
   margin: 0;
@@ -390,6 +403,49 @@ form {
   width: 40px;
   background-color: #fff;
 }
+// ***********************************************************navbar
+.menu-bar {
+  border-radius: 25px;
+  height: fit-content;
+  display: inline-flex;
+  // background-color: rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  align-items: center;
+  padding: 0 10px;
+  margin: 50px 0 0 0;
+  .navlink {
+    list-style: none;
+    color: white;
+    font-weight: bold;
+    padding: 12px 16px;
+    margin: 0 8px;
+    position: relative;
+    cursor: pointer;
+    white-space: nowrap;
+    &::before {
+      content: " ";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      transition: 0.2s;
+      border-radius: 25px;
+    }
+    &:hover {
+      &::before {
+        background: linear-gradient(to bottom, #e8edec, #d2d1d3);
+        box-shadow: 0px 3px 20px 0px black;
+        transform: scale(1.2);
+      }
+      color: black;
+    }
+  }
+}
+
+//*************************************end of navbar
 .search-bar-container {
   display: flex;
   flex-flow: row;
@@ -472,6 +528,7 @@ form {
 
 .nav-bar {
   display: flex;
+  margin-top: 0%;
   justify-content: space-evenly;
   text-align: center;
   align-items: center;
