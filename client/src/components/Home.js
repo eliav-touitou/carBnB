@@ -10,6 +10,10 @@ import {
   setNotFoundMessage,
 } from "../actions";
 
+import "react-dates/initialize";
+import { DateRangePicker } from "react-dates";
+import "react-dates/lib/css/_datepicker.css";
+
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -68,6 +72,13 @@ export default function Home() {
       }, 4500);
     }
   }, [notFoundMessage]);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [focusedInput, setFocusedInput] = useState(null);
+  const handleDatesChange = ({ startDate, endDate }) => {
+    setStartDate(startDate);
+    setEndDate(endDate);
+  };
 
   return (
     <div>
@@ -82,6 +93,16 @@ export default function Home() {
           <hr />
         </div>
       ))}
+
+      <DateRangePicker
+        startDate={startDate}
+        startDateId="tata-start-date"
+        endDate={endDate}
+        endDateId="tata-end-date"
+        onDatesChange={handleDatesChange}
+        focusedInput={focusedInput}
+        onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
+      />
     </div>
   );
 }

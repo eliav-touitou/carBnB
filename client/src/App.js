@@ -39,6 +39,7 @@ function App() {
 
   // Get all cars brand from API.
   useEffect(() => {
+    dispatch(setShowLogin(false));
     axios
       .get(apiCars + "/vehicles/GetMakesForVehicleType/car?format=json")
       .then(({ data }) => {
