@@ -5,7 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { setAuth, setAuthOut, setOnLoginPage } from "../actions";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
+import logo from "../carBnB-logo.png";
 
+import FacebookOutlinedIcon from "@material-ui/icons/FacebookOutlined";
+import GoogleIcon from "@material-ui/icons/Google";
 export default function Login() {
   const dispatch = useDispatch();
 
@@ -89,39 +92,71 @@ export default function Login() {
   };
 
   return (
-    <div className={`login-container-${promptOrNormal}`}>
-      <input
-        className={`username-input-login-${promptOrNormal}`}
-        ref={userNameRef}
-        type="text"
-        placeholder="enter your username"
-      ></input>
-      <input
-        className={`password-input-login-${promptOrNormal}`}
-        ref={passwordRef}
-        type="password"
-        placeholder="enter your password"
-      ></input>
-      <button onClick={onLoginHandler}>login</button>
-      <GoogleLogin
-        clientId="186150944842-sg6rcdti8hqtq2td43gv4jo2t1jmc8hj.apps.googleusercontent.com"
-        buttonText="Login"
-        onSuccess={responseSuccessGoogle}
-        onFailure={responseErrorGoogle}
-        cookiePolicy={"single_host_origin"}
-      />
-      <FacebookLogin
-        appId="830912607629776"
-        autoLoad={false}
-        callback={responseFacebook}
-      />
-
-      <Link to="/register">
-        <button className={`register-btn-login-${promptOrNormal}`}>
-          go to register
+    <div className="form-container sign-in-container">
+      <form action="#">
+        <h1 className="login-form-title">Sign in</h1>
+        <div className="social-container">
+          <a href="#" className="login-form-a social">
+            {/* {FacebookOutlinedIcon} */}
+            <i className="fab fa-google-plus-g" />
+          </a>
+          <a href="#" className="login-form-a social">
+            <i className="fab fa-google-plus-g" />
+          </a>
+        </div>
+        <span className="login-form-span">or use your account</span>
+        <input
+          className="login-form-input"
+          type="email"
+          placeholder="Email"
+          ref={userNameRef}
+        />
+        <input
+          className="login-form-input"
+          type="password"
+          placeholder="Password"
+          ref={passwordRef}
+        />
+        {/* <a href="#">Forgot your password?</a> */}
+        <button className="login-form-button" onClick={onLoginHandler}>
+          Sign In
         </button>
-      </Link>
-      {promptOrNormal === "normal" && auth && <Redirect to="/" />}
+      </form>
     </div>
+
+    // <div className={`login-container-${promptOrNormal}`}>
+    //   <input
+    //     className={`username-input-login-${promptOrNormal}`}
+    //     ref={userNameRef}
+    //     type="text"
+    //     placeholder="enter your username"
+    //   ></input>
+    //   <input
+    //     className={`password-input-login-${promptOrNormal}`}
+    //     ref={passwordRef}
+    //     type="password"
+    //     placeholder="enter your password"
+    //   ></input>
+    //   <button onClick={onLoginHandler}>login</button>
+    //   <GoogleLogin
+    //     clientId="186150944842-sg6rcdti8hqtq2td43gv4jo2t1jmc8hj.apps.googleusercontent.com"
+    //     buttonText="Login"
+    //     onSuccess={responseSuccessGoogle}
+    //     onFailure={responseErrorGoogle}
+    //     cookiePolicy={"single_host_origin"}
+    //   />
+    //   <FacebookLogin
+    //     appId="830912607629776"
+    //     autoLoad={false}
+    //     callback={responseFacebook}
+    //   />
+
+    //   <Link to="/register">
+    //     <button className={`register-btn-login-${promptOrNormal}`}>
+    //       go to register
+    //     </button>
+    //   </Link>
+    //   {promptOrNormal === "normal" && auth && <Redirect to="/" />}
+    // </div><div>
   );
 }
