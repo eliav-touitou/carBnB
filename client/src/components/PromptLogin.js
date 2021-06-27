@@ -1,12 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import Register from "./Register";
 import Login from "./Login";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 // import { setPromptOrNormal } from "../actions";
-import logo from "../carBnB-logo.png";
+import { setOnLoginPage } from "../actions";
+
+import logo from "../logo-white.png";
 
 export default function PromptLogin() {
+  const dispatch = useDispatch();
+
   const [rightPanelActive, setRightPanelActive] = useState();
+  useEffect(() => {
+    dispatch(setOnLoginPage(true));
+    return () => {
+      dispatch(setOnLoginPage(false));
+    };
+  }, []);
 
   return (
     <div className={`login-container`}>
@@ -31,8 +41,8 @@ export default function PromptLogin() {
               </button>
             </div>
             <div className="overlay-panel overlay-right">
-              <img src={logo} alt="fuck" />
-              <p className="login-form-paragraph">
+              <img className="login-img" src={logo} alt="fuck" />
+              <p className="login-form-paragraph" id="under-logo">
                 We invite you to start your journey with us, and with many other
                 drivers
               </p>
