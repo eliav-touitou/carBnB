@@ -47,7 +47,6 @@ export default function Register() {
           placeholder="* Email"
           required
         ></input>
-
         <input
           className="login-form-input"
           name="firstName"
@@ -68,7 +67,6 @@ export default function Register() {
           type="phone"
           placeholder="Enter your phone"
         ></input>
-
         <input
           className="login-form-input"
           name="address"
@@ -91,6 +89,7 @@ export default function Register() {
             required
           />
         </div>
+        <span className="login-form-span">Fields with * are required</span>
         <button className="login-form-button" type="submit">
           Sign Up
         </button>
