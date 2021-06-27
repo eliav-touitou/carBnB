@@ -64,81 +64,91 @@ export default function SearchBar({ allCitiesApi }) {
       console.log(err);
     }
   };
+  const focusInput = (e) => {
+    e.target.childNodes[0].childNodes[1].focus();
+    console.log(e);
+  };
   return (
-    <div className="search-bar-container">
-      <div className="search-inputs">
-        <label htmlFor="cities">
-          <div className="label">City:</div>
-          <input
-            name="cities"
-            list="cities"
-            ref={cityRef}
-            placeholder="Wanted City"
-          ></input>
-          <datalist id="cities">
-            {allCitiesApi?.map((city, i) => (
-              <option key={`city-${i}`} value={city} />
-            ))}
-          </datalist>
-        </label>
-      </div>
-      <div className="separator"></div>
-      <div className="search-inputs">
-        <label htmlFor="rent-start">
-          <div className="label">Start date:</div>
-          <input
-            onChange={updateTomorrow}
-            ref={startDateRef}
-            type="date"
-            name="rent-start"
-            // value={today}
-            min={today}
-            max="2022-01-01"
-            placeholder="Add dates"
-          ></input>
-        </label>
-      </div>
-      <div className="separator"></div>
-      <div className="search-inputs">
-        <label htmlFor="rent-end">
-          <div className="label">End date:</div>
-          <input
-            ref={endDateRef}
-            type="date"
-            name="rent-end"
-            // value={tomorrow}
-            min={tomorrow}
-            max="2022-02-01"
-            placeholder="Add dates"
-          ></input>
-        </label>
-      </div>
-      <div className="separator"></div>
-      <div className="search-inputs">
-        <label htmlFor="passengers">
-          <div className="label">What size of car you need?</div>
-          <input
-            name="passengers"
-            list="passengers"
-            ref={passengersRef}
-            placeholder="Size"
-          ></input>
-          <datalist id="passengers">
-            <option value="2+" />
-            <option value="4+" />
-            <option value="5+" />
-            <option value="7+" />
-            {/* <option value="else..." /> */}
-          </datalist>
-        </label>
-      </div>
-      <div className="search-button">
-        <button className="search-btn" onClick={search}>
-          <SearchIcon />
-        </button>
-      </div>
-
+    <div className="top-navigation">
+      <nav className="search-nav">
+        <div className="search">
+          <div className="search-inputs" onClick={focusInput}>
+            <label htmlFor="cities">
+              <div className="label">City:</div>
+              <input
+                name="cities"
+                list="cities"
+                ref={cityRef}
+                placeholder="Wanted City"
+              ></input>
+              <datalist id="cities">
+                {allCitiesApi?.map((city, i) => (
+                  <option key={`city-${i}`} value={city} />
+                ))}
+              </datalist>
+            </label>
+          </div>
+          <div className="separator"></div>
+          <div className="search-inputs" onClick={focusInput}>
+            <label htmlFor="rent-start">
+              <div className="label">Start date:</div>
+              <input
+                onChange={updateTomorrow}
+                ref={startDateRef}
+                type="date"
+                name="rent-start"
+                // value={today}
+                min={today}
+                max="2022-01-01"
+                placeholder="Add dates"
+              ></input>
+            </label>
+          </div>
+          <div className="separator"></div>
+          <div className="search-inputs" onClick={focusInput}>
+            <label htmlFor="rent-end">
+              <div className="label">End date:</div>
+              <input
+                ref={endDateRef}
+                type="date"
+                name="rent-end"
+                // value={tomorrow}
+                min={tomorrow}
+                max="2022-02-01"
+                placeholder="Add dates"
+              ></input>
+            </label>
+          </div>
+          <div className="separator"></div>
+          <div className="search-inputs" onClick={focusInput}>
+            <label htmlFor="passengers">
+              <div className="label">What size of car you need?</div>
+              <input
+                name="passengers"
+                list="passengers"
+                ref={passengersRef}
+                placeholder="Size"
+              ></input>
+              <datalist id="passengers">
+                <option value="2+" />
+                <option value="4+" />
+                <option value="5+" />
+                <option value="7+" />
+                {/* <option value="else..." /> */}
+              </datalist>
+            </label>
+          </div>
+          <div className="search-button">
+            <button className="search-btn" onClick={search}>
+              <SearchIcon />
+            </button>
+          </div>
+        </div>
+      </nav>{" "}
+      {/*   End nav   */}
       <Redirect push={true} to={`${resultsPage}`} />
     </div>
+
+    // </div>
   );
 }

@@ -93,7 +93,7 @@ body {
 .login-page {
   min-width: 100vw;
   min-height: 100vh;
-  //   position: fixed;
+  //   position: fixed;S
   //   display: flex;
   //   flex-direction: column;
   //   -webkit-box-pack: center;
@@ -102,7 +102,7 @@ body {
   //   -webkit-box-align: center;
   //   -ms-flex-align: center;
   //   align-items: center;
-  background-image: url("C:/dev/carBnB/client/src/background-img.png");
+  // background-image: url("C:/dev/carBnB/client/src/background-img.png");
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
@@ -123,6 +123,32 @@ body {
 
 h2 {
   text-align: center;
+}
+
+.x {
+  position: absolute;
+  margin-top: 2%;
+  font-size: "large";
+  cursor: pointer;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 1em;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background: linear-gradient(to bottom, #e8edec, #e7e7e7);
+    transform: scale(1.1);
+    color: black;
+  }
+}
+
+.register {
+  margin-right: 2%;
+  right: 0;
+}
+.login {
+  margin-left: 2%;
 }
 
 .login-form-paragraph {
@@ -470,38 +496,55 @@ form {
 }
 
 //*************************************end of navbar
-.search-bar-container {
+
+//************************************* search bar
+
+.separator {
+  align-self: center !important;
+  border-right: 1.5px solid #c2c2c2 !important;
+  flex: 0 0 0px !important;
+  height: 32px !important;
+}
+
+.top-navigation {
+  width: 100%;
   display: flex;
-  flex-flow: row;
-  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  color: white;
+  /*   z-index: 10; */
+  & input {
+    outline: none;
+  }
+}
+
+.search-nav {
+  display: flex;
+  flex-direction: column;
+  /*   flex: 1.5 0 0%; */
+  min-width: 50%;
+}
+
+/* Search form */
+.search {
+  display: flex;
+  flex-flow: row no-wrap;
   justify-content: space-evenly;
   background: white;
-  width: 90%;
-  height: 10vh;
-  margin: 0 auto;
-  border-radius: 3em;
+  /*   height: 50px; */
+  border-radius: 50px;
   overflow: hidden;
 }
 
-.search-bar-container .label {
+.search .label {
   display: block;
-  font-size: medium;
+  font-size: 0.75rem;
+  color: #111111;
   font-weight: bold;
 }
 
 .search-inputs {
-  flex: 1 0 auto;
-  padding: 1em 3em;
-}
-.search-inputs:hover {
-  cursor: pointer;
-  background-color: rgb(236, 236, 236);
-  border-radius: 3em;
-  &.search-inputs input {
-    cursor: pointer;
-    background-color: rgb(236, 236, 236);
-    border-radius: 3em;
-  }
+  /*   flex: 1 0 auto; */
+  padding: 16px 24px;
 }
 
 .search-inputs:nth-child(1) {
@@ -521,34 +564,34 @@ form {
   border: none;
   display: block;
 }
+.search-inputs:hover {
+  cursor: pointer;
+  background-color: rgb(236, 236, 236);
+  border-radius: 3em;
+  &.search-inputs input {
+    cursor: pointer;
+    background-color: rgb(236, 236, 236);
+    border-radius: 3em;
+  }
+}
 
 .search-button {
   flex: 0 0 auto;
-  padding: 0.8em 0.8em 0.8em 0;
+  padding: 8px 8px 8px 0;
   cursor: pointer;
 }
 
 .search-button button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 4em;
-  width: 0.8em;
-  height: 0.8em;
-  border-radius: 1em;
+  font-size: 16px;
+  width: 48px;
+  height: 48px;
+  border-radius: 30px;
   border: none;
   background: rgb(79, 90, 192);
   color: white;
   cursor: pointer;
 }
-
-.separator {
-  align-self: center !important;
-  border-right: 2px solid #c2c2c2 !important;
-  flex: 0 0 0px !important;
-  height: 32px !important;
-}
+//************************************* end search bar
 
 .nav-bar {
   display: flex;
@@ -592,7 +635,7 @@ form {
 
 /* Remove extra left and right margins, due to padding */
 .row {
-  // margin: 0 -5px;
+  margin: 0 -5px;
 }
 
 /* Clear floats after the columns */

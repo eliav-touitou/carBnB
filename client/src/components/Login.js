@@ -28,6 +28,9 @@ export default function Login() {
 
   useEffect(() => {
     if (auth) dispatch(setShowLogin(false));
+    return () => {
+      dispatch(setShowLogin(false));
+    };
   }, [auth]);
 
   // Send login data, user name and password
@@ -96,6 +99,14 @@ export default function Login() {
 
   return (
     <div className="form-container sign-in-container">
+      <div
+        className="x login"
+        onClick={() => {
+          dispatch(setShowLogin(false));
+        }}
+      >
+        ✖
+      </div>
       <form action="#">
         <h1 className="login-form-title">Sign in</h1>
         <div className="social-container">
