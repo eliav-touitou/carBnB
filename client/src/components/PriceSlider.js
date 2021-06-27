@@ -34,6 +34,7 @@ export default function RangeSlider() {
     if (temp.length > 0) {
       const maxPriceFromDB = Math.max(...temp);
       setMaxPrice(maxPriceFromDB);
+      dispatch(setFilterPrice([10, maxPriceFromDB + 5]));
     }
   }, []);
 

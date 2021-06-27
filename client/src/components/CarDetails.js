@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
+import { setPhotosArray } from "../actions";
+import Carousel from "react-elastic-carousel";
 
 import {
   setRentalDetails,
@@ -13,18 +15,21 @@ import {
 import PromptLogin from "./PromptLogin";
 
 export default function CarDetails() {
-  const [gallery, setGallery] = useState([]);
   const dispatch = useDispatch();
   const { resultId } = useParams();
 
+  //bringing the photos of the corresponding car, and emptying it on component down
   useEffect(() => {
     const photosData = ["Photo", ["car_id"], [availableCars[resultId].car_id]];
     axios
       .post("/api/v1/search/getitem", { data: photosData })
       .then(({ data }) => {
-        setGallery(data.data);
+        dispatch(setPhotosArray(data.data));
       })
       .catch((err) => console.log(err.message));
+    return () => {
+      dispatch(setPhotosArray([]));
+    };
   }, []);
 
   // Use states
@@ -34,6 +39,7 @@ export default function CarDetails() {
   // Redux States
   const availableCars = useSelector((state) => state.availableCars);
   const initialSearch = useSelector((state) => state.initialSearch);
+  const photosArray = useSelector((state) => state.photosArray);
   const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -128,7 +134,7 @@ export default function CarDetails() {
         (pricePerDay - (percent / 100) * pricePerDay) * numberOfDaysToRent;
       return { price: newPrice, percent: `${percent}%`, days: "month" };
     }
-    if (numberOfDaysToRent >= 7) {
+    if (numberOfDaysToRent >= 7 && numberOfDaysToRent < 30) {
       const percent = discountAboveWeek.slice(0, -1);
       newPrice =
         (pricePerDay - (percent / 100) * pricePerDay) * numberOfDaysToRent;
@@ -162,8 +168,9 @@ export default function CarDetails() {
         } $`}</p>
       )}
       <p>{`Total price: ${calculateDiscount().price}`}</p>
-      <div className="gallery">
-        {gallery?.map((photo, i) => (
+      <div className="gallery"></div>
+      <Carousel>
+        {photosArray?.map((photo, i) => (
           <img
             alt="license"
             key={`photo-${i}`}
@@ -171,9 +178,11 @@ export default function CarDetails() {
             height={100}
           />
         ))}
-      </div>
+      </Carousel>
+
       <button onClick={rentalCar}>Order this car</button>
       <Redirect push to={redirect} />
     </div>
   );
 }
+////////////////////////////////////////

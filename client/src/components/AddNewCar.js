@@ -20,18 +20,36 @@ export default function AddNewCar() {
   const [yearsArr, setYearsArr] = useState([]);
   const [percentage, setPercentage] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
+  const [tomorrow, setTomorrow] = useState();
+
+  const today = new Date().toISOString().slice(0, 10);
+
+  const endDateRef = useRef();
+  const startDateRef = useRef();
+
+  useEffect(() => {
+    let tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    setTomorrow(tomorrow.toISOString().slice(0, 10));
+  }, []);
+
+  const updateTomorrow = () => {
+    let startDate = new Date(startDateRef.current.value);
+    startDate.setDate(startDate.getDate() + 1);
+    setTomorrow(startDate.toISOString().slice(0, 10));
+  };
 
   // Global variables
   const apiCars = "https://vpic.nhtsa.dot.gov/api";
   const gearOptions = ["Manual", "Auto"];
   const seatsOptions = ["2", "4", "5", "6", "7", "9", "else"];
   const fuelTypes = [
-    "Octan-95",
-    "Octan-96",
-    "Octan-98",
-    "Soler",
-    "Electric",
-    "Gas",
+    "OCTAN-95",
+    "OCTAN-96",
+    "OCTAN-98",
+    "SOLER",
+    "ELECTRIC",
+    "GAS",
   ];
 
   // UseRefs
@@ -64,7 +82,7 @@ export default function AddNewCar() {
     }
     setYearsArr(temp);
     temp = [];
-    for (let j = 5; j <= 50; j += 5) {
+    for (let j = 0; j <= 50; j += 5) {
       temp.push(j + "%");
     }
     setPercentage(temp);
@@ -104,6 +122,8 @@ export default function AddNewCar() {
       gear: gearRef.current.value,
       year: yearRef.current.value,
       fuel: fuelRef.current.value,
+      until: endDateRef.current.value,
+      from: startDateRef.current.value,
       passengers: parseInt(passengersRef.current.value),
       pricePerDay: pricePerDayRef.current.value,
       discountPerWeek: discountPerWeekRef.current.value,
@@ -241,6 +261,31 @@ export default function AddNewCar() {
             <option key={`discountPerMonth-${i}`} value={percent} />
           ))}
         </datalist>
+      </div>
+      <div className="choose-dates">
+        <div className="start-date">
+          <label htmlFor="start">Available from:</label>
+          <input
+            onChange={updateTomorrow}
+            ref={startDateRef}
+            type="date"
+            name="rent-start"
+            // value={today}
+            min={today}
+            max="2022-01-01"
+          ></input>
+        </div>
+        <div className="end-date">
+          <label htmlFor="start">Available until:</label>
+          <input
+            ref={endDateRef}
+            type="date"
+            name="rent-end"
+            // value={tomorrow}
+            min={tomorrow}
+            max="2022-02-01"
+          ></input>
+        </div>
       </div>
       <UploadPhoto id={id} />
       <div>

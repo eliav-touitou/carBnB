@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import PromptLogin from "./PromptLogin";
 
-export default function Result({ brand, passengers, carId, resultId }) {
+export default function Result({ model, brand, passengers, carId, resultId }) {
   // Redux states
   const auth = useSelector((state) => state.auth);
 
@@ -30,15 +30,21 @@ export default function Result({ brand, passengers, carId, resultId }) {
       console.log(err);
     }
   };
+
   return (
     <div className="car-details">
-      {showLogin && <PromptLogin />}
-      <Link to={`/result/${resultId}`}>
+      <div className="first-details">
+        {showLogin && <PromptLogin />}
         <div className="car-brand">Brand: {brand}</div>
+        <div className="car-passengers">Model: {model}</div>
         <div className="car-passengers">Passengers: {passengers}</div>
-      </Link>
-      <button onClick={() => saveToFavorite(carId)}>❤</button>
-      <hr />
+
+        <button onClick={() => saveToFavorite(carId)}>❤</button>
+        <Link to={`/result/${resultId}`}>
+          <button>Read More</button>
+        </Link>
+      </div>
+      {/* <hr /> */}
     </div>
   );
 }
