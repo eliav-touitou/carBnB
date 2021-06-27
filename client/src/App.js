@@ -90,16 +90,14 @@ function App() {
             </NavLink>
           )}
           {!auth && (
-            <button
+            <div
               className="navlink"
-              // activeStyle={{ color: "navy" }}
-              // to="/login"
               onClick={() => {
                 dispatch(setShowLogin(true));
               }}
             >
               Login
-            </button>
+            </div>
           )}
           {auth && (
             <Link onClick={logoutHandler} to="/" className="navlink">
