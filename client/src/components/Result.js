@@ -35,7 +35,6 @@ export default function Result({ model, brand, passengers, carId, resultId }) {
   return (
     <div className="car-details">
       <div className="first-details">
-        {showLogin && <PromptLogin />}
         <div className="car-brand">Brand: {brand}</div>
         <div className="car-passengers">Model: {model}</div>
         <div className="car-passengers">Passengers: {passengers}</div>
