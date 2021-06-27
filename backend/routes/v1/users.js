@@ -83,6 +83,7 @@ users.get("/allusers", async (req, res) => {
 users.post("/register", async (req, res) => {
   try {
     const { newUser } = req.body;
+    console.log(newUser);
     const { firstName, lastName, address, phoneNumber, email } = newUser;
     const objToSearchBy = { model: Auth, email: email };
     const auth = await getUserOrAuth(objToSearchBy);
@@ -92,8 +93,10 @@ users.post("/register", async (req, res) => {
         .status(409)
         .json({ success: true, message: "User already exist" });
     }
+    console.log(newUser.password);
 
     newUser.password = hashSync(newUser.password, genSaltSync(10));
+    console.log(98);
 
     await addToUsersDB({ firstName, lastName, address, phoneNumber, email });
     await addToAuthDB({
@@ -111,7 +114,7 @@ users.post("/register", async (req, res) => {
 
     return res.status(200).json({ success: true, data: newUser });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: error.message });

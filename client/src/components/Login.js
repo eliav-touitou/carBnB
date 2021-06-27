@@ -14,7 +14,6 @@ export default function Login() {
 
   // Redux states
   const auth = useSelector((state) => state.auth);
-  const promptOrNormal = useSelector((state) => state.promptOrNormal);
 
   // UseRefs
   const userNameRef = useRef();
@@ -96,13 +95,34 @@ export default function Login() {
       <form action="#">
         <h1 className="login-form-title">Sign in</h1>
         <div className="social-container">
-          <a href="#" className="login-form-a social">
-            {/* {FacebookOutlinedIcon} */}
-            <i className="fab fa-google-plus-g" />
-          </a>
-          <a href="#" className="login-form-a social">
-            <i className="fab fa-google-plus-g" />
-          </a>
+          {/* <a href="#" className="login-form-a social"></a>
+          <a href="#" className="login-form-a social"></a> */}
+
+          <GoogleLogin
+            clientId="186150944842-sg6rcdti8hqtq2td43gv4jo2t1jmc8hj.apps.googleusercontent.com"
+            render={(renderProps) => (
+              <div
+                className="login-form-a social"
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                <i className="fab fa-google-plus-g" />
+              </div>
+            )}
+            buttonText="Login"
+            onSuccess={responseSuccessGoogle}
+            onFailure={responseErrorGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
+          <FacebookLogin
+            appId="830912607629776"
+            cssClass="social facebook-button"
+            icon="fa fa-facebook"
+            textButton={""}
+            autoLoad={false}
+            fields={"adress"}
+            callback={responseFacebook}
+          />
         </div>
         <span className="login-form-span">or use your account</span>
         <input
@@ -122,6 +142,7 @@ export default function Login() {
           Sign In
         </button>
       </form>
+      {auth && <Redirect to="/" />}
     </div>
 
     // <div className={`login-container-${promptOrNormal}`}>
@@ -138,25 +159,24 @@ export default function Login() {
     //     placeholder="enter your password"
     //   ></input>
     //   <button onClick={onLoginHandler}>login</button>
-    //   <GoogleLogin
-    //     clientId="186150944842-sg6rcdti8hqtq2td43gv4jo2t1jmc8hj.apps.googleusercontent.com"
-    //     buttonText="Login"
-    //     onSuccess={responseSuccessGoogle}
-    //     onFailure={responseErrorGoogle}
-    //     cookiePolicy={"single_host_origin"}
-    //   />
-    //   <FacebookLogin
-    //     appId="830912607629776"
-    //     autoLoad={false}
-    //     callback={responseFacebook}
-    //   />
+    // <GoogleLogin
+    //   clientId="186150944842-sg6rcdti8hqtq2td43gv4jo2t1jmc8hj.apps.googleusercontent.com"
+    //   buttonText="Login"
+    //   onSuccess={responseSuccessGoogle}
+    //   onFailure={responseErrorGoogle}
+    //   cookiePolicy={"single_host_origin"}
+    // />
+    // <FacebookLogin
+    //   appId="830912607629776"
+    //   autoLoad={false}
+    //   callback={responseFacebook}
+    // />
 
     //   <Link to="/register">
     //     <button className={`register-btn-login-${promptOrNormal}`}>
     //       go to register
     //     </button>
     //   </Link>
-    //   {promptOrNormal === "normal" && auth && <Redirect to="/" />}
     // </div><div>
   );
 }
