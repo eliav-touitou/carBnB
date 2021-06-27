@@ -396,16 +396,32 @@ form {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 0 10px;
-  margin: 50px 0 0 0;
+}
+
+.menu-bar .Avatar {
+  margin-left: 5px;
+}
+
+.menu-bar #navbar-logo {
+  height: 100px;
+  float: left;
+  width: auto;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  margin-right: 50vw;
 }
 
 .menu-bar .navlink {
@@ -413,7 +429,7 @@ form {
   color: white;
   font-weight: bold;
   padding: 12px 16px;
-  margin: 0 8px;
+  margin: 8px 8px;
   position: relative;
   cursor: pointer;
   white-space: nowrap;
@@ -459,7 +475,7 @@ form {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   background: white;
-  width: 70%;
+  width: 90%;
   height: 10vh;
   margin: 0 auto;
   border-radius: 3em;
