@@ -85,6 +85,8 @@ const addToCarsDB = async (obj) => {
       price_per_day: obj.pricePerDay,
       discount_for_week: obj.discountPerWeek,
       discount_for_month: obj.discountPerMonth,
+      available_from: obj.from,
+      available_until: obj.until,
       is_rented: false,
     });
     return savedCar;

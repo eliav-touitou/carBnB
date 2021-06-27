@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useEffect } from "react";
-import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
+import { BrowserRouter, Route, Switch, NavLink, Link } from "react-router-dom";
 import Home from "./components/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -10,7 +10,7 @@ import AddNewCar from "./components/AddNewCar";
 import SearchBar from "./components/SearchBar";
 import Rental from "./components/Rental";
 import Results from "./components/Results";
-import { setAllCarsApi, setAuthOut } from "./actions";
+import { setAllCarsApi, setAuthOut, setShowLogin } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 import CarDetails from "./components/CarDetails";
 import OrderSummery from "./components/OrderSummery";
@@ -27,14 +27,13 @@ const axios = require("axios");
 function App() {
   const dispatch = useDispatch();
 
-  const notificationCounter = useSelector((state) => state.notificationCounter);
-
   // Global API URL.
   const apiCars = "https://vpic.nhtsa.dot.gov/api";
 
   // Redux state
+  const notificationCounter = useSelector((state) => state.notificationCounter);
   const auth = useSelector((state) => state.auth);
-  const isLoginPage = useSelector((state) => state.isLoginPage);
+  const showLogin = useSelector((state) => state.showLogin);
 
   // Get all cars brand from API.
   useEffect(() => {
@@ -51,6 +50,7 @@ function App() {
     try {
       await axios.post("/api/v1/users/logout");
       dispatch(setAuthOut());
+
       console.log("Success logout");
     } catch (error) {
       console.log("Failed logout");
@@ -60,32 +60,52 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {!isLoginPage && (
-          <nav className="nav-bar">
-            <NavLink activeStyle={{ color: "navy" }} to="/">
-              Home
+        <nav className="menu-bar">
+          <NavLink className="navlink" activeStyle={{ color: "navy" }} to="/">
+            Home
+          </NavLink>
+          <NavLink
+            className="navlink"
+            activeStyle={{ color: "navy" }}
+            to="/searchbar"
+          >
+            Search
+          </NavLink>
+          <NavLink
+            className="navlink"
+            activeStyle={{ color: "navy" }}
+            to="/addnewcar"
+          >
+            Add New Car
+          </NavLink>
+          {auth && (
+            <NavLink
+              className="navlink"
+              activeStyle={{ color: "navy" }}
+              to="/notifications"
+            >
+              <Badge badgeContent={notificationCounter} color="primary">
+                <MailIcon />
+              </Badge>
             </NavLink>
-            <NavLink activeStyle={{ color: "navy" }} to="/searchbar">
-              Search
-            </NavLink>
-            <NavLink activeStyle={{ color: "navy" }} to="/addnewcar">
-              Add New Car
-            </NavLink>
-            {auth && (
-              <NavLink activeStyle={{ color: "navy" }} to="/notifications">
-                <Badge badgeContent={notificationCounter} color="primary">
-                  <MailIcon />
-                </Badge>
-              </NavLink>
-            )}
-            {!auth && (
-              <NavLink activeStyle={{ color: "navy" }} to="/login">
-                Login
-              </NavLink>
-            )}
-            {auth && <button onClick={logoutHandler}>Logout</button>}
-          </nav>
-        )}
+          )}
+          {!auth && (
+            <div
+              className="navlink"
+              onClick={() => {
+                dispatch(setShowLogin(true));
+              }}
+            >
+              Login
+            </div>
+          )}
+          {auth && (
+            <Link onClick={logoutHandler} to="/" className="navlink">
+              Logout
+            </Link>
+          )}
+        </nav>
+        {showLogin && <PromptLogin />}
         <Switch>
           <Route exact path="/">
             <Home />

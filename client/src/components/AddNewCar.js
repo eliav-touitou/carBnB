@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllModelsApi, setAllCarsApi, setPhotosArray } from "../actions";
-import PromptLogin from "./PromptLogin";
 import UploadPhoto from "./UploadPhoto";
 
 export default function AddNewCar() {
@@ -19,7 +18,6 @@ export default function AddNewCar() {
   // Use states
   const [yearsArr, setYearsArr] = useState([]);
   const [percentage, setPercentage] = useState([]);
-  const [showLogin, setShowLogin] = useState(false);
   const [tomorrow, setTomorrow] = useState();
 
   const today = new Date().toISOString().slice(0, 10);

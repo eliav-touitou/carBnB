@@ -1,10 +1,11 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRef } from "react";
-import { useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setShowLogin } from "../actions";
 
 export default function Register() {
+  const dispatch = useDispatch();
   // UseRefs
   const passwordRef = useRef();
   const passwordValidationRef = useRef();
@@ -12,6 +13,11 @@ export default function Register() {
   // Redux states
   const promptOrNormal = useSelector((state) => state.promptOrNormal);
   const auth = useSelector((state) => state.auth);
+
+  // Use Effect
+  useEffect(() => {
+    if (auth) dispatch(setShowLogin(false));
+  }, [auth]);
 
   // Function to save new user to database
   const addNewUser = async (e) => {
@@ -34,6 +40,7 @@ export default function Register() {
       console.log(error);
     }
   };
+
   return (
     //   {promptOrNormal === "normal" && auth && <Redirect to="/" />}
     // </div>
