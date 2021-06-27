@@ -144,8 +144,6 @@ export default function CarDetails() {
 
   return (
     <div>
-      {showLogin && <PromptLogin />}
-
       <p>מלא פרטים על הרכב 😃😃🍏🍏</p>
       <a href={`mailto:${availableCars[resultId].owner_email}`}>owner email</a>
       <p>barnd: {availableCars[resultId].brand} </p>

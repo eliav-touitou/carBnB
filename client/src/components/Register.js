@@ -14,6 +14,7 @@ export default function Register() {
   const promptOrNormal = useSelector((state) => state.promptOrNormal);
   const auth = useSelector((state) => state.auth);
 
+  // Use Effect
   useEffect(() => {
     if (auth) dispatch(setShowLogin(false));
   }, [auth]);
