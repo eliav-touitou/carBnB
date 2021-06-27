@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setAuth, setAuthOut, setOnLoginPage } from "../actions";
+import { setAuth, setAuthOut, setOnLoginPage, setShowLogin } from "../actions";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import logo from "../carBnB-logo.png";
@@ -25,6 +25,10 @@ export default function Login() {
       dispatch(setOnLoginPage(false));
     };
   }, []);
+
+  useEffect(() => {
+    if (auth) dispatch(setShowLogin(false));
+  }, [auth]);
 
   // Send login data, user name and password
   const onLoginHandler = async () => {
@@ -142,7 +146,6 @@ export default function Login() {
           Sign In
         </button>
       </form>
-      {auth && <Redirect to="/" />}
     </div>
 
     // <div className={`login-container-${promptOrNormal}`}>

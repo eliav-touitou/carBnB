@@ -60,48 +60,47 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {!isLoginPage && (
-          <nav className="menu-bar">
-            <NavLink className="navlink" activeStyle={{ color: "navy" }} to="/">
-              Home
-            </NavLink>
+        <nav className="menu-bar">
+          <NavLink className="navlink" activeStyle={{ color: "navy" }} to="/">
+            Home
+          </NavLink>
+          <NavLink
+            className="navlink"
+            activeStyle={{ color: "navy" }}
+            to="/searchbar"
+          >
+            Search
+          </NavLink>
+          <NavLink
+            className="navlink"
+            activeStyle={{ color: "navy" }}
+            to="/addnewcar"
+          >
+            Add New Car
+          </NavLink>
+          {auth && (
             <NavLink
               className="navlink"
               activeStyle={{ color: "navy" }}
-              to="/searchbar"
+              to="/notifications"
             >
-              Search
+              <Badge badgeContent={notificationCounter} color="primary">
+                <MailIcon />
+              </Badge>
             </NavLink>
+          )}
+          {!auth && (
             <NavLink
               className="navlink"
               activeStyle={{ color: "navy" }}
-              to="/addnewcar"
+              to="/login"
             >
-              Add New Car
+              Login
             </NavLink>
-            {auth && (
-              <NavLink
-                className="navlink"
-                activeStyle={{ color: "navy" }}
-                to="/notifications"
-              >
-                <Badge badgeContent={notificationCounter} color="primary">
-                  <MailIcon />
-                </Badge>
-              </NavLink>
-            )}
-            {!auth && (
-              <NavLink
-                className="navlink"
-                activeStyle={{ color: "navy" }}
-                to="/login"
-              >
-                Login
-              </NavLink>
-            )}
-            {auth && <button onClick={logoutHandler}>Logout</button>}
-          </nav>
-        )}
+          )}
+          {auth && <button onClick={logoutHandler}>Logout</button>}
+        </nav>
+
         <Switch>
           <Route exact path="/">
             <Home />

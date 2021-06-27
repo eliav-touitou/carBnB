@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
-import { setPhotosArray } from "../actions";
+import { setPhotosArray, setShowLogin } from "../actions";
 import Carousel from "react-elastic-carousel";
 
 import {
@@ -34,16 +34,16 @@ export default function CarDetails() {
 
   // Use states
   const [redirect, setRedirect] = useState(`/result/${resultId}`);
-  const [showLogin, setShowLogin] = useState(false);
 
   // Redux States
   const availableCars = useSelector((state) => state.availableCars);
   const initialSearch = useSelector((state) => state.initialSearch);
   const photosArray = useSelector((state) => state.photosArray);
   const auth = useSelector((state) => state.auth);
+  const showLogin = useSelector((state) => state.showLogin);
 
   useEffect(() => {
-    if (auth) setShowLogin(false);
+    if (auth) dispatch(setShowLogin(false));
   }, [auth]);
 
   // Handle with difference cases
@@ -93,7 +93,7 @@ export default function CarDetails() {
         }
       } else {
         // need to prompt login component
-        setShowLogin(true);
+        dispatch(setShowLogin(true));
         console.log("must log in first!");
       }
     } catch (error) {

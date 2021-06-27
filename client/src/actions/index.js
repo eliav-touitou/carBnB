@@ -113,9 +113,17 @@ export const setNotificationCounter = (number) => {
     payload: number,
   };
 };
+
 export const setPhotosArray = (arr) => {
   return {
     type: "SETPHOTOSARRAY",
     payload: arr,
+  };
+};
+
+export const setShowLogin = (bool) => {
+  return {
+    type: "SETSHOWLOGIN",
+    payload: bool,
   };
 };

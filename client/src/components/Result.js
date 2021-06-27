@@ -1,19 +1,20 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { setShowLogin } from "../actions";
 import PromptLogin from "./PromptLogin";
 
 export default function Result({ model, brand, passengers, carId, resultId }) {
+  const dispatch = useDispatch();
+
   // Redux states
   const auth = useSelector((state) => state.auth);
+  const showLogin = useSelector((state) => state.showLogin);
 
   useEffect(() => {
-    if (auth) setShowLogin(false);
+    if (auth) dispatch(setShowLogin(false));
   }, [auth]);
-
-  // Use states
-  const [showLogin, setShowLogin] = useState(false);
 
   const saveToFavorite = async (carId) => {
     try {
@@ -24,7 +25,7 @@ export default function Result({ model, brand, passengers, carId, resultId }) {
         console.log(result);
       } else {
         // need to prompt login promp component
-        setShowLogin(true);
+        dispatch(setShowLogin(true));
       }
     } catch (err) {
       console.log(err);
