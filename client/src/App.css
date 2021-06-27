@@ -48,6 +48,10 @@ body {
 .login-page {
   min-width: 100vw;
   min-height: 100vh;
+  background-image: url("C:/dev/carBnB/client/src/background-img.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
 }
 
 .login-page {
