@@ -71,7 +71,6 @@ export default function Home() {
 
   return (
     <div>
-      <Avatar />
       <SearchBar allCitiesApi={allCitiesApi} />
       {notFoundMessage && <div>{notFoundMessage}</div>}
       {/* <p>messages thet not read: {counter}</p> */}

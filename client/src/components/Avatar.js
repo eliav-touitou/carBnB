@@ -50,7 +50,7 @@ export default function Avatar() {
   };
 
   return (
-    <div>
+    <div className="Avatar">
       <ClickAwayListener onClickAway={handleClickAway}>
         <div className={classes.root}>
           <button type="button" onClick={handleClick}>
