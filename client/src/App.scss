@@ -1,45 +1,3 @@
-body {
-  background-color: rgb(252, 226, 188);
-  margin: 0;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-// .search-bar-container {
-//   display: flex;
-//   flex-direction: row;
-//   flex-wrap: nowrap;
-//   justify-content: flex-start;
-//   align-content: stretch;
-//   align-items: flex-start;
-//   width: 70%;
-//   background: rgb(250, 246, 246);
-//   margin: 0 auto;
-//   padding: 1em;
-// }
-// input {
-//   min-width: 7vw;
-//   padding: 0.3em;
-//   // margin-left: 2vw;
-//   border: 1px solid #666;
-//   border-radius: 1em;
-//   height: 4vh;
-//   order: 0;
-//   align-self: auto;
-// }
-// .search-btn {
-//   cursor: pointer;
-//   padding: 8px 16px;
-//   min-height: 48px;
-//   min-width: 10px;
-//   word-wrap: nowrap;
-//   background: #000;
-//   color: #fff;
-//   border: 1px solid #fff;
-//   border-radius: 5px;
-// }
 .login-page {
   // height: 100vh;
   // width: 100vw;
@@ -87,13 +45,21 @@ body {
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
   height: 100vh;
-  margin: -20px 0 50px;
+  margin: 0;
 }
 .App {
   min-width: 100vw;
   min-height: 100vh;
+  //   position: fixed;S
+  //   display: flex;
+  //   flex-direction: column;
+  //   -webkit-box-pack: center;
+  //   -ms-flex-pack: center;
+  //   justify-content: center;
+  //   -webkit-box-align: center;
+  //   -ms-flex-align: center;
+  //   align-items: center;
   background-image: url("C:/Users/yone5/Desktop/Cyber4s/carBnB/client/src/background-img.png");
-  // background-image: url("C:/dev/carBnB/client/src/background-img.png");
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
@@ -145,32 +111,31 @@ h2 {
 }
 
 .login-form-paragraph {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 100;
-  line-height: 20px;
+  line-height: 1.25rem;
   letter-spacing: 0.5px;
-  margin: 20px 0 30px;
+  margin: 1.25rem 0 1.875rem;
 }
 
 .login-form-span {
-  font-size: 12px;
+  font-size: 0.75rem;
   align-self: flex-start;
-  margin: 8px 0px 10px 0px;
+  margin: 0.5rem 0px 0.625rem 0px;
 }
 
 .login-form-a {
   color: #333;
   font-size: 14px;
   text-decoration: none;
-  margin: 15px 0;
+  margin: 0.938rem 0;
 }
 .login-img {
-  height: 300px;
+  content: url(C:/dev/carBnB/client/src/logo-white.png);
+  height: 8rem;
   width: auto;
-  margin-top: -100px;
-}
-#under-logo {
-  margin-top: -60px;
+  margin-top: -3rem;
+  margin-bottom: 2rem;
 }
 
 .login-form-button {
@@ -178,9 +143,9 @@ h2 {
   border: 1px solid #4d61b9;
   background-color: #4d61b9;
   color: #ffffff;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: bold;
-  padding: 12px 45px;
+  padding: 0.75rem 2.813rem;
   letter-spacing: 1px;
   text-transform: uppercase;
   -webkit-transition: -webkit-transform 80ms ease-in;
@@ -218,7 +183,7 @@ form {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  padding: 0 50px;
+  padding: 0 3.125rem;
   height: 100%;
   text-align: center;
 }
@@ -232,15 +197,15 @@ form {
 .login-form-validation {
   background-color: #eee;
   border: none;
-  padding: 12px 15px;
-  margin: 8px 0;
+  padding: 0.75rem 0.938rem;
+  margin: 0.5rem 0;
   width: 48%;
 }
 .login-form-input {
   background-color: #eee;
   border: none;
-  padding: 12px 15px;
-  margin: 8px 0;
+  padding: 0.75rem 0.938rem;
+  margin: 0.5rem 0;
   width: 100%;
 }
 
@@ -252,9 +217,9 @@ form {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
-  width: 820px;
+  width: 51.25rem;
   max-width: 100%;
-  min-height: 520px;
+  min-height: 32.5rem;
 }
 
 .form-container {
@@ -375,7 +340,7 @@ form {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  padding: 0 40px;
+  padding: 0 2.5rem;
   text-align: center;
   top: 0;
   height: 100%;
@@ -412,7 +377,7 @@ form {
 }
 
 .social-container {
-  margin: 20px 0;
+  margin: 1.25rem 0;
 }
 
 .social-container a,
@@ -430,19 +395,94 @@ form {
   -ms-flex-align: center;
   align-items: center;
   margin: 0 5px;
-  height: 40px;
-  width: 40px;
+  height: 2.5rem;
+  width: 2.5rem;
   background-color: #fff;
 }
+@media screen and (max-width: 840px) {
+  .login-img {
+    // width: 2rem;
+    // height: auto;
+    // overflow: visible;
+    display: none;
+    // content: url(C:/dev/carBnB/client/src/carBnB-logo.png);
+    // position: absolute;
+    // margin-left: -80vw;
+    // margin-bottom: 60vh;
+    // z-index: 9999 !important;
+  }
+  form {
+    padding: 0 0.5rem;
+  }
+  .container {
+    max-width: 80vw;
+    height: 95vh;
+  }
+  .sign-in-container {
+    width: 60%;
+  }
+  .overlay-right {
+    width: 40%;
+  }
+  // .right-panel-active > .sign-up-container {
+  //   width: 70%;
+  // }
+  // .right-panel-active > .sign-in-container,
+  // .right-panel-active > .overlay-right {
+  //   display: none;
+  // }
+  // .right-panel-active > .overlay-container {
+  //   width: 30%;
+  // }
+  // .right-panel-active > .overlay-right {
+  //   width: 70%;
+  // }
+  // .overlay-container {
+  //   left: 30%;
+  // }
+  #signUp,
+  #signIn {
+    padding: 0.75rem;
+  }
+
+  .welcome {
+    display: none;
+  }
+}
+@media screen and (max-width: 600px) {
+  .password-and-validation {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .login-form-password,
+  .login-form-validation {
+    width: 100%;
+  }
+  .login-form-validation {
+    padding-right: 0rem;
+  }
+}
+@media screen and (max-width: 400px) {
+  .login-form-button {
+    padding: 0.75rem 1.4rem;
+  }
+  .login-form-title {
+    font-size: 1.8em;
+  }
+}
+
 // ***********************************************************navbar
 .menu-bar {
-  border-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
   height: fit-content;
-  width: 100vw;
-  // justify-content: flex-end;
-  display: flex;
+  // // justify-content: flex-end;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-template-rows: auto;
   flex-direction: row;
-  // background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgb(176, 194, 206);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   align-items: center;
@@ -451,7 +491,9 @@ form {
   }
 
   #navbar-logo {
-    height: 100px;
+    height: 80px;
+    padding: 15px;
+    margin-top: 1vh;
     float: left;
     width: auto;
     align-self: flex-start;
@@ -459,31 +501,16 @@ form {
   }
   .navlink {
     list-style: none;
-    color: white;
+    color: black;
     font-weight: bold;
     padding: 12px 16px;
     margin: 8px 8px;
     position: relative;
-    cursor: pointer;
     white-space: nowrap;
-    &::before {
-      content: " ";
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      z-index: -1;
-      transition: 0.2s;
-      border-radius: 25px;
-    }
+    cursor: pointer;
     &:hover {
-      &::before {
-        background: linear-gradient(to bottom, #e8edec, #d2d1d3);
-        box-shadow: 0px 3px 20px 0px black;
-        transform: scale(1.2);
-      }
-      color: black;
+      border-radius: 1em;
+      background-color: rgba(0, 0, 0, 0.1);
     }
   }
 }
@@ -514,43 +541,45 @@ form {
   display: flex;
   flex-direction: column;
   /*   flex: 1.5 0 0%; */
-  min-width: 50%;
+  min-width: 70%;
 }
 
 /* Search form */
 .search {
   display: flex;
-  flex-flow: row no-wrap;
-  justify-content: space-evenly;
+  flex-flow: row;
+  // flex-wrap: nowrap;
+  // justify-content: space-evenly;
   background: white;
   /*   height: 50px; */
   border-radius: 50px;
-  overflow: hidden;
+  // overflow: hidden;
+}
+.inputs {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  width: 95%;
 }
 
 .search .label {
-  display: block;
+  display: inline-block;
   font-size: 0.75rem;
   color: #111111;
   font-weight: bold;
 }
 
+.search-inputs label {
+  display: inline-block;
+  max-width: fit-content;
+}
 .search-inputs {
   /*   flex: 1 0 auto; */
+  display: flex;
+  flex-direction: column;
   padding: 16px 24px;
-}
-
-.search-inputs:nth-child(1) {
-  flex: 1.5 0 0%;
-}
-
-.search-inputs:nth-child(2),
-.search-inputs:nth-child(3) {
-  flex: 1 0 0%;
-}
-
-.search-inputs:nth-child(4) {
-  flex: 0.85 0 0%;
+  width: 33.333333%;
 }
 
 .search-inputs input {
@@ -566,11 +595,22 @@ form {
     background-color: rgb(236, 236, 236);
     border-radius: 3em;
   }
+  & .DateInput {
+    background-color: rgb(236, 236, 236);
+  }
+  & .DateRangePickerInput_arrow {
+    background-color: rgb(236, 236, 236);
+  }
+  & .DateRangePickerInput {
+    background-color: rgb(236, 236, 236);
+  }
 }
 
 .search-button {
-  flex: 0 0 auto;
-  padding: 8px 8px 8px 0;
+  display: flex;
+  align-items: center;
+  float: right;
+  // margin-right: -2%;
   cursor: pointer;
 }
 
@@ -585,38 +625,6 @@ form {
   cursor: pointer;
 }
 //************************************* end search bar
-
-.nav-bar {
-  display: flex;
-  margin-top: 0%;
-  justify-content: space-evenly;
-  text-align: center;
-  align-items: center;
-  font-size: larger;
-  height: 8vh;
-  background-color: lightgray;
-  color: black;
-  font-weight: bold;
-  & a {
-    text-decoration: none;
-    color: black;
-    display: flex;
-    border: none;
-    width: fit-content;
-    font-size: 1em;
-    transition: transform 1s;
-  }
-}
-
-.nav-bar a:hover {
-  cursor: pointer;
-  color: black;
-  font-weight: bold;
-  -ms-transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-  text-shadow: 5px 5px 5px black;
-}
 
 /* Float four columns side by side */
 .car-details {
@@ -654,4 +662,18 @@ form {
   text-align: center;
   background-color: #f1f1f1;
 }
+///////////////////////////////////start of results + filter////////////////////
+.results-page {
+  display: flex;
+  flex-direction: row;
+}
+.filter-bar {
+  margin-top: 10vh;
+  border: 1px black solid;
+}
 ///////////////////////////////////////////////////////
+
+.MuiPaper-root {
+  position: absolute;
+  margin-top: 3%;
+}

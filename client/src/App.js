@@ -64,7 +64,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <nav className="menu-bar">
-          <img id="navbar-logo" src={logo} alt="fuck" />
+          <img id="navbar-logo" src={logo} alt="logo" />
           <NavLink className="navlink" activeStyle={{ color: "navy" }} to="/">
             Home
           </NavLink>
