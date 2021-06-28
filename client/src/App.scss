@@ -502,6 +502,7 @@ form {
     list-style: none;
     color: black;
     font-weight: bold;
+    text-align: center;
     padding: 12px 16px;
     margin: 8px 8px;
     position: relative;
@@ -625,51 +626,84 @@ form {
 }
 //************************************* end search bar
 
-/* Float four columns side by side */
-.car-details {
-  float: left;
-  width: 25%;
-  padding: 0 10px;
-  margin-bottom: 2vh;
-}
-
-/* Remove extra left and right margins, due to padding */
-.row {
-  margin: 0 -5px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive columns */
-@media screen and (max-width: 600px) {
-  .car-details {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
+///////////////////////////////////start of results + filter////////////////////
+.results-section {
+  width: 100%;
+  padding-left: 10px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
   }
 }
-
-/* Style the counter cards */
-.first-details {
+.car-details {
+  float: left;
+  width: 40%;
+  // margin: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 0.7em;
   text-align: center;
   background-color: #f1f1f1;
 }
-///////////////////////////////////start of results + filter////////////////////
+.results {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+
+/* Responsive columns */
+
 .results-page {
   display: flex;
   flex-direction: row;
+  width: 100vw;
 }
 .filter-bar {
-  margin-top: 10vh;
-  border: 1px black solid;
+  padding: 50px 20px;
+  width: 30%;
+  border-right: 3px rgb(7, 5, 146) solid;
 }
+#price-slider,
+#rating-slider,
+#years-slider {
+  max-width: 100%;
+}
+@media screen and (max-width: 700px) {
+  .results {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+  .car-details {
+    width: 80%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .results-page {
+    flex-direction: column;
+  }
+  .filter-bar {
+    padding: 20px 0;
+    width: 100vw;
+    border-bottom: 3px #070592 solid;
+    border-right: none;
+    text-align: center;
+  }
+
+  .select,
+  .slider {
+    max-width: 45%;
+    display: inline-block;
+    margin: 0 1.25%;
+  }
+}
+
 ///////////////////////////////////////////////////////
 
 .MuiPaper-root {
