@@ -7,7 +7,7 @@ export default function OrderDetails() {
 
   const order = state.order;
   return (
-    <div>
+    <table className="order-details-container">
       {console.log(order)}
       <h3>transaction number: {order.transactionId} </h3>
       <a href={`mailto:${order.ownerEmail}`}>owner email</a>
@@ -17,10 +17,10 @@ export default function OrderDetails() {
       <p>fuel: {order.fuel} </p>
       <p>gear: {order.gear} </p>
       <p>passengers: {order.passengers} </p>
-      <p>end date: {order.endDate} </p>
-      <p>start date: {order.startDate} </p>
+      <p>end date: {new Date(order.endDate).toDateString()} </p>
+      <p>start date: {new Date(order.startDate).toDateString()} </p>
       <p>is active: {order.isActive} </p>
       <p>total price: {order.totalPrice} </p>
-    </div>
+    </table>
   );
 }

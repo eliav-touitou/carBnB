@@ -25,18 +25,20 @@ export default function MyOrders() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [window.location.href]);
 
   return (
     <div>
-      {allOrders.map((order, i) => (
-        <Link
-          key={`order-${i}`}
-          to={{ pathname: `/order/${i}`, state: { order } }}
-        >
-          <p>Order number: {order.transactionId}</p>
-        </Link>
-      ))}
+      <ul className="ul-orders">
+        {allOrders.map((order, i) => (
+          <Link
+            key={`order-${i}`}
+            to={{ pathname: `/order/${i}`, state: { order } }}
+          >
+            <li>Order number: {order.transactionId}</li>
+          </Link>
+        ))}
+      </ul>
     </div>
   );
 }
