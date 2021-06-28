@@ -1,5 +1,6 @@
 html {
   scroll-behavior: smooth;
+  behavior: slow;
 }
 .login-page {
   // height: 100vh;
@@ -72,6 +73,13 @@ button {
   background-repeat: no-repeat;
   background-size: cover;
   // position: fixed;
+}
+.App {
+  // background-size: 70vh;
+  // background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
+  background-color: rgb(238, 238, 238);
+  background-position-y: 10vh;
+  background-position-x: 10vw;
 }
 .login-page {
   display: flex;
@@ -539,8 +547,9 @@ form {
 }
 
 .top-navigation {
-  width: 100%;
   display: flex;
+  width: 90%;
+  margin-left: 7%;
   justify-content: space-evenly;
   color: white;
   /*   z-index: 10; */
@@ -710,7 +719,7 @@ form {
 .land-section {
   height: 100vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   text-align: center;
   a {
     text-decoration: none;
@@ -720,11 +729,39 @@ form {
   }
 
   h1 {
-    margin: auto;
+    // margin: auto;
+    display: flex;
     font-size: 50px;
+    width: 50%;
+    margin-left: 8%;
+    margin-top: 3%;
+  }
+  span {
+    font-size: 35px;
+    display: flex;
+    margin-top: 10%;
+    width: fit-content;
+    height: 50vh;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: -2%;
+    margin-left: 8%;
+  }
+  a {
+    color: whitesmoke;
+    padding: 20px;
+    border-radius: 5em;
+    background-color: rgb(81, 145, 241);
+    display: flex;
   }
 }
 
 .search-section {
   height: 100vh;
+  background-size: 70vh;
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
+  background-repeat: no-repeat;
+  background-position-y: 10vh;
+  background-position-x: 4vw;
 }

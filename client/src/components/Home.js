@@ -9,6 +9,7 @@ import {
   setNotificationCounter,
   setNotFoundMessage,
 } from "../actions";
+import photo from "../photos/van-image.jpeg";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -72,9 +73,14 @@ export default function Home() {
   return (
     <div>
       <section className="land-section">
+        <img height="45%" src={photo}></img>
         <h1>
-          <a href="#search">Let's Start Travel</a>
+          We invite you to start your journey with us, and with many other
+          drivers
         </h1>
+        <span>
+          <a href="#search">Let's Start</a>
+        </span>
       </section>
       {notFoundMessage && <div>{notFoundMessage}</div>}
       {/* <p>messages thet not read: {counter}</p> */}

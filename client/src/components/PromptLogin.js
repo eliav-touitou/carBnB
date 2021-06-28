@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 // import { setPromptOrNormal } from "../actions";
 import { setOnLoginPage } from "../actions";
 
-import logo from "../logo-white.png";
+import logo from "../photos/logo-white.png";
 
 export default function PromptLogin() {
   const dispatch = useDispatch();

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setAuth, setAuthOut, setOnLoginPage, setShowLogin } from "../actions";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
-import logo from "../carBnB-logo.png";
+import logo from "../photos/carBnB-logo.png";
 
 import FacebookOutlinedIcon from "@material-ui/icons/FacebookOutlined";
 import GoogleIcon from "@material-ui/icons/Google";

@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 html {
   scroll-behavior: smooth;
+  behavior: slow;
 }
 
 .login-page {
@@ -55,6 +56,12 @@ button {
   min-height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.App {
+  background-color: #eeeeee;
+  background-position-y: 10vh;
+  background-position-x: 10vw;
 }
 
 .login-page {
@@ -546,10 +553,11 @@ form {
 }
 
 .top-navigation {
-  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 90%;
+  margin-left: 7%;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
@@ -761,10 +769,10 @@ form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+      -ms-flex-direction: column;
+          flex-direction: column;
   text-align: center;
 }
 
@@ -777,11 +785,55 @@ form {
 }
 
 .land-section h1 {
-  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   font-size: 50px;
+  width: 50%;
+  margin-left: 8%;
+  margin-top: 3%;
+}
+
+.land-section span {
+  font-size: 35px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 10%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 50vh;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: -2%;
+  margin-left: 8%;
+}
+
+.land-section a {
+  color: whitesmoke;
+  padding: 20px;
+  border-radius: 5em;
+  background-color: #5191f1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .search-section {
   height: 100vh;
+  background-size: 70vh;
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
+  background-repeat: no-repeat;
+  background-position-y: 10vh;
+  background-position-x: 4vw;
 }
 /*# sourceMappingURL=App.css.map */

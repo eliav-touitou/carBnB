@@ -22,7 +22,7 @@ import { Badge } from "@material-ui/core";
 import MailIcon from "@material-ui/icons/Mail";
 import PromptLogin from "./components/PromptLogin";
 import Avatar from "./components/Avatar";
-import logo from "./carBnB-logo.png";
+import logo from "./photos/carBnB-logo.png";
 
 const axios = require("axios");
 
