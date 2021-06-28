@@ -71,9 +71,18 @@ export default function Home() {
 
   return (
     <div>
-      <SearchBar allCitiesApi={allCitiesApi} />
+      <section className="land-section">
+        <h1>
+          <a href="#search">Let's Start Travel</a>
+        </h1>
+      </section>
       {notFoundMessage && <div>{notFoundMessage}</div>}
       {/* <p>messages thet not read: {counter}</p> */}
+
+      <section className="search-section" id="search">
+        <SearchBar allCitiesApi={allCitiesApi} />
+      </section>
+      <section></section>
     </div>
   );
 }

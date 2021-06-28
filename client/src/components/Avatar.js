@@ -56,13 +56,29 @@ export default function Avatar() {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <Link>
+        <Link exact={"true"} to="/profile" className="menu-drop-down">
           <MenuItem onClick={handleClose}>Profile</MenuItem>
         </Link>
-        <Link>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
+        <Link
+          exact={"true"}
+          to="/allmyorders/orders"
+          className="menu-drop-down"
+        >
+          <MenuItem onClick={handleClose}>My orders</MenuItem>
         </Link>
-        <Link onClick={logoutHandler} to="/">
+        <Link
+          exact={"true"}
+          to="/allmyorders/rentals"
+          className="menu-drop-down"
+        >
+          <MenuItem onClick={handleClose}>My rentals</MenuItem>
+        </Link>
+        <Link
+          onClick={logoutHandler}
+          exact={"true"}
+          to="/"
+          className="menu-drop-down"
+        >
           <MenuItem onClick={handleClose}>Logout</MenuItem>
         </Link>
       </Menu>
