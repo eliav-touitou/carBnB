@@ -60,7 +60,7 @@ body {
   //   -webkit-box-align: center;
   //   -ms-flex-align: center;
   //   align-items: center;
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/background-img.png");
+  background-image: url("C:/dev/carBnB/client/src/background-img.png");
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
@@ -110,32 +110,31 @@ h2 {
 }
 
 .login-form-paragraph {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 100;
-  line-height: 20px;
+  line-height: 1.25rem;
   letter-spacing: 0.5px;
-  margin: 20px 0 30px;
+  margin: 1.25rem 0 1.875rem;
 }
 
 .login-form-span {
-  font-size: 12px;
+  font-size: 0.75rem;
   align-self: flex-start;
-  margin: 8px 0px 10px 0px;
+  margin: 0.5rem 0px 0.625rem 0px;
 }
 
 .login-form-a {
   color: #333;
   font-size: 14px;
   text-decoration: none;
-  margin: 15px 0;
+  margin: 0.938rem 0;
 }
 .login-img {
-  height: 300px;
+  content: url(C:/dev/carBnB/client/src/logo-white.png);
+  height: 8rem;
   width: auto;
-  margin-top: -100px;
-}
-#under-logo {
-  margin-top: -60px;
+  margin-top: -3rem;
+  margin-bottom: 2rem;
 }
 
 .login-form-button {
@@ -143,9 +142,9 @@ h2 {
   border: 1px solid #4d61b9;
   background-color: #4d61b9;
   color: #ffffff;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: bold;
-  padding: 12px 45px;
+  padding: 0.75rem 2.813rem;
   letter-spacing: 1px;
   text-transform: uppercase;
   -webkit-transition: -webkit-transform 80ms ease-in;
@@ -183,7 +182,7 @@ form {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  padding: 0 50px;
+  padding: 0 3.125rem;
   height: 100%;
   text-align: center;
 }
@@ -197,15 +196,15 @@ form {
 .login-form-validation {
   background-color: #eee;
   border: none;
-  padding: 12px 15px;
-  margin: 8px 0;
+  padding: 0.75rem 0.938rem;
+  margin: 0.5rem 0;
   width: 48%;
 }
 .login-form-input {
   background-color: #eee;
   border: none;
-  padding: 12px 15px;
-  margin: 8px 0;
+  padding: 0.75rem 0.938rem;
+  margin: 0.5rem 0;
   width: 100%;
 }
 
@@ -217,9 +216,9 @@ form {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
-  width: 820px;
+  width: 51.25rem;
   max-width: 100%;
-  min-height: 520px;
+  min-height: 32.5rem;
 }
 
 .form-container {
@@ -340,7 +339,7 @@ form {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  padding: 0 40px;
+  padding: 0 2.5rem;
   text-align: center;
   top: 0;
   height: 100%;
@@ -377,7 +376,7 @@ form {
 }
 
 .social-container {
-  margin: 20px 0;
+  margin: 1.25rem 0;
 }
 
 .social-container a,
@@ -395,10 +394,83 @@ form {
   -ms-flex-align: center;
   align-items: center;
   margin: 0 5px;
-  height: 40px;
-  width: 40px;
+  height: 2.5rem;
+  width: 2.5rem;
   background-color: #fff;
 }
+@media screen and (max-width: 840px) {
+  .login-img {
+    // width: 2rem;
+    // height: auto;
+    // overflow: visible;
+    display: none;
+    // content: url(C:/dev/carBnB/client/src/carBnB-logo.png);
+    // position: absolute;
+    // margin-left: -80vw;
+    // margin-bottom: 60vh;
+    // z-index: 9999 !important;
+  }
+  form {
+    padding: 0 0.5rem;
+  }
+  .container {
+    max-width: 80vw;
+    height: 95vh;
+  }
+  .sign-in-container {
+    width: 60%;
+  }
+  .overlay-right {
+    width: 40%;
+  }
+  // .right-panel-active > .sign-up-container {
+  //   width: 70%;
+  // }
+  // .right-panel-active > .sign-in-container,
+  // .right-panel-active > .overlay-right {
+  //   display: none;
+  // }
+  // .right-panel-active > .overlay-container {
+  //   width: 30%;
+  // }
+  // .right-panel-active > .overlay-right {
+  //   width: 70%;
+  // }
+  // .overlay-container {
+  //   left: 30%;
+  // }
+  #signUp,
+  #signIn {
+    padding: 0.75rem;
+  }
+
+  .welcome {
+    display: none;
+  }
+}
+@media screen and (max-width: 600px) {
+  .password-and-validation {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .login-form-password,
+  .login-form-validation {
+    width: 100%;
+  }
+  .login-form-validation {
+    padding-right: 0rem;
+  }
+}
+@media screen and (max-width: 400px) {
+  .login-form-button {
+    padding: 0.75rem 1.4rem;
+  }
+  .login-form-title {
+    font-size: 1.8em;
+  }
+}
+
 // ***********************************************************navbar
 .menu-bar {
   border-bottom-right-radius: 25px;
@@ -588,6 +660,15 @@ form {
   padding: 0.7em;
   text-align: center;
   background-color: #f1f1f1;
+}
+///////////////////////////////////start of results + filter////////////////////
+.results-page {
+  display: flex;
+  flex-direction: row;
+}
+.filter-bar {
+  margin-top: 10vh;
+  border: 1px black solid;
 }
 ///////////////////////////////////////////////////////
 

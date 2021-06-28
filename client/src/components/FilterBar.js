@@ -43,7 +43,7 @@ export default function FilterBar({ brandRef, modelRef, gearRef, fuelRef }) {
   };
 
   return (
-    <div>
+    <div className="filter-bar">
       <div>
         pick your car brand
         <input
