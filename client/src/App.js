@@ -21,6 +21,8 @@ import OrderDetails from "./components/OrderDetails";
 import { Badge } from "@material-ui/core";
 import MailIcon from "@material-ui/icons/Mail";
 import PromptLogin from "./components/PromptLogin";
+import Avatar from "./components/Avatar";
+import logo from "./carBnB-logo.png";
 
 const axios = require("axios");
 
@@ -37,6 +39,7 @@ function App() {
 
   // Get all cars brand from API.
   useEffect(() => {
+    dispatch(setShowLogin(false));
     axios
       .get(apiCars + "/vehicles/GetMakesForVehicleType/car?format=json")
       .then(({ data }) => {
@@ -61,16 +64,17 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <nav className="menu-bar">
+          <img id="navbar-logo" src={logo} alt="fuck" />
           <NavLink className="navlink" activeStyle={{ color: "navy" }} to="/">
             Home
           </NavLink>
-          <NavLink
+          {/* <NavLink
             className="navlink"
             activeStyle={{ color: "navy" }}
             to="/searchbar"
           >
             Search
-          </NavLink>
+          </NavLink> */}
           <NavLink
             className="navlink"
             activeStyle={{ color: "navy" }}
@@ -104,6 +108,7 @@ function App() {
               Logout
             </Link>
           )}
+          <Avatar />
         </nav>
         {showLogin && <PromptLogin />}
         <Switch>

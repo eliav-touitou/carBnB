@@ -10,39 +10,27 @@ import {
   setNotFoundMessage,
 } from "../actions";
 
+import "react-dates/initialize";
+import { DateRangePicker } from "react-dates";
+import "react-dates/lib/css/_datepicker.css";
+import "../react_dates_overrides.css";
+
 export default function SearchBar({ allCitiesApi }) {
   const dispatch = useDispatch();
 
   // Use states
-  const [tomorrow, setTomorrow] = useState();
   const [resultsPage, setResultsPage] = useState("/");
-
-  // Global variable
-  const today = new Date().toISOString().slice(0, 10);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [focusedInput, setFocusedInput] = useState(null);
 
   // UseRefs
   const cityRef = useRef();
   const passengersRef = useRef();
-  const endDateRef = useRef();
-  const startDateRef = useRef();
-
-  useEffect(() => {
-    let tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    setTomorrow(tomorrow.toISOString().slice(0, 10));
-  }, []);
-
-  const updateTomorrow = () => {
-    let startDate = new Date(startDateRef.current.value);
-    startDate.setDate(startDate.getDate() + 1);
-    setTomorrow(startDate.toISOString().slice(0, 10));
-  };
 
   const search = async () => {
     const city = cityRef.current.value;
     const passengers = Number(passengersRef.current.value.slice(0, -1));
-    const startDate = startDateRef.current.value;
-    const endDate = endDateRef.current.value;
     if (!city || !passengers || !startDate || !endDate) return;
 
     const searchParameters = {
@@ -64,81 +52,93 @@ export default function SearchBar({ allCitiesApi }) {
       console.log(err);
     }
   };
-  return (
-    <div className="search-bar-container">
-      <div className="search-inputs">
-        <label htmlFor="cities">
-          <div className="label">City:</div>
-          <input
-            name="cities"
-            list="cities"
-            ref={cityRef}
-            placeholder="Wanted City"
-          ></input>
-          <datalist id="cities">
-            {allCitiesApi?.map((city, i) => (
-              <option key={`city-${i}`} value={city} />
-            ))}
-          </datalist>
-        </label>
-      </div>
-      <div className="separator"></div>
-      <div className="search-inputs">
-        <label htmlFor="rent-start">
-          <div className="label">Start date:</div>
-          <input
-            onChange={updateTomorrow}
-            ref={startDateRef}
-            type="date"
-            name="rent-start"
-            // value={today}
-            min={today}
-            max="2022-01-01"
-            placeholder="Add dates"
-          ></input>
-        </label>
-      </div>
-      <div className="separator"></div>
-      <div className="search-inputs">
-        <label htmlFor="rent-end">
-          <div className="label">End date:</div>
-          <input
-            ref={endDateRef}
-            type="date"
-            name="rent-end"
-            // value={tomorrow}
-            min={tomorrow}
-            max="2022-02-01"
-            placeholder="Add dates"
-          ></input>
-        </label>
-      </div>
-      <div className="separator"></div>
-      <div className="search-inputs">
-        <label htmlFor="passengers">
-          <div className="label">What size of car you need?</div>
-          <input
-            name="passengers"
-            list="passengers"
-            ref={passengersRef}
-            placeholder="Size"
-          ></input>
-          <datalist id="passengers">
-            <option value="2+" />
-            <option value="4+" />
-            <option value="5+" />
-            <option value="7+" />
-            {/* <option value="else..." /> */}
-          </datalist>
-        </label>
-      </div>
-      <div className="search-button">
-        <button className="search-btn" onClick={search}>
-          <SearchIcon />
-        </button>
-      </div>
 
+  // Focus on input
+  const focusInput = (e) => {
+    if (e.target.className === "search-inputs") {
+      e.target.childNodes[0].childNodes[1].focus();
+    }
+    if (e.target.localName === "label") {
+      e.target.childNodes[1].focus();
+    }
+    if (e.target.className === "label") {
+      e.target.parentElement.childNodes[1].focus();
+    }
+  };
+
+  // Handle dates on changes
+  const handleDatesChange = ({ startDate, endDate }) => {
+    setStartDate(startDate);
+    setEndDate(endDate);
+  };
+  return (
+    <div className="top-navigation">
+      <nav className="search-nav">
+        <div className="search">
+          <div className="inputs">
+            <div className="search-inputs" onClick={focusInput}>
+              <label htmlFor="cities">
+                <div className="label">City:</div>
+                <input
+                  name="cities"
+                  list="cities"
+                  ref={cityRef}
+                  placeholder="Wanted City"
+                ></input>
+                <datalist id="cities">
+                  {allCitiesApi?.map((city, i) => (
+                    <option key={`city-${i}`} value={city} />
+                  ))}
+                </datalist>
+              </label>
+            </div>
+            <div className="separator"></div>
+            <div className="search-inputs">
+              <div className="label">Choose Dates:</div>
+              <DateRangePicker
+                startDate={startDate}
+                startDatePlaceholderText="Start date:"
+                startDateId="tata-start-date"
+                endDate={endDate}
+                endDatePlaceholderText="End date:"
+                endDateId="tata-end-date"
+                onDatesChange={handleDatesChange}
+                focusedInput={focusedInput}
+                onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
+                small={true}
+              />
+            </div>
+            <div className="separator"></div>
+            <div className="search-inputs" onClick={focusInput}>
+              <label htmlFor="passengers">
+                <div className="label">What size of car you need?</div>
+                <input
+                  name="passengers"
+                  list="passengers"
+                  ref={passengersRef}
+                  placeholder="Size"
+                ></input>
+                <datalist id="passengers">
+                  <option value="2+" />
+                  <option value="4+" />
+                  <option value="5+" />
+                  <option value="7+" />
+                  {/* <option value="else..." /> */}
+                </datalist>
+              </label>
+            </div>
+          </div>
+          <div className="search-button">
+            <button className="search-btn" onClick={search}>
+              <SearchIcon />
+            </button>
+          </div>
+        </div>
+      </nav>{" "}
+      {/*   End nav   */}
       <Redirect push={true} to={`${resultsPage}`} />
     </div>
+
+    // </div>
   );
 }
