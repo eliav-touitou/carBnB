@@ -45,7 +45,7 @@ export default function RangeSlider() {
   }, []);
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} id="years-slider">
       <Slider
         min={minYear - 10}
         max={maxYear + 10}

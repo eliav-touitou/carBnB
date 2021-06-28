@@ -43,7 +43,7 @@ export default function RangeSlider() {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} id="price-slider">
       <Slider
         max={maxPrice}
         value={priceFilter}

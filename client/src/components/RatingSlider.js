@@ -54,7 +54,7 @@ export default function RatingSlider() {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} id="rating-slider">
       <Slider
         max={5}
         defaultValue={0}

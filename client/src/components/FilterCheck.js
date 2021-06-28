@@ -154,39 +154,47 @@ export default function FilterCheck() {
 
   return (
     <div className="filter-bar">
-      filter your car brand
-      <Select
-        options={brandFilterArr}
-        onChange={(e) => setSelectedBrandFilterArr(e)}
-        isMulti={true}
-      />
-      filter your car model
-      <Select
-        options={modelFilterArr}
-        onChange={(e) => setSelectedModelFilterArr(e)}
-        isMulti={true}
-      />
-      filter your car fuel
-      <Select
-        options={fuelTypes}
-        onChange={(e) => setSelectedFuelFilterArr(e)}
-        isMulti={true}
-      />
-      filter your car gear
-      <Select
-        options={gearOptions}
-        onChange={(e) => setSelectedGearFilterArr(e)}
-        isMulti={true}
-      />
-      <div>
+      <div className="select">
+        filter your car brand
+        <Select
+          options={brandFilterArr}
+          onChange={(e) => setSelectedBrandFilterArr(e)}
+          isMulti={true}
+        />
+      </div>
+      <div className="select">
+        filter your car model
+        <Select
+          options={modelFilterArr}
+          onChange={(e) => setSelectedModelFilterArr(e)}
+          isMulti={true}
+        />
+      </div>
+      <div className="select">
+        filter your car fuel
+        <Select
+          options={fuelTypes}
+          onChange={(e) => setSelectedFuelFilterArr(e)}
+          isMulti={true}
+        />
+      </div>
+      <div className="select">
+        filter your car gear
+        <Select
+          options={gearOptions}
+          onChange={(e) => setSelectedGearFilterArr(e)}
+          isMulti={true}
+        />
+      </div>
+      <div className="slider">
         pick your car year
         <YearsSlider />
       </div>
-      <div>
+      <div className="slider">
         Enter wanted tariff per day
         <PriceSlider />
       </div>
-      <div>
+      <div className="slider">
         Rating Of Cars Owners:
         <RatingSlider />
       </div>
