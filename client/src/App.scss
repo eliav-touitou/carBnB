@@ -692,4 +692,12 @@ form {
   text-align: center;
   background-color: #f1f1f1;
 }
-///////////////////////////////////////////////////////
+///////////////////////////////////start of results + filter////////////////////
+.results-page {
+  display: flex;
+  flex-direction: row;
+  .filter-bar {
+    margin-top: 10vh;
+    border: 1px black solid;
+  }
+}

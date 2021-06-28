@@ -153,7 +153,7 @@ export default function FilterCheck() {
   ]);
 
   return (
-    <div>
+    <div className="filter-bar">
       filter your car brand
       <Select
         options={brandFilterArr}

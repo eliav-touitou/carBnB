@@ -705,4 +705,19 @@ form {
   text-align: center;
   background-color: #f1f1f1;
 }
+
+.results-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.results-page .filter-bar {
+  margin-top: 10vh;
+  border: 1px black solid;
+}
 /*# sourceMappingURL=App.css.map */
