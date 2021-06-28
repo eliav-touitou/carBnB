@@ -47,7 +47,8 @@ body {
   height: 100vh;
   margin: 0;
 }
-.App {
+.App,
+.login-page {
   min-width: 100vw;
   min-height: 100vh;
   //   position: fixed;S
@@ -65,8 +66,6 @@ body {
   position: fixed;
 }
 .login-page {
-  min-width: 100vw;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -131,7 +130,7 @@ h2 {
   margin: 0.938rem 0;
 }
 .login-img {
-  content: url(C:/dev/carBnB/client/src/logo-white.png);
+  // content: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\logo-white.png);
   height: 8rem;
   width: auto;
   margin-top: -3rem;
@@ -479,7 +478,7 @@ form {
   height: fit-content;
   // // justify-content: flex-end;
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto;
   grid-template-rows: auto;
   flex-direction: row;
   background-color: rgb(176, 194, 206);
