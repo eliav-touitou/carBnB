@@ -60,7 +60,7 @@ body {
   //   -webkit-box-align: center;
   //   -ms-flex-align: center;
   //   align-items: center;
-  background-image: url("C:/dev/carBnB/client/src/background-img.png");
+  // background-image: url("C:/dev/carBnB/client/src/background-img.png");
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
@@ -130,7 +130,7 @@ h2 {
   margin: 0.938rem 0;
 }
 .login-img {
-  content: url(C:/dev/carBnB/client/src/logo-white.png);
+  // content: url(C:/dev/carBnB/client/src/logo-white.png);
   height: 8rem;
   width: auto;
   margin-top: -3rem;
@@ -478,7 +478,7 @@ form {
   height: fit-content;
   // // justify-content: flex-end;
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto;
   grid-template-rows: auto;
   flex-direction: row;
   background-color: rgb(176, 194, 206);

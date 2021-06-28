@@ -45,7 +45,6 @@ body {
 .login-page {
   min-width: 100vw;
   min-height: 100vh;
-  background-image: url("C:/dev/carBnB/client/src/background-img.png");
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
@@ -134,7 +133,6 @@ h2 {
 }
 
 .login-img {
-  content: url(C:/dev/carBnB/client/src/logo-white.png);
   height: 8rem;
   width: auto;
   margin-top: -3rem;
@@ -476,8 +474,8 @@ form {
   height: fit-content;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto auto auto auto auto;
-      grid-template-columns: auto auto auto auto auto;
+  -ms-grid-columns: auto auto auto auto auto auto;
+      grid-template-columns: auto auto auto auto auto auto;
   -ms-grid-rows: auto;
       grid-template-rows: auto;
   -webkit-box-orient: horizontal;
