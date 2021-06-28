@@ -24,7 +24,7 @@ export default function Register() {
     const form = e.target;
     e.preventDefault();
     if (passwordRef.current.value !== passwordValidationRef.current.value) {
-      return "fuck you";
+      alert("Passwords does'nt match");
     }
     try {
       const formData = new FormData(form);
@@ -45,7 +45,7 @@ export default function Register() {
     //   {promptOrNormal === "normal" && auth && <Redirect to="/" />}
     // </div>
     <div className="form-container sign-up-container">
-      <form onSubmit={addNewUser}>
+      <form id="register" onSubmit={addNewUser}>
         <h1 className="login-form-title">Create Account</h1>
         <input
           className="login-form-input"
