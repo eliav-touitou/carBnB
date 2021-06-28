@@ -51,8 +51,7 @@ body {
   margin: -20px 0 50px;
 }
 
-.App,
-.login-page {
+.App {
   min-width: 100vw;
   min-height: 100vh;
   background-image: url("C:/Users/yone5/Desktop/Cyber4s/carBnB/client/src/background-img.png");
@@ -62,6 +61,8 @@ body {
 }
 
 .login-page {
+  min-width: 100vw;
+  min-height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

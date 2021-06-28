@@ -89,19 +89,9 @@ body {
   height: 100vh;
   margin: -20px 0 50px;
 }
-.App,
-.login-page {
+.App {
   min-width: 100vw;
   min-height: 100vh;
-  //   position: fixed;S
-  //   display: flex;
-  //   flex-direction: column;
-  //   -webkit-box-pack: center;
-  //   -ms-flex-pack: center;
-  //   justify-content: center;
-  //   -webkit-box-align: center;
-  //   -ms-flex-align: center;
-  //   align-items: center;
   background-image: url("C:/Users/yone5/Desktop/Cyber4s/carBnB/client/src/background-img.png");
   // background-image: url("C:/dev/carBnB/client/src/background-img.png");
   background-repeat: no-repeat;
@@ -109,6 +99,8 @@ body {
   position: fixed;
 }
 .login-page {
+  min-width: 100vw;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
