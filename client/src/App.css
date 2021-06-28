@@ -530,7 +530,7 @@ form {
       -ms-flex-direction: column;
           flex-direction: column;
   /*   flex: 1.5 0 0%; */
-  min-width: 50%;
+  min-width: 70%;
 }
 
 /* Search form */
@@ -540,46 +540,54 @@ form {
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-flow: row no-wrap;
-          flex-flow: row no-wrap;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+      -ms-flex-flow: row;
+          flex-flow: row;
   background: white;
   /*   height: 50px; */
   border-radius: 50px;
-  overflow: hidden;
+}
+
+.inputs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row;
+          flex-flow: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  width: 95%;
 }
 
 .search .label {
-  display: block;
+  display: inline-block;
   font-size: 0.75rem;
   color: #111111;
   font-weight: bold;
 }
 
+.search-inputs label {
+  display: inline-block;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+
 .search-inputs {
   /*   flex: 1 0 auto; */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   padding: 16px 24px;
-}
-
-.search-inputs:nth-child(1) {
-  -webkit-box-flex: 1.5;
-      -ms-flex: 1.5 0 0%;
-          flex: 1.5 0 0%;
-}
-
-.search-inputs:nth-child(2),
-.search-inputs:nth-child(3) {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 0 0%;
-          flex: 1 0 0%;
-}
-
-.search-inputs:nth-child(4) {
-  -webkit-box-flex: 0.85;
-      -ms-flex: 0.85 0 0%;
-          flex: 0.85 0 0%;
+  width: 33.333333%;
 }
 
 .search-inputs input {
@@ -599,11 +607,26 @@ form {
   border-radius: 3em;
 }
 
+.search-inputs:hover .DateInput {
+  background-color: #ececec;
+}
+
+.search-inputs:hover .DateRangePickerInput_arrow {
+  background-color: #ececec;
+}
+
+.search-inputs:hover .DateRangePickerInput {
+  background-color: #ececec;
+}
+
 .search-button {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 auto;
-          flex: 0 0 auto;
-  padding: 8px 8px 8px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  float: right;
   cursor: pointer;
 }
 

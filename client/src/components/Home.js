@@ -10,10 +10,6 @@ import {
   setNotFoundMessage,
 } from "../actions";
 
-import "react-dates/initialize";
-import { DateRangePicker } from "react-dates";
-import "react-dates/lib/css/_datepicker.css";
-
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -72,37 +68,12 @@ export default function Home() {
       }, 4500);
     }
   }, [notFoundMessage]);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [focusedInput, setFocusedInput] = useState(null);
-  const handleDatesChange = ({ startDate, endDate }) => {
-    setStartDate(startDate);
-    setEndDate(endDate);
-  };
 
   return (
     <div>
       <SearchBar allCitiesApi={allCitiesApi} />
       {notFoundMessage && <div>{notFoundMessage}</div>}
       {/* <p>messages thet not read: {counter}</p> */}
-      {allCars?.map((car, i) => (
-        <div key={`car` + i}>
-          <h3>{car.brand}</h3>
-          <div>{car.model}</div>
-          <div>{car.year}</div>
-          <hr />
-        </div>
-      ))}
-
-      <DateRangePicker
-        startDate={startDate}
-        startDateId="tata-start-date"
-        endDate={endDate}
-        endDateId="tata-end-date"
-        onDatesChange={handleDatesChange}
-        focusedInput={focusedInput}
-        onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
-      />
     </div>
   );
 }
