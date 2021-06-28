@@ -60,7 +60,7 @@ body {
   //   -webkit-box-align: center;
   //   -ms-flex-align: center;
   //   align-items: center;
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/background-img.png");
+  background-image: url("C:/dev/carBnB/client/src/background-img.png");
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
@@ -131,12 +131,10 @@ h2 {
 }
 .login-img {
   content: url(C:/dev/carBnB/client/src/logo-white.png);
-  height: 18.75rem;
+  height: 8rem;
   width: auto;
-  margin-top: -6.25rem;
-}
-#under-logo {
-  margin-top: -3.75rem;
+  margin-top: -3rem;
+  margin-bottom: 2rem;
 }
 
 .login-form-button {
