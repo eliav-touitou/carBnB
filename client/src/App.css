@@ -1,14 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
-body {
-  background-color: #fce2bc;
-  margin: 0;
-}
-
-* {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
 .login-page {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
@@ -48,13 +38,14 @@ body {
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
   height: 100vh;
-  margin: -20px 0 50px;
+  margin: 0;
 }
 
 .App,
 .login-page {
   min-width: 100vw;
   min-height: 100vh;
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/background-img.png");
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
@@ -425,18 +416,22 @@ form {
 }
 
 .menu-bar {
-  border-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  width: 100vw;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto auto auto auto;
+      grid-template-columns: auto auto auto auto auto;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  background-color: #b0c2ce;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   -webkit-box-align: center;
@@ -449,7 +444,9 @@ form {
 }
 
 .menu-bar #navbar-logo {
-  height: 100px;
+  height: 80px;
+  padding: 15px;
+  margin-top: 1vh;
   float: left;
   width: auto;
   -ms-flex-item-align: start;
@@ -459,39 +456,18 @@ form {
 
 .menu-bar .navlink {
   list-style: none;
-  color: white;
+  color: black;
   font-weight: bold;
   padding: 12px 16px;
   margin: 8px 8px;
   position: relative;
-  cursor: pointer;
   white-space: nowrap;
-}
-
-.menu-bar .navlink::before {
-  content: " ";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-  border-radius: 25px;
+  cursor: pointer;
 }
 
 .menu-bar .navlink:hover {
-  color: black;
-}
-
-.menu-bar .navlink:hover::before {
-  background: -webkit-gradient(linear, left top, left bottom, from(#e8edec), to(#d2d1d3));
-  background: linear-gradient(to bottom, #e8edec, #d2d1d3);
-  -webkit-box-shadow: 0px 3px 20px 0px black;
-          box-shadow: 0px 3px 20px 0px black;
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
+  border-radius: 1em;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .separator {
@@ -641,51 +617,6 @@ form {
   cursor: pointer;
 }
 
-.nav-bar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin-top: 0%;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  text-align: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  font-size: larger;
-  height: 8vh;
-  background-color: lightgray;
-  color: black;
-  font-weight: bold;
-}
-
-.nav-bar a {
-  text-decoration: none;
-  color: black;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  border: none;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  font-size: 1em;
-  -webkit-transition: -webkit-transform 1s;
-  transition: -webkit-transform 1s;
-  transition: transform 1s;
-  transition: transform 1s, -webkit-transform 1s;
-}
-
-.nav-bar a:hover {
-  cursor: pointer;
-  color: black;
-  font-weight: bold;
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-  text-shadow: 5px 5px 5px black;
-}
-
 /* Float four columns side by side */
 .car-details {
   float: left;
@@ -722,5 +653,10 @@ form {
   padding: 0.7em;
   text-align: center;
   background-color: #f1f1f1;
+}
+
+.MuiPaper-root {
+  position: absolute;
+  margin-top: 3%;
 }
 /*# sourceMappingURL=App.css.map */

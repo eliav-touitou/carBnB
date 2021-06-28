@@ -1,45 +1,3 @@
-body {
-  background-color: rgb(252, 226, 188);
-  margin: 0;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-// .search-bar-container {
-//   display: flex;
-//   flex-direction: row;
-//   flex-wrap: nowrap;
-//   justify-content: flex-start;
-//   align-content: stretch;
-//   align-items: flex-start;
-//   width: 70%;
-//   background: rgb(250, 246, 246);
-//   margin: 0 auto;
-//   padding: 1em;
-// }
-// input {
-//   min-width: 7vw;
-//   padding: 0.3em;
-//   // margin-left: 2vw;
-//   border: 1px solid #666;
-//   border-radius: 1em;
-//   height: 4vh;
-//   order: 0;
-//   align-self: auto;
-// }
-// .search-btn {
-//   cursor: pointer;
-//   padding: 8px 16px;
-//   min-height: 48px;
-//   min-width: 10px;
-//   word-wrap: nowrap;
-//   background: #000;
-//   color: #fff;
-//   border: 1px solid #fff;
-//   border-radius: 5px;
-// }
 .login-page {
   // height: 100vh;
   // width: 100vw;
@@ -87,7 +45,7 @@ body {
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
   height: 100vh;
-  margin: -20px 0 50px;
+  margin: 0;
 }
 .App,
 .login-page {
@@ -102,7 +60,7 @@ body {
   //   -webkit-box-align: center;
   //   -ms-flex-align: center;
   //   align-items: center;
-  // background-image: url("C:/dev/carBnB/client/src/background-img.png");
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/background-img.png");
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
@@ -443,13 +401,15 @@ form {
 }
 // ***********************************************************navbar
 .menu-bar {
-  border-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
   height: fit-content;
-  width: 100vw;
-  // justify-content: flex-end;
-  display: flex;
+  // // justify-content: flex-end;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-template-rows: auto;
   flex-direction: row;
-  // background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgb(176, 194, 206);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   align-items: center;
@@ -458,7 +418,9 @@ form {
   }
 
   #navbar-logo {
-    height: 100px;
+    height: 80px;
+    padding: 15px;
+    margin-top: 1vh;
     float: left;
     width: auto;
     align-self: flex-start;
@@ -466,31 +428,16 @@ form {
   }
   .navlink {
     list-style: none;
-    color: white;
+    color: black;
     font-weight: bold;
     padding: 12px 16px;
     margin: 8px 8px;
     position: relative;
-    cursor: pointer;
     white-space: nowrap;
-    &::before {
-      content: " ";
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      z-index: -1;
-      transition: 0.2s;
-      border-radius: 25px;
-    }
+    cursor: pointer;
     &:hover {
-      &::before {
-        background: linear-gradient(to bottom, #e8edec, #d2d1d3);
-        box-shadow: 0px 3px 20px 0px black;
-        transform: scale(1.2);
-      }
-      color: black;
+      border-radius: 1em;
+      background-color: rgba(0, 0, 0, 0.1);
     }
   }
 }
@@ -606,38 +553,6 @@ form {
 }
 //************************************* end search bar
 
-.nav-bar {
-  display: flex;
-  margin-top: 0%;
-  justify-content: space-evenly;
-  text-align: center;
-  align-items: center;
-  font-size: larger;
-  height: 8vh;
-  background-color: lightgray;
-  color: black;
-  font-weight: bold;
-  & a {
-    text-decoration: none;
-    color: black;
-    display: flex;
-    border: none;
-    width: fit-content;
-    font-size: 1em;
-    transition: transform 1s;
-  }
-}
-
-.nav-bar a:hover {
-  cursor: pointer;
-  color: black;
-  font-weight: bold;
-  -ms-transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-  text-shadow: 5px 5px 5px black;
-}
-
 /* Float four columns side by side */
 .car-details {
   float: left;
@@ -675,3 +590,8 @@ form {
   background-color: #f1f1f1;
 }
 ///////////////////////////////////////////////////////
+
+.MuiPaper-root {
+  position: absolute;
+  margin-top: 3%;
+}
