@@ -74,14 +74,6 @@ export default function Home() {
       <SearchBar allCitiesApi={allCitiesApi} />
       {notFoundMessage && <div>{notFoundMessage}</div>}
       {/* <p>messages thet not read: {counter}</p> */}
-      {allCars?.map((car, i) => (
-        <div key={`car` + i}>
-          <h3>{car.brand}</h3>
-          <div>{car.model}</div>
-          <div>{car.year}</div>
-          <hr />
-        </div>
-      ))}
     </div>
   );
 }

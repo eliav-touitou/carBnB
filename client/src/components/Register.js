@@ -45,6 +45,14 @@ export default function Register() {
     //   {promptOrNormal === "normal" && auth && <Redirect to="/" />}
     // </div>
     <div className="form-container sign-up-container">
+      <div
+        className="x register"
+        onClick={() => {
+          dispatch(setShowLogin(false));
+        }}
+      >
+        ✖
+      </div>
       <form id="register" onSubmit={addNewUser}>
         <h1 className="login-form-title">Create Account</h1>
         <input
