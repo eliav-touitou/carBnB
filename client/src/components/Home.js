@@ -111,6 +111,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <hr />
+      <section className="footer-section">
+        <hr />
+        <footer></footer>
+      </section>
     </div>
   );
 }
