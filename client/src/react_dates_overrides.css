@@ -26,7 +26,7 @@
   border: none;
 }
 .DayPicker_transitionContainer {
-  position: fixed;
+  /* position: fixed; */
 }
 
 .DateRangePickerInput {

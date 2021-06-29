@@ -22,7 +22,7 @@ import { Badge } from "@material-ui/core";
 import MailIcon from "@material-ui/icons/Mail";
 import PromptLogin from "./components/PromptLogin";
 import Avatar from "./components/Avatar";
-import logo from "./photos/carBnB-logo.png";
+import logo from "./photos/logo-black.png";
 
 const axios = require("axios");
 
@@ -63,58 +63,49 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <nav className="menu-bar">
-          <img id="navbar-logo" src={logo} alt="logo" />
+        <NavLink className="navlink" id="navbar-logo" exact to="/">
+          <img src={logo} alt="logo" />
+        </NavLink>
+        <NavLink
+          className="navlink add-car-btn"
+          activeStyle={{ color: "navy" }}
+          to="/addnewcar"
+        >
+          Become a host
+        </NavLink>
+        {auth ? (
           <NavLink
-            className="navlink"
+            className="navlink messages"
             activeStyle={{ color: "navy" }}
-            exact
-            to="/"
+            to="/notifications"
           >
-            Home
+            <Badge badgeContent={notificationCounter} color="primary">
+              <MailIcon />
+            </Badge>
           </NavLink>
-          {/* <NavLink
-            className="navlink"
-            activeStyle={{ color: "navy" }}
-            to="/searchbar"
+        ) : (
+          <div
+            className="navlink login-btn"
+            onClick={() => {
+              dispatch(setShowLogin(true));
+            }}
           >
-            Search
-          </NavLink> */}
-          <NavLink
+            Login
+          </div>
+        )}
+        {/* {!auth && (
+          <div
             className="navlink"
-            activeStyle={{ color: "navy" }}
-            to="/addnewcar"
+            onClick={() => {
+              dispatch(setShowLogin(true));
+            }}
           >
-            Add New Car
-          </NavLink>
-          {auth && (
-            <NavLink
-              className="navlink"
-              activeStyle={{ color: "navy" }}
-              to="/notifications"
-            >
-              <Badge badgeContent={notificationCounter} color="primary">
-                <MailIcon />
-              </Badge>
-            </NavLink>
-          )}
-          {!auth && (
-            <div
-              className="navlink"
-              onClick={() => {
-                dispatch(setShowLogin(true));
-              }}
-            >
-              Login
-            </div>
-          )}
-          {auth && (
-            <Link onClick={logoutHandler} to="/" className="navlink">
-              Logout
-            </Link>
-          )}
-          <Avatar />
-        </nav>
+            Login
+          </div>
+        )} */}
+
+        <Avatar />
+
         {showLogin && <PromptLogin />}
         <Switch>
           <Route exact path="/">
