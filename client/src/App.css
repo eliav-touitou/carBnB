@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+html {
+  scroll-behavior: smooth;
+  behavior: slow;
+}
+
 .login-page {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
@@ -41,14 +46,22 @@ body {
   margin: 0;
 }
 
+button {
+  cursor: pointer;
+}
+
 .App,
 .login-page {
   min-width: 100vw;
   min-height: 100vh;
-  background-image: url("C:/dev/carBnB/client/src/background-img.png");
   background-repeat: no-repeat;
   background-size: cover;
-  position: fixed;
+}
+
+.App {
+  background-color: #eeeeee;
+  background-position-y: 10vh;
+  background-position-x: 10vw;
 }
 
 .login-page {
@@ -134,7 +147,6 @@ h2 {
 }
 
 .login-img {
-  content: url(C:/dev/carBnB/client/src/logo-white.png);
   height: 8rem;
   width: auto;
   margin-top: -3rem;
@@ -469,22 +481,23 @@ form {
 }
 
 .menu-bar {
-  border-bottom-right-radius: 25px;
-  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  max-width: 100vw;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto auto auto auto auto;
-      grid-template-columns: auto auto auto auto auto;
-  -ms-grid-rows: auto;
-      grid-template-rows: auto;
+  -ms-grid-columns: auto auto auto auto auto auto;
+      grid-template-columns: auto auto auto auto auto auto;
+  -ms-grid-rows: 50px;
+      grid-template-rows: 50px;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background-color: #b0c2ce;
+  background-color: #cfdee7;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   -webkit-box-align: center;
@@ -497,18 +510,23 @@ form {
 }
 
 .menu-bar #navbar-logo {
-  height: 80px;
-  padding: 15px;
-  margin-top: 1vh;
+  height: 60px;
+  padding: 10px;
+  padding-top: 0;
+  margin-bottom: 2px;
+  font-weight: bold;
   float: left;
   width: auto;
   -ms-flex-item-align: start;
       align-self: flex-start;
   margin-right: 50vw;
+  margin-left: 10px;
 }
 
 .menu-bar .navlink {
+  text-align: center;
   list-style: none;
+  text-decoration: none;
   color: black;
   font-weight: bold;
   text-align: center;
@@ -533,22 +551,6 @@ form {
       -ms-flex: 0 0 0px !important;
           flex: 0 0 0px !important;
   height: 32px !important;
-}
-
-.top-navigation {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  color: white;
-  /*   z-index: 10; */
-}
-
-.top-navigation input {
-  outline: none;
 }
 
 .search-nav {
@@ -778,6 +780,195 @@ form {
 
 .MuiPaper-root {
   position: absolute;
+  margin-top: 2.2%;
+}
+
+.menu-drop-down {
+  color: black;
+  text-decoration: none;
+}
+
+.order-details-container {
+  margin-left: 15px;
+}
+
+.ul-orders {
+  margin-top: 50px;
+}
+
+.ul-orders li {
+  margin: 15px;
+}
+
+.land-section {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+}
+
+.land-section a {
+  text-decoration: none;
+}
+
+.land-section a:active {
+  color: #551a8b;
+}
+
+.land-section h1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 50px;
+  width: 55%;
+  margin-left: 8%;
   margin-top: 3%;
+}
+
+.land-section span {
+  font-size: 35px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 10%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 50vh;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: -2%;
+  margin-left: 8%;
+}
+
+.land-section span a {
+  color: whitesmoke;
+  padding: 20px;
+  border-radius: 5em;
+  background-color: #5191f1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-shadow: black 2px 2px 2px;
+          box-shadow: black 2px 2px 2px;
+}
+
+.land-section span a:active {
+  color: black;
+  -webkit-box-shadow: black 0.5px 0.5px;
+          box-shadow: black 0.5px 0.5px;
+}
+
+.search-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+  background-size: 70vh;
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
+  background-repeat: no-repeat;
+  background-position-y: 2vh;
+  background-position-x: 4vw;
+}
+
+.search-section .top-navigation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 90%;
+  margin-top: 75px;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  color: white;
+}
+
+.search-section .top-navigation input {
+  outline: none;
+}
+
+.top-pick-section {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #f7ffff), color-stop(70%, #defcf8));
+  background: linear-gradient(#f7ffff 30%, #defcf8 70%);
+}
+
+.top-pick-section h2 {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin-top: 50px;
+  margin-left: 20px;
+  margin-bottom: 70px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-size: 32px;
+}
+
+.top-pick-section .top-picks-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100vw;
+}
+
+.top-pick-section .top-pick {
+  cursor: pointer;
+}
+
+.top-pick-section .top-pick h4 {
+  font-size: 15px;
+  margin-bottom: 0px;
+}
+
+.top-pick-section .top-pick p {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.top-pick-section .top-pick img {
+  height: 450px;
+  width: 370px;
+  border-radius: 0.5em;
 }
 /*# sourceMappingURL=App.css.map */

@@ -18,9 +18,7 @@ const {
   createPDFToSend,
   buildInvoice,
 } = require("../../utils/helperFunctions");
-const path =
-  "C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/backend/output.pdf";
-
+const path = process.env.PDF_PATH;
 // Gets a unique rental
 rentals.post("/uniquerental", async (req, res) => {
   const { id } = req.body;

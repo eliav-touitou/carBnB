@@ -9,6 +9,10 @@ import {
   setNotificationCounter,
   setNotFoundMessage,
 } from "../actions";
+import photo from "../photos/van-image.jpeg";
+import topCar from "../photos/top-car.jpeg";
+import topOwner from "../photos/top-owner.jpeg";
+import topLocation from "../photos/top-location.jpeg";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -71,9 +75,47 @@ export default function Home() {
 
   return (
     <div>
-      <SearchBar allCitiesApi={allCitiesApi} />
+      <section className="land-section">
+        <img height="45%" src={photo}></img>
+        <h1>
+          We invite you to start your journey with us, and with many other
+          drivers
+        </h1>
+        <span>
+          <a href="#search">Let's Start</a>
+        </span>
+      </section>
       {notFoundMessage && <div>{notFoundMessage}</div>}
       {/* <p>messages thet not read: {counter}</p> */}
+
+      <section className="search-section" id="search">
+        <SearchBar allCitiesApi={allCitiesApi} />
+      </section>
+      <section className="top-pick-section">
+        <h2>Choose the best</h2>
+        <div className="top-picks-container">
+          <div className="top-pick">
+            <img src={topCar} className="top-car-img" />
+            <h4>TOP CARS</h4>
+            <p>Extraordinary driving experience. </p>
+          </div>
+          <div className="top-pick">
+            <img src={topOwner} />
+            <h4>TOP OWNERS</h4>
+            <p>Lovely owner for the best travel. </p>
+          </div>
+          <div className="top-pick">
+            <img src={topLocation} />
+            <h4>TOP LOCATIONS</h4>
+            <p>Peacefully moment in paradise. </p>
+          </div>
+        </div>
+      </section>
+      <hr />
+      <section className="footer-section">
+        <hr />
+        <footer></footer>
+      </section>
     </div>
   );
 }
