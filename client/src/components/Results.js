@@ -12,9 +12,10 @@ export default function Results() {
   return (
     <div className="results-page">
       <FilterCheck />
-      <div className="results">
-        <div className="row">
-          <h1>Results</h1>
+
+      <div className="results-section">
+        <h1>Results</h1>
+        <div className="results">
           {filteredCars?.map((car, i) => (
             <Result
               key={`car-${i}`}
