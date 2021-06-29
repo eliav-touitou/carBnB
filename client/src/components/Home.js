@@ -76,7 +76,7 @@ export default function Home() {
   return (
     <div>
       <section className="land-section">
-        <img className="intro-img" height="45%" src={photo}></img>
+        <img className="intro-img" height="50%" src={photo}></img>
         <h1>
           We invite you to start your journey with us, and with many other
           drivers

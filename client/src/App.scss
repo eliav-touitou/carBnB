@@ -63,7 +63,6 @@ button {
   background-size: cover;
 }
 .App {
-  background-color: rgb(238, 238, 238);
   background-position-y: 10vh;
   background-position-x: 10vw;
 }
@@ -922,8 +921,8 @@ form {
   justify-content: center;
   margin: auto;
   width: 50%;
-  height: 40vh;
-  margin-bottom: 25%;
+  height: 60vh;
+  margin-bottom: 13%;
   box-shadow: 0px 0px 22px -1px #000000;
   border-radius: 1em;
   background-color: rgba(255, 245, 245, 0.432);
@@ -952,6 +951,8 @@ form {
       // float: right;
       position: relative;
       right: 0;
+      color: #0065fc;
+      cursor: pointer;
     }
   }
 }
@@ -970,18 +971,36 @@ form {
   display: flex;
   text-align: left;
   width: 45%;
+  li {
+    cursor: pointer;
+  }
 }
 .profile-right {
   width: 100%;
   li {
     width: 70%;
   }
+  .add-new {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: fit-content;
+    color: #0065fc;
+    cursor: pointer;
+  }
 }
-// .rating-panel-profile {
-//   display: flex;
-//   justify-content: center;
-//   span {
-//     width: 13%;
-//     justify-content: space-evenly;
-//   }
-// }
+.rating-panel-profile {
+  width: 40%;
+  display: flex;
+  justify-content: space-evenly;
+  // margin-left: auto;
+  align-self: center;
+  span {
+    width: fit-content;
+  }
+}
+.fa-star {
+  // color: rgb(83, 83, 83);
+  color: rgb(240, 240, 80);
+  fill: currentColor;
+}
