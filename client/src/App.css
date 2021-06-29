@@ -552,23 +552,6 @@ form {
   height: 32px !important;
 }
 
-.top-navigation {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 90%;
-  margin-left: 7%;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  color: white;
-  /*   z-index: 10; */
-}
-
-.top-navigation input {
-  outline: none;
-}
-
 .search-nav {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -818,7 +801,7 @@ form {
   margin-left: 8%;
 }
 
-.land-section a {
+.land-section span a {
   color: whitesmoke;
   padding: 20px;
   border-radius: 5em;
@@ -826,14 +809,113 @@ form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-shadow: black 2px 2px 2px;
+          box-shadow: black 2px 2px 2px;
+}
+
+.land-section span a:active {
+  color: black;
+  -webkit-box-shadow: black 0.5px 0.5px;
+          box-shadow: black 0.5px 0.5px;
 }
 
 .search-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 100vh;
   background-size: 70vh;
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
+  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
   background-repeat: no-repeat;
-  background-position-y: 10vh;
+  background-position-y: 2vh;
   background-position-x: 4vw;
+}
+
+.search-section .top-navigation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 90%;
+  margin-top: 75px;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  color: white;
+}
+
+.search-section .top-navigation input {
+  outline: none;
+}
+
+.top-pick-section {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #f7ffff), color-stop(70%, #defcf8));
+  background: linear-gradient(#f7ffff 30%, #defcf8 70%);
+}
+
+.top-pick-section h2 {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin-top: 50px;
+  margin-left: 20px;
+  margin-bottom: 70px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-size: 32px;
+}
+
+.top-pick-section .top-picks-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100vw;
+}
+
+.top-pick-section .top-pick {
+  cursor: pointer;
+}
+
+.top-pick-section .top-pick h4 {
+  font-size: 15px;
+  margin-bottom: 0px;
+}
+
+.top-pick-section .top-pick p {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.top-pick-section .top-pick img {
+  height: 450px;
+  width: 370px;
+  border-radius: 0.5em;
 }
 /*# sourceMappingURL=App.css.map */
