@@ -35,14 +35,11 @@ $color: #4d61b9;
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 
 /***************************************************************************** login */
-
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
 body {
-  background: #f6f5f7;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
@@ -58,29 +55,19 @@ button {
 
 .App,
 .login-page {
+  width: 100%;
+  height: 100%;
   min-width: 100vw;
   min-height: 100vh;
-  //   position: fixed;S
-  //   display: flex;
-  //   flex-direction: column;
-  //   -webkit-box-pack: center;
-  //   -ms-flex-pack: center;
-  //   justify-content: center;
-  //   -webkit-box-align: center;
-  //   -ms-flex-align: center;
-  //   align-items: center;
-  // background-image: url("C:/Users/yone5/Desktop/Cyber4s/carBnB/client/src/background-img.png");
   background-repeat: no-repeat;
   background-size: cover;
-  // position: fixed;
 }
 .App {
-  // background-size: 70vh;
-  // background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
   background-color: rgb(238, 238, 238);
   background-position-y: 10vh;
   background-position-x: 10vw;
 }
+
 .login-page {
   display: flex;
   justify-content: center;
@@ -488,54 +475,93 @@ form {
 }
 
 // ***********************************************************navbar
-.menu-bar {
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-  height: fit-content;
-  max-width: 100vw;
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto;
-  grid-template-rows: 50px;
-  flex-direction: row;
-  background-color: rgb(207, 222, 231);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  align-items: center;
-  .Avatar {
-    margin-left: 5px;
-  }
 
-  #navbar-logo {
-    height: 60px;
-    padding: 10px;
-    padding-top: 0;
-    margin-bottom: 2px;
-    font-weight: bold;
-    float: left;
-    width: auto;
-    align-self: flex-start;
-    margin-right: 50vw;
-    margin-left: 10px;
-  }
-  .navlink {
-    text-align: center;
-    list-style: none;
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    text-align: center;
-    padding: 12px 16px;
-    margin: 8px 8px;
-    position: relative;
-    white-space: nowrap;
-    cursor: pointer;
-    &:hover {
-      border-radius: 1em;
-      background-color: rgba(0, 0, 0, 0.1);
-    }
+.navlink {
+  top: 10px;
+  text-align: center;
+  list-style: none;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  padding: 12px 16px;
+  position: relative;
+  white-space: nowrap;
+  cursor: pointer;
+  // background-color: rgba(255, 255, 255, 0.3);
+  // box-shadow: 1px 1px rgb(80, 77, 77);
+  border-radius: 1em;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
   }
 }
 
+#navbar-logo {
+  position: fixed;
+  left: 10px;
+}
+.Avatar {
+  top: 20px;
+  // background-color: rgba(255, 255, 255, 0.3);
+  // box-shadow: 1px 1px rgb(80, 77, 77);
+  position: fixed;
+  right: 20px;
+
+  .MuiAvatar-colorDefault {
+    color: #fafafa;
+    background-color: #1d1d1d;
+  }
+}
+
+.messages {
+  text-shadow: 10px 5px rgba(230, 8, 130, 0.1);
+  top: 25px;
+  position: fixed;
+  right: 100px;
+}
+.login-btn {
+  top: 25px;
+  position: fixed;
+  right: 90px;
+}
+.add-car-btn {
+  text-shadow: 2.5px 5px 2px 2px rgba(230, 8, 130, 0.1);
+  top: 25px;
+  position: fixed;
+  right: 160px;
+}
+
+//   .navlink {
+//     text-align: center;
+//     list-style: none;
+//     text-decoration: none;
+//     color: black;
+//     font-weight: bold;
+//     text-align: center;
+//     padding: 12px 16px;
+//     margin: 8px 8px;
+//     position: relative;
+//     white-space: nowrap;
+//     cursor: pointer;
+//     &:hover {
+//       border-radius: 1em;
+//       background-color: rgba(0, 0, 0, 0.1);
+//     }
+//   }
+// }
+
+// @media screen and (max-width: 600px) {
+//   .menu-bar {
+//     position: fixed;
+//     min-height: 100vh;
+//     min-width: fit-content;
+//     display: grid;
+//     grid-template-rows: auto auto auto auto auto auto;
+//     grid-template-columns: 50px;
+//     flex-direction: column;
+//     align-items: center;
+//   }
+// }
 //*************************************end of navbar
 
 //************************************* search bar
@@ -551,7 +577,7 @@ form {
   display: flex;
   flex-direction: column;
   /*   flex: 1.5 0 0%; */
-  min-width: 70%;
+  min-width: 100%;
 }
 
 /* Search form */
@@ -739,6 +765,7 @@ form {
 }
 
 .land-section {
+  top: 0;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -748,6 +775,9 @@ form {
     &:active {
       color: #551a8b;
     }
+  }
+  .intro-img {
+    top: 0;
   }
 
   h1 {
@@ -790,17 +820,21 @@ form {
   align-items: center;
   height: 100vh;
   background-size: 70vh;
+  // background-image: url("C:/dev/carBnB/client/src/photos/good-logo-white.png");
   background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
+  // background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
   background-repeat: no-repeat;
-  background-position-y: 2vh;
+  background-position-y: 10vh;
   background-position-x: 4vw;
 
   .top-navigation {
     display: flex;
-    width: 90%;
-    margin-top: 75px;
+    width: 60%;
+    margin-top: 200px;
     justify-content: space-evenly;
     color: white;
+    box-shadow: 0px 0px 22px -1px #000000;
+    border-radius: 5em;
     & input {
       outline: none;
     }
@@ -811,7 +845,6 @@ form {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(rgb(247, 255, 255) 30%, rgb(222, 252, 248) 70%);
 
   h2 {
     display: inline-flex;
@@ -841,9 +874,114 @@ form {
       opacity: 0.7;
     }
     img {
-      height: 450px;
-      width: 370px;
+      height: 20vh;
+      width: auto;
       border-radius: 0.5em;
+      // display: inline-block;
     }
   }
 }
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  hr {
+    width: 100%;
+  }
+}
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  i {
+    font-size: x-large;
+  }
+  .copyright {
+    font-size: large;
+  }
+}
+.upper-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  li {
+    list-style: none;
+    line-height: 30px;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.profile-inner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  width: 50%;
+  height: 40vh;
+  margin-bottom: 25%;
+  box-shadow: 0px 0px 22px -1px #000000;
+  border-radius: 1em;
+  background-color: rgba(255, 245, 245, 0.432);
+  hr {
+    margin: 0;
+  }
+  ul {
+    width: 100%;
+    padding-left: 15px;
+  }
+  li {
+    display: flex;
+    flex-direction: row;
+    line-height: 40px;
+    list-style: none;
+    width: 100%;
+    padding-left: 5px;
+    align-items: center;
+    justify-content: space-between;
+    &:hover {
+      border-radius: 1em;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    .pencil-profile {
+      display: flex;
+      // float: right;
+      position: relative;
+      right: 0;
+    }
+  }
+}
+.profile-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+.details-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 9%;
+}
+.profile-left {
+  display: flex;
+  text-align: left;
+  width: 45%;
+}
+.profile-right {
+  width: 100%;
+  li {
+    width: 70%;
+  }
+}
+// .rating-panel-profile {
+//   display: flex;
+//   justify-content: center;
+//   span {
+//     width: 13%;
+//     justify-content: space-evenly;
+//   }
+// }

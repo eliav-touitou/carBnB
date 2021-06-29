@@ -9,7 +9,7 @@ import {
   setNotificationCounter,
   setNotFoundMessage,
 } from "../actions";
-import photo from "../photos/van-image.jpeg";
+import photo from "../photos/background-4593643_1920.jpg";
 import topCar from "../photos/top-car.jpeg";
 import topOwner from "../photos/top-owner.jpeg";
 import topLocation from "../photos/top-location.jpeg";
@@ -76,7 +76,7 @@ export default function Home() {
   return (
     <div>
       <section className="land-section">
-        <img height="45%" src={photo}></img>
+        <img className="intro-img" height="45%" src={photo}></img>
         <h1>
           We invite you to start your journey with us, and with many other
           drivers
@@ -113,8 +113,43 @@ export default function Home() {
       </section>
       <hr />
       <section className="footer-section">
-        <hr />
-        <footer></footer>
+        <div className="upper-footer">
+          <div className="support">
+            <h4>Support</h4>
+            <ul>
+              <li>Contact us</li>
+              <li>Cancellation Policy</li>
+            </ul>
+          </div>
+          <div className="information">
+            <h4>Info</h4>
+            <ul>
+              <li>How we started</li>
+              <li>Service declaration</li>
+              <li>About the Founders</li>
+            </ul>
+          </div>
+        </div>
+        <hr height="100px" />
+        <footer className="footer">
+          <div>
+            <i className="fab fa-github"></i>
+          </div>
+          <div>
+            <i className="fab fa-facebook-f"></i>
+          </div>
+          <div>
+            <i className="far fa-envelope"></i>
+          </div>
+          <div>
+            <i className="fab fa-linkedin"></i>
+          </div>
+          <p className="instagram">
+            {" "}
+            <i className="fab fa-instagram"></i>
+          </p>
+          <div className="copyright">© 2021 J.E.E</div>
+        </footer>
       </section>
     </div>
   );
