@@ -667,6 +667,7 @@ form {
 }
 
 .results-section {
+  margin-top: 10vh;
   width: 100%;
   padding-left: 10px;
   text-align: center;
@@ -720,7 +721,7 @@ form {
 }
 
 .filter-bar {
-  padding: 50px 20px;
+  padding: 100px 20px;
   width: 30%;
   border-right: 3px #070592 solid;
 }
@@ -749,6 +750,21 @@ form {
   }
 }
 
+@media screen and (min-width: 600px) {
+  .filter-bar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    min-height: 100vh;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .results-page {
     -webkit-box-orient: vertical;
@@ -757,11 +773,14 @@ form {
             flex-direction: column;
   }
   .filter-bar {
-    padding: 20px 0;
+    padding: 100px 0 0 0;
     width: 100vw;
     border-bottom: 3px #070592 solid;
     border-right: none;
     text-align: center;
+  }
+  .results-section {
+    margin-top: 2vh;
   }
   .select,
   .slider {
