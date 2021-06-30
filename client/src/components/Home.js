@@ -13,6 +13,7 @@ import photo from "../photos/background-4593643_1920.jpg";
 import topCar from "../photos/top-car.jpeg";
 import topOwner from "../photos/top-owner.jpeg";
 import topLocation from "../photos/top-location.jpeg";
+import TopCarousel from "./TopCarousel";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -111,6 +112,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <TopCarousel />
       <hr />
       <section className="footer-section">
         <div className="upper-footer">
