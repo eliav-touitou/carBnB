@@ -1139,3 +1139,170 @@ form {
   }
 }
 ////////////////////////////////end of top picks carousel
+/////////////////add new car
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap");
+$primary-bg-color: #9db3dd;
+$secondary-bg-color: #46494b;
+$font-color: rgba(0, 0, 0, 0.8);
+$font-family: "Montserrat", sans-serif;
+$form-border-color: rgba(0, 0, 0, 0.1);
+
+.add-new-car-page {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  background: #c4e0e0;
+  color: $font-color;
+  height: 100vh;
+  min-width: 100vw;
+}
+.add-car-panel {
+  height: 70vh;
+  width: 60vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.left-side-panel {
+  background-color: $secondary-bg-color;
+  width: 20%;
+  height: 100%;
+}
+.right-side-panel {
+  width: 80%;
+  background-color: $primary-bg-color;
+  max-height: 100%;
+  height: 100%;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .fields-inputs {
+    width: 100%;
+    height: 100%;
+    padding: 6vh 2vw;
+    // display: flex;
+    // align-items: center;
+    // flex-direction: column;
+    justify-content: space-between;
+    .input-div {
+      width: 50%;
+      display: inline-block;
+
+      & input,
+      .radio-container {
+        // display: inline-block;
+        width: 95%;
+      }
+    }
+  }
+  & button {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    height: 38px;
+    line-height: 38px;
+    width: 100px;
+    border-radius: 19px;
+    // font-family: $font-family;
+  }
+}
+.submit-btn {
+  width: 100%;
+  height: 15%;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  & button {
+    background-color: $secondary-bg-color;
+    color: white;
+    align-self: center;
+  }
+}
+
+//   & .set {
+//     display: flex;
+//     justify-content: space-between;
+//     margin: 10px 0;
+//   }
+.right-side-panel {
+  & input {
+    border: 1px solid $form-border-color;
+    border-radius: 4px;
+    height: 38px;
+    line-height: 38px;
+    padding-left: 5px;
+  }
+
+  & input,
+  label {
+    color: $font-color;
+  }
+
+  //   & header {
+  //     padding: 40px;
+  //   }
+
+  & label,
+  input,
+  .pets-photo {
+    width: 176px;
+  }
+
+  //   & .pets-photo {
+  //     align-items: center;
+  //     display: grid;
+  //     grid-template-areas: ". .";
+
+  //     & button {
+  //       border: none;
+  //       border-radius: 50%;
+  //       height: 38px;
+  //       margin-right: 10px;
+  //       outline: none;
+  //       width: 38px;
+  //     }
+
+  //     & button i {
+  //       color: $font-color;
+  //       font-size: 16px;
+  //     }
+  //   }
+
+  .pets-weight .radio-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .radio-container {
+    background: #fff;
+    border: 1px solid $form-border-color;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 5px;
+  }
+  .radio-container label {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    transition: 0.2s all ease-in-out;
+    width: 80px;
+  }
+  .radio-container input[type="radio"] {
+    display: none;
+  }
+  .radio-container input[type="radio"]:checked + label {
+    background: $primary-bg-color;
+    border: 1px solid $form-border-color;
+  }
+}
+
+///////////////////////end of add car section

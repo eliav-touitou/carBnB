@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap");
 html {
   scroll-behavior: smooth;
   behavior: slow;
@@ -1351,5 +1352,177 @@ form {
   height: 50vh;
   width: 80%;
   border-radius: 0.5em;
+}
+
+.add-new-car-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: #c4e0e0;
+  color: rgba(0, 0, 0, 0.8);
+  height: 100vh;
+  min-width: 100vw;
+}
+
+.add-car-panel {
+  height: 70vh;
+  width: 60vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.left-side-panel {
+  background-color: #46494b;
+  width: 20%;
+  height: 100%;
+}
+
+.right-side-panel {
+  width: 80%;
+  background-color: #9db3dd;
+  max-height: 100%;
+  height: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.right-side-panel .fields-inputs {
+  width: 100%;
+  height: 100%;
+  padding: 6vh 2vw;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.right-side-panel .fields-inputs .input-div {
+  width: 50%;
+  display: inline-block;
+}
+
+.right-side-panel .fields-inputs .input-div input,
+.right-side-panel .fields-inputs .input-div .radio-container {
+  width: 95%;
+}
+
+.right-side-panel button {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  height: 38px;
+  line-height: 38px;
+  width: 100px;
+  border-radius: 19px;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 15%;
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.submit-btn button {
+  background-color: #46494b;
+  color: white;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.right-side-panel input {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  height: 38px;
+  line-height: 38px;
+  padding-left: 5px;
+}
+
+.right-side-panel input,
+.right-side-panel label {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.right-side-panel label,
+.right-side-panel input,
+.right-side-panel .pets-photo {
+  width: 176px;
+}
+
+.right-side-panel .pets-weight .radio-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+}
+
+.right-side-panel .radio-container {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  display: inline-block;
+  padding: 5px;
+}
+
+.right-side-panel .radio-container label {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  -webkit-transition: 0.2s all ease-in-out;
+  transition: 0.2s all ease-in-out;
+  width: 80px;
+}
+
+.right-side-panel .radio-container input[type="radio"] {
+  display: none;
+}
+
+.right-side-panel .radio-container input[type="radio"]:checked + label {
+  background: #9db3dd;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 /*# sourceMappingURL=App.css.map */
