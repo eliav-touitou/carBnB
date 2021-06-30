@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
+import MyCar from "./MyCar";
 
 export default function MyCars({
-  myCarsData,
+  myCarData,
   iconsKey,
   setIndexPage,
   indexPage,
+  nextPage,
+  setMyCarsData,
 }) {
   const [carDetails, setCarDetails] = useState([]);
 
@@ -16,8 +19,8 @@ export default function MyCars({
   }, []);
 
   useEffect(() => {
-    if (myCarsData) {
-      const temp = Object.entries(myCarsData[indexPage]);
+    if (myCarData) {
+      const temp = Object.entries(myCarData);
       temp.map(([key, value]) => {
         if (
           key !== "car_id" &&
@@ -38,30 +41,19 @@ export default function MyCars({
     };
   }, [indexPage]);
 
-  const nextPage = () => {
-    if (indexPage === myCarsData.length - 1) {
-      setIndexPage(0);
-    } else {
-      setIndexPage((prev) => (prev += 1));
-    }
-  };
-
   return (
     <div>
       <span onClick={nextPage}>⏭</span>
       <ul>
         {carDetails.map(([key, value], i) => (
-          <>
-            <li>
-              <div>
-                {iconsKey[key]}
-                <span> {value}</span>
-                <span className="pencil-profile">
-                  <CreateOutlinedIcon />
-                </span>
-              </div>
-            </li>
-          </>
+          <MyCar
+            key={`key-${i}`}
+            keys={key}
+            value={value}
+            iconsKey={iconsKey}
+            carId={myCarData.car_id}
+            setMyCarsData={setMyCarsData}
+          />
         ))}
       </ul>
     </div>

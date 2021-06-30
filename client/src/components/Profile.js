@@ -46,7 +46,15 @@ export default function Profile() {
       })
       .then(({ data: cars }) => setMyCarsData(cars.data))
       .catch((error) => console.log(error));
-  }, []);
+  }, [myCarsData]);
+
+  const nextPage = () => {
+    if (indexPage === myCarsData.length - 1) {
+      setIndexPage(0);
+    } else {
+      setIndexPage((prev) => (prev += 1));
+    }
+  };
 
   return (
     <div className="profile-container">
@@ -76,10 +84,12 @@ export default function Profile() {
             ) : (
               myCarsData && (
                 <MyCars
-                  myCarsData={myCarsData}
+                  myCarData={myCarsData[indexPage]}
                   iconsKey={iconsKey}
                   setIndexPage={setIndexPage}
                   indexPage={indexPage}
+                  nextPage={nextPage}
+                  setMyCarsData={setMyCarsData}
                 />
               )
             )}
