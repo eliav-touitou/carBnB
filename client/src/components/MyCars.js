@@ -53,10 +53,13 @@ export default function MyCars({
         {carDetails.map(([key, value], i) => (
           <>
             <li>
-              {iconsKey[key]} {value}
-              <span className="pencil-profile">
-                <CreateOutlinedIcon />
-              </span>
+              <div>
+                {iconsKey[key]}
+                <span> {value}</span>
+                <span className="pencil-profile">
+                  <CreateOutlinedIcon />
+                </span>
+              </div>
             </li>
           </>
         ))}
