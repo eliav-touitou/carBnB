@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
 import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
 
-export default function MyCars({ myCar, iconsKey }) {
-  console.log(myCar);
-  console.log(iconsKey);
-  const [arr, setArr] = useState([]);
+export default function MyCars({
+  myCarsData,
+  iconsKey,
+  setIndexPage,
+  indexPage,
+}) {
+  const [carDetails, setCarDetails] = useState([]);
 
   useEffect(() => {
-    if (myCar) {
-      const temp = Object.entries(myCar);
+    return () => {
+      setIndexPage(0);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (myCarsData) {
+      const temp = Object.entries(myCarsData[indexPage]);
       temp.map(([key, value]) => {
         if (
           key !== "car_id" &&
@@ -20,17 +29,28 @@ export default function MyCars({ myCar, iconsKey }) {
           if (key === "available_from" || key === "available_until") {
             value = new Date(value).toDateString();
           }
-          //   if (key === "available_from")
-          setArr((prev) => [...prev, [key, value]]);
+          setCarDetails((prev) => [...prev, [key, value]]);
         }
       });
     }
-  }, []);
+    return () => {
+      setCarDetails([]);
+    };
+  }, [indexPage]);
+
+  const nextPage = () => {
+    if (indexPage === myCarsData.length - 1) {
+      setIndexPage(0);
+    } else {
+      setIndexPage((prev) => (prev += 1));
+    }
+  };
 
   return (
     <div>
+      <span onClick={nextPage}>⏭</span>
       <ul>
-        {arr.map(([key, value]) => (
+        {carDetails.map(([key, value], i) => (
           <>
             <li>
               {iconsKey[key]} {value}

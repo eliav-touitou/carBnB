@@ -36,6 +36,7 @@ export default function Profile() {
   const [modifyPhoneInput, setModifyPhoneInput] = useState(false);
   const [myCarsData, setMyCarsData] = useState();
   const [displayOverview, setDisplayOverview] = useState(true);
+  const [indexPage, setIndexPage] = useState(0);
 
   useEffect(() => {
     axios
@@ -394,9 +395,14 @@ export default function Profile() {
                 )}
               </ul>
             ) : (
-              myCarsData?.map((myCar) => (
-                <MyCars myCar={myCar} iconsKey={iconsKey} />
-              ))
+              myCarsData && (
+                <MyCars
+                  myCarsData={myCarsData}
+                  iconsKey={iconsKey}
+                  setIndexPage={setIndexPage}
+                  indexPage={indexPage}
+                />
+              )
             )}
           </div>
         </div>
