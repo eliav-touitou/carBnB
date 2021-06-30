@@ -99,7 +99,15 @@ export default function OverviewDetail({ iconsKey, keys, value }) {
               <span> {value}</span>
               <span className="pencil-profile">
                 {keys === "user_email" ? null : (
-                  <CreateOutlinedIcon onClick={() => setIsOpen(true)} />
+                  <>
+                    <CreateOutlinedIcon onClick={() => setIsOpen(true)} />
+                    <i
+                      class="far fa-trash-alt"
+                      onClick={() => {
+                        updateItem(keys, null);
+                      }}
+                    ></i>
+                  </>
                 )}
               </span>
             </div>
