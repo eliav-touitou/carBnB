@@ -1016,3 +1016,27 @@ form {
   color: rgb(240, 240, 80);
   fill: currentColor;
 }
+.tool-tip-text {
+  visibility: hidden;
+  width: 230px;
+  background-color: rgb(208, 238, 247);
+  border: 1px solid black;
+  color: black;
+  text-align: flex-start;
+  border-radius: 1em;
+  // max-height: max-content;
+  height: 150px;
+  word-wrap: break-word;
+  overflow-y: auto;
+
+  /* Position the tooltip */
+  position: absolute;
+  display: flex;
+  right: -5px;
+  top: 20px;
+
+  z-index: 1;
+}
+.tool-tip-text.true {
+  visibility: visible;
+}

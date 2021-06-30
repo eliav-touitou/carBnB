@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch, NavLink, Link } from "react-router-dom";
 import Home from "./components/Home";
 import Register from "./components/Register";
@@ -23,6 +23,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import PromptLogin from "./components/PromptLogin";
 import Avatar from "./components/Avatar";
 import logo from "./photos/logo-black.png";
+import Messages from "./components/Messages";
 
 const axios = require("axios");
 
@@ -36,6 +37,9 @@ function App() {
   const notificationCounter = useSelector((state) => state.notificationCounter);
   const auth = useSelector((state) => state.auth);
   const showLogin = useSelector((state) => state.showLogin);
+
+  // Use state
+  const [visibility, setVisibility] = useState(false);
 
   // Get all cars brand from API.
   useEffect(() => {
@@ -80,7 +84,10 @@ function App() {
             to="/notifications"
           >
             <Badge badgeContent={notificationCounter} color="primary">
-              <MailIcon />
+              <MailIcon onClick={() => setVisibility((prev) => !prev)} />
+              <div className={`tool-tip-text ${visibility}`}>
+                <Messages />
+              </div>
             </Badge>
           </NavLink>
         ) : (
