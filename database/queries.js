@@ -32,6 +32,17 @@ const getRental = async (id) => {
   }
 };
 
+// Get unique car photo
+const getPhoto = async (id) => {
+  try {
+    const result = await Photo.findOne({ where: { car_id: id } });
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // Get unique user / auth
 const getUserOrAuth = async (obj) => {
   const { model, email } = obj;
@@ -187,7 +198,7 @@ const GetCarsByParameters = async (obj) => {
               },
             },
             {
-              [Op.eq]: { available_from: null },
+              available_from: { [Op.is]: null },
             },
           ],
 
@@ -351,4 +362,5 @@ module.exports = {
   addNewRentalToDB,
   addNewNotification,
   getAllCarsByIdsArr,
+  getPhoto,
 };
