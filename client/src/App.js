@@ -24,6 +24,7 @@ import PromptLogin from "./components/PromptLogin";
 import Avatar from "./components/Avatar";
 import logo from "./photos/logo-black.png";
 import Messages from "./components/Messages";
+import CreditCards from "./components/CreditCards";
 
 const axios = require("axios");
 
@@ -144,7 +145,7 @@ function App() {
             <Results />
           </Route>
           <Route exact path="/summery">
-            <OrderSummery />
+            <CreditCards />
           </Route>
           {auth && (
             <Route exact path="/notifications">
