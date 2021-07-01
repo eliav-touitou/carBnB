@@ -32,6 +32,17 @@ const getRental = async (id) => {
   }
 };
 
+// Get unique car photo
+const getPhoto = async (id) => {
+  try {
+    const result = await Photo.findOne({ where: { car_id: id } });
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // Get unique user / auth
 const getUserOrAuth = async (obj) => {
   const { model, email } = obj;
@@ -176,13 +187,20 @@ const GetCarsByParameters = async (obj) => {
     const result = await Car.findAll({
       where: {
         [Op.and]: {
-          available_from: {
-            [Op.lte]: startDate,
-          },
+          [Op.or]: [
+            {
+              available_from: {
+                [Op.lte]: startDate,
+              },
 
-          available_until: {
-            [Op.gte]: endDate,
-          },
+              available_until: {
+                [Op.gte]: endDate,
+              },
+            },
+            {
+              available_from: { [Op.is]: null },
+            },
+          ],
 
           passengers: { [Op.gte]: numOfPassengers },
           owner_email: { [Op.in]: arrOfEmails },
@@ -344,4 +362,5 @@ module.exports = {
   addNewRentalToDB,
   addNewNotification,
   getAllCarsByIdsArr,
+  getPhoto,
 };

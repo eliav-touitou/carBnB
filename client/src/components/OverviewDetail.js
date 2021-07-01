@@ -92,7 +92,7 @@ export default function OverviewDetail({ iconsKey, keys, value }) {
   return (
     <>
       {!isOpen ? (
-        !isNull ? (
+        auth[keys] ? (
           <li>
             <div>
               <span>{iconsKey[keys]}</span>

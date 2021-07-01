@@ -41,6 +41,7 @@ function App() {
 
   // Use state
   const [visibility, setVisibility] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   // Get all cars brand from API.
   useEffect(() => {
@@ -53,16 +54,9 @@ function App() {
       });
   }, []);
 
-  // Logout handler
-  const logoutHandler = async () => {
-    try {
-      await axios.post("/api/v1/users/logout");
-      dispatch(setAuthOut());
-
-      console.log("Success logout");
-    } catch (error) {
-      console.log("Failed logout");
-    }
+  const handleVisibility = () => {
+    setVisibility((prev) => !prev);
+    setAnchorEl(null);
   };
 
   return (
@@ -79,18 +73,18 @@ function App() {
           Become a host
         </NavLink>
         {auth ? (
-          <NavLink
+          <div
             className="navlink messages"
             activeStyle={{ color: "navy" }}
-            to="/notifications"
+            // to="/notifications"
           >
             <Badge badgeContent={notificationCounter} color="primary">
-              <MailIcon onClick={() => setVisibility((prev) => !prev)} />
+              <MailIcon onClick={handleVisibility} />
               <div className={`tool-tip-text ${visibility}`}>
-                <Messages />
+                <Notifications />
               </div>
             </Badge>
-          </NavLink>
+          </div>
         ) : (
           <div
             className="navlink login-btn"
@@ -112,7 +106,11 @@ function App() {
           </div>
         )} */}
 
-        <Avatar />
+        <Avatar
+          anchorEl={anchorEl}
+          setAnchorEl={setAnchorEl}
+          setVisibility={setVisibility}
+        />
 
         {showLogin && <PromptLogin />}
         <Switch>
