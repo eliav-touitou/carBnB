@@ -176,13 +176,20 @@ const GetCarsByParameters = async (obj) => {
     const result = await Car.findAll({
       where: {
         [Op.and]: {
-          available_from: {
-            [Op.lte]: startDate,
-          },
+          [Op.or]: [
+            {
+              available_from: {
+                [Op.lte]: startDate,
+              },
 
-          available_until: {
-            [Op.gte]: endDate,
-          },
+              available_until: {
+                [Op.gte]: endDate,
+              },
+            },
+            {
+              [Op.eq]: { available_from: null },
+            },
+          ],
 
           passengers: { [Op.gte]: numOfPassengers },
           owner_email: { [Op.in]: arrOfEmails },
