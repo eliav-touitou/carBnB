@@ -3,7 +3,14 @@ import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-export default function MyCar({ iconsKey, keys, value, carId, setMyCarsData }) {
+export default function MyCar({
+  iconsKey,
+  keys,
+  value,
+  carId,
+  setMyCarsData,
+  myCarsData,
+}) {
   const includesCondition = ["available", "discount", "price"];
   // Redux states
   const auth = useSelector((state) => state.auth);

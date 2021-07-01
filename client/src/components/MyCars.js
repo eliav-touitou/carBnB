@@ -9,6 +9,7 @@ export default function MyCars({
   indexPage,
   nextPage,
   setMyCarsData,
+  myCarsData,
 }) {
   const [carDetails, setCarDetails] = useState([]);
 
@@ -39,7 +40,7 @@ export default function MyCars({
     return () => {
       setCarDetails([]);
     };
-  }, [indexPage]);
+  }, [indexPage, myCarsData]);
 
   return (
     <div>
@@ -51,8 +52,9 @@ export default function MyCars({
             keys={key}
             value={value}
             iconsKey={iconsKey}
-            carId={myCarData.car_id}
+            carId={myCarData?.car_id}
             setMyCarsData={setMyCarsData}
+            myCarsData={myCarsData}
           />
         ))}
       </ul>

@@ -46,7 +46,7 @@ export default function Profile() {
       })
       .then(({ data: cars }) => setMyCarsData(cars.data))
       .catch((error) => console.log(error));
-  }, [myCarsData]);
+  }, []);
 
   const nextPage = () => {
     if (indexPage === myCarsData.length - 1) {
@@ -90,6 +90,7 @@ export default function Profile() {
                   indexPage={indexPage}
                   nextPage={nextPage}
                   setMyCarsData={setMyCarsData}
+                  myCarsData={myCarsData}
                 />
               )
             )}

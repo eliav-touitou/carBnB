@@ -78,18 +78,18 @@ function App() {
           Become a host
         </NavLink>
         {auth ? (
-          <NavLink
+          <div
             className="navlink messages"
             activeStyle={{ color: "navy" }}
-            to="/notifications"
+            // to="/notifications"
           >
             <Badge badgeContent={notificationCounter} color="primary">
               <MailIcon onClick={() => setVisibility((prev) => !prev)} />
               <div className={`tool-tip-text ${visibility}`}>
-                <Messages />
+                <Notifications />
               </div>
             </Badge>
-          </NavLink>
+          </div>
         ) : (
           <div
             className="navlink login-btn"

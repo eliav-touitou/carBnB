@@ -10,7 +10,7 @@ export default function Messages({ message, messageId }) {
   };
   return (
     <div>
-      <Link onClick={updateRead} to={`message/${messageId}`}>
+      <Link onClick={updateRead} to={`/message/${messageId}`}>
         <div className={`read-${String(message?.read)}`}>
           <p> {message?.title}</p>
           {/* <p>{new Date(message?.createdAt).toDateString()}</p> */}
