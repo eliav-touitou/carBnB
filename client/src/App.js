@@ -24,6 +24,7 @@ import PromptLogin from "./components/PromptLogin";
 import Avatar from "./components/Avatar";
 import logo from "./photos/logo-black.png";
 import CreditCards from "./components/CreditCards";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 
 const axios = require("axios");
 
@@ -77,8 +78,8 @@ function App() {
             activeStyle={{ color: "navy" }}
             // to="/notifications"
           >
-            <Badge badgeContent={notificationCounter} color="primary">
-              <MailIcon onClick={handleVisibility} />
+            <Badge badgeContent={notificationCounter} color="secondary">
+              <NotificationsIcon onClick={handleVisibility} />
               <div className={`tool-tip-text ${visibility}`}>
                 <Notifications />
               </div>

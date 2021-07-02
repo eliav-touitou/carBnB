@@ -49,7 +49,7 @@ export default function Rental({ id }) {
           alt="license"
           key={`photo-${i}`}
           src={`data:image/jpeg;base64,${photo.file}`}
-          height={100}
+          height={60}
         />
       ))}
     </div>

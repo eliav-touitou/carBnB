@@ -515,7 +515,6 @@ form {
 }
 
 .messages {
-  text-shadow: 10px 5px rgba(230, 8, 130, 0.1);
   top: 25px;
   position: fixed;
   right: 100px;
@@ -1023,29 +1022,101 @@ form {
   color: rgb(240, 240, 80);
   fill: currentColor;
 }
+////////////////////////////////// tool tip messages ///////////////////////////////
 .tool-tip-text {
   visibility: hidden;
-  width: 230px;
-  background-color: rgb(208, 238, 247);
+  width: fit-content;
+  background-color: rgb(255, 255, 255);
   border: 1px solid black;
   color: black;
   text-align: flex-start;
-  border-radius: 1em;
-  // max-height: max-content;
-  height: 150px;
+  border-radius: 0.5em;
+  min-height: 35vh;
+  max-height: 70vh;
   word-wrap: break-word;
   overflow-y: auto;
-
+  color: black;
   /* Position the tooltip */
   position: absolute;
   display: flex;
-  right: -5px;
-  top: 20px;
-
+  right: -6vw;
+  top: 30px;
+  a {
+    text-decoration: none;
+  }
   z-index: 1;
 }
 .tool-tip-text.true {
   visibility: visible;
+}
+.read-true {
+  // background-color: rgb(212, 211, 211);
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  margin-bottom: 1vh;
+}
+.read-false {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  margin-bottom: 1vh;
+  // background-color: rgb(172, 255, 152);
+}
+.all-notifications-container {
+  width: 100%;
+}
+.message-container {
+  width: 100%;
+  a {
+    color: black;
+  }
+  &:hover {
+    background-color: rgba(207, 207, 207, 0.705);
+  }
+}
+.footer-message {
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #65676b;
+  font-weight: lighter;
+}
+.message-title {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 80%;
+}
+.bullet-message {
+  font-size: 400%;
+  height: min-content;
+  color: blue;
+}
+.date-span-message {
+  display: flex;
+  align-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  height: 20px;
+  width: 95%;
+}
+/////////////////////////////////////////////
+
+//////////////////// message details page ////////////////////////////
+
+.message-div-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+.message-div-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
 }
 
 //////////////////////////////////Credit Card ///////////////////////////
@@ -1389,5 +1460,6 @@ $form-border-color: rgba(0, 0, 0, 0.1);
     border-radius: 50%;
     background-color: white;
     padding: 3%;
+    cursor: pointer;
   }
 }

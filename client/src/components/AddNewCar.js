@@ -103,7 +103,7 @@ export default function AddNewCar() {
       year: yearRef.current.value,
       fuel: gasType,
       until: endDate === "" ? null : endDate,
-      from: startDate === "" ? null : endDate,
+      from: startDate === "" ? null : startDate,
       passengers: parseInt(passengersRef.current.value),
       pricePerDay: pricePerDayRef.current.value,
       discountPerWeek: discountPerWeekRef.current.value,

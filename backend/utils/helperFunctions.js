@@ -21,7 +21,7 @@ const buildPatterns = ({ transactionId, startDate, endDate }) => {
   </p>`;
 
   const textPatternToOwner = `<p>Dear valued User,
-  your car got an order from user.... on these dates: ${startDate} - ${endDate}.
+  your car got an order from user.... on these dates: ${startDate.toDateString()} - ${endDate.toDateString()}.
   please enter your account to confirm the order.
   in case you won't handle the request within 12 hours the order will be canceled.
   kind regards, carBnB team</p>
