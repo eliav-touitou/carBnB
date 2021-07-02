@@ -64,7 +64,7 @@ export default function Home() {
         })
         .catch((err) => console.log(err.message));
     }
-  }, [auth]);
+  }, [[], auth]);
 
   useEffect(() => {
     if (notFoundMessage) {

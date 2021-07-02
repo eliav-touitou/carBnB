@@ -78,7 +78,7 @@ export default function MessageDetails() {
   return (
     <div className="message-div-container">
       <div className="message-div-details">
-        {message.content.slice(3, message.content.length - 7)}
+        {message.content.slice(3, message.content.length - 4)}
         {statusButton && (
           <p>
             <button onClick={updateRentalStatus}>accept</button> |{" "}

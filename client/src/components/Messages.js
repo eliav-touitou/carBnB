@@ -16,7 +16,9 @@ export default function Messages({ message, messageId }) {
       data: { id: message?.id, status: "read" },
     });
   };
-  console.log(message);
+
+  ////////////////// need to check if message not read and title == "order finish"⬇
+  ////////////////////// show rating component to user, else only message
   return (
     <div className="message-container">
       <Link onClick={updateRead} to={`/message/${messageId}`}>
