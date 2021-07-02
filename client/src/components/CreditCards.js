@@ -1,12 +1,29 @@
+import axios from "axios";
 import React, { useState } from "react";
 import Cards from "react-credit-cards";
 import "react-credit-cards/lib/styles-compiled.css";
+import { useSelector, useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
+import {
+  setRentalDetails,
+  setAvailableCars,
+  setFilteredCars,
+  setInitialSearch,
+  setNotFoundMessage,
+} from "../actions";
 // import "react-credit-cards/es/styles-compiled.css";
 
-////////// NEED TO MOVE THE RENTAL CAR FUNCTION TO THIS COMPONENT. ////////////////////
-
 export default function CreditCards() {
+  const dispatch = useDispatch();
+
+  // Redux states
+  const auth = useSelector((state) => state.auth);
+  const initialSearch = useSelector((state) => state.initialSearch);
+  const carToRental = useSelector((state) => state.carToRental);
+
   // Use State
+  const [redirect, setRedirect] = useState("/payment");
+  const [isTakenMessage, setIsTakenMessage] = useState(false);
   const [data, setData] = useState({
     cvc: "",
     expiry: "",
@@ -22,6 +39,56 @@ export default function CreditCards() {
     });
   };
 
+  const makeOrder = async (e) => {
+    e.preventDefault();
+    try {
+      const rental = await axios.post("/api/v1/rentals/new", {
+        data: { rentalDetails: carToRental, userDetails: auth },
+      });
+
+      // If order succeed redirect to summery
+      if (rental.status === 201) {
+        dispatch(setRentalDetails(rental.data.data));
+        setRedirect("/summery");
+      }
+    } catch (error) {
+      // If in the middle of the order, someone else took this car
+      if (error.response.status === 400) {
+        await resetAvailableCars();
+      }
+      console.log(error);
+    }
+  };
+
+  // Handle with difference cases
+  const resetAvailableCars = async () => {
+    try {
+      const { data: availableCars } = await axios.post(
+        "api/v1/search/initial",
+        { data: initialSearch }
+      );
+
+      // If still there are available Cars, redirect to results
+      dispatch(setAvailableCars(availableCars.data));
+      dispatch(setFilteredCars(availableCars.data));
+      setIsTakenMessage(true);
+      setTimeout(() => {
+        setIsTakenMessage(false);
+        setRedirect("/results");
+      }, 5000);
+    } catch (err) {
+      // If still there no available Cars, redirect to home
+      if (err.response.status === 404) {
+        setRedirect("/");
+        dispatch(setAvailableCars([]));
+        dispatch(setFilteredCars([]));
+        dispatch(setInitialSearch([]));
+        dispatch(setNotFoundMessage(err.response.data.message));
+      }
+      console.log(err);
+    }
+  };
+
   return (
     <div id="" className="credit-card-page">
       <div id="" className="credit-card-container">
@@ -33,12 +100,13 @@ export default function CreditCards() {
             name={data.name}
             number={data.number}
           />
-          <form action="">
+          <form>
             <input
-              type="number"
-              name="cvc"
-              placeholder="CVC"
+              type="text"
+              name="number"
+              placeholder="Card Number"
               onChange={handleInputChange}
+              maxLength="16"
             />
             <input
               type="date"
@@ -54,13 +122,21 @@ export default function CreditCards() {
             />
             <input
               type="number"
-              name="number"
-              placeholder="Card Number"
+              name="cvc"
+              placeholder="CVC"
               onChange={handleInputChange}
             />
+            <button onClick={makeOrder}>ORDER!</button>
+            {isTakenMessage && (
+              <div>
+                Oops.. someone just pick the car, you are redirect to all
+                results again:/
+              </div>
+            )}
           </form>
         </div>
       </div>
+      <Redirect push to={redirect} />
     </div>
   );
 }

@@ -23,7 +23,6 @@ import MailIcon from "@material-ui/icons/Mail";
 import PromptLogin from "./components/PromptLogin";
 import Avatar from "./components/Avatar";
 import logo from "./photos/logo-black.png";
-import Messages from "./components/Messages";
 import CreditCards from "./components/CreditCards";
 
 const axios = require("axios");
@@ -142,8 +141,11 @@ function App() {
           <Route exact path="/results">
             <Results />
           </Route>
-          <Route exact path="/summery">
+          <Route exact path="/payment">
             <CreditCards />
+          </Route>
+          <Route exact path="/summery">
+            <OrderSummery />
           </Route>
           {auth && (
             <Route exact path="/notifications">

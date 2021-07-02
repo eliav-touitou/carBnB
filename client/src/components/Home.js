@@ -13,7 +13,6 @@ import photo from "../photos/background-4593643_1920.jpg";
 import topCar from "../photos/top-car.jpeg";
 import topOwner from "../photos/top-owner.jpeg";
 import topLocation from "../photos/top-location.jpeg";
-import CreditCards from "./CreditCards";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -76,7 +75,6 @@ export default function Home() {
 
   return (
     <div>
-      <CreditCards />
       <section className="land-section">
         <img className="intro-img" height="50%" src={photo}></img>
         <h1>
@@ -88,7 +86,6 @@ export default function Home() {
         </span>
       </section>
       {notFoundMessage && <div>{notFoundMessage}</div>}
-      {/* <p>messages thet not read: {counter}</p> */}
 
       <section className="search-section" id="search">
         <SearchBar allCitiesApi={allCitiesApi} />

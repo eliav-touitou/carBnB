@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
-import { setPhotosArray, setShowLogin } from "../actions";
+import { setPhotosArray, setShowLogin, setCarToRental } from "../actions";
 import Carousel from "react-elastic-carousel";
 
 import {
@@ -41,70 +41,11 @@ export default function CarDetails() {
   const photosArray = useSelector((state) => state.photosArray);
   const auth = useSelector((state) => state.auth);
   const showLogin = useSelector((state) => state.showLogin);
+  const carToRental = useSelector((state) => state.carToRental);
 
   useEffect(() => {
     if (auth) dispatch(setShowLogin(false));
   }, [auth]);
-
-  // Handle with difference cases
-  const resetAvailableCars = async () => {
-    try {
-      const { data: availableCars } = await axios.post(
-        "api/v1/search/initial",
-        { data: initialSearch }
-      );
-
-      // If still there are available Cars, redirect to results
-      dispatch(setAvailableCars(availableCars.data));
-      dispatch(setFilteredCars(availableCars.data));
-      setRedirect("/results");
-    } catch (err) {
-      // If still there no available Cars, redirect to home
-      if (err.response.status === 404) {
-        setRedirect("/");
-        dispatch(setAvailableCars([]));
-        dispatch(setFilteredCars([]));
-        dispatch(setInitialSearch([]));
-      }
-      console.log(err);
-    }
-  };
-
-  // Send new rental to save
-  const rentalCar = async () => {
-    const data = {
-      carId: availableCars[resultId].car_id,
-      ownerEmail: availableCars[resultId].owner_email,
-      renterEmail: auth.user_email,
-      startDate: initialSearch.startDate,
-      endDate: initialSearch.endDate,
-      totalPrice: calculateDiscount().price,
-    };
-    try {
-      if (auth) {
-        const rental = await axios.post("/api/v1/rentals/new", {
-          data: { rentalDetails: data, userDetails: auth },
-        });
-
-        // If order succeed redirect to summery
-        if (rental.status === 201) {
-          dispatch(setRentalDetails(rental.data.data));
-          setRedirect("/summery");
-        }
-      } else {
-        // need to prompt login component
-        dispatch(setShowLogin(true));
-        console.log("must log in first!");
-      }
-    } catch (error) {
-      // If in the middle of the order, someone else took this car
-      if (error.response.status === 400) {
-        dispatch(setNotFoundMessage(error.response.data.message));
-        await resetAvailableCars();
-      }
-      console.log(error);
-    }
-  };
 
   // Function for get numbers of days rental
   const getNumberOfRentalDays = () => {
@@ -139,6 +80,25 @@ export default function CarDetails() {
       newPrice =
         (pricePerDay - (percent / 100) * pricePerDay) * numberOfDaysToRent;
       return { price: newPrice, percent: `${percent}%`, days: "week" };
+    }
+  };
+
+  const goToPayment = () => {
+    if (auth) {
+      const data = {
+        carId: availableCars[resultId].car_id,
+        ownerEmail: availableCars[resultId].owner_email,
+        renterEmail: auth.user_email,
+        startDate: initialSearch.startDate,
+        endDate: initialSearch.endDate,
+        totalPrice: calculateDiscount().price,
+      };
+      dispatch(setCarToRental(data));
+      setRedirect("/payment");
+    } else {
+      // need to prompt login component
+      dispatch(setShowLogin(true));
+      console.log("must log in first!");
     }
   };
 
@@ -178,9 +138,8 @@ export default function CarDetails() {
         ))}
       </Carousel>
 
-      <button onClick={rentalCar}>Order this car</button>
+      <button onClick={goToPayment}>go to payment</button>
       <Redirect push to={redirect} />
     </div>
   );
 }
-////////////////////////////////////////

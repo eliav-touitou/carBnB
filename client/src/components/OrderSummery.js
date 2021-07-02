@@ -3,8 +3,9 @@ import { useSelector } from "react-redux";
 
 export default function OrderSummery() {
   // Redux state
-  const rentalDetails = useSelector((state) => state.rentalDetails);
-  const array = Object.entries(rentalDetails);
+  const carToRental = useSelector((state) => state.carToRental);
+  const array = Object.entries(carToRental);
+
   return (
     <div>
       <h1>Your order was successfully made! </h1>
