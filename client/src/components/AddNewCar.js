@@ -9,6 +9,7 @@ import "react-dates/lib/css/_datepicker.css";
 import "../react_dates_overrides.css";
 import dog from "../photos/dog-4223905_1920.jpg";
 import { setAuth } from "../actions";
+import { Redirect } from "react-router";
 export default function AddNewCar() {
   const dispatch = useDispatch();
 
@@ -26,6 +27,7 @@ export default function AddNewCar() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [focusedInput, setFocusedInput] = useState(null);
+  const [redirect, setRedirect] = useState(false);
   const [gearType, setGearType] = useState("Manuel");
   const [gasType, setGasType] = useState("Octan-95");
 
@@ -117,6 +119,7 @@ export default function AddNewCar() {
         photosArray.forEach((photo) => (photo.car_id = id));
         dispatch(setPhotosArray(photosArray));
         await axios.post("api/v1/photos/savephotos", photosArray);
+        setRedirect(true);
       } else {
         // need to prompt login promp component
       }
@@ -347,6 +350,7 @@ export default function AddNewCar() {
           </div>
           <div className="submit-btn">
             <button onClick={uploadCar}>Upload Car</button>
+            {redirect && <Redirect to="/profile" />}
           </div>
         </div>
       </div>
