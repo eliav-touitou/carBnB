@@ -9,28 +9,11 @@ export default function Notifications() {
   const notifications = useSelector((state) => state.notifications);
   const dispatch = useDispatch();
 
-  const getAllNewMessages = async () => {
-    try {
-      if (auth) {
-        const { data: messages } = await axios.post(
-          "/api/v1/notification/messages",
-          {
-            data: { email: auth.user_email },
-          }
-        );
-        dispatch(setNotifications(messages.data));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <div>
+    <div className="all-notifications-container">
       {notifications?.map((message, i) => (
         <Messages message={message} key={`message-${i}`} messageId={i} />
       ))}
-      <button onClick={getAllNewMessages}>refresh</button>
     </div>
   );
 }
