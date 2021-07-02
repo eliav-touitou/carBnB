@@ -709,6 +709,7 @@ form {
 #rating-slider,
 #years-slider {
   max-width: 100%;
+  width: 100%;
 }
 @media screen and (max-width: 700px) {
   .results {
@@ -854,20 +855,20 @@ form {
   }
 }
 
+///////////////////////////////////////////////.top-pick-section
 .top-pick-section {
   height: 100vh;
   display: flex;
   flex-direction: column;
-
+  align-self: center;
+  justify-content: center;
   h2 {
-    display: inline-flex;
-    margin-top: 50px;
-    margin-left: 20px;
     margin-bottom: 70px;
     height: fit-content;
     font-size: 32px;
   }
   .top-picks-container {
+    max-width: 100%;
     display: flex;
     flex-direction: row;
     align-content: stretch;
@@ -878,6 +879,9 @@ form {
 
   .top-pick {
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     h4 {
       font-size: 15px;
       margin-bottom: 0px;
@@ -887,13 +891,14 @@ form {
       opacity: 0.7;
     }
     img {
-      height: 20vh;
-      width: auto;
+      height: 40vh;
+      width: 100%;
       border-radius: 0.5em;
       // display: inline-block;
     }
   }
 }
+//////////////////////////////////////////footer
 
 .footer-section {
   display: flex;
@@ -1077,3 +1082,312 @@ form {
 }
 
 //////////////////////////////////Credit Card ///////////////////////////
+//////////////////////////////////////////////////top picks carousel
+.carousel-wrapper {
+  height: 400px;
+  position: relative;
+  width: 800px;
+  margin: 0 auto;
+  max-width: 100vw;
+}
+.carousel-item {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 25px 50px;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 12px;
+}
+
+.arrow-prev {
+  left: -30px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) rotate(135deg);
+}
+
+.arrow-next {
+  right: -30px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.light {
+  color: white;
+}
+
+@media (max-width: 480px) {
+  .arrow,
+  .light .arrow {
+    background-size: 10px;
+    background-position: 10px 50%;
+  }
+}
+
+/*Select every element*/
+[id^="item"] {
+  display: none;
+}
+
+.item-1 {
+  z-index: 2;
+  opacity: 1;
+  // background: url("https://static.pexels.com/photos/6526/sea-beach-holiday-vacation-large.jpg");
+  background-size: cover;
+}
+.item-2 {
+  // background: url("https://static.pexels.com/photos/6506/alcohol-bar-drinks-party-large.jpg");
+  background-size: cover;
+}
+.item-3 {
+  // background: url("https://static.pexels.com/photos/6529/lake-kajak-kayak-large.jpg");
+  background-size: cover;
+}
+
+*:target ~ .item-1 {
+  opacity: 0;
+}
+
+#item-1:target ~ .item-1 {
+  opacity: 1;
+}
+
+#item-2:target ~ .item-2,
+#item-3:target ~ .item-3 {
+  z-index: 3;
+  opacity: 1;
+}
+.top-pick-carousel {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  max-width: 100vw;
+
+  h2 {
+    margin-bottom: 70px;
+    height: fit-content;
+    font-size: 32px;
+  }
+  .items-data {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h4 {
+      font-size: 15px;
+      margin-bottom: 0px;
+    }
+    p {
+      font-size: 13px;
+      opacity: 0.7;
+    }
+    img {
+      height: 50vh;
+      width: 80%;
+      border-radius: 0.5em;
+    }
+  }
+}
+////////////////////////////////end of top picks carousel
+/////////////////add new car
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap");
+$primary-bg-color: #9db3dd;
+$secondary-bg-color: #46494b;
+$font-color: rgba(0, 0, 0, 0.8);
+$font-family: "Montserrat", sans-serif;
+$form-border-color: rgba(0, 0, 0, 0.1);
+
+.add-new-car-page {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  background: #c4e0e0;
+  color: $font-color;
+  height: 100vh;
+  min-width: 100vw;
+}
+.add-car-panel {
+  height: 80vh;
+  width: 60vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.left-side-panel {
+  background-color: $secondary-bg-color;
+  width: 20%;
+  height: 100%;
+}
+.right-side-panel {
+  width: 80%;
+  background-color: $primary-bg-color;
+  max-height: 100%;
+  height: 100%;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & h1 {
+    display: inline-block;
+    font-size: 24px;
+  }
+  .fields-inputs {
+    width: 100%;
+    height: 100%;
+    padding: 2vh 2vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .set {
+      width: 100%;
+      min-width: 100%;
+    }
+    .input-div {
+      width: 50%;
+      display: inline-block;
+
+      & input,
+      .radio-container {
+        // display: inline-block;
+        width: 95%;
+      }
+    }
+  }
+  & button {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    height: 38px;
+    line-height: 38px;
+    width: 100px;
+    border-radius: 19px;
+    // font-family: $font-family;
+  }
+}
+.submit-btn {
+  width: 100%;
+  height: 15%;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  & button {
+    background-color: $secondary-bg-color;
+    color: white;
+    align-self: center;
+  }
+}
+
+//   & .set {
+//     display: flex;
+//     justify-content: space-between;
+//     margin: 10px 0;
+//   }
+.right-side-panel {
+  & input {
+    border: 1px solid $form-border-color;
+    border-radius: 4px;
+    height: 38px;
+    line-height: 38px;
+    padding-left: 5px;
+  }
+
+  & input,
+  label {
+    color: $font-color;
+  }
+
+  //   & header {
+  //     padding: 40px;
+  //   }
+
+  & label,
+  input,
+  .pets-photo {
+    width: 176px;
+  }
+
+  //   & .pets-photo {
+  //     align-items: center;
+  //     display: grid;
+  //     grid-template-areas: ". .";
+
+  //     & button {
+  //       border: none;
+  //       border-radius: 50%;
+  //       height: 38px;
+  //       margin-right: 10px;
+  //       outline: none;
+  //       width: 38px;
+  //     }
+
+  //     & button i {
+  //       color: $font-color;
+  //       font-size: 16px;
+  //     }
+  //   }
+
+  .gas-type {
+    width: 100%;
+    .radio-container {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+    }
+  }
+
+  .radio-container {
+    background: #fff;
+    border: 1px solid $form-border-color;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+  }
+  .radio-container label {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    transition: 0.2s all ease-in-out;
+    width: 80px;
+  }
+  .radio-container input[type="radio"] {
+    display: none;
+  }
+  .radio-container input[type="radio"]:checked + label {
+    background: $primary-bg-color;
+    border: 1px solid $form-border-color;
+  }
+}
+
+///////////////////////end of add car section
+
+.upload-div {
+  & input[type="file"] {
+    display: none;
+  }
+  .upload-btn {
+    border-radius: 50%;
+    background-color: white;
+    padding: 3%;
+  }
+}
