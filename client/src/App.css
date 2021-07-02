@@ -1375,7 +1375,7 @@ form {
 }
 
 .add-car-panel {
-  height: 70vh;
+  height: 80vh;
   width: 60vw;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1418,13 +1418,33 @@ form {
           align-items: center;
 }
 
+.right-side-panel h1 {
+  display: inline-block;
+  font-size: 24px;
+}
+
 .right-side-panel .fields-inputs {
   width: 100%;
   height: 100%;
-  padding: 6vh 2vw;
+  padding: 2vh 2vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.right-side-panel .fields-inputs .set {
+  width: 100%;
+  min-width: 100%;
 }
 
 .right-side-panel .fields-inputs .input-div {
@@ -1484,13 +1504,16 @@ form {
   width: 176px;
 }
 
-.right-side-panel .pets-weight .radio-container {
+.right-side-panel .gas-type {
+  width: 100%;
+}
+
+.right-side-panel .gas-type .radio-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   width: 100%;
 }
 
@@ -1498,7 +1521,11 @@ form {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  display: inline-block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   padding: 5px;
 }
 
@@ -1524,5 +1551,15 @@ form {
 .right-side-panel .radio-container input[type="radio"]:checked + label {
   background: #9db3dd;
   border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.upload-div input[type="file"] {
+  display: none;
+}
+
+.upload-div .upload-btn {
+  border-radius: 50%;
+  background-color: white;
+  padding: 3%;
 }
 /*# sourceMappingURL=App.css.map */

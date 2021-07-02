@@ -29,10 +29,16 @@ export default function Rental({ id }) {
   };
 
   return (
-    <div>
+    <div className="upload-div">
       <div>
+        <label for="upload-photo" className="file-upload">
+          <span className="upload-btn">
+            <i className="fas fa-camera-retro" id="pets-upload" />
+          </span>
+          <span> Upload a photo</span>
+        </label>
         <input
-          className="upload-photo-rental"
+          id="upload-photo"
           type="file"
           onChange={(e) => imageToBinary(e)}
           multiple
