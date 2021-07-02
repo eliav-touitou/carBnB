@@ -4,13 +4,16 @@ const {
   getAllItems,
   deleteItems,
   addNewNotification,
+  getAllOptionalFinishOrders,
+  updateItemToDB,
 } = require("../database/queries");
 const {
   buildPatternsForCanceledRentals,
+  buildPatternsForAfterRentalFinish,
   sendMail,
 } = require("../backend/utils/helperFunctions");
 
-const scrapeDB = async () => {
+const removePendingOrders = async () => {
   const rentalToRemoveIds = [];
   const rentalToRemove = [];
   try {
@@ -57,6 +60,55 @@ const scrapeDB = async () => {
   }
 };
 
+const finishOrders = async () => {
+  try {
+    const allOptionalFinishOrders = await getAllOptionalFinishOrders(Rental);
+    const arrOfRentalsId = [];
+    allOptionalFinishOrders.forEach((order) => {
+      if (new Date() > new Date(order.end_date)) {
+        arrOfRentalsId.push(order);
+      }
+    });
+
+    arrOfRentalsId.forEach(async (rental) => {
+      // Build pattern texts for emails
+      const { textToRenterAfterFinish } = buildPatternsForAfterRentalFinish({
+        transactionId: String(rental.transaction_id),
+      });
+
+      const forRenter = {
+        messageFrom: process.env.ADMIN_MAIL,
+        messageTo: rental.renter_email,
+        title: "Order Finished",
+        content: textToRenterAfterFinish,
+      };
+      const objToUpdateDB = {
+        table: Rental,
+        column: ["is_active"],
+        primaryKey: "transaction_id",
+        primaryKeyValue: rental.transaction_id,
+        content: ["finished"],
+      };
+
+      /////////////////////////////// need to fix email sending //////////////////////////////////////////
+      // sendMail(forRenter);
+      await updateItemToDB(objToUpdateDB);
+      await addNewNotification(forRenter);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+finishOrders().then((res) => {
+  console.log(res);
+});
+
+// Run every hour
 setInterval(async () => {
-  await scrapeDB();
+  await removePendingOrders();
 }, 3600000);
+
+// Run every day
+setInterval(async () => {
+  await finishOrders();
+}, 86400000);
