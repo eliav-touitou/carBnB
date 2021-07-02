@@ -341,6 +341,16 @@ const getAllCarsByIdsArr = async (arr) => {
   }
 };
 
+const getAllOptionalFinishOrders = async () => {
+  try {
+    const result = await Rental.findAll({ where: { is_active: "confirm" } });
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getCar,
   getRental,
@@ -363,4 +373,5 @@ module.exports = {
   addNewNotification,
   getAllCarsByIdsArr,
   getPhoto,
+  getAllOptionalFinishOrders,
 };
