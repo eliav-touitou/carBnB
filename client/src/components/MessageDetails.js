@@ -1,13 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { setNotifications, setNotificationCounter } from "../actions";
 
 export default function MessageDetails() {
+  const dispatch = useDispatch();
   const { messageId } = useParams();
   const notifications = useSelector((state) => state.notifications);
   const [statusButton, setStatusButton] = useState(false);
   const message = notifications[messageId];
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
     axios
@@ -34,6 +37,29 @@ export default function MessageDetails() {
     }
   };
 
+  useEffect(() => {
+    let count = 0;
+    try {
+      if (auth) {
+        axios
+          .post("/api/v1/notification/messages", {
+            data: { email: auth.user_email },
+          })
+          .then(({ data: messages }) => {
+            messages.data?.forEach((message) => {
+              if (message.read === false) {
+                count++;
+              }
+            });
+            dispatch(setNotificationCounter(count));
+            dispatch(setNotifications(messages.data));
+          });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [notifications]);
+
   const updateRentalStatus = async (e) => {
     const status = e.target.innerText === "accept" ? "confirm" : "reject";
     try {
@@ -50,15 +76,17 @@ export default function MessageDetails() {
   };
 
   return (
-    <div>
-      {message.content}
-      {statusButton && (
-        <p>
-          <button onClick={updateRentalStatus}>accept</button> |{" "}
-          <button>reject</button>
-        </p>
-      )}
-      <button onClick={updateUnRead}>unread this message</button>
+    <div className="message-div-container">
+      <div className="message-div-details">
+        {message.content.slice(3, message.content.length - 7)}
+        {statusButton && (
+          <p>
+            <button onClick={updateRentalStatus}>accept</button> |{" "}
+            <button>reject</button>
+          </p>
+        )}
+        <button onClick={updateUnRead}>unread this message</button>
+      </div>
     </div>
   );
 }
