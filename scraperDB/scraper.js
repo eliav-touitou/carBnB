@@ -113,5 +113,3 @@ setInterval(async () => {
 setInterval(async () => {
   await finishOrders();
 }, 86400000);
-
-finishOrders();

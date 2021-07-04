@@ -52,8 +52,6 @@ const buildPatternsForAfterRentalFinish = ({ transactionId }) => {
 };
 
 const sendMail = ({ from, to, subject, text }) => {
-  console.log("///////////////////////////////////////");
-  console.log(from, to, subject, text);
   mailOption = {
     from: from,
     to: to,

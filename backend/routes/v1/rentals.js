@@ -113,8 +113,8 @@ rentals.post("/new", async (req, res) => {
     });
 
     await addNewNotification({
-      messageFrom: rentalDetails.renterEmail,
-      messageTo: rentalDetails.ownerEmail,
+      from: rentalDetails.renterEmail,
+      to: rentalDetails.ownerEmail,
       title: "New Order incoming",
       content: textPatternToOwner,
       transactionId: result.transaction_id,
