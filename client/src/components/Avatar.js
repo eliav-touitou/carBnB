@@ -82,6 +82,9 @@ export default function Avatar({ setVisibility, setAnchorEl, anchorEl }) {
         >
           <MenuItem onClick={handleClose}>Logout</MenuItem>
         </Link>
+        <Link exact={"true"} to="/favorite" className="menu-drop-down">
+          <MenuItem onClick={handleClose}>Favorite</MenuItem>
+        </Link>
       </Menu>
     </div>
   );

@@ -31,6 +31,7 @@ import Avatar from "./components/Avatar";
 import logo from "./photos/logo-black.png";
 import CreditCards from "./components/CreditCards";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import MyFavorite from "./components/MyFavorite";
 
 const axios = require("axios");
 
@@ -173,6 +174,9 @@ function App() {
           </Route>
           <Route exact path="/summery">
             <OrderSummery />
+          </Route>
+          <Route exact path="/favorite">
+            <MyFavorite />
           </Route>
           {auth && (
             <Route exact path="/notifications">
