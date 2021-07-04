@@ -52,6 +52,8 @@ const buildPatternsForAfterRentalFinish = ({ transactionId }) => {
 };
 
 const sendMail = ({ from, to, subject, text }) => {
+  console.log("///////////////////////////////////////");
+  console.log(from, to, subject, text);
   mailOption = {
     from: from,
     to: to,
@@ -65,9 +67,10 @@ const sendMail = ({ from, to, subject, text }) => {
       },
     ],
   };
-
+  if (subject !== "New Order incoming") delete mailOption.attachments;
   transporter.sendMail(mailOption, (error, info) => {
     if (error) {
+      console.log(error);
       throw error;
     } else {
       console.log(info);

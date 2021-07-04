@@ -3,12 +3,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "./SearchBar";
 import Avatar from "./Avatar";
-import {
-  setPromptOrNormal,
-  setNotifications,
-  setNotificationCounter,
-  setNotFoundMessage,
-} from "../actions";
+import { setPromptOrNormal, setNotFoundMessage } from "../actions";
 import photo from "../photos/background-4593643_1920.jpg";
 import topCar from "../photos/top-car.jpeg";
 import topOwner from "../photos/top-owner.jpeg";
@@ -45,26 +40,6 @@ export default function Home() {
   const setNormal = () => {
     dispatch(setPromptOrNormal("normal"));
   };
-
-  useEffect(() => {
-    let count = 0;
-    if (auth) {
-      axios
-        .post("/api/v1/notification/messages", {
-          data: { email: auth.user_email },
-        })
-        .then(({ data: messages }) => {
-          messages.data?.forEach((message) => {
-            if (message.read === false) {
-              count++;
-            }
-          });
-          dispatch(setNotificationCounter(count));
-          dispatch(setNotifications(messages.data));
-        })
-        .catch((err) => console.log(err.message));
-    }
-  }, [[], auth]);
 
   useEffect(() => {
     if (notFoundMessage) {
