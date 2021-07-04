@@ -310,9 +310,9 @@ const addNewNotification = async (obj) => {
   const objToSave = {
     message_from: obj.from,
     message_to: obj.to,
-    title: obj.subject,
-    content: obj.text,
-    transactionId: obj.transaction_id,
+    title: obj.title,
+    content: obj.content,
+    transaction_id: obj.transactionId,
     read: false,
   };
   try {

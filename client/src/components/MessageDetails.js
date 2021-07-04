@@ -3,14 +3,22 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { setNotifications, setNotificationCounter } from "../actions";
+import Rating from "@material-ui/lab/Rating";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
 export default function MessageDetails() {
   const dispatch = useDispatch();
   const { messageId } = useParams();
+
+  // Redux states
   const notifications = useSelector((state) => state.notifications);
-  const [statusButton, setStatusButton] = useState(false);
-  const message = notifications[messageId];
   const auth = useSelector((state) => state.auth);
+
+  // Use states
+  const [statusButton, setStatusButton] = useState(false);
+  const [value, setValue] = useState(0);
+  const message = notifications[messageId];
 
   useEffect(() => {
     axios
@@ -58,7 +66,10 @@ export default function MessageDetails() {
     } catch (error) {
       console.log(error);
     }
-  }, [notifications]);
+    return () => {
+      setValue(0);
+    };
+  }, []);
 
   const updateRentalStatus = async (e) => {
     const status = e.target.innerText === "accept" ? "confirm" : "reject";
@@ -75,6 +86,42 @@ export default function MessageDetails() {
     }
   };
 
+  const updateRating = async (newValue) => {
+    setValue(newValue);
+    try {
+      const { data: uniqueRental } = await axios.post(
+        "/api/v1/rentals/uniquerental",
+        {
+          id: String(message.transaction_id),
+        }
+      );
+      const ownerEmail = uniqueRental.data.owner_email;
+
+      const { data: user } = await axios.post("/api/v1/users/uniqueuser", {
+        email: ownerEmail,
+      });
+
+      const prevRating = user.data.rating;
+      const prevNumberOfVotes = user.data.number_of_votes;
+      const newNumberOfVotes = user.data.number_of_votes + 1;
+      const newRating =
+        (prevRating * prevNumberOfVotes + value) / newNumberOfVotes;
+      const arrToUpdate = [
+        "User",
+        ["rating", "number_of_votes"],
+        ownerEmail,
+        [newRating, newNumberOfVotes],
+      ];
+
+      const updateUser = await axios.post("/api/v1/users/updateitems", {
+        data: arrToUpdate,
+      });
+      console.log(updateUser);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="message-div-container">
       <div className="message-div-details">
@@ -85,6 +132,26 @@ export default function MessageDetails() {
             <button>reject</button>
           </p>
         )}
+        {message.title === "Order Finished" && value === 0 ? (
+          <div id="rating-background">
+            <div id="rating-container">
+              <Box component="fieldset" mb={3} borderColor="transparent">
+                <Typography id="rate-owner" component="legend">
+                  <br /> Rate Owner:
+                </Typography>
+                <Rating
+                  id="stars"
+                  size="large"
+                  name="simple-controlled"
+                  value={value}
+                  onChange={(event, newValue) => {
+                    updateRating(newValue);
+                  }}
+                />
+              </Box>
+            </div>
+          </div>
+        ) : null}
         <button onClick={updateUnRead}>unread this message</button>
       </div>
     </div>

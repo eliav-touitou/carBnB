@@ -9,6 +9,7 @@ import topCar from "../photos/top-car.jpeg";
 import topOwner from "../photos/top-owner.jpeg";
 import topLocation from "../photos/top-location.jpeg";
 import TopCarousel from "./TopCarousel";
+import Snackbar from "@material-ui/core/Snackbar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -61,8 +62,14 @@ export default function Home() {
           <a href="#search">Let's Start</a>
         </span>
       </section>
-      {notFoundMessage && <div>{notFoundMessage}</div>}
-
+      {notFoundMessage && (
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={true}
+          message={notFoundMessage}
+          key={"top" + "center"}
+        />
+      )}
       <section className="search-section" id="search">
         <SearchBar allCitiesApi={allCitiesApi} />
       </section>
@@ -87,8 +94,8 @@ export default function Home() {
         </div>
       </section>
       <TopCarousel />
-      <hr />
       <section className="footer-section">
+        <hr />
         <div className="upper-footer">
           <div className="support">
             <h4>Support</h4>
