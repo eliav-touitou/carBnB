@@ -103,43 +103,100 @@ export default function CarDetails() {
   };
 
   return (
-    <div>
-      <p>מלא פרטים על הרכב 😃😃🍏🍏</p>
-      <a href={`mailto:${availableCars[resultId].owner_email}`}>owner email</a>
-      <p>barnd: {availableCars[resultId].brand} </p>
-      <p>model: {availableCars[resultId].model} </p>
-      <p>year: {availableCars[resultId].year} </p>
-      <p>fuel: {availableCars[resultId].fuel} </p>
-      <p>gear: {availableCars[resultId].gear} </p>
-      <p>passengers: {availableCars[resultId].passengers} </p>
-      <p>
-        {`initial price: ${getNumberOfRentalDays()} x
+    <div className="car-details-page">
+      <div className="car-details-outer-container">
+        <div className="car-details-inner-container">
+          <p>
+            <span className="car-specific-detail">barnd:</span>
+            <span className="car-specific-info">
+              {availableCars[resultId].brand}
+            </span>
+          </p>
+          <p>
+            <span className="car-specific-detail">model:</span>
+            <span className="car-specific-info">
+              {availableCars[resultId].model}
+            </span>
+          </p>
+          <p>
+            <span className="car-specific-detail">year:</span>
+            <span className="car-specific-info">
+              {availableCars[resultId].year}
+            </span>
+          </p>
+          <p>
+            <span className="car-specific-detail">fuel:</span>
+            <span className="car-specific-info">
+              {availableCars[resultId].fuel}
+            </span>
+          </p>
+          <p>
+            <span className="car-specific-detail">gear:</span>
+            <span className="car-specific-info">
+              {availableCars[resultId].gear}
+            </span>
+          </p>
+          <p>
+            <span className="car-specific-detail">passengers:</span>
+            <span className="car-specific-info">
+              {" "}
+              {availableCars[resultId].passengers}
+            </span>
+          </p>
+          <p>
+            <span className="car-specific-detail">initial price:</span>{" "}
+            <span className="car-specific-info">{`${getNumberOfRentalDays()} x
         ${availableCars[resultId].price_per_day} =
-        ${getNumberOfRentalDays() * availableCars[resultId].price_per_day}`}
-      </p>
-      {calculateDiscount().percent && (
-        <p>{`discount for order over ${calculateDiscount().days}: ${
-          calculateDiscount().percent
-        } , - ${
-          getNumberOfRentalDays() * availableCars[resultId].price_per_day -
-          calculateDiscount().price
-        } $`}</p>
-      )}
-      <p>{`Total price: ${calculateDiscount().price}`}</p>
-      <div className="gallery"></div>
-      <Carousel>
-        {photosArray?.map((photo, i) => (
-          <img
-            alt="license"
-            key={`photo-${i}`}
-            src={`data:image/jpeg;base64,${photo.file}`}
-            height={100}
-          />
-        ))}
-      </Carousel>
+        ${
+          getNumberOfRentalDays() * availableCars[resultId].price_per_day
+        }$`}</span>
+          </p>
+          {calculateDiscount().percent && (
+            <p>
+              <span className="car-specific-detail">{`discount for order over ${
+                calculateDiscount().days
+              }:`}</span>
+              <span className="car-specific-info">{`${
+                calculateDiscount().percent
+              } , - ${
+                getNumberOfRentalDays() *
+                  availableCars[resultId].price_per_day -
+                calculateDiscount().price
+              } $`}</span>
+            </p>
+          )}
+          <p>
+            <span className="car-specific-detail">Total price:</span>
+            {
+              <span className="car-specific-info">
+                {calculateDiscount().price}$
+              </span>
+            }
+          </p>
+          {/* <a
+            className="owner-email-car-details"
+            href={`mailto:${availableCars[resultId].owner_email}`}
+          >
+            owner email
+          </a> */}
+          <div className="gallery"></div>
+          {photosArray.length !== 0 && (
+            <Carousel>
+              {photosArray?.map((photo, i) => (
+                <img
+                  alt="license"
+                  key={`photo-${i}`}
+                  src={`data:image/jpeg;base64,${photo.file}`}
+                  height={100}
+                />
+              ))}
+            </Carousel>
+          )}
 
-      <button onClick={goToPayment}>go to payment</button>
-      <Redirect push to={redirect} />
+          <button onClick={goToPayment}>go to payment</button>
+          <Redirect push to={redirect} />
+        </div>
+      </div>
     </div>
   );
 }

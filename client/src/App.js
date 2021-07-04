@@ -10,7 +10,13 @@ import AddNewCar from "./components/AddNewCar";
 import SearchBar from "./components/SearchBar";
 import Rental from "./components/Rental";
 import Results from "./components/Results";
-import { setAllCarsApi, setAuthOut, setShowLogin } from "./actions";
+import {
+  setAllCarsApi,
+  setAuthOut,
+  setNotificationCounter,
+  setNotifications,
+  setShowLogin,
+} from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 import CarDetails from "./components/CarDetails";
 import OrderSummery from "./components/OrderSummery";
@@ -58,6 +64,26 @@ function App() {
     setVisibility((prev) => !prev);
     setAnchorEl(null);
   };
+
+  useEffect(() => {
+    let count = 0;
+    if (auth) {
+      axios
+        .post("/api/v1/notification/messages", {
+          data: { email: auth.user_email },
+        })
+        .then(({ data: messages }) => {
+          messages.data?.forEach((message) => {
+            if (message.read === false) {
+              count++;
+            }
+          });
+          dispatch(setNotificationCounter(count));
+          dispatch(setNotifications(messages.data));
+        })
+        .catch((err) => console.log(err.message));
+    }
+  }, [[], auth, visibility]);
 
   return (
     <div className="App">

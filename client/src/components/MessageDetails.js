@@ -69,6 +69,7 @@ export default function MessageDetails() {
   }, []);
 
   const updateRentalStatus = async (e) => {
+    console.log(e);
     const status = e.target.innerText === "accept" ? "confirm" : "reject";
     try {
       await axios.patch("/api/v1/rentals/status", {
@@ -126,7 +127,7 @@ export default function MessageDetails() {
         {statusButton && (
           <p>
             <button onClick={updateRentalStatus}>accept</button> |{" "}
-            <button>reject</button>
+            <button onClick={updateRentalStatus}>reject</button>
           </p>
         )}
         {message.title === "Order Finished" && value === 0 ? (

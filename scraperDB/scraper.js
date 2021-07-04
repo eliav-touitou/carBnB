@@ -73,16 +73,18 @@ const finishOrders = async () => {
     });
 
     arrOfRentalsId.forEach(async (rental) => {
+      rental.toJSON();
       // Build pattern texts for emails
       const { textToRenterAfterFinish } = buildPatternsForAfterRentalFinish({
         transactionId: String(rental.transaction_id),
       });
 
       const forRenter = {
-        messageFrom: process.env.ADMIN_MAIL,
-        messageTo: rental.renter_email,
-        title: "Order Finished",
-        content: textToRenterAfterFinish,
+        from: process.env.ADMIN_MAIL,
+        to: rental.renter_email,
+        subject: "Order Finished",
+        text: textToRenterAfterFinish,
+        transactionId: rental.transaction_id,
       };
       const objToUpdateDB = {
         table: Rental,
@@ -92,8 +94,7 @@ const finishOrders = async () => {
         content: ["finished"],
       };
 
-      /////////////////////////////// need to fix email sending //////////////////////////////////////////
-      // sendMail(forRenter);
+      sendMail(forRenter);
       await updateItemToDB(objToUpdateDB);
       await addNewNotification(forRenter);
     });
