@@ -834,8 +834,8 @@ form {
   height: 100vh;
   background-size: 70vh;
   // background-image: url("C:/dev/carBnB/client/src/photos/good-logo-white.png");
-  // background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
+  // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
   background-repeat: no-repeat;
   background-position-y: 10vh;
   background-position-x: 4vw;
@@ -1565,5 +1565,36 @@ $form-border-color: rgba(0, 0, 0, 0.1);
   background-color: lightgray;
   hr {
     margin: 0;
+  }
+}
+
+.order-summery-page {
+  height: 100%;
+  width: 100%;
+  .order-summery-outer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    .order-summery-inner-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      width: 40%;
+      height: 70vh;
+      min-height: min-content;
+      margin-bottom: 7%;
+      box-shadow: 0px 0px 22px -1px #000000;
+      border-radius: 1em;
+      background-color: rgba(255, 245, 245, 0.432);
+      div {
+        display: flex;
+        width: 28vw;
+        line-height: 35px;
+        justify-content: space-between;
+      }
+    }
   }
 }

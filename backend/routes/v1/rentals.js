@@ -116,8 +116,8 @@ rentals.post("/new", async (req, res) => {
     await addNewNotification({
       from: rentalDetails.renterEmail,
       to: rentalDetails.ownerEmail,
-      title: "New Order incoming",
-      content: textPatternToOwner,
+      subject: "New Order incoming",
+      text: textPatternToOwner,
       transactionId: result.transaction_id,
     });
 
@@ -163,8 +163,8 @@ rentals.patch("/status", async (req, res) => {
     await addNewNotification({
       from: rentalDetails.owner_email,
       to: rentalDetails.renter_email,
-      title: `Order ${status}`,
-      content: textToRenterAfterResponding,
+      subject: `Order ${status}`,
+      text: textToRenterAfterResponding,
       transactionId: transactionId,
     });
 
