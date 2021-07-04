@@ -52,6 +52,8 @@ const removePendingOrders = async () => {
 
       sendMail(forRenter);
       sendMail(forOwner);
+      forRenter.transactionId = result.transaction_id;
+      forOwner.transactionId = result.transaction_id;
       await addNewNotification(forRenter);
       await addNewNotification(forOwner);
     });
