@@ -933,14 +933,15 @@ form {
   }
 }
 /////////////////////users profile
+
 .profile-inner-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: auto;
+  justify-content: space-evenly;
+  // padding-top: 5%;
+  // margin: auto;
   width: 50%;
-  height: 60vh;
-  margin-bottom: 13%;
+  height: 70vh;
   box-shadow: 0px 0px 22px -1px #000000;
   border-radius: 1em;
   background-color: rgba(255, 245, 245, 0.432);
@@ -992,6 +993,9 @@ form {
 }
 .profile-container {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
   width: 100vw;
 }
@@ -1000,6 +1004,8 @@ form {
   display: flex;
   flex-direction: row;
   margin-bottom: 9%;
+  max-height: 100%;
+  // overflow-y: scroll;
 }
 .profile-left {
   display: flex;
@@ -1011,6 +1017,17 @@ form {
 }
 .profile-right {
   width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  & div {
+    max-height: 100%;
+  }
+  & ul {
+    max-height: 35vh;
+    // flex-grow: 1;
+    overflow-y: scroll;
+  }
   li {
     width: 80%;
   }
@@ -1046,6 +1063,7 @@ form {
     margin-right: 0.5em;
   }
 }
+
 ////////////////////////////////// tool tip messages ///////////////////////////////
 .tool-tip-text {
   visibility: hidden;

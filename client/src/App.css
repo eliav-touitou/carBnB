@@ -1073,13 +1073,11 @@ form {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin: auto;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   width: 50%;
-  height: 60vh;
-  margin-bottom: 13%;
+  height: 70vh;
   -webkit-box-shadow: 0px 0px 22px -1px #000000;
           box-shadow: 0px 0px 22px -1px #000000;
   border-radius: 1em;
@@ -1162,6 +1160,16 @@ form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 100vh;
   width: 100vw;
 }
@@ -1176,6 +1184,7 @@ form {
       -ms-flex-direction: row;
           flex-direction: row;
   margin-bottom: 9%;
+  max-height: 100%;
 }
 
 .profile-left {
@@ -1192,6 +1201,23 @@ form {
 
 .profile-right {
   width: 100%;
+  max-height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.profile-right div {
+  max-height: 100%;
+}
+
+.profile-right ul {
+  max-height: 35vh;
+  overflow-y: scroll;
 }
 
 .profile-right li {

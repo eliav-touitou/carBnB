@@ -67,19 +67,19 @@ export default function MyCar({
     <>
       {!isOpen ? (
         <li>
-          <div>
-            {iconsKey[keys]}
+          <div className="data-and-icon">
+            <span>{iconsKey[keys]}</span>
             <span> {value}</span>
-            <span className="pencil-profile">
-              {includesCondition.some((el) => keys.includes(el)) && (
-                <CreateOutlinedIcon onClick={() => setIsOpen(true)} />
-              )}
-            </span>
           </div>
+          <span className="pencil-profile">
+            {includesCondition.some((el) => keys.includes(el)) && (
+              <CreateOutlinedIcon onClick={() => setIsOpen(true)} />
+            )}
+          </span>
         </li>
       ) : (
         <li>
-          <div>
+          <div className="data-and-icon">
             <span>{iconsKey[keys]}</span>
             <input ref={inputRef} autoFocus={true} defaultValue={value}></input>
           </div>{" "}
