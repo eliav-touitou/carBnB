@@ -66,9 +66,6 @@ export default function MessageDetails() {
     } catch (error) {
       console.log(error);
     }
-    return () => {
-      setValue(0);
-    };
   }, []);
 
   const updateRentalStatus = async (e) => {

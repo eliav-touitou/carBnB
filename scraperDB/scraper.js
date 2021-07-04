@@ -33,7 +33,7 @@ const removePendingOrders = async () => {
       // Build pattern texts for emails
       const { textToCanceledRenter, textToCanceledOwner } =
         buildPatternsForCanceledRentals({
-          transactionId: String(result.transaction_id),
+          transactionId: String(rental.transaction_id),
         });
 
       forRenter = {
@@ -102,15 +102,20 @@ const finishOrders = async () => {
   }
 };
 finishOrders().then((res) => {
+  console.log("105");
+  console.log(res);
+});
+removePendingOrders().then((res) => {
+  console.log("109");
   console.log(res);
 });
 
 // Run every hour
-setInterval(async () => {
-  await removePendingOrders();
-}, 3600000);
+// setInterval(async () => {
+//   await removePendingOrders();
+// }, 3600000);
 
-// Run every day
-setInterval(async () => {
-  await finishOrders();
-}, 86400000);
+// // Run every day
+// setInterval(async () => {
+//   await finishOrders();
+// }, 86400000);
