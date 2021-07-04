@@ -12,6 +12,7 @@ import {
   setNotFoundMessage,
 } from "../actions";
 // import "react-credit-cards/es/styles-compiled.css";
+import Snackbar from "@material-ui/core/Snackbar";
 
 export default function CreditCards() {
   const dispatch = useDispatch();
@@ -128,10 +129,13 @@ export default function CreditCards() {
             />
             <button onClick={makeOrder}>ORDER!</button>
             {isTakenMessage && (
-              <div>
-                Oops.. someone just pick the car, you are redirect to all
-                results again:/
-              </div>
+              <Snackbar
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                open={true}
+                message={`Oops.. someone just pick the car. \nyou are redirect to all
+               results again:(`}
+                key={"top" + "center"}
+              />
             )}
           </form>
         </div>
