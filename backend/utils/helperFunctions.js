@@ -51,6 +51,12 @@ const buildPatternsForAfterRentalFinish = ({ transactionId }) => {
   return { textToRenterAfterFinish };
 };
 
+const buildPatternsForConfirmOrRejectRental = ({ transactionId, status }) => {
+  const textToRenterAfterResponding = `<p>Dear valued User,
+  Your order Num ${transactionId} was ${status}</p>`;
+
+  return { textToRenterAfterResponding };
+};
 const sendMail = ({ from, to, subject, text }) => {
   mailOption = {
     from: from,
@@ -65,7 +71,7 @@ const sendMail = ({ from, to, subject, text }) => {
       },
     ],
   };
-  if (subject !== "New Order incoming") delete mailOption.attachments;
+  if (subject !== "Order summery") delete mailOption.attachments;
   transporter.sendMail(mailOption, (error, info) => {
     if (error) {
       console.log(error);
@@ -274,4 +280,5 @@ module.exports = {
   createPDFToSend,
   buildInvoice,
   buildPatternsForAfterRentalFinish,
+  buildPatternsForConfirmOrRejectRental,
 };
