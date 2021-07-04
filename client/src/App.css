@@ -1312,6 +1312,8 @@ form {
 
 .message-container {
   width: 100%;
+  border-bottom: 1px black solid;
+  padding: 3px;
 }
 
 .message-container a {
@@ -1810,5 +1812,63 @@ form {
   background-color: white;
   padding: 3%;
   cursor: pointer;
+}
+
+.MuiPaper-root.MuiSnackbarContent-root.MuiPaper-elevation6 {
+  position: relative;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2em;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2em;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+#rating-container {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+  text-align: center;
+  background-color: rgba(226, 226, 226, 0.876);
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding-bottom: 1em;
+  padding-right: 4em;
+  padding-left: 4em;
+  border-radius: 5px;
+}
+
+#rating-background {
+  margin: 0;
+  height: 100vh;
+}
+
+#rate-owner {
+  font-size: 1em;
+}
+
+.footer-section {
+  background-color: lightgray;
+}
+
+.footer-section hr {
+  margin: 0;
 }
 /*# sourceMappingURL=App.css.map */

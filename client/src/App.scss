@@ -1092,6 +1092,8 @@ form {
 }
 .message-container {
   width: 100%;
+  border-bottom: 1px black solid;
+  padding: 3px;
   a {
     color: black;
   }
@@ -1485,5 +1487,66 @@ $form-border-color: rgba(0, 0, 0, 0.1);
     background-color: white;
     padding: 3%;
     cursor: pointer;
+  }
+}
+
+///////////////////////////////////////////// scroll style /////////////////////////////
+.MuiPaper-root.MuiSnackbarContent-root.MuiPaper-elevation6 {
+  position: relative;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2em;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2em;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+///////////////////////////////////////////// end scroll style /////////////////////////////
+
+//////////////////////////// rating panel ////////////////////////////////
+#rating-container {
+  width: fit-content;
+  margin: auto;
+  // position: fixed;
+  // top: 1em;
+  // left: 2vw;
+  text-align: center;
+  background-color: rgba(226, 226, 226, 0.876);
+  height: fit-content;
+  padding-bottom: 1em;
+  padding-right: 4em;
+  padding-left: 4em;
+  border-radius: 5px;
+}
+#rating-background {
+  margin: 0;
+  height: 100vh;
+  // position: fixed;
+}
+#rate-owner {
+  font-size: 1em;
+}
+
+//////////////////////////// end rating panel ////////////////////////////////
+
+.footer-section {
+  background-color: lightgray;
+  hr {
+    margin: 0;
   }
 }
