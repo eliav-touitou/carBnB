@@ -1,6 +1,13 @@
 import "./App.css";
-import React, { useEffect } from "react";
-import { BrowserRouter, Route, Switch, NavLink, Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  NavLink,
+  Link,
+  Redirect,
+} from "react-router-dom";
 import Home from "./components/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -10,7 +17,13 @@ import AddNewCar from "./components/AddNewCar";
 import SearchBar from "./components/SearchBar";
 import Rental from "./components/Rental";
 import Results from "./components/Results";
-import { setAllCarsApi, setAuthOut, setShowLogin } from "./actions";
+import {
+  setAllCarsApi,
+  setAuthOut,
+  setNotificationCounter,
+  setNotifications,
+  setShowLogin,
+} from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 import CarDetails from "./components/CarDetails";
 import OrderSummery from "./components/OrderSummery";
@@ -23,6 +36,11 @@ import MailIcon from "@material-ui/icons/Mail";
 import PromptLogin from "./components/PromptLogin";
 import Avatar from "./components/Avatar";
 import logo from "./photos/logo-black.png";
+import CreditCards from "./components/CreditCards";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import Snackbar from "@material-ui/core/Snackbar";
+import MyFavorite from "./components/MyFavorite";
+import CarDetailsFromFavorite from "./components/CarDetailsFromFavorite";
 
 const axios = require("axios");
 
@@ -37,6 +55,11 @@ function App() {
   const auth = useSelector((state) => state.auth);
   const showLogin = useSelector((state) => state.showLogin);
 
+  // Use state
+  const [visibility, setVisibility] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [needToLogin, setNeedToLogin] = useState(false);
+
   // Get all cars brand from API.
   useEffect(() => {
     dispatch(setShowLogin(false));
@@ -48,17 +71,38 @@ function App() {
       });
   }, []);
 
-  // Logout handler
-  const logoutHandler = async () => {
-    try {
-      await axios.post("/api/v1/users/logout");
-      dispatch(setAuthOut());
-
-      console.log("Success logout");
-    } catch (error) {
-      console.log("Failed logout");
-    }
+  const handleVisibility = () => {
+    setVisibility((prev) => !prev);
+    setAnchorEl(null);
   };
+
+  useEffect(() => {
+    let count = 0;
+    if (auth) {
+      axios
+        .post("/api/v1/notification/messages", {
+          data: { email: auth.user_email },
+        })
+        .then(({ data: messages }) => {
+          messages.data?.forEach((message) => {
+            if (message.read === false) {
+              count++;
+            }
+          });
+          dispatch(setNotificationCounter(count));
+          dispatch(setNotifications(messages.data));
+        })
+        .catch((err) => {
+          if (err.response.status === 403) {
+            dispatch(setAuthOut());
+            setNeedToLogin(true);
+            setTimeout(() => {
+              setNeedToLogin(false);
+            }, 4500);
+          }
+        });
+    }
+  }, [[], auth, visibility]);
 
   return (
     <div className="App">
@@ -74,15 +118,18 @@ function App() {
           Become a host
         </NavLink>
         {auth ? (
-          <NavLink
+          <div
             className="navlink messages"
             activeStyle={{ color: "navy" }}
-            to="/notifications"
+            // to="/notifications"
           >
-            <Badge badgeContent={notificationCounter} color="primary">
-              <MailIcon />
+            <Badge badgeContent={notificationCounter} color="secondary">
+              <NotificationsIcon onClick={handleVisibility} />
+              <div className={`tool-tip-text ${visibility}`}>
+                <Notifications />
+              </div>
             </Badge>
-          </NavLink>
+          </div>
         ) : (
           <div
             className="navlink login-btn"
@@ -93,18 +140,21 @@ function App() {
             Login
           </div>
         )}
-        {/* {!auth && (
-          <div
-            className="navlink"
-            onClick={() => {
-              dispatch(setShowLogin(true));
-            }}
-          >
-            Login
-          </div>
-        )} */}
 
-        <Avatar />
+        {needToLogin && (
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            open={true}
+            message="your time expired, please login again"
+            key={"top" + "center"}
+          />
+        )}
+
+        <Avatar
+          anchorEl={anchorEl}
+          setAnchorEl={setAnchorEl}
+          setVisibility={setVisibility}
+        />
 
         {showLogin && <PromptLogin />}
         <Switch>
@@ -136,8 +186,14 @@ function App() {
           <Route exact path="/results">
             <Results />
           </Route>
+          <Route exact path="/payment">
+            <CreditCards />
+          </Route>
           <Route exact path="/summery">
             <OrderSummery />
+          </Route>
+          <Route exact path="/favorite">
+            <MyFavorite />
           </Route>
           {auth && (
             <Route exact path="/notifications">
@@ -145,12 +201,18 @@ function App() {
             </Route>
           )}
           <Route exact path="/result/:resultId" component={CarDetails} />
+          <Route
+            exact
+            path="/favorite/:carId"
+            component={CarDetailsFromFavorite}
+          />
           <Route exact path="/message/:messageId" component={MessageDetails} />
           <Route exact path="/allmyorders/:type" component={MyOrders} />
           <Route exact path="/order/:orderId" component={OrderDetails} />
 
           <Route path="/" component={NotFound} />
         </Switch>
+        {needToLogin && <Redirect push to="/" />}
       </BrowserRouter>
     </div>
   );

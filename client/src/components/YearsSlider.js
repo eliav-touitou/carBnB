@@ -25,9 +25,10 @@ export default function RangeSlider() {
   // Use states
   const [maxYear, setMaxYear] = useState(100);
   const [minYear, setMinYear] = useState(100);
+  const [tempYears, setTempYears] = useState([]);
 
   const handleChange = (event, newValue) => {
-    dispatch(setFilterYears(newValue));
+    setTempYears(newValue);
   };
 
   useEffect(() => {
@@ -41,6 +42,7 @@ export default function RangeSlider() {
       setMaxYear(maxYearFromDB);
       setMinYear(minYearFromDB);
       dispatch(setFilterYears([minYearFromDB - 5, maxYearFromDB + 5]));
+      setTempYears([minYearFromDB - 5, maxYearFromDB + 5]);
     }
   }, []);
 
@@ -48,9 +50,10 @@ export default function RangeSlider() {
     <div className={classes.root} id="years-slider">
       <Slider
         min={minYear - 10}
-        max={maxYear + 10}
-        value={yearsFilter}
+        max={maxYear}
+        value={tempYears}
         onChange={handleChange}
+        onChangeCommitted={() => dispatch(setFilterYears(tempYears))}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}

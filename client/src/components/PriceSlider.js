@@ -25,6 +25,7 @@ export default function RangeSlider() {
 
   // Use states
   const [maxPrice, setMaxPrice] = useState(100);
+  const [tempPrice, setTempPrice] = useState([]);
 
   useEffect(() => {
     const temp = [];
@@ -35,19 +36,21 @@ export default function RangeSlider() {
       const maxPriceFromDB = Math.max(...temp);
       setMaxPrice(maxPriceFromDB);
       dispatch(setFilterPrice([10, maxPriceFromDB + 5]));
+      setTempPrice([10, maxPriceFromDB + 5]);
     }
   }, []);
 
   const handleChange = (event, newValue) => {
-    dispatch(setFilterPrice(newValue));
+    setTempPrice(newValue);
   };
 
   return (
     <div className={classes.root} id="price-slider">
       <Slider
         max={maxPrice}
-        value={priceFilter}
+        value={tempPrice}
         onChange={handleChange}
+        onChangeCommitted={() => dispatch(setFilterPrice(tempPrice))}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}

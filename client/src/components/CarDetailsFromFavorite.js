@@ -1,17 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useLocation } from "react-router-dom";
 import { setPhotosArray, setShowLogin, setCarToRental } from "../actions";
-import CarGallery from "./CarGallery";
 
-export default function CarDetails() {
+export default function CarDetailsFromFavorite() {
   const dispatch = useDispatch();
-  const { resultId } = useParams();
+  const { car, dates } = useLocation().state;
+  console.log(dates);
 
   //bringing the photos of the corresponding car, and emptying it on component down
   useEffect(() => {
-    const photosData = ["Photo", ["car_id"], [availableCars[resultId].car_id]];
+    const photosData = ["Photo", ["car_id"], [car.car_id]];
     axios
       .post("/api/v1/search/getitem", { data: photosData })
       .then(({ data }) => {
@@ -24,11 +24,10 @@ export default function CarDetails() {
   }, []);
 
   // Use states
-  const [redirect, setRedirect] = useState(`/result/${resultId}`);
+  const [redirect, setRedirect] = useState();
 
   // Redux States
-  const availableCars = useSelector((state) => state.availableCars);
-  const initialSearch = useSelector((state) => state.initialSearch);
+
   const photosArray = useSelector((state) => state.photosArray);
   const auth = useSelector((state) => state.auth);
 
@@ -39,7 +38,7 @@ export default function CarDetails() {
   // Function for get numbers of days rental
   const getNumberOfRentalDays = () => {
     const numberOfDaysToRent = Math.round(
-      (new Date(initialSearch.endDate) - new Date(initialSearch.startDate)) /
+      (new Date(dates.endDate) - new Date(dates.startDate)) /
         (1000 * 60 * 60 * 24)
     );
     return numberOfDaysToRent;
@@ -47,9 +46,9 @@ export default function CarDetails() {
 
   // Function for calculate price for rental
   const calculateDiscount = () => {
-    const pricePerDay = availableCars[resultId].price_per_day;
-    const discountAboveWeek = availableCars[resultId].discount_for_week;
-    const discountAboveMonth = availableCars[resultId].discount_for_month;
+    const pricePerDay = car.price_per_day;
+    const discountAboveWeek = car.discount_for_week;
+    const discountAboveMonth = car.discount_for_month;
     const numberOfDaysToRent = getNumberOfRentalDays();
     let newPrice = 0;
 
@@ -75,11 +74,11 @@ export default function CarDetails() {
   const goToPayment = () => {
     if (auth) {
       const data = {
-        carId: availableCars[resultId].car_id,
-        ownerEmail: availableCars[resultId].owner_email,
+        carId: car.car_id,
+        ownerEmail: car.owner_email,
         renterEmail: auth.user_email,
-        startDate: initialSearch.startDate,
-        endDate: initialSearch.endDate,
+        startDate: dates.startDate,
+        endDate: dates.endDate,
         totalPrice: calculateDiscount().price,
       };
       dispatch(setCarToRental(data));
@@ -97,48 +96,33 @@ export default function CarDetails() {
         <div className="car-details-inner-container">
           <p>
             <span className="car-specific-detail">barnd:</span>
-            <span className="car-specific-info">
-              {availableCars[resultId].brand}
-            </span>
+            <span className="car-specific-info">{car.brand}</span>
           </p>
           <p>
             <span className="car-specific-detail">model:</span>
-            <span className="car-specific-info">
-              {availableCars[resultId].model}
-            </span>
+            <span className="car-specific-info">{car.model}</span>
           </p>
           <p>
             <span className="car-specific-detail">year:</span>
-            <span className="car-specific-info">
-              {availableCars[resultId].year}
-            </span>
+            <span className="car-specific-info">{car.year}</span>
           </p>
           <p>
             <span className="car-specific-detail">fuel:</span>
-            <span className="car-specific-info">
-              {availableCars[resultId].fuel}
-            </span>
+            <span className="car-specific-info">{car.fuel}</span>
           </p>
           <p>
             <span className="car-specific-detail">gear:</span>
-            <span className="car-specific-info">
-              {availableCars[resultId].gear}
-            </span>
+            <span className="car-specific-info">{car.gear}</span>
           </p>
           <p>
             <span className="car-specific-detail">passengers:</span>
-            <span className="car-specific-info">
-              {" "}
-              {availableCars[resultId].passengers}
-            </span>
+            <span className="car-specific-info"> {car.passengers}</span>
           </p>
           <p>
             <span className="car-specific-detail">initial price:</span>{" "}
             <span className="car-specific-info">{`${getNumberOfRentalDays()} x
-        ${availableCars[resultId].price_per_day} =
-        ${
-          getNumberOfRentalDays() * availableCars[resultId].price_per_day
-        }$`}</span>
+        ${car.price_per_day} =
+        ${getNumberOfRentalDays() * car.price_per_day}$`}</span>
           </p>
           {calculateDiscount().percent && (
             <p>
@@ -148,8 +132,7 @@ export default function CarDetails() {
               <span className="car-specific-info">{`${
                 calculateDiscount().percent
               } , - ${
-                getNumberOfRentalDays() *
-                  availableCars[resultId].price_per_day -
+                getNumberOfRentalDays() * car.price_per_day -
                 calculateDiscount().price
               } $`}</span>
             </p>
@@ -163,11 +146,10 @@ export default function CarDetails() {
             }
           </p>
           <div className="gallery"></div>
-          {photosArray.length !== 0 && <CarGallery photosArray={photosArray} />}
 
           <button onClick={goToPayment}>go to payment</button>
-          <Redirect push to={redirect} />
         </div>
+        {redirect && <Redirect push to="/payment" />}
       </div>
     </div>
   );

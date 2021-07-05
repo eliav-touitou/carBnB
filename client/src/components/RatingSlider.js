@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 import { setFilterRate } from "../actions";
@@ -47,9 +47,12 @@ export default function RatingSlider() {
   // Redux states
   const ratingFilter = useSelector((state) => state.ratingFilter);
 
+  // Use states
+  const [tempRating, setTempRating] = useState();
+
   const filterCarByOwnerRate = async (event, newValue) => {
     if (newValue !== ratingFilter) {
-      dispatch(setFilterRate(newValue));
+      setTempRating(newValue);
     }
   };
 
@@ -59,6 +62,7 @@ export default function RatingSlider() {
         max={5}
         defaultValue={0}
         onChange={filterCarByOwnerRate}
+        onChangeCommitted={() => dispatch(setFilterRate(tempRating))}
         aria-labelledby="discrete-slider-always"
         step={1}
         marks={marks}

@@ -32,6 +32,17 @@ const getRental = async (id) => {
   }
 };
 
+// Get unique car photo
+const getPhoto = async (id) => {
+  try {
+    const result = await Photo.findOne({ where: { car_id: id } });
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // Get unique user / auth
 const getUserOrAuth = async (obj) => {
   const { model, email } = obj;
@@ -176,13 +187,20 @@ const GetCarsByParameters = async (obj) => {
     const result = await Car.findAll({
       where: {
         [Op.and]: {
-          available_from: {
-            [Op.lte]: startDate,
-          },
+          [Op.or]: [
+            {
+              available_from: {
+                [Op.lte]: startDate,
+              },
 
-          available_until: {
-            [Op.gte]: endDate,
-          },
+              available_until: {
+                [Op.gte]: endDate,
+              },
+            },
+            {
+              available_from: { [Op.is]: null },
+            },
+          ],
 
           passengers: { [Op.gte]: numOfPassengers },
           owner_email: { [Op.in]: arrOfEmails },
@@ -237,7 +255,6 @@ const getUserByRating = async (minRate) => {
         },
       },
     });
-    console.log(ratedUser);
     return ratedUser;
   } catch (error) {
     throw error;
@@ -290,11 +307,11 @@ const addNewRentalToDB = async (obj) => {
 
 const addNewNotification = async (obj) => {
   const objToSave = {
-    message_from: obj.messageFrom,
-    message_to: obj.messageTo,
-    title: obj.title,
-    content: obj.content,
-    transactionId: obj.transaction_id,
+    message_from: obj.from,
+    message_to: obj.to,
+    title: obj.subject,
+    content: obj.text,
+    transaction_id: obj.transactionId,
     read: false,
   };
   try {
@@ -323,6 +340,16 @@ const getAllCarsByIdsArr = async (arr) => {
   }
 };
 
+const getAllOptionalFinishOrders = async () => {
+  try {
+    const result = await Rental.findAll({ where: { is_active: "confirm" } });
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getCar,
   getRental,
@@ -344,4 +371,6 @@ module.exports = {
   addNewRentalToDB,
   addNewNotification,
   getAllCarsByIdsArr,
+  getPhoto,
+  getAllOptionalFinishOrders,
 };

@@ -2,17 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "./SearchBar";
-import Avatar from "./Avatar";
-import {
-  setPromptOrNormal,
-  setNotifications,
-  setNotificationCounter,
-  setNotFoundMessage,
-} from "../actions";
+import { setPromptOrNormal, setNotFoundMessage } from "../actions";
 import photo from "../photos/background-4593643_1920.jpg";
 import topCar from "../photos/top-car.jpeg";
 import topOwner from "../photos/top-owner.jpeg";
 import topLocation from "../photos/top-location.jpeg";
+import TopCarousel from "./TopCarousel";
+import Snackbar from "@material-ui/core/Snackbar";
+import MyFavorite from "./MyFavorite";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -46,26 +43,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    let count = 0;
-    if (auth) {
-      axios
-        .post("/api/v1/notification/messages", {
-          data: { email: auth.user_email },
-        })
-        .then(({ data: messages }) => {
-          messages.data?.forEach((message) => {
-            if (message.read === false) {
-              count++;
-            }
-          });
-          dispatch(setNotificationCounter(count));
-          dispatch(setNotifications(messages.data));
-        })
-        .catch((err) => console.log(err.message));
-    }
-  }, []);
-
-  useEffect(() => {
     if (notFoundMessage) {
       setTimeout(() => {
         dispatch(setNotFoundMessage(false));
@@ -76,7 +53,7 @@ export default function Home() {
   return (
     <div>
       <section className="land-section">
-        <img className="intro-img" height="45%" src={photo}></img>
+        <img className="intro-img" height="50%" src={photo}></img>
         <h1>
           We invite you to start your journey with us, and with many other
           drivers
@@ -85,9 +62,14 @@ export default function Home() {
           <a href="#search">Let's Start</a>
         </span>
       </section>
-      {notFoundMessage && <div>{notFoundMessage}</div>}
-      {/* <p>messages thet not read: {counter}</p> */}
-
+      {notFoundMessage && (
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={true}
+          message={notFoundMessage}
+          key={"top" + "center"}
+        />
+      )}
       <section className="search-section" id="search">
         <SearchBar allCitiesApi={allCitiesApi} />
       </section>
@@ -111,8 +93,9 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <hr />
+      <TopCarousel />
       <section className="footer-section">
+        <hr />
         <div className="upper-footer">
           <div className="support">
             <h4>Support</h4>

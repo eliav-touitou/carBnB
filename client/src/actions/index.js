@@ -127,3 +127,9 @@ export const setShowLogin = (bool) => {
     payload: bool,
   };
 };
+export const setCarToRental = (obj) => {
+  return {
+    type: "SETCARTORENTAL",
+    payload: obj,
+  };
+};

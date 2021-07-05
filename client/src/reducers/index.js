@@ -17,6 +17,7 @@ import { notFoundMessageReducer } from "./notFoundMessage";
 import { notificationCounterReducer } from "./notificationCounter";
 import { photosArrayReducer } from "./photosArray";
 import { showLoginReducer } from "./showLogin";
+import { carToRentalReducer } from "./carToRental";
 
 const allReducers = combineReducers({
   allCars: carsReducer,
@@ -37,6 +38,7 @@ const allReducers = combineReducers({
   notificationCounter: notificationCounterReducer,
   photosArray: photosArrayReducer,
   showLogin: showLoginReducer,
+  carToRental: carToRentalReducer,
 });
 
 const rootReducer = (state, action) => {

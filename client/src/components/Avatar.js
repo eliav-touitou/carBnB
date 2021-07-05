@@ -10,18 +10,18 @@ import Name from "@material-ui/core/Avatar";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import axios from "axios";
 
-export default function Avatar() {
+export default function Avatar({ setVisibility, setAnchorEl, anchorEl }) {
   const dispatch = useDispatch();
 
   // Redux states
   const auth = useSelector((state) => state.auth);
 
-  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
     if (auth) {
       setAnchorEl(event.currentTarget);
+      setVisibility(false);
     }
   };
 
@@ -55,6 +55,7 @@ export default function Avatar() {
         open={open}
         onClose={handleClose}
         TransitionComponent={Fade}
+        disableScrollLock={true}
       >
         <Link exact={"true"} to="/profile" className="menu-drop-down">
           <MenuItem onClick={handleClose}>Profile</MenuItem>
@@ -72,6 +73,9 @@ export default function Avatar() {
           className="menu-drop-down"
         >
           <MenuItem onClick={handleClose}>My rentals</MenuItem>
+        </Link>
+        <Link exact={"true"} to="/favorite" className="menu-drop-down">
+          <MenuItem onClick={handleClose}>My favorite</MenuItem>
         </Link>
         <Link
           onClick={logoutHandler}

@@ -17,15 +17,15 @@ const buildPatterns = ({ transactionId, startDate, endDate }) => {
   Your order Num ${transactionId} was successfully made!
   you will be notified when the car owner will approve your request. 
   in case the car owner won't handle your request within 12 hours the order will be canceled and you will be notified.
-  kind regards, carBnB team
-  </p>`;
+  kind regards, carBnB team</p>`;
 
   const textPatternToOwner = `<p>Dear valued User,
-  your car got an order from user.... on these dates: ${startDate} - ${endDate}.
+  your car got an order from user.... on these dates: ${new Date(
+    startDate
+  ).toDateString()} - ${new Date(endDate).toDateString()}.
   please enter your account to confirm the order.
   in case you won't handle the request within 12 hours the order will be canceled.
-  kind regards, carBnB team</p>
-  `;
+  kind regards, carBnB team</p>`;
 
   return { textPatternToRenter, textPatternToOwner };
 };
@@ -34,14 +34,29 @@ const buildPatternsForCanceledRentals = ({ transactionId }) => {
   const textToCanceledRenter = `<p>Dear valued User,
   Your order Num ${transactionId} was canceled because the cars owner didn't complete the process after 12 hours.
   we deeply apologize for the inconvenience
-  kind regards, carBnB team<p/>`;
+  kind regards, carBnB team</p>`;
   const textToCanceledOwner = `<p>Dear valued User,
   the order Num ${transactionId}, for your car was canceled because you didn't complete the process and approved the order within our 12H policy .
-  kind regards, carBnB team<p/>`;
+  kind regards, carBnB team</p>`;
 
   return { textToCanceledRenter, textToCanceledOwner };
 };
 
+const buildPatternsForAfterRentalFinish = ({ transactionId }) => {
+  const textToRenterAfterFinish = `<p>Dear valued User,
+  Your order Num ${transactionId} was over. Let us know how was your ride and please 
+  rating the owner for better service.
+  kind regards, carBnB team</p>`;
+
+  return { textToRenterAfterFinish };
+};
+
+const buildPatternsForConfirmOrRejectRental = ({ transactionId, status }) => {
+  const textToRenterAfterResponding = `<p>Dear valued User,
+  Your order Num ${transactionId} was ${status}</p>`;
+
+  return { textToRenterAfterResponding };
+};
 const sendMail = ({ from, to, subject, text }) => {
   mailOption = {
     from: from,
@@ -56,12 +71,12 @@ const sendMail = ({ from, to, subject, text }) => {
       },
     ],
   };
-
+  if (subject !== "Order summery") delete mailOption.attachments;
   transporter.sendMail(mailOption, (error, info) => {
     if (error) {
+      console.log(error);
       throw error;
     } else {
-      console.log(info);
       return true;
     }
   });
@@ -263,4 +278,6 @@ module.exports = {
   sendMail,
   createPDFToSend,
   buildInvoice,
+  buildPatternsForAfterRentalFinish,
+  buildPatternsForConfirmOrRejectRental,
 };

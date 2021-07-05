@@ -4,13 +4,16 @@ const {
   getAllItems,
   deleteItems,
   addNewNotification,
+  getAllOptionalFinishOrders,
+  updateItemToDB,
 } = require("../database/queries");
 const {
   buildPatternsForCanceledRentals,
+  buildPatternsForAfterRentalFinish,
   sendMail,
 } = require("../backend/utils/helperFunctions");
 
-const scrapeDB = async () => {
+const removePendingOrders = async () => {
   const rentalToRemoveIds = [];
   const rentalToRemove = [];
   try {
@@ -30,7 +33,7 @@ const scrapeDB = async () => {
       // Build pattern texts for emails
       const { textToCanceledRenter, textToCanceledOwner } =
         buildPatternsForCanceledRentals({
-          transactionId: String(result.transaction_id),
+          transactionId: String(rental.transaction_id),
         });
 
       forRenter = {
@@ -49,6 +52,8 @@ const scrapeDB = async () => {
 
       sendMail(forRenter);
       sendMail(forOwner);
+      forRenter.transactionId = result.transaction_id;
+      forOwner.transactionId = result.transaction_id;
       await addNewNotification(forRenter);
       await addNewNotification(forOwner);
     });
@@ -57,6 +62,61 @@ const scrapeDB = async () => {
   }
 };
 
-setInterval(async () => {
-  await scrapeDB();
-}, 3600000);
+const finishOrders = async () => {
+  try {
+    const allOptionalFinishOrders = await getAllOptionalFinishOrders(Rental);
+    const arrOfRentalsId = [];
+    allOptionalFinishOrders.forEach((order) => {
+      if (new Date() > new Date(order.end_date)) {
+        arrOfRentalsId.push(order);
+      }
+    });
+
+    arrOfRentalsId.forEach(async (rental) => {
+      rental.toJSON();
+      // Build pattern texts for emails
+      const { textToRenterAfterFinish } = buildPatternsForAfterRentalFinish({
+        transactionId: String(rental.transaction_id),
+      });
+
+      const forRenter = {
+        from: process.env.ADMIN_MAIL,
+        to: rental.renter_email,
+        subject: "Order Finished",
+        text: textToRenterAfterFinish,
+        transactionId: rental.transaction_id,
+      };
+      const objToUpdateDB = {
+        table: Rental,
+        column: ["is_active"],
+        primaryKey: "transaction_id",
+        primaryKeyValue: rental.transaction_id,
+        content: ["finished"],
+      };
+
+      sendMail(forRenter);
+      await updateItemToDB(objToUpdateDB);
+      await addNewNotification(forRenter);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+finishOrders().then((res) => {
+  console.log("105");
+  console.log(res);
+});
+removePendingOrders().then((res) => {
+  console.log("109");
+  console.log(res);
+});
+
+// Run every hour
+// setInterval(async () => {
+//   await removePendingOrders();
+// }, 3600000);
+
+// // Run every day
+// setInterval(async () => {
+//   await finishOrders();
+// }, 86400000);
