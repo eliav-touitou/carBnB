@@ -712,6 +712,9 @@ form {
       flex-direction: column;
       padding-right: 0;
       justify-content: space-between;
+      // button:first-childe {
+      //   mlmlm
+      // }
     }
   }
 }
@@ -1357,6 +1360,7 @@ form {
     max-width: 100%;
 
     .carousel-item {
+      padding: unset;
       position: absolute;
       top: 0;
       bottom: 0;
@@ -1373,21 +1377,21 @@ form {
       transition: all 0.5s ease-in-out;
     }
     .arrow {
-      border: solid black;
+      border: solid rgb(0, 0, 0);
       border-width: 0 3px 3px 0;
       display: inline-block;
-      padding: 6px;
+      // padding: 6px;
     }
 
     .arrow-prev {
-      left: -10px;
+      left: 30px;
       position: absolute;
       top: 50%;
       transform: translateY(-50%) rotate(135deg);
     }
 
     .arrow-next {
-      right: -10px;
+      right: 30px;
       position: absolute;
       top: 50%;
       transform: translateY(-50%) rotate(-45deg);
@@ -1428,9 +1432,9 @@ form {
       display: flex;
       flex-direction: column;
       align-items: center;
-      .top-picks-img {
-        height: 50vh;
-        width: 80%;
+      img {
+        // height: 50vh;
+        // width: 80%;
         border-radius: 0.5em;
       }
     }

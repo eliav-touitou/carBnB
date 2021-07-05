@@ -1709,6 +1709,7 @@ form {
 }
 
 .top-pick-carousel-result .carousel-wrapper-result .carousel-item {
+  padding: unset;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -1736,11 +1737,10 @@ form {
   border: solid black;
   border-width: 0 3px 3px 0;
   display: inline-block;
-  padding: 6px;
 }
 
 .top-pick-carousel-result .carousel-wrapper-result .arrow-prev {
-  left: -10px;
+  left: 30px;
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%) rotate(135deg);
@@ -1748,7 +1748,7 @@ form {
 }
 
 .top-pick-carousel-result .carousel-wrapper-result .arrow-next {
-  right: -10px;
+  right: 30px;
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%) rotate(-45deg);
@@ -1799,9 +1799,7 @@ form {
           align-items: center;
 }
 
-.top-pick-carousel-result .carousel-wrapper-result .items-data .top-picks-img {
-  height: 50vh;
-  width: 80%;
+.top-pick-carousel-result .carousel-wrapper-result .items-data img {
   border-radius: 0.5em;
 }
 

@@ -15,6 +15,7 @@ export default function Result({ model, brand, passengers, carId, resultId }) {
   const showLogin = useSelector((state) => state.showLogin);
   const [carPhoto, setCarPhoto] = useState();
   const [photosArray, setPhotosArray] = useState([]);
+  const [heartButton, setHeartButton] = useState("far fa-heart");
 
   // useEffect(() => {
   //   axios
@@ -42,18 +43,36 @@ export default function Result({ model, brand, passengers, carId, resultId }) {
   }, [auth]);
 
   const saveToFavorite = async (carId) => {
-    try {
-      if (auth) {
-        const result = await axios.post("/api/v1/favorite/add", {
-          data: { carId: carId, userEmail: auth.user_email },
-        });
-        console.log(result);
-      } else {
-        // need to prompt login promp component
-        dispatch(setShowLogin(true));
+    if (heartButton === "far fa-heart") {
+      try {
+        if (auth) {
+          const result = await axios.post("/api/v1/favorite/add", {
+            data: { carId: carId, userEmail: auth.user_email },
+          });
+          console.log(result);
+        } else {
+          // need to prompt login promp component
+          dispatch(setShowLogin(true));
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
+      setHeartButton("fas fa-heart");
+    } else {
+      try {
+        if (auth) {
+          const result = await axios.post("/api/v1/favorite/remove", {
+            data: { carId: carId, userEmail: auth.user_email },
+          });
+          console.log(result);
+        } else {
+          // need to prompt login promp component
+          dispatch(setShowLogin(true));
+        }
+      } catch (err) {
+        console.log(err);
+      }
+      setHeartButton("far fa-heart");
     }
   };
 
@@ -71,7 +90,9 @@ export default function Result({ model, brand, passengers, carId, resultId }) {
           <div className="car-passengers">Passengers: {passengers}</div>
         </div>
         <div className="buttons">
-          <button onClick={() => saveToFavorite(carId)}>❤</button>
+          <button onClick={() => saveToFavorite(carId)}>
+            <i class={heartButton}></i>
+          </button>
           <Link to={`/result/${resultId}`}>
             <button>➡</button>
           </Link>
