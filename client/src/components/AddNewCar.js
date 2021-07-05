@@ -1,7 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAllModelsApi, setAllCarsApi, setPhotosArray } from "../actions";
+import {
+  setAllModelsApi,
+  setAllCarsApi,
+  setPhotosArray,
+  setNotFoundMessage,
+} from "../actions";
 import UploadPhoto from "./UploadPhoto";
 import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
@@ -10,6 +15,8 @@ import "../react_dates_overrides.css";
 import dog from "../photos/dog-4223905_1920.jpg";
 import { setAuth } from "../actions";
 import { Redirect } from "react-router";
+import Snackbar from "@material-ui/core/Snackbar";
+
 export default function AddNewCar() {
   const dispatch = useDispatch();
 
@@ -20,6 +27,7 @@ export default function AddNewCar() {
   const allModelsApi = useSelector((state) => state.allModelsApi);
   const auth = useSelector((state) => state.auth);
   const photosArray = useSelector((state) => state.photosArray);
+  const notFoundMessage = useSelector((state) => state.notFoundMessage);
 
   // Use states
   const [yearsArr, setYearsArr] = useState([]);
@@ -43,6 +51,25 @@ export default function AddNewCar() {
   const discountPerWeekRef = useRef();
   const discountPerMonthRef = useRef();
   const passengersRef = useRef();
+
+  //Checking if logged user has an address before adding a car
+  useEffect(() => {
+    if (auth.address === null) {
+      dispatch(
+        setNotFoundMessage(
+          "You must update your address before becoming a host"
+        )
+      );
+    }
+  }, []);
+  useEffect(() => {
+    if (notFoundMessage) {
+      setTimeout(() => {
+        dispatch(setNotFoundMessage(false));
+        setRedirect(true);
+      }, 4000);
+    }
+  }, [notFoundMessage]);
 
   // Get all cars brand from API.
   useEffect(() => {
@@ -139,6 +166,14 @@ export default function AddNewCar() {
   };
   return (
     <div className="add-new-car-page">
+      {notFoundMessage && (
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={true}
+          message={notFoundMessage}
+          key={"top" + "center"}
+        />
+      )}
       <div className="add-car-panel">
         <div className="left-side-panel">
           <img width="150%" height="auto" bottom src={dog} />

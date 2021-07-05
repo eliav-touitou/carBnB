@@ -93,24 +93,24 @@ export default function OverviewDetail({ iconsKey, keys, value }) {
     <>
       {!isOpen ? (
         auth[keys] ? (
-          <li>
-            <div>
+          <li className="overview-detail">
+            <div className="data-and-icon">
               <span>{iconsKey[keys]}</span>
               <span> {value}</span>
-              <span className="pencil-profile">
-                {keys === "user_email" ? null : (
-                  <>
-                    <CreateOutlinedIcon onClick={() => setIsOpen(true)} />
-                    <i
-                      class="far fa-trash-alt"
-                      onClick={() => {
-                        updateItem(keys, null);
-                      }}
-                    ></i>
-                  </>
-                )}
-              </span>
             </div>
+            <span className="pencil-profile">
+              {keys === "user_email" ? null : (
+                <>
+                  <CreateOutlinedIcon onClick={() => setIsOpen(true)} />
+                  <i
+                    class="far fa-trash-alt"
+                    onClick={() => {
+                      updateItem(keys, null);
+                    }}
+                  ></i>
+                </>
+              )}
+            </span>
           </li>
         ) : (
           <li className="add-new" onClick={() => setIsOpen(true)}>
@@ -121,8 +121,8 @@ export default function OverviewDetail({ iconsKey, keys, value }) {
           </li>
         )
       ) : (
-        <li>
-          <div>
+        <li className="overview-detail">
+          <div className="data-and-icon">
             <span>{iconsKey[keys]}</span>
             <input ref={inputRef} autoFocus={true} defaultValue={value}></input>
           </div>{" "}

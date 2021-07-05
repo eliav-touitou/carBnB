@@ -44,7 +44,6 @@ export default function MyCars({
 
   return (
     <div>
-      <span onClick={nextPage}>⏭</span>
       <ul>
         {carDetails.map(([key, value], i) => (
           <MyCar
@@ -58,6 +57,7 @@ export default function MyCars({
           />
         ))}
       </ul>
+      <span onClick={nextPage}>⏭</span>
     </div>
   );
 }
