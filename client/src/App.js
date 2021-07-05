@@ -1,29 +1,12 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-  NavLink,
-  Link,
-  Redirect,
-} from "react-router-dom";
 import Home from "./components/Home";
 import Register from "./components/Register";
-import Login from "./components/Login";
 import Profile from "./components/Profile";
 import NotFound from "./components/NotFound";
 import AddNewCar from "./components/AddNewCar";
 import SearchBar from "./components/SearchBar";
-import Rental from "./components/Rental";
 import Results from "./components/Results";
-import {
-  setAllCarsApi,
-  setAuthOut,
-  setNotificationCounter,
-  setNotifications,
-  setShowLogin,
-} from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 import CarDetails from "./components/CarDetails";
 import OrderSummery from "./components/OrderSummery";
@@ -32,7 +15,6 @@ import Notifications from "./components/Notifications";
 import MyOrders from "./components/MyOrders";
 import OrderDetails from "./components/OrderDetails";
 import { Badge } from "@material-ui/core";
-import MailIcon from "@material-ui/icons/Mail";
 import PromptLogin from "./components/PromptLogin";
 import Avatar from "./components/Avatar";
 import logo from "./photos/logo-black.png";
@@ -40,6 +22,20 @@ import CreditCards from "./components/CreditCards";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import Snackbar from "@material-ui/core/Snackbar";
 import MyFavorite from "./components/MyFavorite";
+import {
+  setAllCarsApi,
+  setAuthOut,
+  setNotificationCounter,
+  setNotifications,
+  setShowLogin,
+} from "./actions";
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  NavLink,
+  Redirect,
+} from "react-router-dom";
 
 const axios = require("axios");
 
@@ -178,9 +174,6 @@ function App() {
           )}
           <Route exact path="/searchbar">
             <SearchBar />
-          </Route>
-          <Route exact path="/rental">
-            <Rental />
           </Route>
           <Route exact path="/results">
             <Results />
