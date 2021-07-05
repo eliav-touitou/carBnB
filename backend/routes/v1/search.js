@@ -8,6 +8,7 @@ const {
 } = require("../../../database/queries");
 const { User, Auth, Car, Rental, Photo } = require("../../../database/models");
 const models = require("../../../database/models");
+const { writeLogs } = require("../../utils/helperFunctions");
 
 // Get any items from any table.
 search.post("/getitem", async (req, res) => {
@@ -22,7 +23,14 @@ search.post("/getitem", async (req, res) => {
     }
     return res.status(200).json({ message: "Success", data: itemFound });
   } catch (err) {
-    console.log(err.message);
+    const objToWrite = {
+      date: new Date(),
+      error: err,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/search/getitem",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: err.message });
@@ -102,7 +110,14 @@ search.post("/initial", async (req, res) => {
 
     return res.status(200).json({ message: "successful", data: carsAvailable });
   } catch (err) {
-    console.log(err);
+    const objToWrite = {
+      date: new Date(),
+      error: err,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/search/initial",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: err.message });

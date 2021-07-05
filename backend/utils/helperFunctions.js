@@ -272,6 +272,20 @@ const createPDFToSend = async (invoice, path) => {
   createInvoice(invoice, path);
 };
 
+const writeLogs = async (body) => {
+  fs.readFile("./backend-logs/error-logs.json", (err, data) => {
+    let objToSave = JSON.parse(data);
+
+    objToSave.allErrors.push(body);
+
+    fs.writeFile(
+      "./backend-logs/error-logs.json",
+      JSON.stringify(objToSave),
+      (err) => console.log(err)
+    );
+  });
+};
+
 module.exports = {
   buildPatterns,
   buildPatternsForCanceledRentals,
@@ -280,4 +294,5 @@ module.exports = {
   buildInvoice,
   buildPatternsForAfterRentalFinish,
   buildPatternsForConfirmOrRejectRental,
+  writeLogs,
 };

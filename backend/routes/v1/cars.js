@@ -7,6 +7,7 @@ const {
   getCar,
   addToCarsDB,
 } = require("../../../database/queries");
+const { writeLogs } = require("../../utils/helperFunctions");
 
 // Gets a unique car
 cars.post("/uniquecar", async (req, res) => {
@@ -21,6 +22,14 @@ cars.post("/uniquecar", async (req, res) => {
     return res.status(200).json({ success: true, data: car });
   } catch (error) {
     console.log(error.message);
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/cars/uniquecar",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: error.message });
@@ -37,6 +46,14 @@ cars.get("/allcars", async (req, res) => {
     return res.status(200).json({ success: true, data: cars });
   } catch (error) {
     console.log(error.message);
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/cars/allcars",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: error.message });
@@ -52,6 +69,14 @@ cars.post("/upload", validToken, async (req, res) => {
     return res.status(200).json({ success: true, data: savedCar });
   } catch (error) {
     console.log(error);
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/cars/upload",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: error.message });

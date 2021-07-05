@@ -62,10 +62,12 @@ export default function CreditCards() {
       console.log(error);
     }
     try {
-      const arr = ["User", ["license"], auth.user_email, [image]];
-      await axios.post("api/v1/users/updateitems", { data: arr });
-      auth.license = image;
-      dispatch(setAuth(auth));
+      if (auth.license === null) {
+        const arr = ["User", ["license"], auth.user_email, [image]];
+        await axios.post("api/v1/users/updateitems", { data: arr });
+        auth.license = image;
+        dispatch(setAuth(auth));
+      }
     } catch (error) {
       console.log(error);
     }
@@ -158,7 +160,7 @@ export default function CreditCards() {
             )}
           </form>
 
-          {auth.license === null ? (
+          {auth.license === null && (
             <div>
               <h3>You must upload your licenses first!!</h3>
               <input
@@ -167,7 +169,7 @@ export default function CreditCards() {
                 onChange={(e) => imageToBinary(e)}
               ></input>
             </div>
-          ) : null}
+          )}
         </div>
         <button onClick={makeOrder}>ORDER!</button>
       </div>
