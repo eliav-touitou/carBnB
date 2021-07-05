@@ -4,6 +4,7 @@ import { DateRangePicker } from "react-dates";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { setCarToRental, setRentalDetails } from "../actions";
+import Snackbar from "@material-ui/core/Snackbar";
 
 export default function FavoriteDetails({ car }) {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export default function FavoriteDetails({ car }) {
   const [focusedInput, setFocusedInput] = useState(null);
   const [isAvailable, setIsAvailable] = useState();
   const [redirect, setRedirect] = useState("/favorite");
+  const [filledDates, setFilledDates] = useState(false);
 
   const CheckAvailability = async () => {
     if (startDate && endDate) {
@@ -33,6 +35,11 @@ export default function FavoriteDetails({ car }) {
       } catch (err) {
         console.log(err);
       }
+    } else {
+      setFilledDates(true);
+      setTimeout(() => {
+        setFilledDates(false);
+      }, 4500);
     }
   };
 
@@ -127,6 +134,14 @@ export default function FavoriteDetails({ car }) {
           <p>Car is available to orders in those dates</p>
           <button onClick={makeOrder}>Order</button>
         </div>
+      )}
+      {filledDates && (
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={true}
+          message="you must pick dates first"
+          key={"top" + "center"}
+        />
       )}
       <Redirect push to={redirect} />
     </div>
