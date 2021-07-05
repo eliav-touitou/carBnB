@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { setShowLogin } from "../actions";
 import PromptLogin from "./PromptLogin";
 import defaultPhoto from "../photos/no-car-photo.png";
+import CarGallery from "./CarGallery";
 
 export default function Result({ model, brand, passengers, carId, resultId }) {
   const dispatch = useDispatch();
@@ -13,17 +14,28 @@ export default function Result({ model, brand, passengers, carId, resultId }) {
   const auth = useSelector((state) => state.auth);
   const showLogin = useSelector((state) => state.showLogin);
   const [carPhoto, setCarPhoto] = useState();
+  const [photosArray, setPhotosArray] = useState([]);
+
+  // useEffect(() => {
+  //   axios
+  //     .post("/api/v1/photos/uniquephoto", { carId })
+  //     .then(({ data: photo }) => {
+  //       setCarPhoto(photo.data?.file);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [carId]);
 
   useEffect(() => {
+    const photosData = ["Photo", ["car_id"], [carId]];
     axios
-      .post("/api/v1/photos/uniquephoto", { carId })
-      .then(({ data: photo }) => {
-        setCarPhoto(photo.data?.file);
+      .post("/api/v1/search/getitem", { data: photosData })
+      .then(({ data }) => {
+        setPhotosArray(data.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [carId]);
+      .catch((err) => console.log(err.message));
+  }, []);
 
   useEffect(() => {
     if (auth) dispatch(setShowLogin(false));
@@ -48,23 +60,22 @@ export default function Result({ model, brand, passengers, carId, resultId }) {
   return (
     <div className="car-details">
       <div className="first-details">
-        {carPhoto ? (
-          <img
-            alt="car-photo"
-            src={`data:image/jpeg;base64,${carPhoto}`}
-            height={100}
-          />
+        {photosArray.length > 0 ? (
+          <CarGallery photosArray={photosArray} location={"result"} />
         ) : (
           <img alt="car-photo" src={defaultPhoto} height={100} />
         )}
-        <div className="car-brand">Brand: {brand}</div>
-        <div className="car-passengers">Model: {model}</div>
-        <div className="car-passengers">Passengers: {passengers}</div>
-
-        <button onClick={() => saveToFavorite(carId)}>❤</button>
-        <Link to={`/result/${resultId}`}>
-          <button>Read More</button>
-        </Link>
+        <div className="data">
+          <div className="car-brand">Brand: {brand}</div>
+          <div className="car-passengers">Model: {model}</div>
+          <div className="car-passengers">Passengers: {passengers}</div>
+        </div>
+        <div className="buttons">
+          <button onClick={() => saveToFavorite(carId)}>❤</button>
+          <Link to={`/result/${resultId}`}>
+            <button>➡</button>
+          </Link>
+        </div>
       </div>
       {/* <hr /> */}
     </div>

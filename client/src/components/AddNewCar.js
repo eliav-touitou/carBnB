@@ -56,7 +56,9 @@ export default function AddNewCar() {
   useEffect(() => {
     if (auth.address === null) {
       dispatch(
-        setNotFoundMessage("Please update your address before adding a car")
+        setNotFoundMessage(
+          "You must update your address before becoming a host"
+        )
       );
     }
   }, []);

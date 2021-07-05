@@ -14,7 +14,7 @@ export default function TopCarousel() {
         <span id="item-3"></span>
         <div className="carousel-item item-1">
           <div className="items-data">
-            <img src={topCar} className="top-car-img" />
+            <img src={topCar} className="top-picks-img" />
             <h4>TOP CARS</h4>
             <p>Extraordinary driving experience. </p>
           </div>
@@ -24,7 +24,7 @@ export default function TopCarousel() {
 
         <div className="carousel-item item-2">
           <div className="items-data">
-            <img src={topOwner} />
+            <img src={topOwner} className="top-picks-img" />
             <h4>TOP OWNERS</h4>
             <p>Lovely owner for the best travel. </p>
           </div>
@@ -34,7 +34,7 @@ export default function TopCarousel() {
 
         <div className="carousel-item item-3">
           <div className="items-data">
-            <img src={topLocation} />
+            <img src={topLocation} className="top-picks-img" />
             <h4>TOP LOCATIONS</h4>
             <p>Peacefully moment in paradise. </p>
           </div>

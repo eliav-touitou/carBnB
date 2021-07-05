@@ -1,10 +1,9 @@
 import React from "react";
 
-export default function CarGallery({ photosArray }) {
+export default function CarGallery({ photosArray, location }) {
   return (
-    <div className="top-pick-carousel">
-      <h2>Choose the best</h2>
-      <div className="carousel-wrapper">
+    <div className={`top-pick-carousel-${location}`}>
+      <div className={`carousel-wrapper-${location}`}>
         {photosArray?.map((photo, i) => (
           <>
             <style>
@@ -20,7 +19,7 @@ export default function CarGallery({ photosArray }) {
             </style>
             <span id={`item-${i + 1}`}></span>
           </>
-        ))}{" "}
+        ))}
         {photosArray?.map((photo, i) => (
           <div
             className={
@@ -34,8 +33,7 @@ export default function CarGallery({ photosArray }) {
                 alt="license"
                 key={`photo-${i}`}
                 src={`data:image/jpeg;base64,${photo.file}`}
-                height={100}
-                className="top-car-img"
+                height="100%"
               />
             </div>
             <a
