@@ -663,13 +663,22 @@ form {
 //************************************* end search bar
 
 ///////////////////////////////////start of results + filter////////////////////
+.results-page {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  max-height: 100vh;
+}
 .results-section {
   margin-top: 10vh;
   width: 100%;
+  max-height: 100%;
   padding-left: 10px;
   text-align: center;
   align-items: center;
   justify-content: center;
+  max-height: 100%;
+  overflow-y: scroll;
   &:after {
     content: "";
     display: table;
@@ -678,31 +687,55 @@ form {
 }
 .car-details {
   float: left;
-  width: 40%;
-  // margin: 10px;
+  width: 70%;
+  margin: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 0.7em;
   text-align: center;
   background-color: #f1f1f1;
+  .first-details {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 100%;
+    .data {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-content: center;
+    }
+    .buttons {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding-right: 0;
+      justify-content: space-between;
+      // button:first-childe {
+      //   mlmlm
+      // }
+    }
+  }
 }
 .results {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
 }
 
 /* Responsive columns */
 
-.results-page {
-  display: flex;
-  flex-direction: row;
-  width: 100vw;
-}
 .filter-bar {
+  // position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 100px 20px;
   width: 30%;
   border-right: 3px rgb(7, 5, 146) solid;
+  max-height: 100vh;
 }
 #price-slider,
 #rating-slider,
@@ -715,6 +748,10 @@ form {
     flex-direction: column;
     width: 100%;
     align-items: center;
+  }
+  .filter-bar {
+    position: unset;
+    display: unset;
   }
   .car-details {
     width: 80%;
@@ -833,9 +870,9 @@ form {
   align-items: center;
   height: 100vh;
   background-size: 70vh;
-  // background-image: url("C:/dev/carBnB/client/src/photos/good-logo-white.png");
+  background-image: url("C:/dev/carBnB/client/src/photos/good-logo-white.png");
   // background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
+  // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
   background-repeat: no-repeat;
   background-position-y: 10vh;
   background-position-x: 4vw;
@@ -932,15 +969,16 @@ form {
     padding: 0;
   }
 }
+/////////////////////users profile
 
 .profile-inner-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: auto;
+  justify-content: space-evenly;
+  // padding-top: 5%;
+  // margin: auto;
   width: 50%;
-  height: 60vh;
-  margin-bottom: 13%;
+  height: 70vh;
   box-shadow: 0px 0px 22px -1px #000000;
   border-radius: 1em;
   background-color: rgba(255, 245, 245, 0.432);
@@ -966,16 +1004,35 @@ form {
     }
     .pencil-profile {
       display: flex;
+      flex-direction: row;
+      align-items: center;
       // float: right;
       position: relative;
       right: 0;
       color: #0065fc;
       cursor: pointer;
+      .fa-times {
+        margin-left: 0.5em;
+      }
+      .fa-trash-alt {
+        fill: currentColor;
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        font-size: 1.2rem;
+        transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        flex-shrink: 0;
+        user-select: none;
+        margin-left: 0.5em;
+      }
     }
   }
 }
 .profile-container {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
   width: 100vw;
 }
@@ -984,6 +1041,8 @@ form {
   display: flex;
   flex-direction: row;
   margin-bottom: 9%;
+  max-height: 100%;
+  // overflow-y: scroll;
 }
 .profile-left {
   display: flex;
@@ -995,8 +1054,19 @@ form {
 }
 .profile-right {
   width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  & div {
+    max-height: 100%;
+  }
+  & ul {
+    max-height: 35vh;
+    // flex-grow: 1;
+    overflow-y: scroll;
+  }
   li {
-    width: 70%;
+    width: 80%;
   }
   .add-new {
     display: flex;
@@ -1005,6 +1075,9 @@ form {
     width: fit-content;
     color: #0065fc;
     cursor: pointer;
+    & div {
+      margin-right: 0.5em;
+    }
   }
 }
 .rating-panel-profile {
@@ -1022,6 +1095,12 @@ form {
   color: rgb(240, 240, 80);
   fill: currentColor;
 }
+.data-and-icon {
+  & span:nth-child(1) {
+    margin-right: 0.5em;
+  }
+}
+
 ////////////////////////////////// tool tip messages ///////////////////////////////
 .tool-tip-text {
   visibility: hidden;
@@ -1214,15 +1293,9 @@ form {
 .item-1 {
   z-index: 2;
   opacity: 1;
-  // background: url("https://static.pexels.com/photos/6526/sea-beach-holiday-vacation-large.jpg");
   background-size: cover;
 }
-.item-2 {
-  // background: url("https://static.pexels.com/photos/6506/alcohol-bar-drinks-party-large.jpg");
-  background-size: cover;
-}
-.item-3 {
-  // background: url("https://static.pexels.com/photos/6529/lake-kajak-kayak-large.jpg");
+.secondaries {
   background-size: cover;
 }
 
@@ -1265,10 +1338,105 @@ form {
       font-size: 13px;
       opacity: 0.7;
     }
-    img {
+    .top-picks-img {
       height: 50vh;
       width: 80%;
       border-radius: 0.5em;
+    }
+  }
+}
+///////////////////////////////////////////////////car-gallery-result
+.top-pick-carousel-result {
+  position: relative;
+  height: 20vh;
+  // display: flex;
+  // flex-direction: column;
+  // align-self: center;
+  // justify-content: center;
+  max-width: 100vw;
+  .carousel-wrapper-result {
+    width: 300px;
+    margin: 0 auto;
+    max-width: 100%;
+
+    .carousel-item {
+      padding: unset;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      // padding: 25px 50px;
+
+      display: flex;
+      flex-direction: row;
+      align-self: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.5s ease-in-out;
+    }
+    .arrow {
+      border: solid rgb(0, 0, 0);
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      // padding: 6px;
+    }
+
+    .arrow-prev {
+      left: 30px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) rotate(135deg);
+    }
+
+    .arrow-next {
+      right: 30px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) rotate(-45deg);
+    }
+
+    .light {
+      color: white;
+    }
+
+    @media (max-width: 480px) {
+      .arrow,
+      .light .arrow {
+        background-size: 10px;
+        background-position: 10px 50%;
+      }
+    }
+
+    /*Select every element*/
+    [id^="item"] {
+      display: none;
+    }
+
+    .item-1 {
+      z-index: 2;
+      opacity: 1;
+      background-size: cover;
+    }
+    .secondaries {
+      background-size: cover;
+    }
+
+    *:target ~ .item-1 {
+      opacity: 0;
+    }
+
+    .items-data {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      img {
+        // height: 50vh;
+        // width: 80%;
+        border-radius: 0.5em;
+      }
     }
   }
 }
@@ -1567,7 +1735,7 @@ $form-border-color: rgba(0, 0, 0, 0.1);
     margin: 0;
   }
 }
-
+//////////////////////////////order summery
 .order-summery-page {
   height: 100%;
   width: 100%;

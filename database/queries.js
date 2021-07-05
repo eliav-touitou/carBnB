@@ -255,7 +255,6 @@ const getUserByRating = async (minRate) => {
         },
       },
     });
-    console.log(ratedUser);
     return ratedUser;
   } catch (error) {
     throw error;

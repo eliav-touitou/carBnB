@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { setPhotosArray, setShowLogin, setCarToRental } from "../actions";
+import CarGallery from "./CarGallery";
 
 export default function CarDetails() {
   const dispatch = useDispatch();
@@ -161,13 +162,8 @@ export default function CarDetails() {
               </span>
             }
           </p>
-          {/* <a
-            className="owner-email-car-details"
-            href={`mailto:${availableCars[resultId].owner_email}`}
-          >
-            owner email
-          </a> */}
           <div className="gallery"></div>
+          {photosArray.length !== 0 && <CarGallery photosArray={photosArray} />}
 
           <button onClick={goToPayment}>go to payment</button>
           <Redirect push to={redirect} />

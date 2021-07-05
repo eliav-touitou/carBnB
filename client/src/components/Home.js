@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "./SearchBar";
-import Avatar from "./Avatar";
 import { setPromptOrNormal, setNotFoundMessage } from "../actions";
 import photo from "../photos/background-4593643_1920.jpg";
 import topCar from "../photos/top-car.jpeg";
