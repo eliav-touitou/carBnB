@@ -10,6 +10,7 @@ import {
   setFilteredCars,
   setInitialSearch,
   setNotFoundMessage,
+  setAuth,
 } from "../actions";
 // import "react-credit-cards/es/styles-compiled.css";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -23,6 +24,7 @@ export default function CreditCards() {
   const carToRental = useSelector((state) => state.carToRental);
 
   // Use State
+  const [image, setImage] = useState([]);
   const [redirect, setRedirect] = useState("/payment");
   const [isTakenMessage, setIsTakenMessage] = useState(false);
   const [data, setData] = useState({
@@ -59,6 +61,14 @@ export default function CreditCards() {
       }
       console.log(error);
     }
+    try {
+      const arr = ["User", ["license"], auth.user_email, [image]];
+      await axios.post("api/v1/users/updateitems", { data: arr });
+      auth.license = image;
+      dispatch(setAuth(auth));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Handle with difference cases
@@ -88,6 +98,16 @@ export default function CreditCards() {
       }
       console.log(err);
     }
+  };
+
+  const imageToBinary = async (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const data = await reader.result.split(",")[1];
+      setImage(data);
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -127,18 +147,29 @@ export default function CreditCards() {
               placeholder="CVC"
               onChange={handleInputChange}
             />
-            <button onClick={makeOrder}>ORDER!</button>
             {isTakenMessage && (
               <Snackbar
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}
                 open={true}
                 message={`Oops.. someone just pick the car. \nyou are redirect to all
-               results again:(`}
+              results again:(`}
                 key={"top" + "center"}
               />
             )}
           </form>
+
+          {auth.license === null ? (
+            <div>
+              <h3>You must upload your licenses first!!</h3>
+              <input
+                className="upload-photo-rental"
+                type="file"
+                onChange={(e) => imageToBinary(e)}
+              ></input>
+            </div>
+          ) : null}
         </div>
+        <button onClick={makeOrder}>ORDER!</button>
       </div>
       <Redirect push to={redirect} />
     </div>

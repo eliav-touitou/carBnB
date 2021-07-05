@@ -11,16 +11,16 @@ export default function OrderDetails() {
       {console.log(order)}
       <h3>transaction number: {order.transactionId} </h3>
       <a href={`mailto:${order.ownerEmail}`}>owner email</a>
-      <p>barnd: {order.brand} </p>
-      <p>model: {order.model} </p>
-      <p>year: {order.year} </p>
-      <p>fuel: {order.fuel} </p>
-      <p>gear: {order.gear} </p>
-      <p>passengers: {order.passengers} </p>
-      <p>end date: {new Date(order.endDate).toDateString()} </p>
-      <p>start date: {new Date(order.startDate).toDateString()} </p>
-      <p>is active: {order.isActive} </p>
-      <p>total price: {order.totalPrice} </p>
+      <p>Barnd: {order.brand} </p>
+      <p>Model: {order.model} </p>
+      <p>Year: {order.year} </p>
+      <p>Fuel: {order.fuel} </p>
+      <p>Gear: {order.gear} </p>
+      <p>Passengers: {order.passengers} </p>
+      <p>Start date: {new Date(order.startDate).toDateString()} </p>
+      <p>End date: {new Date(order.endDate).toDateString()} </p>
+      <p>Order status: {order.isActive} </p>
+      <p>Total price: {order.totalPrice} </p>
     </table>
   );
 }
