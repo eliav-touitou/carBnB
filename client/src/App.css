@@ -973,7 +973,7 @@ form {
           align-items: center;
   height: 100vh;
   background-size: 70vh;
-  background-image: url("C:/dev/carBnB/client/src/photos/good-logo-white.png");
+  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
   background-repeat: no-repeat;
   background-position-y: 10vh;
   background-position-x: 4vw;
