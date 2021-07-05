@@ -10,6 +10,7 @@ import topOwner from "../photos/top-owner.jpeg";
 import topLocation from "../photos/top-location.jpeg";
 import TopCarousel from "./TopCarousel";
 import Snackbar from "@material-ui/core/Snackbar";
+import MyFavorite from "./MyFavorite";
 
 export default function Home() {
   const dispatch = useDispatch();

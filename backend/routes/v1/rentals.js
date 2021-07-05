@@ -60,6 +60,7 @@ rentals.get("/allrentals", async (req, res) => {
 // Add new rental to rentals DB
 rentals.post("/new", async (req, res) => {
   const { rentalDetails, userDetails } = req.body.data;
+  console.log(req.body.data);
   try {
     // Checks if car already ordered in this dates => if true ⬇
     const takenCars = await whatCarsAreTaken({
