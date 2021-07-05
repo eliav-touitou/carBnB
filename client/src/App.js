@@ -1,6 +1,13 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Switch, NavLink, Link } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  NavLink,
+  Link,
+  Redirect,
+} from "react-router-dom";
 import Home from "./components/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -31,6 +38,7 @@ import Avatar from "./components/Avatar";
 import logo from "./photos/logo-black.png";
 import CreditCards from "./components/CreditCards";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import Snackbar from "@material-ui/core/Snackbar";
 
 const axios = require("axios");
 
@@ -48,6 +56,7 @@ function App() {
   // Use state
   const [visibility, setVisibility] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [needToLogin, setNeedToLogin] = useState(false);
 
   // Get all cars brand from API.
   useEffect(() => {
@@ -81,7 +90,15 @@ function App() {
           dispatch(setNotificationCounter(count));
           dispatch(setNotifications(messages.data));
         })
-        .catch((err) => console.log(err.message));
+        .catch((err) => {
+          if (err.response.status === 403) {
+            dispatch(setAuthOut());
+            setNeedToLogin(true);
+            setTimeout(() => {
+              setNeedToLogin(false);
+            }, 4500);
+          }
+        });
     }
   }, [[], auth, visibility]);
 
@@ -121,16 +138,15 @@ function App() {
             Login
           </div>
         )}
-        {/* {!auth && (
-          <div
-            className="navlink"
-            onClick={() => {
-              dispatch(setShowLogin(true));
-            }}
-          >
-            Login
-          </div>
-        )} */}
+
+        {needToLogin && (
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            open={true}
+            message="your time expired, please login again"
+            key={"top" + "center"}
+          />
+        )}
 
         <Avatar
           anchorEl={anchorEl}
@@ -186,6 +202,7 @@ function App() {
 
           <Route path="/" component={NotFound} />
         </Switch>
+        {needToLogin && <Redirect push to="/" />}
       </BrowserRouter>
     </div>
   );
