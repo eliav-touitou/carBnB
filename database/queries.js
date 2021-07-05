@@ -308,10 +308,10 @@ const addNewRentalToDB = async (obj) => {
 
 const addNewNotification = async (obj) => {
   const objToSave = {
-    message_from: obj.messageFrom,
-    message_to: obj.messageTo,
-    title: obj.title,
-    content: obj.content,
+    message_from: obj.from,
+    message_to: obj.to,
+    title: obj.subject,
+    content: obj.text,
     transaction_id: obj.transactionId,
     read: false,
   };

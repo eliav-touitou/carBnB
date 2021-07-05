@@ -18,13 +18,12 @@ export default function Result({ model, brand, passengers, carId, resultId }) {
     axios
       .post("/api/v1/photos/uniquephoto", { carId })
       .then(({ data: photo }) => {
-        console.log(photo);
-        setCarPhoto(photo.data.file);
+        setCarPhoto(photo.data?.file);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [carId]);
 
   useEffect(() => {
     if (auth) dispatch(setShowLogin(false));

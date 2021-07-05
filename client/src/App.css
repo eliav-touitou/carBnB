@@ -1836,6 +1836,76 @@ form {
   cursor: pointer;
 }
 
+.car-details-page {
+  height: 100vh;
+  width: 100vw;
+}
+
+.car-details-page .car-details-outer-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100vh;
+}
+
+.car-details-page .car-details-outer-container .car-details-inner-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: auto;
+  width: 40%;
+  height: 70vh;
+  min-height: -webkit-min-content;
+  min-height: -moz-min-content;
+  min-height: min-content;
+  margin-bottom: 7%;
+  -webkit-box-shadow: 0px 0px 22px -1px #000000;
+          box-shadow: 0px 0px 22px -1px #000000;
+  border-radius: 1em;
+  background-color: rgba(255, 245, 245, 0.432);
+}
+
+.car-details-page .car-details-outer-container .car-details-inner-container p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 28vw;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.car-details-page .car-details-outer-container .car-details-inner-container p .car-specific-detail {
+  font-weight: bold;
+}
+
+.car-details-page .car-details-outer-container .car-details-inner-container button {
+  padding-bottom: 5px;
+}
+
+.car-details-page .car-details-outer-container .car-details-inner-container .owner-email-car-details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 28vw;
+}
+
 .MuiPaper-root.MuiSnackbarContent-root.MuiPaper-elevation6 {
   position: relative;
 }
@@ -1892,5 +1962,61 @@ form {
 
 .footer-section hr {
   margin: 0;
+}
+
+.order-summery-page {
+  height: 100%;
+  width: 100%;
+}
+
+.order-summery-page .order-summery-outer-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100vh;
+}
+
+.order-summery-page .order-summery-outer-container .order-summery-inner-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: auto;
+  width: 40%;
+  height: 70vh;
+  min-height: -webkit-min-content;
+  min-height: -moz-min-content;
+  min-height: min-content;
+  margin-bottom: 7%;
+  -webkit-box-shadow: 0px 0px 22px -1px #000000;
+          box-shadow: 0px 0px 22px -1px #000000;
+  border-radius: 1em;
+  background-color: rgba(255, 245, 245, 0.432);
+}
+
+.order-summery-page .order-summery-outer-container .order-summery-inner-container div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 28vw;
+  line-height: 35px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 /*# sourceMappingURL=App.css.map */

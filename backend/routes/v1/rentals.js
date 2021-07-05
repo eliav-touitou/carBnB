@@ -17,6 +17,7 @@ const {
   sendMail,
   createPDFToSend,
   buildInvoice,
+  buildPatternsForConfirmOrRejectRental,
 } = require("../../utils/helperFunctions");
 const path = process.env.PDF_PATH;
 // Gets a unique rental
@@ -113,10 +114,10 @@ rentals.post("/new", async (req, res) => {
     });
 
     await addNewNotification({
-      messageFrom: rentalDetails.renterEmail,
-      messageTo: rentalDetails.ownerEmail,
-      title: "New Order incoming",
-      content: textPatternToOwner,
+      from: rentalDetails.renterEmail,
+      to: rentalDetails.ownerEmail,
+      subject: "New Order incoming",
+      text: textPatternToOwner,
       transactionId: result.transaction_id,
     });
 
@@ -138,6 +139,33 @@ rentals.patch("/status", async (req, res) => {
       primaryKey: "transaction_id",
       primaryKeyValue: transactionId,
       content: [status],
+    });
+
+    let rentalDetails = await getItemFromDB({
+      model: Rental,
+      column: ["transaction_id"],
+      columnValue: [transactionId],
+    });
+
+    const { textToRenterAfterResponding } =
+      buildPatternsForConfirmOrRejectRental({
+        transactionId,
+        status,
+      });
+    rentalDetails = rentalDetails[0].toJSON();
+    sendMail({
+      from: process.env.ADMIN_MAIL,
+      to: rentalDetails.renter_email,
+      subject: `Order ${status}`,
+      text: textToRenterAfterResponding,
+    });
+    console.log(rentalDetails);
+    await addNewNotification({
+      from: rentalDetails.owner_email,
+      to: rentalDetails.renter_email,
+      subject: `Order ${status}`,
+      text: textToRenterAfterResponding,
+      transactionId: transactionId,
     });
 
     return res.status(200).json({ message: "Successes" });
