@@ -185,6 +185,7 @@ users.post("/updateitems", validToken, async (req, res) => {
     };
 
     await updateItemToDB(objToUpdate);
+
     return res.status(200).json({ message: "Success to update!" });
   } catch (error) {
     console.log(error);

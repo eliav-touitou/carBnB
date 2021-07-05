@@ -30,7 +30,7 @@ export default function OrderSummery() {
             </span>
           </div>
           <div className="order-summery-details">
-            <span className="order-summery-description">Start Date:</span>
+            <span className="order-summery-description">End Date:</span>
             <span className="order-summery-value">
               {new Date(carToRental.endDate).toDateString()}
             </span>

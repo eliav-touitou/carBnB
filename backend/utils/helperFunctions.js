@@ -77,7 +77,6 @@ const sendMail = ({ from, to, subject, text }) => {
       console.log(error);
       throw error;
     } else {
-      console.log(info);
       return true;
     }
   });

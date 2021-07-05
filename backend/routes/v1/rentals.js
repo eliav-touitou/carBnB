@@ -20,6 +20,7 @@ const {
   buildPatternsForConfirmOrRejectRental,
 } = require("../../utils/helperFunctions");
 const path = process.env.PDF_PATH;
+
 // Gets a unique rental
 rentals.post("/uniquerental", async (req, res) => {
   const { id } = req.body;
@@ -160,7 +161,7 @@ rentals.patch("/status", async (req, res) => {
       subject: `Order ${status}`,
       text: textToRenterAfterResponding,
     });
-    console.log(rentalDetails);
+
     await addNewNotification({
       from: rentalDetails.owner_email,
       to: rentalDetails.renter_email,
