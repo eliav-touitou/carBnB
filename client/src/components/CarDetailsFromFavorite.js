@@ -1,17 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory, useLocation, useParams } from "react-router-dom";
+import { Redirect, useLocation } from "react-router-dom";
 import { setPhotosArray, setShowLogin, setCarToRental } from "../actions";
-import Carousel from "react-elastic-carousel";
-
-import {
-  setRentalDetails,
-  setAvailableCars,
-  setFilteredCars,
-  setInitialSearch,
-  setNotFoundMessage,
-} from "../actions";
 
 export default function CarDetailsFromFavorite() {
   const dispatch = useDispatch();
@@ -155,18 +146,6 @@ export default function CarDetailsFromFavorite() {
             }
           </p>
           <div className="gallery"></div>
-          {photosArray.length !== 0 && (
-            <Carousel>
-              {photosArray?.map((photo, i) => (
-                <img
-                  alt="license"
-                  key={`photo-${i}`}
-                  src={`data:image/jpeg;base64,${photo.file}`}
-                  height={100}
-                />
-              ))}
-            </Carousel>
-          )}
 
           <button onClick={goToPayment}>go to payment</button>
         </div>
