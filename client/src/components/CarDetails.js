@@ -3,16 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { setPhotosArray, setShowLogin, setCarToRental } from "../actions";
-import Carousel from "react-elastic-carousel";
-
-import {
-  setRentalDetails,
-  setAvailableCars,
-  setFilteredCars,
-  setInitialSearch,
-  setNotFoundMessage,
-} from "../actions";
-import PromptLogin from "./PromptLogin";
+import CarGallery from "./CarGallery";
 
 export default function CarDetails() {
   const dispatch = useDispatch();
@@ -103,7 +94,7 @@ export default function CarDetails() {
   };
 
   return (
-    <div>
+    <div className="car-details-page">
       <p>מלא פרטים על הרכב 😃😃🍏🍏</p>
       <a href={`mailto:${availableCars[resultId].owner_email}`}>owner email</a>
       <p>barnd: {availableCars[resultId].brand} </p>
@@ -127,17 +118,7 @@ export default function CarDetails() {
       )}
       <p>{`Total price: ${calculateDiscount().price}`}</p>
       <div className="gallery"></div>
-      <Carousel>
-        {photosArray?.map((photo, i) => (
-          <img
-            alt="license"
-            key={`photo-${i}`}
-            src={`data:image/jpeg;base64,${photo.file}`}
-            height={100}
-          />
-        ))}
-      </Carousel>
-
+      <CarGallery photosArray={photosArray} />
       <button onClick={goToPayment}>go to payment</button>
       <Redirect push to={redirect} />
     </div>

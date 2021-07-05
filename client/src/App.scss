@@ -1256,17 +1256,14 @@ form {
 .item-1 {
   z-index: 2;
   opacity: 1;
-  // background: url("https://static.pexels.com/photos/6526/sea-beach-holiday-vacation-large.jpg");
   background-size: cover;
 }
-.item-2 {
-  // background: url("https://static.pexels.com/photos/6506/alcohol-bar-drinks-party-large.jpg");
+.secondaries {
   background-size: cover;
 }
-.item-3 {
-  // background: url("https://static.pexels.com/photos/6529/lake-kajak-kayak-large.jpg");
-  background-size: cover;
-}
+// .item-3 {
+//   background-size: cover;
+// }
 
 *:target ~ .item-1 {
   opacity: 0;
@@ -1568,3 +1565,4 @@ $form-border-color: rgba(0, 0, 0, 0.1);
     margin: 0;
   }
 }
+///////////////////////////////car details page//////////////////////////@at-root
