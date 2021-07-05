@@ -31,8 +31,6 @@ export default function CarDetails() {
   const initialSearch = useSelector((state) => state.initialSearch);
   const photosArray = useSelector((state) => state.photosArray);
   const auth = useSelector((state) => state.auth);
-  const showLogin = useSelector((state) => state.showLogin);
-  const carToRental = useSelector((state) => state.carToRental);
 
   useEffect(() => {
     if (auth) dispatch(setShowLogin(false));
