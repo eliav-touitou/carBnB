@@ -86,7 +86,6 @@ export default function FavoriteDetails({ car }) {
 
   // Order new car
   const makeOrder = async () => {
-    console.log(car);
     try {
       car.carId = car.car_id;
       car.startDate = startDate;
@@ -100,7 +99,6 @@ export default function FavoriteDetails({ car }) {
 
       // If order succeed redirect to summery
 
-      console.log(rental);
       dispatch(setRentalDetails(rental.data));
       dispatch(setCarToRental(car));
       setRedirect("/summery");

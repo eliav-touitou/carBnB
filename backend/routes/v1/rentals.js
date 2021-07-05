@@ -18,6 +18,7 @@ const {
   createPDFToSend,
   buildInvoice,
   buildPatternsForConfirmOrRejectRental,
+  writeLogs,
 } = require("../../utils/helperFunctions");
 const path = process.env.PDF_PATH;
 
@@ -34,6 +35,14 @@ rentals.post("/uniquerental", async (req, res) => {
     return res.status(200).json({ success: true, data: rental });
   } catch (error) {
     console.log(error.message);
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/rentals/uniquerental",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: error.message });
@@ -51,6 +60,14 @@ rentals.get("/allrentals", async (req, res) => {
     return res.status(200).json({ success: true, data: rentals });
   } catch (error) {
     console.log(error.message);
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/rentals/allrentals",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: error.message });
@@ -126,6 +143,14 @@ rentals.post("/new", async (req, res) => {
     return res.status(201).json({ message: "Successes", data: result });
   } catch (err) {
     console.log(err);
+    const objToWrite = {
+      date: new Date(),
+      error: err,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/rentals/new",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: err.message });
@@ -173,6 +198,14 @@ rentals.patch("/status", async (req, res) => {
     return res.status(200).json({ message: "Successes" });
   } catch (err) {
     console.log(err);
+    const objToWrite = {
+      date: new Date(),
+      error: err,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/rentals/status",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: err.message });
@@ -227,6 +260,17 @@ rentals.post("/myorders", async (req, res) => {
       .json({ message: "Successes", data: arrOfOrdersToClient });
   } catch (error) {
     console.log(error);
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/rentals/myorders",
+    };
+    await writeLogs(objToWrite);
+    return res
+      .status(500)
+      .json({ message: "Problems with our server", error: error.message });
   }
 });
 
