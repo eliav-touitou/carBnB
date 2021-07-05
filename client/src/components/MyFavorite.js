@@ -20,9 +20,9 @@ export default function MyFavorite() {
   }, []);
 
   return (
-    <div>
+    <div className="car-favorite-page">
       {myFavorite?.map((car, i) => (
-        <div key={`car-${i}`}>
+        <div key={`car-${i}`} className="car-favorite-container">
           <FavoriteDetails car={car} key={`car-${i}`} />
         </div>
       ))}

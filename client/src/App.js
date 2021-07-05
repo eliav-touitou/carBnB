@@ -32,6 +32,7 @@ import logo from "./photos/logo-black.png";
 import CreditCards from "./components/CreditCards";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MyFavorite from "./components/MyFavorite";
+import CarDetailsFromFavorite from "./components/CarDetailsFromFavorite";
 
 const axios = require("axios");
 
@@ -184,6 +185,11 @@ function App() {
             </Route>
           )}
           <Route exact path="/result/:resultId" component={CarDetails} />
+          <Route
+            exact
+            path="/favorite/:carId"
+            component={CarDetailsFromFavorite}
+          />
           <Route exact path="/message/:messageId" component={MessageDetails} />
           <Route exact path="/allmyorders/:type" component={MyOrders} />
           <Route exact path="/order/:orderId" component={OrderDetails} />
