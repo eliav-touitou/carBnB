@@ -1,5 +1,4 @@
 import { Snackbar } from "@material-ui/core";
-import axios from "axios";
 import React, { useState } from "react";
 import { DateRangePicker } from "react-dates";
 import { Redirect } from "react-router-dom";
