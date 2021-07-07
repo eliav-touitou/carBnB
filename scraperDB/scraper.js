@@ -11,6 +11,7 @@ const {
   buildPatternsForCanceledRentals,
   buildPatternsForAfterRentalFinish,
   sendMail,
+  writeLogs,
 } = require("../backend/utils/helperFunctions");
 
 const removePendingOrders = async () => {
@@ -59,6 +60,13 @@ const removePendingOrders = async () => {
     });
   } catch (error) {
     console.log(error);
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: "none",
+      route: "scraper-removePendingOrders function ",
+    };
+    await writeLogs(objToWrite);
   }
 };
 
@@ -100,23 +108,22 @@ const finishOrders = async () => {
     });
   } catch (error) {
     console.log(error);
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: "none",
+      route: "scraper-finishOrders function ",
+    };
+    await writeLogs(objToWrite);
   }
 };
-finishOrders().then((res) => {
-  console.log("105");
-  console.log(res);
-});
-removePendingOrders().then((res) => {
-  console.log("109");
-  console.log(res);
-});
 
 // Run every hour
-// setInterval(async () => {
-//   await removePendingOrders();
-// }, 3600000);
+setInterval(async () => {
+  await removePendingOrders();
+}, 3600000);
 
-// // Run every day
-// setInterval(async () => {
-//   await finishOrders();
-// }, 86400000);
+// Run every day
+setInterval(async () => {
+  await finishOrders();
+}, 86400000);
