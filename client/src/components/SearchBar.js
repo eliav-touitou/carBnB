@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import {
@@ -9,17 +9,22 @@ import {
   setInitialSearch,
   setNotFoundMessage,
 } from "../actions";
+import moment from "moment";
 
 import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 import "../react_dates_overrides.css";
 
-export default function SearchBar({ allCitiesApi }) {
+export default function SearchBar() {
   const dispatch = useDispatch();
 
+  // Redux states
+  const allCitiesApi = useSelector((state) => state.allCitiesApi);
+  const initialSearch = useSelector((state) => state.initialSearch);
+
   // Use states
-  const [resultsPage, setResultsPage] = useState("/");
+  const [resultsPage, setResultsPage] = useState(false);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [focusedInput, setFocusedInput] = useState(null);
@@ -45,7 +50,7 @@ export default function SearchBar({ allCitiesApi }) {
       dispatch(setAvailableCars(availableCars.data));
       dispatch(setFilteredCars(availableCars.data));
       if (availableCars.data.length !== 0) {
-        setResultsPage("/results");
+        setResultsPage(true);
       }
     } catch (err) {
       dispatch(setNotFoundMessage(err.response.data.message));
@@ -71,6 +76,7 @@ export default function SearchBar({ allCitiesApi }) {
     setStartDate(startDate);
     setEndDate(endDate);
   };
+
   return (
     <div className="top-navigation">
       <nav className="search-nav">
@@ -83,6 +89,11 @@ export default function SearchBar({ allCitiesApi }) {
                   name="cities"
                   list="cities"
                   ref={cityRef}
+                  defaultValue={
+                    window.location.href === "http://localhost:3000/"
+                      ? undefined
+                      : initialSearch?.city
+                  }
                   placeholder="Wanted City"
                 ></input>
                 <datalist id="cities">
@@ -96,10 +107,18 @@ export default function SearchBar({ allCitiesApi }) {
             <div className="search-inputs">
               <div className="label">Choose Dates:</div>
               <DateRangePicker
-                startDate={startDate}
+                startDate={
+                  window.location.href === "http://localhost:3000/"
+                    ? startDate
+                    : moment(initialSearch?.startDate)
+                }
                 startDatePlaceholderText="Start date:"
                 startDateId="tata-start-date"
-                endDate={endDate}
+                endDate={
+                  window.location.href === "http://localhost:3000/"
+                    ? endDate
+                    : moment(initialSearch?.endDate)
+                }
                 endDatePlaceholderText="End date:"
                 endDateId="tata-end-date"
                 onDatesChange={handleDatesChange}
@@ -116,6 +135,11 @@ export default function SearchBar({ allCitiesApi }) {
                   name="passengers"
                   list="passengers"
                   ref={passengersRef}
+                  defaultValue={
+                    window.location.href === "http://localhost:3000/"
+                      ? undefined
+                      : initialSearch?.passengers + "+"
+                  }
                   placeholder="Size"
                 ></input>
                 <datalist id="passengers">
@@ -123,7 +147,6 @@ export default function SearchBar({ allCitiesApi }) {
                   <option value="4+" />
                   <option value="5+" />
                   <option value="7+" />
-                  {/* <option value="else..." /> */}
                 </datalist>
               </label>
             </div>
@@ -136,7 +159,7 @@ export default function SearchBar({ allCitiesApi }) {
         </div>
       </nav>{" "}
       {/*   End nav   */}
-      <Redirect push={true} to={`${resultsPage}`} />
+      {resultsPage && <Redirect push={true} to={"/results"} />}
     </div>
 
     // </div>

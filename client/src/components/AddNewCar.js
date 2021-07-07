@@ -41,7 +41,7 @@ export default function AddNewCar() {
 
   // Global variables
   const apiCars = "https://vpic.nhtsa.dot.gov/api";
-  const seatsOptions = ["2", "4", "5", "6", "7", "9", "else"];
+  const seatsOptions = ["2", "4", "5", "6", "7"];
 
   // UseRefs
   const brandRef = useRef();

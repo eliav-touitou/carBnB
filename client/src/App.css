@@ -520,7 +520,7 @@ form {
 }
 
 .messages {
-  top: 25px;
+  top: 23px;
   position: fixed;
   right: 100px;
 }
@@ -536,6 +536,31 @@ form {
   top: 25px;
   position: fixed;
   right: 160px;
+}
+
+@media screen and (max-width: 600px) {
+  #navbar-logo {
+    left: 5px;
+    width: 90px;
+    height: 58px;
+  }
+  #navbar-logo img {
+    left: 5px;
+    width: 90px;
+    height: 58px;
+  }
+  .Avatar {
+    right: 10px;
+  }
+  .messages {
+    right: 70px;
+  }
+  .login-btn {
+    right: 60px;
+  }
+  .add-car-btn {
+    right: 120px;
+  }
 }
 
 .separator {
@@ -703,6 +728,38 @@ form {
   clear: both;
 }
 
+.search-bar-in-results-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.search-bar-in-results-page .top-navigation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 73%;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  color: white;
+  -webkit-box-shadow: 0px 0px 22px -1px #000000;
+          box-shadow: 0px 0px 22px -1px #000000;
+  border-radius: 5em;
+}
+
+.search-bar-in-results-page .top-navigation input {
+  outline: none;
+}
+
 .car-details {
   float: left;
   width: 70%;
@@ -748,7 +805,6 @@ form {
 }
 
 .car-details .first-details .buttons {
-  min-height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -774,6 +830,24 @@ form {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+  margin-top: 4vh;
+}
+
+.rating-result {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.owner-rating-results {
+  font-weight: bold;
+}
+
+.owner-rating-reviews {
+  font-weight: lighter;
 }
 
 /* Responsive columns */
@@ -975,7 +1049,7 @@ form {
           align-items: center;
   height: 100vh;
   background-size: 70vh;
-  background-image: url("C:/dev/carBnB/client/src/photos/good-logo-white.png");
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
   background-repeat: no-repeat;
   background-position-y: 10vh;
   background-position-x: 4vw;
@@ -1072,6 +1146,11 @@ form {
   height: 40vh;
   width: 100%;
   border-radius: 0.5em;
+}
+
+.top-pick-section a {
+  text-decoration: none;
+  color: black;
 }
 
 .footer-section {
@@ -2454,69 +2533,59 @@ form {
 }
 
 .car-favorite-page {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-.car-favorite-page .car-favorite-container {
+.car-favorite-page .favorite-car-list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 60vw;
-}
-
-.car-favorite-page .car-favorite-container .car-favorite-outer-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  width: 100%;
-}
-
-.car-favorite-page .car-favorite-container .car-favorite-outer-container .car-details {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 40vw;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 80%;
 }
 
-.car-favorite-page .car-favorite-container .car-favorite-outer-container .car-details .car-details-upper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+.car-favorite-page .favorite-car-list .car-details {
+  width: 60%;
+}
+
+.car-favorite-page .favorite-car-list .car-details img {
+  height: 150px;
+  width: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .car-favorite-page {
+    padding-top: 100px;
+  }
+  .car-favorite-page .favorite-car-list .car-details {
+    width: 80%;
+    height: 70vh;
+  }
+  .car-favorite-page .favorite-car-list .first-details {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .car-favorite-page .favorite-car-list .first-details img {
+    height: auto;
+    width: 100%;
+  }
 }
 /*# sourceMappingURL=App.css.map */

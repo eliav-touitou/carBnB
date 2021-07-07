@@ -2,6 +2,7 @@ require("dotenv").config();
 const { Router } = require("express");
 const axios = require("axios");
 const cheerio = require("cheerio");
+const { writeLogs } = require("../../utils/helperFunctions");
 const city = "Haifa";
 const startDate = "2021-07-12";
 const endDate = "2021-08-12";
@@ -40,6 +41,13 @@ async function run() {
     console.log(average);
   } catch (err) {
     console.log(err);
+    const objToWrite = {
+      date: new Date(),
+      error: err,
+      status: "none",
+      route: "/api/v1/scraper/run",
+    };
+    await writeLogs(objToWrite);
   }
 }
 run();

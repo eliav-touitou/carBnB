@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
       });
       this.hasMany(models.Car, {
         foreignKey: "owner_email",
-        sourceKey: "user_email",
+        targetKey: "user_email",
       });
-      this.belongsToMany(models.Car, {
-        through: "Favorite",
-        foreignKey: "user_email",
-      });
+      // this.belongsToMany(models.Car, {
+      //   through: "Favorite",
+      //   foreignKey: "user_email",
+      // });
     }
   }
   User.init(
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       address: DataTypes.STRING,
       rating: DataTypes.FLOAT,
       number_of_votes: DataTypes.INTEGER,
-      license: DataTypes.TEXT("long"),
+      license: DataTypes.TEXT,
     },
     {
       sequelize,

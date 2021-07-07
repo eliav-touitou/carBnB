@@ -23,6 +23,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import Snackbar from "@material-ui/core/Snackbar";
 import MyFavorite from "./components/MyFavorite";
 import CarDetailsFromFavorite from "./components/CarDetailsFromFavorite";
+import Tops from "./components/Tops";
 import {
   setAllCarsApi,
   setAuthOut,
@@ -114,11 +115,7 @@ function App() {
           Become a host
         </NavLink>
         {auth ? (
-          <div
-            className="navlink messages"
-            activeStyle={{ color: "navy" }}
-            // to="/notifications"
-          >
+          <div className="navlink messages">
             <Badge badgeContent={notificationCounter} color="secondary">
               <NotificationsIcon onClick={handleVisibility} />
               <div className={`tool-tip-text ${visibility}`}>
@@ -202,6 +199,7 @@ function App() {
           <Route exact path="/message/:messageId" component={MessageDetails} />
           <Route exact path="/allmyorders/:type" component={MyOrders} />
           <Route exact path="/order/:orderId" component={OrderDetails} />
+          <Route exact path="/top/:type" component={Tops} />
 
           <Route path="/" component={NotFound} />
         </Switch>

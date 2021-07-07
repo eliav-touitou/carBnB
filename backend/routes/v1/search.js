@@ -76,6 +76,7 @@ search.post("/initial", async (req, res) => {
       users.forEach((user) => {
         if (car.owner_email === user.user_email) {
           car.dataValues.owner_rating = user.rating;
+          car.dataValues.number_of_votes = user.number_of_votes;
           return;
         }
       });

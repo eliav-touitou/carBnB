@@ -31,29 +31,29 @@ export default function MyOrders() {
   return (
     <div className="my-order-page">
       {allOrders.map((order, i) => (
-        <div class="artboard">
-          <div class="card">
-            <div class="card__side card__side--back">
-              <div class="card__cover">
-                <h4 class="card__heading">
-                  <span class="card__heading-span">
+        <div key={`order-${i}`} className="artboard">
+          <div className="card">
+            <div className="card__side card__side--back">
+              <div className="card__cover">
+                <h4 className="card__heading">
+                  <span className="card__heading-span">
                     Order number: {order.transactionId}
                   </span>
                 </h4>
               </div>
-              <div class="card__details">
+              <div className="card__details">
                 <OrderDetails order={order} />
               </div>
             </div>
 
-            <div class="card__side card__side--front">
-              <div class="card__theme">
-                <div class="card__theme-box">
-                  <p class="card__title">
+            <div className="card__side card__side--front">
+              <div className="card__theme">
+                <div className="card__theme-box">
+                  <p className="card__title">
                     {" "}
                     Order number: {order.transactionId}
                   </p>
-                  <p class="card__subject">
+                  <p className="card__subject">
                     {type === "rentals" ? "Order from you" : "Cars you ordered"}
                   </p>
                 </div>

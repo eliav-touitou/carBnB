@@ -51,6 +51,20 @@
       "status": 500,
       "ourMessage": "Problems with our server",
       "route": "api/v1/users/updateitems"
+    },
+    {
+      "date": "2021-07-07T15:10:44.267Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/top/locations"
+    },
+    {
+      "date": "2021-07-07T15:21:28.131Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/top/cars"
     }
   ]
 }

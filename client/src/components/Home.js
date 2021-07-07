@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "./SearchBar";
-import { setPromptOrNormal, setNotFoundMessage } from "../actions";
+import {
+  setPromptOrNormal,
+  setNotFoundMessage,
+  setAllCitiesApi,
+  setInitialSearch,
+} from "../actions";
 import photo from "../photos/background-4593643_1920.jpg";
 import topCar from "../photos/top-car.jpeg";
 import topOwner from "../photos/top-owner.jpeg";
@@ -10,9 +15,18 @@ import topLocation from "../photos/top-location.jpeg";
 import TopCarousel from "./TopCarousel";
 import Snackbar from "@material-ui/core/Snackbar";
 import MyFavorite from "./MyFavorite";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const dispatch = useDispatch();
+
+  // Redux states
+  const allCars = useSelector((state) => state.allCars);
+  const auth = useSelector((state) => state.auth);
+  const notFoundMessage = useSelector((state) => state.notFoundMessage);
+  const allCitiesApi = useSelector((state) => state.allCitiesApi);
+  const initialSearch = useSelector((state) => state.initialSearch);
+
   useEffect(() => {
     axios
       .get(
@@ -26,21 +40,9 @@ export default function Home() {
             temp.push(city["שם_ישוב_לועזי"].trim());
           }
         });
-        setAllCitiesApi(temp);
+        dispatch(setAllCitiesApi(temp));
       });
   }, []);
-
-  // Redux states
-  const allCars = useSelector((state) => state.allCars);
-  const auth = useSelector((state) => state.auth);
-  const notFoundMessage = useSelector((state) => state.notFoundMessage);
-
-  // Use State
-  const [allCitiesApi, setAllCitiesApi] = useState([]);
-
-  const setNormal = () => {
-    dispatch(setPromptOrNormal("normal"));
-  };
 
   useEffect(() => {
     if (notFoundMessage) {
@@ -71,25 +73,31 @@ export default function Home() {
         />
       )}
       <section className="search-section" id="search">
-        <SearchBar allCitiesApi={allCitiesApi} />
+        <SearchBar />
       </section>
       <section className="top-pick-section">
         <h2>Choose the best</h2>
         <div className="top-picks-container">
           <div className="top-pick">
-            <img src={topCar} className="top-car-img" />
-            <h4>TOP CARS</h4>
-            <p>Extraordinary driving experience. </p>
+            <Link exact={"true"} to="/top/cars">
+              <img src={topCar} className="top-car-img" />
+              <h4>TOP CARS</h4>
+              <p>Extraordinary driving experience. </p>
+            </Link>
           </div>
           <div className="top-pick">
-            <img src={topOwner} />
-            <h4>TOP OWNERS</h4>
-            <p>Lovely owner for the best travel. </p>
+            <Link exact={"true"} to="/top/owners">
+              <img src={topOwner} />
+              <h4>TOP OWNERS</h4>
+              <p>Lovely owner for the best travel. </p>
+            </Link>
           </div>
           <div className="top-pick">
-            <img src={topLocation} />
-            <h4>TOP LOCATIONS</h4>
-            <p>Peacefully moment in paradise. </p>
+            <Link exact={"true"} to="/top/locations">
+              <img src={topLocation} />
+              <h4>TOP LOCATIONS</h4>
+              <p>Peacefully moment in paradise. </p>
+            </Link>
           </div>
         </div>
       </section>

@@ -133,3 +133,9 @@ export const setCarToRental = (obj) => {
     payload: obj,
   };
 };
+export const setAllCitiesApi = (obj) => {
+  return {
+    type: "SETALLCITIESAPI",
+    payload: obj,
+  };
+};
