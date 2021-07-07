@@ -1,1 +1,70 @@
-{"allErrors":[{"date":"2021-07-05T18:20:43.375Z","error":{"name":"SequelizeValidationError","errors":[{"message":"license cannot be an array or an object","type":"string violation","path":"license","value":[],"origin":"CORE","instance":{"user_email":null,"license":[],"updatedAt":"2021-07-05T18:20:43.368Z"},"validatorKey":"not_a_string","validatorName":null,"validatorArgs":[]}]},"status":500,"ourMessage":"Problems with our server","route":"api/v1/users/updateitems"},{"date":"2021-07-05T18:20:55.553Z","error":{"name":"SequelizeValidationError","errors":[{"message":"license cannot be an array or an object","type":"string violation","path":"license","value":[],"origin":"CORE","instance":{"user_email":null,"license":[],"updatedAt":"2021-07-05T18:20:55.547Z"},"validatorKey":"not_a_string","validatorName":null,"validatorArgs":[]}]},"status":500,"ourMessage":"Problems with our server","route":"api/v1/users/updateitems"},{"date":"2021-07-07T15:10:44.267Z","error":{},"status":500,"ourMessage":"Problems with our server","route":"api/v1/top/locations"},{"date":"2021-07-07T15:21:28.131Z","error":{},"status":500,"ourMessage":"Problems with our server","route":"api/v1/top/cars"}]}
+{
+  "allErrors": [
+    {
+      "date": "2021-07-05T18:20:43.375Z",
+      "error": {
+        "name": "SequelizeValidationError",
+        "errors": [
+          {
+            "message": "license cannot be an array or an object",
+            "type": "string violation",
+            "path": "license",
+            "value": [],
+            "origin": "CORE",
+            "instance": {
+              "user_email": null,
+              "license": [],
+              "updatedAt": "2021-07-05T18:20:43.368Z"
+            },
+            "validatorKey": "not_a_string",
+            "validatorName": null,
+            "validatorArgs": []
+          }
+        ]
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/users/updateitems"
+    },
+    {
+      "date": "2021-07-05T18:20:55.553Z",
+      "error": {
+        "name": "SequelizeValidationError",
+        "errors": [
+          {
+            "message": "license cannot be an array or an object",
+            "type": "string violation",
+            "path": "license",
+            "value": [],
+            "origin": "CORE",
+            "instance": {
+              "user_email": null,
+              "license": [],
+              "updatedAt": "2021-07-05T18:20:55.547Z"
+            },
+            "validatorKey": "not_a_string",
+            "validatorName": null,
+            "validatorArgs": []
+          }
+        ]
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/users/updateitems"
+    },
+    {
+      "date": "2021-07-07T15:10:44.267Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/top/locations"
+    },
+    {
+      "date": "2021-07-07T15:21:28.131Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/top/cars"
+    }
+  ]
+}
