@@ -9,6 +9,7 @@ import {
   setInitialSearch,
   setNotFoundMessage,
 } from "../actions";
+import moment from "moment";
 
 import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
@@ -75,6 +76,7 @@ export default function SearchBar() {
     setStartDate(startDate);
     setEndDate(endDate);
   };
+
   return (
     <div className="top-navigation">
       <nav className="search-nav">
@@ -108,14 +110,14 @@ export default function SearchBar() {
                 startDate={
                   window.location.href === "http://localhost:3000/"
                     ? startDate
-                    : initialSearch?.startDate
+                    : moment(initialSearch?.startDate)
                 }
                 startDatePlaceholderText="Start date:"
                 startDateId="tata-start-date"
                 endDate={
                   window.location.href === "http://localhost:3000/"
                     ? endDate
-                    : initialSearch?.endDate
+                    : moment(initialSearch?.endDate)
                 }
                 endDatePlaceholderText="End date:"
                 endDateId="tata-end-date"
@@ -145,7 +147,6 @@ export default function SearchBar() {
                   <option value="4+" />
                   <option value="5+" />
                   <option value="7+" />
-                  {/* <option value="else..." /> */}
                 </datalist>
               </label>
             </div>
