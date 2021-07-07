@@ -9,6 +9,7 @@ const {
   getAllCarsByIdsArr,
   whatCarsAreTaken,
 } = require("../../../database/queries");
+const { writeLogs } = require("../../utils/helperFunctions");
 
 favorite.post("/add", async (req, res) => {
   const { carId, userEmail } = req.body.data;
@@ -18,6 +19,14 @@ favorite.post("/add", async (req, res) => {
     return res.status(201).json({ message: "Favorite saved!", data: favorite });
   } catch (err) {
     console.log(err);
+    const objToWrite = {
+      date: new Date(),
+      error: err,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/favorite/add",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: err.message });
@@ -31,6 +40,14 @@ favorite.post("/remove", async (req, res) => {
     return res.status(200).json({ message: "Favorite removed!" });
   } catch (err) {
     console.log(err);
+    const objToWrite = {
+      date: new Date(),
+      error: err,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/favorite/remove",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: err.message });
@@ -53,6 +70,14 @@ favorite.post("/all", async (req, res) => {
     return res.status(201).json({ message: "Successes", data: allFavorite });
   } catch (err) {
     console.log(err);
+    const objToWrite = {
+      date: new Date(),
+      error: err,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/favorite/all",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: err.message });
@@ -78,6 +103,14 @@ favorite.post("/checkavailability", async (req, res) => {
     res.status(200).send(true);
   } catch (err) {
     console.log(err);
+    const objToWrite = {
+      date: new Date(),
+      error: err,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/favorite/checkavailability",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: err.message });

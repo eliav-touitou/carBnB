@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import OrderDetails from "./OrderDetails";
 
 export default function MyOrders() {
   const { type } = useParams();
@@ -28,17 +29,39 @@ export default function MyOrders() {
   }, [window.location.href]);
 
   return (
-    <div>
-      <ul className="ul-orders">
-        {allOrders.map((order, i) => (
-          <Link
-            key={`order-${i}`}
-            to={{ pathname: `/order/${i}`, state: { order } }}
-          >
-            <li>Order number: {order.transactionId}</li>
-          </Link>
-        ))}
-      </ul>
+    <div className="my-order-page">
+      {allOrders.map((order, i) => (
+        <div class="artboard">
+          <div class="card">
+            <div class="card__side card__side--back">
+              <div class="card__cover">
+                <h4 class="card__heading">
+                  <span class="card__heading-span">
+                    Order number: {order.transactionId}
+                  </span>
+                </h4>
+              </div>
+              <div class="card__details">
+                <OrderDetails order={order} />
+              </div>
+            </div>
+
+            <div class="card__side card__side--front">
+              <div class="card__theme">
+                <div class="card__theme-box">
+                  <p class="card__title">
+                    {" "}
+                    Order number: {order.transactionId}
+                  </p>
+                  <p class="card__subject">
+                    {type === "rentals" ? "Order from you" : "Cars you ordered"}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

@@ -17,6 +17,7 @@ const {
   getItemFromDB,
   getUserByRating,
 } = require("../../../database/queries");
+const { writeLogs } = require("../../utils/helperFunctions");
 
 const primaryKeys = {
   User: "user_email",
@@ -39,6 +40,14 @@ users.post("/uniqueuser", async (req, res) => {
     return res.status(200).json({ success: true, data: user });
   } catch (error) {
     console.log(error.message);
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/users/uniqueuser",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: error.message });
@@ -56,6 +65,14 @@ users.post("/rated", async (req, res) => {
     return res.status(200).json({ success: true, data: ratedUsers });
   } catch (error) {
     console.log(error.message);
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/users/rated",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: error.message });
@@ -73,6 +90,14 @@ users.get("/allusers", async (req, res) => {
     return res.status(200).json({ success: true, data: users });
   } catch (error) {
     console.log(error.message);
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/users/allusers",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: error.message });
@@ -83,7 +108,7 @@ users.get("/allusers", async (req, res) => {
 users.post("/register", async (req, res) => {
   try {
     const { newUser } = req.body;
-    console.log(newUser);
+
     const { firstName, lastName, address, phoneNumber, email } = newUser;
     const objToSearchBy = { model: Auth, email: email };
     const auth = await getUserOrAuth(objToSearchBy);
@@ -93,10 +118,8 @@ users.post("/register", async (req, res) => {
         .status(409)
         .json({ success: true, message: "User already exist" });
     }
-    console.log(newUser.password);
 
     newUser.password = hashSync(newUser.password, genSaltSync(10));
-    console.log(98);
 
     await addToUsersDB({ firstName, lastName, address, phoneNumber, email });
     await addToAuthDB({
@@ -115,6 +138,14 @@ users.post("/register", async (req, res) => {
     return res.status(200).json({ success: true, data: newUser });
   } catch (error) {
     console.log(error);
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/users/register",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: error.message });
@@ -151,6 +182,14 @@ users.post("/login", async (req, res) => {
     }
   } catch (error) {
     console.log(error);
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/users/login",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: error.message });
@@ -165,6 +204,14 @@ users.post("/logout", async (req, res) => {
     return res.status(200).json({ message: "Success logout!" });
   } catch (error) {
     console.log(error);
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/users/logout",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: error.message });
@@ -189,6 +236,14 @@ users.post("/updateitems", validToken, async (req, res) => {
     return res.status(200).json({ message: "Success to update!" });
   } catch (error) {
     console.log(error);
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/users/updateitems",
+    };
+    await writeLogs(objToWrite);
     return res
       .status(500)
       .json({ message: "Problems with our server", error: error.message });
