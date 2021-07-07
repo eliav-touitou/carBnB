@@ -687,6 +687,24 @@ form {
     clear: both;
   }
 }
+.search-bar-in-results-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  .top-navigation {
+    display: flex;
+    width: 73%;
+
+    justify-content: space-evenly;
+    color: white;
+    box-shadow: 0px 0px 22px -1px #000000;
+    border-radius: 5em;
+    & input {
+      outline: none;
+    }
+  }
+}
 .car-details {
   float: left;
   width: 70%;
@@ -725,6 +743,7 @@ form {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin-top: 4vh;
 }
 
 /* Responsive columns */
@@ -872,8 +891,8 @@ form {
   align-items: center;
   height: 100vh;
   background-size: 70vh;
-  background-image: url("C:/dev/carBnB/client/src/photos/good-logo-white.png");
-  // background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
+  // background-image: url("C:/dev/carBnB/client/src/photos/good-logo-white.png");
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
   // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
   background-repeat: no-repeat;
   background-position-y: 10vh;

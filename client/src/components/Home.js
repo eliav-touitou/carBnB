@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "./SearchBar";
-import { setPromptOrNormal, setNotFoundMessage } from "../actions";
+import {
+  setPromptOrNormal,
+  setNotFoundMessage,
+  setAllCitiesApi,
+  setInitialSearch,
+} from "../actions";
 import photo from "../photos/background-4593643_1920.jpg";
 import topCar from "../photos/top-car.jpeg";
 import topOwner from "../photos/top-owner.jpeg";
@@ -13,6 +18,14 @@ import MyFavorite from "./MyFavorite";
 
 export default function Home() {
   const dispatch = useDispatch();
+
+  // Redux states
+  const allCars = useSelector((state) => state.allCars);
+  const auth = useSelector((state) => state.auth);
+  const notFoundMessage = useSelector((state) => state.notFoundMessage);
+  const allCitiesApi = useSelector((state) => state.allCitiesApi);
+  const initialSearch = useSelector((state) => state.initialSearch);
+
   useEffect(() => {
     axios
       .get(
@@ -26,21 +39,9 @@ export default function Home() {
             temp.push(city["שם_ישוב_לועזי"].trim());
           }
         });
-        setAllCitiesApi(temp);
+        dispatch(setAllCitiesApi(temp));
       });
   }, []);
-
-  // Redux states
-  const allCars = useSelector((state) => state.allCars);
-  const auth = useSelector((state) => state.auth);
-  const notFoundMessage = useSelector((state) => state.notFoundMessage);
-
-  // Use State
-  const [allCitiesApi, setAllCitiesApi] = useState([]);
-
-  const setNormal = () => {
-    dispatch(setPromptOrNormal("normal"));
-  };
 
   useEffect(() => {
     if (notFoundMessage) {
@@ -71,7 +72,7 @@ export default function Home() {
         />
       )}
       <section className="search-section" id="search">
-        <SearchBar allCitiesApi={allCitiesApi} />
+        <SearchBar />
       </section>
       <section className="top-pick-section">
         <h2>Choose the best</h2>

@@ -114,11 +114,7 @@ function App() {
           Become a host
         </NavLink>
         {auth ? (
-          <div
-            className="navlink messages"
-            activeStyle={{ color: "navy" }}
-            // to="/notifications"
-          >
+          <div className="navlink messages">
             <Badge badgeContent={notificationCounter} color="secondary">
               <NotificationsIcon onClick={handleVisibility} />
               <div className={`tool-tip-text ${visibility}`}>
