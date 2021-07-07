@@ -9,6 +9,7 @@ export default function OverviewDetail({ iconsKey, keys, value }) {
 
   // Redux states
   const auth = useSelector((state) => state.auth);
+  const allCitiesApi = useSelector((state) => state.allCitiesApi);
 
   // Use states
   const [isOpen, setIsOpen] = useState(false);
@@ -103,7 +104,7 @@ export default function OverviewDetail({ iconsKey, keys, value }) {
                 <>
                   <CreateOutlinedIcon onClick={() => setIsOpen(true)} />
                   <i
-                    class="far fa-trash-alt"
+                    className="far fa-trash-alt"
                     onClick={() => {
                       updateItem(keys, null);
                     }}
@@ -124,7 +125,29 @@ export default function OverviewDetail({ iconsKey, keys, value }) {
         <li className="overview-detail">
           <div className="data-and-icon">
             <span>{iconsKey[keys]}</span>
-            <input ref={inputRef} autoFocus={true} defaultValue={value}></input>
+            {keys !== "address" ? (
+              <input
+                ref={inputRef}
+                autoFocus={true}
+                defaultValue={value}
+              ></input>
+            ) : (
+              <>
+                {" "}
+                <input
+                  name="cities-profile"
+                  list="cities-profile"
+                  ref={inputRef}
+                  autoFocus={true}
+                  defaultValue={value}
+                ></input>
+                <datalist id="cities-profile">
+                  {allCitiesApi?.map((city, i) => (
+                    <option key={`city-${i}`} value={city} />
+                  ))}
+                </datalist>{" "}
+              </>
+            )}
           </div>{" "}
           <span className="pencil-profile">
             <i

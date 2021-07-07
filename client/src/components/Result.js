@@ -91,7 +91,7 @@ export default function Result({ model, brand, passengers, carId, resultId }) {
         </div>
         <div className="buttons">
           <button onClick={() => saveToFavorite(carId)}>
-            <i class={heartButton}></i>
+            <i className={heartButton}></i>
           </button>
           <Link to={`/result/${resultId}`}>
             <button>➡</button>

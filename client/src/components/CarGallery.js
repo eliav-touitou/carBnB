@@ -22,6 +22,7 @@ export default function CarGallery({ photosArray, location }) {
         ))}
         {photosArray?.map((photo, i) => (
           <div
+            key={`photo-outer-${i}`}
             className={
               i === 0
                 ? `carousel-item item-${i + 1}`
