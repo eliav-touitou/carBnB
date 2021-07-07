@@ -746,6 +746,17 @@ form {
   margin-top: 4vh;
 }
 
+.rating-result {
+  display: flex;
+  align-items: flex-end;
+}
+.owner-rating-results {
+  font-weight: bold;
+}
+.owner-rating-reviews {
+  font-weight: lighter;
+}
+
 /* Responsive columns */
 
 .filter-bar {

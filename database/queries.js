@@ -117,7 +117,7 @@ const addToUsersDB = async (obj) => {
       first_name: firstName,
       last_name: lastName,
       address: address,
-      rating: null,
+      rating: 0,
       number_of_votes: 0,
     });
   } catch (error) {

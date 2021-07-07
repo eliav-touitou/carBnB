@@ -7,7 +7,15 @@ import PromptLogin from "./PromptLogin";
 import defaultPhoto from "../photos/no-car-photo.png";
 import CarGallery from "./CarGallery";
 
-export default function Result({ model, brand, passengers, carId, resultId }) {
+export default function Result({
+  model,
+  brand,
+  passengers,
+  carId,
+  resultId,
+  ownerRating,
+  numberOfVotes,
+}) {
   const dispatch = useDispatch();
 
   // Redux states
@@ -84,6 +92,11 @@ export default function Result({ model, brand, passengers, carId, resultId }) {
         ) : (
           <img alt="car-photo" src={defaultPhoto} height={100} />
         )}
+        <div className="rating-result">
+          <i className="fas fa-star"></i>
+          <span className="owner-rating-results"> {ownerRating} </span>
+          <span className="owner-rating-reviews">({numberOfVotes})reviews</span>
+        </div>
         <div className="data">
           <div className="car-brand">Brand: {brand}</div>
           <div className="car-passengers">Model: {model}</div>

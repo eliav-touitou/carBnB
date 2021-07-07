@@ -809,6 +809,23 @@ form {
   margin-top: 4vh;
 }
 
+.rating-result {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.owner-rating-results {
+  font-weight: bold;
+}
+
+.owner-rating-reviews {
+  font-weight: lighter;
+}
+
 /* Responsive columns */
 .filter-bar {
   display: -webkit-box;

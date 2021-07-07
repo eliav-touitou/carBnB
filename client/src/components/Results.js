@@ -34,6 +34,8 @@ export default function Results() {
               model={car.model}
               passengers={car.passengers}
               carId={car.car_id}
+              ownerRating={car.owner_rating}
+              numberOfVotes={car.number_of_votes}
             />
           ))}
         </div>
