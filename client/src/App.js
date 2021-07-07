@@ -24,6 +24,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MyFavorite from "./components/MyFavorite";
 import CarDetailsFromFavorite from "./components/CarDetailsFromFavorite";
 import Tops from "./components/Tops";
+import CarsBySelection from "./components/TopCars";
 import {
   setAllCarsApi,
   setAuthOut,
@@ -200,6 +201,12 @@ function App() {
           <Route exact path="/allmyorders/:type" component={MyOrders} />
           <Route exact path="/order/:orderId" component={OrderDetails} />
           <Route exact path="/top/:type" component={Tops} />
+          <Route
+            exact
+            path="/top/ownercars/:ownername"
+            component={CarsBySelection}
+          />
+          <Route exact path="/top/city/:name" component={CarsBySelection} />
 
           <Route path="/" component={NotFound} />
         </Switch>

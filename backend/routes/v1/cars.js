@@ -6,6 +6,7 @@ const {
   getAllItems,
   getCar,
   addToCarsDB,
+  getCarsByCity,
 } = require("../../../database/queries");
 const { writeLogs } = require("../../utils/helperFunctions");
 
@@ -83,4 +84,23 @@ cars.post("/upload", validToken, async (req, res) => {
   }
 });
 
+cars.get("/bycity/:city", async (req, res) => {
+  const { city } = req.params;
+  try {
+    const carsByCity = await getCarsByCity(city);
+    return res.status(200).json({ success: true, data: carsByCity });
+  } catch (error) {
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/cars/upload",
+    };
+    await writeLogs(objToWrite);
+    return res
+      .status(500)
+      .json({ message: "Problems with our server", error: error.message });
+  }
+});
 module.exports = cars;
