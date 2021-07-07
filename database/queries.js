@@ -130,8 +130,10 @@ const top5Locations = async () => {
         b.Cars[0].dataValues.cars_number - a.Cars[0].dataValues.cars_number
     );
     let cities = [];
-    result.forEach((city) => cities.push(city.address));
-    // result.map((res) => console.log(res.toJSON()));
+
+    for (let i = 0; i < 5; i++) {
+      cities.push(result[i].address);
+    }
 
     return cities;
   } catch (error) {

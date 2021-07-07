@@ -1,7 +1,11 @@
 const { Router } = require("express");
 const { writeLogs } = require("../../utils/helperFunctions");
 const top = Router();
-const { top5Owners } = require("../../../database/queries");
+const {
+  top5Owners,
+  top5Locations,
+  top5Cars,
+} = require("../../../database/queries");
 
 top.get("/:type", async (req, res) => {
   const { type } = req.params;
@@ -9,7 +13,7 @@ top.get("/:type", async (req, res) => {
   try {
     switch (type) {
       case "cars":
-        topFive = await Top5Cars(type);
+        topFive = await top5Cars(type);
         break;
       case "owners":
         topFive = await top5Owners(type);
@@ -21,7 +25,7 @@ top.get("/:type", async (req, res) => {
         break;
     }
     return res.status(200).json({ success: true, data: topFive });
-  } catch (err) {
+  } catch (error) {
     const objToWrite = {
       date: new Date(),
       error: error,
