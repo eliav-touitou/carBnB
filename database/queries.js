@@ -54,6 +54,43 @@ const getUserOrAuth = async (obj) => {
     throw error;
   }
 };
+//
+const top5Owners = async () => {
+  try {
+    const result = await User.findAll({
+      order: [["rating", "DESC"]],
+      limit: 5,
+    });
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const top5Cars = async () => {
+  try {
+    const result = await Rental.findAll({
+      attributes: [
+        "car_id",
+        [sequelize.fn("count", sequelize.col("car_id")), "total_orders"],
+      ],
+      group: ["car_id"],
+      limit: 5,
+    });
+    let carArray = [];
+    result.map((car) => carArray.push(car.toJSON()));
+    carArray.sort((a, b) => b.total_orders - a.total_orders);
+    let idArray = [];
+    carArray.forEach((car) => idArray.push(car.car_id));
+
+    console.log(idArray);
+    const sortedCars = await getAllCarsByIdsArr(idArray);
+    console.log(sortedCars);
+    return sortedCars;
+  } catch (error) {
+    throw error;
+  }
+};
 
 // Get item from DB by specific column-value
 const getItemFromDB = async (obj) => {
@@ -69,6 +106,36 @@ const getItemFromDB = async (obj) => {
     return data;
   } catch (err) {
     throw err;
+  }
+};
+const top5Locations = async () => {
+  try {
+    const result = await User.findAll({
+      attributes: ["address"],
+      include: [
+        {
+          model: Car,
+          required: true,
+          attributes: [
+            [Sequelize.fn("COUNT", Sequelize.col("car_id")), "cars_number"],
+          ],
+        },
+      ],
+      group: ["address"],
+    });
+    // console.log(typeof result);
+    console.log(result[0].Cars[0].dataValues.cars_number);
+    result.sort(
+      (a, b) =>
+        b.Cars[0].dataValues.cars_number - a.Cars[0].dataValues.cars_number
+    );
+    let cities = [];
+    result.forEach((city) => cities.push(city.address));
+    // result.map((res) => console.log(res.toJSON()));
+
+    return cities;
+  } catch (error) {
+    throw error;
   }
 };
 
@@ -373,4 +440,7 @@ module.exports = {
   getAllCarsByIdsArr,
   getPhoto,
   getAllOptionalFinishOrders,
+  top5Cars,
+  top5Owners,
+  top5Locations,
 };

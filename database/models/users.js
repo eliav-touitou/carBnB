@@ -16,10 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "owner_email",
         sourceKey: "user_email",
       });
-      this.belongsToMany(models.Car, {
-        through: "Favorite",
-        foreignKey: "user_email",
-      });
+      // this.belongsToMany(models.Car, {
+      //   through: "Favorite",
+      //   foreignKey: "user_email",
+      // });
     }
   }
   User.init(

@@ -2509,6 +2509,11 @@ form {
   width: 60%;
 }
 
+.car-favorite-page .favorite-car-list .car-details img {
+  height: 150px;
+  width: auto;
+}
+
 @media screen and (max-width: 600px) {
   .car-favorite-page {
     padding-top: 100px;
@@ -2522,6 +2527,10 @@ form {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+  }
+  .car-favorite-page .favorite-car-list .first-details img {
+    height: auto;
+    width: 100%;
   }
 }
 /*# sourceMappingURL=App.css.map */

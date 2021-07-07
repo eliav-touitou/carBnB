@@ -2039,6 +2039,10 @@ $color-white: #fff;
     height: 80%;
     .car-details {
       width: 60%;
+      img {
+        height: 150px;
+        width: auto;
+      }
     }
   }
   @media screen and (max-width: 600px) {
@@ -2050,6 +2054,10 @@ $color-white: #fff;
       }
       .first-details {
         flex-direction: column;
+        img {
+          height: auto;
+          width: 100%;
+        }
       }
     }
   }

@@ -96,7 +96,7 @@ export default function FavoriteDetails({ car }) {
         {photosArray.length > 0 ? (
           <CarGallery photosArray={photosArray} location={"result"} />
         ) : (
-          <img alt="car-photo" src={defaultPhoto} height={100} />
+          <img alt="car-photo" src={defaultPhoto} />
         )}
         <div className="data">
           <div>Brand: {car.brand}</div>
