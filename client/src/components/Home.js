@@ -15,6 +15,7 @@ import topLocation from "../photos/top-location.jpeg";
 import TopCarousel from "./TopCarousel";
 import Snackbar from "@material-ui/core/Snackbar";
 import MyFavorite from "./MyFavorite";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -78,19 +79,25 @@ export default function Home() {
         <h2>Choose the best</h2>
         <div className="top-picks-container">
           <div className="top-pick">
-            <img src={topCar} className="top-car-img" />
-            <h4>TOP CARS</h4>
-            <p>Extraordinary driving experience. </p>
+            <Link exact={"true"} to="/top/cars">
+              <img src={topCar} className="top-car-img" />
+              <h4>TOP CARS</h4>
+              <p>Extraordinary driving experience. </p>
+            </Link>
           </div>
           <div className="top-pick">
-            <img src={topOwner} />
-            <h4>TOP OWNERS</h4>
-            <p>Lovely owner for the best travel. </p>
+            <Link exact={"true"} to="/top/owners">
+              <img src={topOwner} />
+              <h4>TOP OWNERS</h4>
+              <p>Lovely owner for the best travel. </p>
+            </Link>
           </div>
           <div className="top-pick">
-            <img src={topLocation} />
-            <h4>TOP LOCATIONS</h4>
-            <p>Peacefully moment in paradise. </p>
+            <Link exact={"true"} to="/top/locations">
+              <img src={topLocation} />
+              <h4>TOP LOCATIONS</h4>
+              <p>Peacefully moment in paradise. </p>
+            </Link>
           </div>
         </div>
       </section>

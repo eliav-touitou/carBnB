@@ -1124,6 +1124,11 @@ form {
   border-radius: 0.5em;
 }
 
+.top-pick-section a {
+  text-decoration: none;
+  color: black;
+}
+
 .footer-section {
   display: -webkit-box;
   display: -ms-flexbox;

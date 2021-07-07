@@ -16,10 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "car_id",
         sourceKey: "car_id",
       });
-      this.belongsToMany(models.User, {
-        through: "Favorite",
-        foreignKey: "car_id",
-      });
+      // this.belongsToMany(models.User, {
+      //   through: "Favorite",
+      //   foreignKey: "car_id",
+      // });
     }
   }
 

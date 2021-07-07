@@ -23,6 +23,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import Snackbar from "@material-ui/core/Snackbar";
 import MyFavorite from "./components/MyFavorite";
 import CarDetailsFromFavorite from "./components/CarDetailsFromFavorite";
+import Tops from "./components/Tops";
 import {
   setAllCarsApi,
   setAuthOut,
@@ -198,6 +199,7 @@ function App() {
           <Route exact path="/message/:messageId" component={MessageDetails} />
           <Route exact path="/allmyorders/:type" component={MyOrders} />
           <Route exact path="/order/:orderId" component={OrderDetails} />
+          <Route exact path="/top/:type" component={Tops} />
 
           <Route path="/" component={NotFound} />
         </Switch>
