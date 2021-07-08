@@ -79,6 +79,8 @@ export default function SearchBar() {
   const handleDatesChange = ({ startDate, endDate }) => {
     setStartDate(startDate);
     setEndDate(endDate);
+    initialSearch.startDate = startDate;
+    initialSearch.endDate = endDate;
   };
 
   return (
