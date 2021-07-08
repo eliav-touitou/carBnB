@@ -1,3 +1,4 @@
+import { ButtonGroup } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -5,7 +6,8 @@ import FavoriteDetails from "./FavoriteDetails";
 
 export default function CarsBySelection() {
   const [ownerCars, setOwnerCars] = useState();
-  const { owner, city } = useLocation().state;
+  const owner = useLocation()?.state.owner;
+  const city = useLocation()?.state.city;
 
   useEffect(() => {
     if (owner) {
@@ -14,7 +16,6 @@ export default function CarsBySelection() {
           data: ["Car", ["owner_email"], [owner.user_email]],
         })
         .then(({ data: cars }) => {
-          console.log(cars.data);
           setOwnerCars(cars.data);
         })
         .catch((err) => console.log(err));

@@ -120,7 +120,7 @@ function App() {
             <Badge badgeContent={notificationCounter} color="secondary">
               <NotificationsIcon onClick={handleVisibility} />
               <div className={`tool-tip-text ${visibility}`}>
-                <Notifications />
+                <Notifications setVisibility={setVisibility} />
               </div>
             </Badge>
           </div>
@@ -207,7 +207,6 @@ function App() {
             component={CarsBySelection}
           />
           <Route exact path="/top/city/:name" component={CarsBySelection} />
-
           <Route path="/" component={NotFound} />
         </Switch>
         {needToLogin && <Redirect push to="/" />}

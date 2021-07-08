@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setNotifications } from "../actions";
 
-export default function Messages({ message, messageId }) {
+export default function Messages({ message, messageId, setVisibility }) {
   const dispatch = useDispatch();
 
   // Redux states
@@ -12,9 +12,14 @@ export default function Messages({ message, messageId }) {
   const notifications = useSelector((state) => state.notifications);
 
   const updateRead = async () => {
-    await axios.patch("/api/v1/notification/updateread", {
-      data: { id: message?.id, status: "read" },
-    });
+    try {
+      await axios.patch("/api/v1/notification/updateread", {
+        data: { id: message?.id, status: "read" },
+      });
+      setVisibility(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

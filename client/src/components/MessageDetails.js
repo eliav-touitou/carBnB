@@ -6,6 +6,8 @@ import { setNotifications, setNotificationCounter } from "../actions";
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import messagePhoto from "../photos/message-photo.jpg";
+import { Snackbar } from "@material-ui/core";
 
 export default function MessageDetails() {
   const dispatch = useDispatch();
@@ -18,6 +20,8 @@ export default function MessageDetails() {
   // Use states
   const [statusButton, setStatusButton] = useState(false);
   const [value, setValue] = useState(0);
+  const [showMessage, setShowMessage] = useState(false);
+  const [listenToUnread, setListenToUnread] = useState(false);
   const message = notifications[messageId];
 
   useEffect(() => {
@@ -40,6 +44,7 @@ export default function MessageDetails() {
       await axios.patch("/api/v1/notification/updateread", {
         data: { id: message.id, status: "unread" },
       });
+      setListenToUnread((prev) => !prev);
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +71,7 @@ export default function MessageDetails() {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [listenToUnread]);
 
   const updateRentalStatus = async (e) => {
     console.log(e);
@@ -114,44 +119,86 @@ export default function MessageDetails() {
       const updateUser = await axios.post("/api/v1/users/updateitems", {
         data: arrToUpdate,
       });
+      setShowMessage(true);
       console.log(updateUser);
     } catch (error) {
       console.log(error);
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 4500);
+  }, [showMessage]);
+
   return (
-    <div className="message-div-container">
-      <div className="message-div-details">
-        {message.content.slice(3, message.content.length - 4)}
-        {statusButton && (
-          <p>
-            <button onClick={updateRentalStatus}>accept</button> |{" "}
-            <button onClick={updateRentalStatus}>reject</button>
-          </p>
-        )}
-        {message.title === "Order Finished" && value === 0 ? (
-          <div id="rating-background">
-            <div id="rating-container">
-              <Box component="fieldset" mb={3} borderColor="transparent">
-                <Typography id="rate-owner" component="legend">
-                  <br /> Rate Owner:
-                </Typography>
-                <Rating
-                  id="stars"
-                  size="large"
-                  name="simple-controlled"
-                  value={value}
-                  onChange={(event, newValue) => {
-                    updateRating(newValue);
-                  }}
-                />
-              </Box>
+    <div className="message-details-container-blog-card">
+      <div className="blog-card">
+        <div className="meta">
+          <img className="photo" height="255px" src={messagePhoto}></img>
+          <div className="details">
+            <div className="upper-section-message-photo">
+              <div className="author">
+                <i class="fas fa-user"></i> {auth.first_name} {auth.last_name}
+              </div>
+              <div className="date">
+                <i class="far fa-calendar"></i>{" "}
+                {new Date(message.updatedAt).toDateString()}
+              </div>
             </div>
+            <div className="tags">Regards CarBnB</div>
           </div>
-        ) : null}
-        <button onClick={updateUnRead}>unread this message</button>
+        </div>
+        <div className="description">
+          <h1>
+            {message.title}{" "}
+            <div
+              style={{
+                visibility:
+                  message.title === "Order Finished" && value === 0
+                    ? "visible"
+                    : "hidden",
+              }}
+              className="rating-panel-container"
+            >
+              <Typography id="rate-owner" component="legend">
+                <br /> Rate Owner:
+              </Typography>
+              <Rating
+                id="stars"
+                size="large"
+                name="simple-controlled"
+                value={value}
+                onChange={(event, newValue) => {
+                  updateRating(newValue);
+                }}
+              />
+            </div>
+          </h1>
+          <h2>Order Number {message.transaction_id}</h2>
+          <p>{message.content.slice(3, message.content.length - 4)}</p>
+          <div className="read-more">
+            {statusButton && (
+              <div>
+                <a onClick={updateRentalStatus}>Accept</a> |{" "}
+                <a onClick={updateRentalStatus}>reject</a>
+              </div>
+            )}
+            <a className="read-later-hover" onClick={updateUnRead}>
+              Read Later
+            </a>
+          </div>
+        </div>
       </div>
+      {showMessage && (
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={true}
+          message={`Your rating was successfully updated`}
+          key={"top" + "center"}
+        />
+      )}
     </div>
   );
 }

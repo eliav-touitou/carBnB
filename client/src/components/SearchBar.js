@@ -22,6 +22,7 @@ export default function SearchBar() {
   // Redux states
   const allCitiesApi = useSelector((state) => state.allCitiesApi);
   const initialSearch = useSelector((state) => state.initialSearch);
+  const notFoundMessage = useSelector((state) => state.notFoundMessage);
 
   // Use states
   const [resultsPage, setResultsPage] = useState(false);
@@ -36,7 +37,10 @@ export default function SearchBar() {
   const search = async () => {
     const city = cityRef.current.value;
     const passengers = Number(passengersRef.current.value.slice(0, -1));
-    if (!city || !passengers || !startDate || !endDate) return;
+    if (!city || !passengers || !startDate || !endDate) {
+      dispatch(setNotFoundMessage("You must fill all inputs"));
+      return;
+    }
 
     const searchParameters = {
       data: { city, startDate, endDate, passengers },
@@ -75,6 +79,8 @@ export default function SearchBar() {
   const handleDatesChange = ({ startDate, endDate }) => {
     setStartDate(startDate);
     setEndDate(endDate);
+    initialSearch.startDate = startDate;
+    initialSearch.endDate = endDate;
   };
 
   return (

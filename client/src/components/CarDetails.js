@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { setPhotosArray, setShowLogin, setCarToRental } from "../actions";
 import CarGallery from "./CarGallery";
+import { Snackbar } from "@material-ui/core";
 
 export default function CarDetails() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export default function CarDetails() {
 
   // Use states
   const [redirect, setRedirect] = useState(`/result/${resultId}`);
+  const [showMessage, setShowMessage] = useState(false);
 
   // Redux States
   const availableCars = useSelector((state) => state.availableCars);
@@ -85,11 +87,19 @@ export default function CarDetails() {
       dispatch(setCarToRental(data));
       setRedirect("/payment");
     } else {
-      // need to prompt login component
       dispatch(setShowLogin(true));
+      setShowMessage(true);
       console.log("must log in first!");
     }
   };
+
+  useEffect(() => {
+    if (showMessage) {
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 4500);
+    }
+  }, [showMessage]);
 
   return (
     <div className="car-details-page">
@@ -166,6 +176,14 @@ export default function CarDetails() {
           {photosArray.length !== 0 && <CarGallery photosArray={photosArray} />}
 
           <button onClick={goToPayment}>go to payment</button>
+          {showMessage && (
+            <Snackbar
+              anchorOrigin={{ vertical: "top", horizontal: "center" }}
+              open={true}
+              message={"In our terms, you must login first"}
+              key={"top" + "center"}
+            />
+          )}
           <Redirect push to={redirect} />
         </div>
       </div>
