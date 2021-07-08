@@ -95,7 +95,7 @@ export default function FavoriteDetails({ car }) {
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
           open={true}
-          message={"must choose dates"}
+          message={"You must choose dates"}
           key={"top" + "center"}
         />
       )}

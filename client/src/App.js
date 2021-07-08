@@ -120,7 +120,7 @@ function App() {
             <Badge badgeContent={notificationCounter} color="secondary">
               <NotificationsIcon onClick={handleVisibility} />
               <div className={`tool-tip-text ${visibility}`}>
-                <Notifications />
+                <Notifications setVisibility={setVisibility} />
               </div>
             </Badge>
           </div>
