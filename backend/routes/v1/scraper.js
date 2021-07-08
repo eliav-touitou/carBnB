@@ -16,7 +16,7 @@ async function run() {
       .eq(1)
       .text()
       .trim();
-    dataFromWiki = dataFromWiki.replace(/ *\([^)]*\) */g, "");
+    dataFromWiki = dataFromWiki.replace(/(\[.*?\]|\(.*?\))/g, "");
     console.log(dataFromWiki);
   } catch (err) {
     console.log(err);

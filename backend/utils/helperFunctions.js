@@ -4,6 +4,7 @@ const PDFDocument = require("pdfkit");
 const fs = require("fs");
 const logo = process.env.LOGO_PATH;
 const cheerio = require("cheerio");
+const axios = require("axios");
 
 transporter = nodemailer.createTransport({
   service: "gmail",
