@@ -14,12 +14,16 @@ export default function CarGallery({ photosArray, location }) {
   };
   return (
     <div className="car-gallery">
-      <button className="arrow prev" onClick={previousPhoto}></button>
+      <button className="arrow prev" onClick={previousPhoto}>
+        <i class="fas fa-angle-left"></i>
+      </button>
       <img
         alt="car"
         src={`data:image/jpeg;base64,${photosArray[index].file}`}
       />
-      <button className="arrow next" onClick={nextPhoto}></button>
+      <button className="arrow next" onClick={nextPhoto}>
+        <i class="fas fa-angle-right"></i>
+      </button>
     </div>
   );
 }

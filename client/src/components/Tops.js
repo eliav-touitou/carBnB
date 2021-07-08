@@ -35,7 +35,7 @@ export default function Tops() {
           </div>
         </div>
       ) : type === "locations" ? (
-        <div>
+        <div className="car-favorite-page">
           {top?.map((city) => (
             <Link
               push={true}
