@@ -119,42 +119,11 @@ export default function Tops() {
                           Joined us on{" "}
                           {new Date(owner.createdAt).toDateString()}
                         </li>
-                        {/* <li>
-                          <strong>Decoration: </strong>balls and bells
-                        </li>
-                        <li>
-                          <strong>Material: </strong>Eco-Friendly
-                        </li> */}
                       </ul>
                     </div>
                   </div>
                 </div>
               </div>
-
-              {/* <h2>{owner.first_name + " " + owner.last_name}</h2> */}
-              {/* <div>City of hosting: {owner.address}</div> */}
-              {/* <TopOwnerCars ownerEmail={owner.user_email} /> */}
-              {/* <div className="rating-panel-top-owner">
-                <span>
-                  <i className="fas fa-star"></i> */}
-              {/* {owner.rating ? owner.rating : 0} / 5 */}
-              {/* </span>
-                <span>|</span>
-                <span>
-                  <i className="far fa-thumbs-up"></i>
-                  {owner.number_of_votes}
-                </span>
-              </div>
-              <Link
-                push={true}
-                to={{
-                  pathname: `/top/ownercars/${owner.first_name}`,
-                  state: { owner },
-                }}
-              >
-                Cars of owner
-              </Link>
-              <hr /> */}
             </section>
           ))}
         </div>

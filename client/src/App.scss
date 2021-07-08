@@ -49,7 +49,7 @@ body {
   -ms-flex-direction: column;
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
 }
 
@@ -895,9 +895,9 @@ form {
   align-items: center;
   height: 100vh;
   background-size: 70vh;
-  // background-image: url("C:/dev/carBnB/client/src/photos/good-logo-white.png");
+  background-image: url("C:/dev/carBnB/client/src/photos/good-logo-white.png");
   // background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
+  // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
   background-repeat: no-repeat;
   background-position-y: 10vh;
   background-position-x: 4vw;
@@ -1375,101 +1375,33 @@ form {
   }
 }
 ///////////////////////////////////////////////////car-gallery-result
-.top-pick-carousel-result {
-  position: relative;
-  height: 20vh;
-  // display: flex;
-  // flex-direction: column;
-  // align-self: center;
-  // justify-content: center;
-  max-width: 100vw;
-  .carousel-wrapper-result {
-    width: 300px;
-    margin: 0 auto;
-    max-width: 100%;
+.car-gallery {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  img {
+    max-height: 200px;
+    width: auto;
+  }
+  .arrow {
+    border: solid rgb(0, 0, 0);
+    border-width: 0 3px 3px 0;
+    padding: 6px;
+    z-index: 999999;
+  }
 
-    .carousel-item {
-      padding: unset;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      // padding: 25px 50px;
+  .prev {
+    margin-right: 5px;
+    transform: translateY(-50%) rotate(135deg);
+  }
 
-      display: flex;
-      flex-direction: row;
-      align-self: center;
-      justify-content: center;
-      opacity: 0;
-      transition: all 0.5s ease-in-out;
-    }
-    .arrow {
-      border: solid rgb(0, 0, 0);
-      border-width: 0 3px 3px 0;
-      display: inline-block;
-      // padding: 6px;
-    }
-
-    .arrow-prev {
-      left: 30px;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%) rotate(135deg);
-    }
-
-    .arrow-next {
-      right: 30px;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%) rotate(-45deg);
-    }
-
-    .light {
-      color: white;
-    }
-
-    @media (max-width: 480px) {
-      .arrow,
-      .light .arrow {
-        background-size: 10px;
-        background-position: 10px 50%;
-      }
-    }
-
-    /*Select every element*/
-    [id^="item"] {
-      display: none;
-    }
-
-    .item-1 {
-      z-index: 2;
-      opacity: 1;
-      background-size: cover;
-    }
-    .secondaries {
-      background-size: cover;
-    }
-
-    *:target ~ .item-1 {
-      opacity: 0;
-    }
-
-    .items-data {
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      img {
-        // height: 50vh;
-        // width: 80%;
-        border-radius: 0.5em;
-      }
-    }
+  .next {
+    margin-left: 5px;
+    transform: translateY(-50%) rotate(-45deg);
   }
 }
-////////////////////////////////end of top picks carousel
+
+////////////////////////////////end of car gallery
 /////////////////add new car
 
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap");
@@ -2111,16 +2043,21 @@ $color-white: #fff;
   height: 100%;
   min-height: 100vh;
   background: #dfc2f2;
+  margin-top: 0;
   background-image: linear-gradient(to right, #ffffb3, #ffe6e6);
   background-attachment: fixed;
   background-size: cover;
+  padding-top: 5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   #container {
     box-shadow: 0 15px 30px 1px grey;
     background: rgba(255, 255, 255, 0.9);
     text-align: center;
     border-radius: 5px;
     overflow: hidden;
-    margin: 5em auto;
+    margin: 2.5em auto;
     height: 350px;
     width: 700px;
   }
