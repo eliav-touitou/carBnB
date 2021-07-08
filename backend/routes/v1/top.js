@@ -24,6 +24,7 @@ top.get("/:type", async (req, res) => {
       default:
         break;
     }
+
     return res.status(200).json({ success: true, data: topFive });
   } catch (error) {
     const objToWrite = {

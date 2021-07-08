@@ -108,6 +108,7 @@ const getItemFromDB = async (obj) => {
     throw err;
   }
 };
+
 const top5Locations = async () => {
   try {
     const result = await User.findAll({
@@ -419,6 +420,25 @@ const getAllOptionalFinishOrders = async () => {
   }
 };
 
+const getCarsByCity = async (city) => {
+  const users = await getByCity({ address: city });
+  const promises = [];
+  users.forEach((user) => {
+    promises.push(
+      getItemFromDB({
+        model: Car,
+        column: ["owner_email"],
+        columnValue: [user.user_email],
+      })
+    );
+  });
+  const tempArr = await Promise.all(promises);
+  const allCarsByCity = [].concat.apply([], tempArr);
+  return allCarsByCity;
+};
+
+getCarsByCity("Haifa");
+
 module.exports = {
   getCar,
   getRental,
@@ -445,4 +465,5 @@ module.exports = {
   top5Cars,
   top5Owners,
   top5Locations,
+  getCarsByCity,
 };
