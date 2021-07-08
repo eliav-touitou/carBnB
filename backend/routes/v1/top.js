@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { writeLogs } = require("../../utils/helperFunctions");
+const { writeLogs, wikiScraper } = require("../../utils/helperFunctions");
 const top = Router();
 const {
   top5Owners,
@@ -20,6 +20,9 @@ top.get("/:type", async (req, res) => {
         break;
       case "locations":
         topFive = await top5Locations(type);
+        topFive.forEach((city) => {
+          city.description = wikiScraper();
+        });
         break;
       default:
         break;
