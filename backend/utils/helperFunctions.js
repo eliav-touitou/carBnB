@@ -3,6 +3,7 @@ const nodemailer = require("nodemailer");
 const PDFDocument = require("pdfkit");
 const fs = require("fs");
 const logo = process.env.LOGO_PATH;
+const cheerio = require("cheerio");
 
 transporter = nodemailer.createTransport({
   service: "gmail",
@@ -286,6 +287,26 @@ const writeLogs = async (body) => {
   });
 };
 
+const wikiScraper = async (city) => {
+  const url = `https://en.wikipedia.org/wiki/${city}`;
+  try {
+    const { data } = await axios.get(url);
+    // console.log(data);
+    const scraper = cheerio.load(data);
+    let dataFromWiki = scraper(
+      ".mw-body > #bodyContent > #mw-content-text > .mw-parser-output"
+    )
+      .children("p")
+      .eq(1)
+      .text()
+      .trim();
+    const textAboutTheCity = dataFromWiki.replace(/[^.,a-zA-Z ]/g, "");
+    console.log(textAboutTheCity);
+  } catch (err) {
+    throw err;
+  }
+};
+
 module.exports = {
   buildPatterns,
   buildPatternsForCanceledRentals,
@@ -295,4 +316,5 @@ module.exports = {
   buildPatternsForAfterRentalFinish,
   buildPatternsForConfirmOrRejectRental,
   writeLogs,
+  wikiScraper,
 };

@@ -14,7 +14,6 @@ export default function CarsBySelection() {
           data: ["Car", ["owner_email"], [owner.user_email]],
         })
         .then(({ data: cars }) => {
-          console.log(cars.data);
           setOwnerCars(cars.data);
         })
         .catch((err) => console.log(err));
