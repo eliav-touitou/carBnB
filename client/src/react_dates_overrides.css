@@ -61,3 +61,7 @@
 .CalendarDay__selected_span:hover {
   background: rgb(147, 153, 156);
 }
+/* .DateRangePicker_picker {
+  position: fixed;
+  z-index: 9999;
+} */
