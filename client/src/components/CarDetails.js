@@ -250,7 +250,7 @@ export default function CarDetails() {
                   <tr>
                     <td>
                       <i class="far fa-clock"></i>
-                      <span className="thin"> Year:</span>
+                      <span className="thin"> Year: </span>
                       {availableCars[resultId].year}
                     </td>
                   </tr>
@@ -262,7 +262,7 @@ export default function CarDetails() {
                   <tr>
                     <td>
                       <i class="fas fa-gas-pump"></i>
-                      <span className="thin"> Fuel:</span>
+                      <span className="thin"> Fuel: </span>
                       {availableCars[resultId].fuel}
                     </td>
                   </tr>
@@ -274,7 +274,7 @@ export default function CarDetails() {
                   <tr>
                     <td>
                       <i class="fas fa-cogs"></i>
-                      <span className="thin"> Gear:</span>
+                      <span className="thin"> Gear: </span>
                       {availableCars[resultId].gear}
                     </td>
                   </tr>
@@ -286,7 +286,7 @@ export default function CarDetails() {
                   <tr>
                     <td>
                       <Icon icon={seatPassenger} />
-                      <span className="thin"> Passengers:</span>
+                      <span className="thin"> Passengers: </span>
                       {availableCars[resultId].passengers}
                     </td>
                   </tr>
