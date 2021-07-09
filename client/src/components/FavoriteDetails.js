@@ -163,7 +163,7 @@ export default function FavoriteDetails({ car }) {
           />
         </div>
         <footer className="content__footer">
-          <button>Book this car</button>
+          <button onClick={checkDatesValue}>Book this car</button>
         </footer>
       </div>
       {redirect === true && (
