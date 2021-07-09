@@ -918,8 +918,8 @@ form {
   height: 100vh;
   background-size: 70vh;
   // background-image: url("C:/dev/carBnB/client/src/photos/good-logo-white.png");
-  // background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
+  // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
   background-repeat: no-repeat;
   background-position-y: 10vh;
   background-position-x: 4vw;
@@ -1086,8 +1086,8 @@ form {
   align-items: center;
   height: 100vh;
   width: 100vw;
-  // background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/dottes.png");
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\dottes.png);
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/dottes.png");
+  // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\dottes.png);
 }
 .details-container {
   width: 100%;
@@ -2083,8 +2083,8 @@ $color_grey_dark: #a2a2a2;
   width: 100vw;
   display: flex;
   background: rgb(228, 255, 241);
-  // background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/road_lines-style.png"),
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\road_lines-style.png),
+  // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\road_lines-style.png)
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/road_lines-style.png"),
     linear-gradient(
       197deg,
       rgba(228, 255, 241, 1) 13%,
@@ -2620,8 +2620,8 @@ $color_grey_dark: #a2a2a2;
 
 /////////////////////////////////////// car details and payment together//////////////////////////////////////////
 
-.container {
-  height: 100%;
+.container-credit-and-summary {
+  height: 100vh;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -2634,8 +2634,6 @@ $color_grey_dark: #a2a2a2;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  background: -webkit-linear-gradient(#c5e5e5, #ccddf9);
-  background: linear-gradient(#c9e5e9, #ccddf9);
 
   h2 {
     margin-bottom: 0px;
@@ -2645,196 +2643,195 @@ $color_grey_dark: #a2a2a2;
     font-size: 19px;
     font-size: 1.2rem;
   }
-}
 
-.thin {
-  font-weight: 400;
-}
-.small {
-  font-size: 12px;
-  font-size: 0.8rem;
-}
-.half-input-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-.half-input-table td:first-of-type {
-  border-right: 10px solid #4488dd;
-  width: 50%;
-}
-.window {
-  height: 540px;
-  width: 800px;
-  background: #fff;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  box-shadow: 0px 15px 50px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 30px;
-  z-index: 10;
-}
-.order-info {
-  height: 100%;
-  width: 50%;
-  padding-left: 25px;
-  padding-right: 25px;
-  box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  position: relative;
-}
-.price {
-  bottom: 0px;
-  position: absolute;
-  right: 0px;
-  color: #4488dd;
-}
-.order-table td:first-of-type {
-  width: 25%;
-}
-.order-table {
-  position: relative;
-}
-.line {
-  height: 1px;
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background: #ddd;
-}
-.order-table td:last-of-type {
-  vertical-align: top;
-  padding-left: 25px;
-}
-.order-info-content {
-  table-layout: fixed;
-}
-
-.full-width {
-  width: 100%;
-}
-.pay-btn {
-  border: none;
-  background: #22b877;
-  line-height: 2em;
-  border-radius: 10px;
-  font-size: 19px;
-  font-size: 1.2rem;
-  color: #fff;
-  cursor: pointer;
-  position: absolute;
-  bottom: 25px;
-  width: calc(100% - 50px);
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-}
-.pay-btn:hover {
-  background: #22a877;
-  color: #eee;
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-}
-
-.total {
-  margin-top: 25px;
-  font-size: 20px;
-  font-size: 1.3rem;
-  position: absolute;
-  bottom: 30px;
-  right: 27px;
-  left: 35px;
-}
-.dense {
-  line-height: 1.2em;
-  font-size: 16px;
-  font-size: 1rem;
-}
-.input-field {
-  background: rgba(255, 255, 255, 0.1);
-  margin-bottom: 10px;
-  margin-top: 3px;
-  line-height: 1.5em;
-  font-size: 20px;
-  font-size: 1.3rem;
-  border: none;
-  padding: 5px 10px 5px 10px;
-  color: #fff;
-  box-sizing: border-box;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-.credit-info {
-  background: #4488dd;
-  height: 100%;
-  width: 50%;
-  color: #eee;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  font-size: 14px;
-  font-size: 0.9rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  box-sizing: border-box;
-  padding-left: 25px;
-  padding-right: 25px;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
-  position: relative;
-}
-
-.credit-card-image {
-  display: block;
-  max-height: 80px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 35px;
-  margin-bottom: 15px;
-}
-.credit-info-content {
-  margin-top: 25px;
-  -webkit-flex-flow: column;
-  -ms-flex-flow: column;
-  flex-flow: column;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-}
-@media (max-width: 600px) {
-  .window {
+  .thin {
+    font-weight: 400;
+  }
+  .small {
+    font-size: 12px;
+    font-size: 0.8rem;
+  }
+  .half-input-table {
+    border-collapse: collapse;
     width: 100%;
-    height: 100%;
-    display: block;
-    border-radius: 0px;
+  }
+  .half-input-table td:first-of-type {
+    border-right: 10px solid #4488dd;
+    width: 50%;
+  }
+  .window {
+    height: 540px;
+    width: 800px;
+    background: #fff;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    box-shadow: 0px 15px 50px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    z-index: 10;
   }
   .order-info {
-    width: 100%;
-    height: auto;
-    padding-bottom: 100px;
-    border-radius: 0px;
+    height: 100%;
+    width: 50%;
+    padding-left: 25px;
+    padding-right: 25px;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: relative;
   }
-  .credit-info {
+  .price {
+    bottom: 0px;
+    position: absolute;
+    right: 0px;
+    color: #4488dd;
+  }
+  .order-table td:first-of-type {
+    width: 25%;
+  }
+  .order-table {
+    position: relative;
+  }
+  .line {
+    height: 1px;
     width: 100%;
-    height: auto;
-    padding-bottom: 100px;
-    border-radius: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #ddd;
+  }
+  .order-table td:last-of-type {
+    vertical-align: top;
+    padding-left: 25px;
+  }
+  .order-info-content {
+    table-layout: fixed;
+  }
+
+  .full-width {
+    width: 100%;
   }
   .pay-btn {
-    border-radius: 0px;
+    border: none;
+    background: #22b877;
+    line-height: 2em;
+    border-radius: 10px;
+    font-size: 19px;
+    font-size: 1.2rem;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    bottom: 25px;
+    width: calc(100% - 50px);
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+  }
+  .pay-btn:hover {
+    background: #22a877;
+    color: #eee;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+  }
+
+  .total {
+    margin-top: 25px;
+    font-size: 20px;
+    font-size: 1.3rem;
+    position: absolute;
+    bottom: 30px;
+    right: 27px;
+    left: 35px;
+  }
+  .dense {
+    line-height: 1.2em;
+    font-size: 16px;
+    font-size: 1rem;
+  }
+  .input-field {
+    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px;
+    margin-top: 3px;
+    line-height: 1.5em;
+    font-size: 20px;
+    font-size: 1.3rem;
+    border: none;
+    padding: 5px 10px 5px 10px;
+    color: #fff;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .credit-info {
+    background: #4488dd;
+    height: 100%;
+    width: 50%;
+    color: #eee;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    font-size: 14px;
+    font-size: 0.9rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    box-sizing: border-box;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    position: relative;
+  }
+
+  .credit-card-image {
+    display: block;
+    max-height: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35px;
+    margin-bottom: 15px;
+  }
+  .credit-info-content {
+    margin-top: 25px;
+    -webkit-flex-flow: column;
+    -ms-flex-flow: column;
+    flex-flow: column;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+  }
+  @media (max-width: 600px) {
+    .window {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 0px;
+    }
+    .order-info {
+      width: 100%;
+      height: auto;
+      padding-bottom: 100px;
+      border-radius: 0px;
+    }
+    .credit-info {
+      width: 100%;
+      height: auto;
+      padding-bottom: 100px;
+      border-radius: 0px;
+    }
+    .pay-btn {
+      border-radius: 0px;
+    }
   }
 }
-
 //////////////////////////////// end car details and payment together////////////////////////////////////

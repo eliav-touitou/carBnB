@@ -221,6 +221,27 @@
       "status": 500,
       "ourMessage": "Problems with our server",
       "route": "api/v1/users/updateitems"
+    },
+    {
+      "date": "2021-07-09T13:07:48.287Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/top/locations"
+    },
+    {
+      "date": "2021-07-09T13:08:06.099Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/top/locations"
+    },
+    {
+      "date": "2021-07-09T13:08:51.196Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/top/locations"
     }
   ]
 }

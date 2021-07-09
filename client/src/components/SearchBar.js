@@ -48,7 +48,7 @@ export default function SearchBar() {
     dispatch(setInitialSearch(searchParameters.data));
     try {
       const { data: availableCars } = await axios.post(
-        "api/v1/search/initial",
+        "/api/v1/search/initial",
         searchParameters
       );
       dispatch(setAvailableCars(availableCars.data));

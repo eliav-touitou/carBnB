@@ -1079,7 +1079,7 @@ form {
           align-items: center;
   height: 100vh;
   background-size: 70vh;
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
   background-repeat: no-repeat;
   background-position-y: 10vh;
   background-position-x: 4vw;
@@ -1352,7 +1352,7 @@ form {
           align-items: center;
   height: 100vh;
   width: 100vw;
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\dottes.png);
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/dottes.png");
 }
 
 .details-container {
@@ -2573,7 +2573,7 @@ form {
   display: -ms-flexbox;
   display: flex;
   background: #e4fff1;
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\road_lines-style.png), linear-gradient(197deg, #e4fff1 13%, #e6f5ff 85%);
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/road_lines-style.png"), linear-gradient(197deg, #e4fff1 13%, #e6f5ff 85%);
   background-repeat: no-repeat;
   background-position-y: 55vh;
   background-size: contain;
@@ -3287,8 +3287,8 @@ form {
           box-shadow: 0 10px 34px 0 rgba(30, 84, 97, 0.32);
 }
 
-.container {
-  height: 100%;
+.container-credit-and-summary {
+  height: 100vh;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
@@ -3298,11 +3298,9 @@ form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background: -webkit-gradient(linear, left top, left bottom, from(#c9e5e9), to(#ccddf9));
-  background: linear-gradient(#c9e5e9, #ccddf9);
 }
 
-.container h2 {
+.container-credit-and-summary h2 {
   margin-bottom: 0px;
   margin-top: 25px;
   text-align: center;
@@ -3311,26 +3309,26 @@ form {
   font-size: 1.2rem;
 }
 
-.thin {
+.container-credit-and-summary .thin {
   font-weight: 400;
 }
 
-.small {
+.container-credit-and-summary .small {
   font-size: 12px;
   font-size: 0.8rem;
 }
 
-.half-input-table {
+.container-credit-and-summary .half-input-table {
   border-collapse: collapse;
   width: 100%;
 }
 
-.half-input-table td:first-of-type {
+.container-credit-and-summary .half-input-table td:first-of-type {
   border-right: 10px solid #4488dd;
   width: 50%;
 }
 
-.window {
+.container-credit-and-summary .window {
   height: 540px;
   width: 800px;
   background: #fff;
@@ -3343,7 +3341,7 @@ form {
   z-index: 10;
 }
 
-.order-info {
+.container-credit-and-summary .order-info {
   height: 100%;
   width: 50%;
   padding-left: 25px;
@@ -3359,22 +3357,22 @@ form {
   position: relative;
 }
 
-.price {
+.container-credit-and-summary .price {
   bottom: 0px;
   position: absolute;
   right: 0px;
   color: #4488dd;
 }
 
-.order-table td:first-of-type {
+.container-credit-and-summary .order-table td:first-of-type {
   width: 25%;
 }
 
-.order-table {
+.container-credit-and-summary .order-table {
   position: relative;
 }
 
-.line {
+.container-credit-and-summary .line {
   height: 1px;
   width: 100%;
   margin-top: 10px;
@@ -3382,20 +3380,20 @@ form {
   background: #ddd;
 }
 
-.order-table td:last-of-type {
+.container-credit-and-summary .order-table td:last-of-type {
   vertical-align: top;
   padding-left: 25px;
 }
 
-.order-info-content {
+.container-credit-and-summary .order-info-content {
   table-layout: fixed;
 }
 
-.full-width {
+.container-credit-and-summary .full-width {
   width: 100%;
 }
 
-.pay-btn {
+.container-credit-and-summary .pay-btn {
   border: none;
   background: #22b877;
   line-height: 2em;
@@ -3411,14 +3409,14 @@ form {
   transition: all 0.2s ease;
 }
 
-.pay-btn:hover {
+.container-credit-and-summary .pay-btn:hover {
   background: #22a877;
   color: #eee;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
-.total {
+.container-credit-and-summary .total {
   margin-top: 25px;
   font-size: 20px;
   font-size: 1.3rem;
@@ -3428,13 +3426,13 @@ form {
   left: 35px;
 }
 
-.dense {
+.container-credit-and-summary .dense {
   line-height: 1.2em;
   font-size: 16px;
   font-size: 1rem;
 }
 
-.input-field {
+.container-credit-and-summary .input-field {
   background: rgba(255, 255, 255, 0.1);
   margin-bottom: 10px;
   margin-top: 3px;
@@ -3451,7 +3449,7 @@ form {
   margin-right: auto;
 }
 
-.credit-info {
+.container-credit-and-summary .credit-info {
   background: #4488dd;
   height: 100%;
   width: 50%;
@@ -3473,7 +3471,7 @@ form {
   position: relative;
 }
 
-.credit-card-image {
+.container-credit-and-summary .credit-card-image {
   display: block;
   max-height: 80px;
   margin-left: auto;
@@ -3482,7 +3480,7 @@ form {
   margin-bottom: 15px;
 }
 
-.credit-info-content {
+.container-credit-and-summary .credit-info-content {
   margin-top: 25px;
   -ms-flex-flow: column;
   -webkit-box-orient: vertical;
@@ -3495,25 +3493,25 @@ form {
 }
 
 @media (max-width: 600px) {
-  .window {
+  .container-credit-and-summary .window {
     width: 100%;
     height: 100%;
     display: block;
     border-radius: 0px;
   }
-  .order-info {
+  .container-credit-and-summary .order-info {
     width: 100%;
     height: auto;
     padding-bottom: 100px;
     border-radius: 0px;
   }
-  .credit-info {
+  .container-credit-and-summary .credit-info {
     width: 100%;
     height: auto;
     padding-bottom: 100px;
     border-radius: 0px;
   }
-  .pay-btn {
+  .container-credit-and-summary .pay-btn {
     border-radius: 0px;
   }
 }

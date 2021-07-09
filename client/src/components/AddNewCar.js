@@ -138,14 +138,14 @@ export default function AddNewCar() {
     };
     try {
       if (auth) {
-        const { data: savedCar } = await axios.post("api/v1/cars/upload", {
+        const { data: savedCar } = await axios.post("/api/v1/cars/upload", {
           newCar: newCar,
         });
         // console.log(savedCar);
         id = savedCar.data.car_id;
         photosArray.forEach((photo) => (photo.car_id = id));
         dispatch(setPhotosArray(photosArray));
-        await axios.post("api/v1/photos/savephotos", photosArray);
+        await axios.post("/api/v1/photos/savephotos", photosArray);
         setRedirect(true);
       } else {
         // need to prompt login promp component

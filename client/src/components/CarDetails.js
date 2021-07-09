@@ -210,7 +210,7 @@ export default function CarDetails() {
   };
 
   return (
-    <div className="container">
+    <div className="container-credit-and-summary">
       <div className="window">
         <div className="order-info">
           <div className="order-info-content">
@@ -282,12 +282,12 @@ export default function CarDetails() {
               </tbody>
             </table>
             <div className="line" />
-            {photosArray.length !== 0 && (
+            {/* {photosArray.length !== 0 && (
               <div style={{ height: "80px" }}>
                 <CarGallery photosArray={photosArray} />
                 <div className="line" />
               </div>
-            )}
+            )} */}
             <div className="total">
               <span style={{ float: "left" }}>
                 <div className="thin dense">Initial Price:</div>
