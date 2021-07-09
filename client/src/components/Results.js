@@ -27,16 +27,7 @@ export default function Results() {
         </div>
         <div className="results">
           {filteredCars?.map((car, i) => (
-            <Result
-              key={`car-${i}`}
-              resultId={i}
-              brand={car.brand}
-              model={car.model}
-              passengers={car.passengers}
-              carId={car.car_id}
-              ownerRating={car.owner_rating}
-              numberOfVotes={car.number_of_votes}
-            />
+            <Result key={`car-${i}`} resultId={i} car={car} />
           ))}
         </div>
       </div>
