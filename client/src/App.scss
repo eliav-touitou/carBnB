@@ -2416,8 +2416,25 @@ $color_grey_dark: #a2a2a2;
 }
 ///////////////// TOP OWNER ////////////////////
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bree+Serif&family=EB+Garamond:ital,wght@0,500;1,800&display=swap");
-
-.top-owner-div {
+.top-page-car-results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+  flex-direction: column;
+  > h1 {
+    display: inline-flex;
+    justify-self: center;
+    margin: 0;
+  }
+  .top-container-car-results {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+  }
+}
+.top-owner-div,
+.top-city-div {
   height: 100%;
   min-height: 100vh;
   background: #dfc2f2;
@@ -2488,6 +2505,12 @@ $color_grey_dark: #a2a2a2;
     text-align: center;
     font-size: 18px;
     color: #7d7d7d;
+  }
+  .product-details-city {
+    width: 18vw;
+  }
+  .product-details > h1 {
+    width: max-content;
   }
   .control {
     bottom: 20%;
@@ -2599,14 +2622,23 @@ $color_grey_dark: #a2a2a2;
     transition: 0.3s ease;
   }
   .info ul li:hover {
-    transform: translateX(50px) scale(1.3);
+    transform: translateX(25px) scale(1.1);
   }
 
   .product-image:hover img {
     transition: all 0.3s ease-out;
   }
   .product-image:hover img {
-    transform: scale(1.2, 1.2);
+    transform: scale(1.1, 1.1);
+  }
+
+  .top-city-information {
+    max-height: 19vh;
+    min-height: 19vh;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
   }
 }
 

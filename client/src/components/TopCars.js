@@ -1,4 +1,3 @@
-import { ButtonGroup } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -21,7 +20,7 @@ export default function CarsBySelection() {
         .catch((err) => console.log(err));
     } else {
       axios
-        .get(`/api/v1/cars/bycity/${city}`)
+        .get(`/api/v1/cars/bycity/${city.city}`)
         .then(({ data: cars }) => {
           setOwnerCars(cars.data);
         })
@@ -30,12 +29,15 @@ export default function CarsBySelection() {
   }, [owner, city]);
 
   return (
-    <div>
-      {ownerCars?.map((car, i) => (
-        <div className="top-owner-car">
-          <FavoriteDetails car={car} key={`car-${i}`} />
-        </div>
-      ))}
+    <div className="top-page-car-results">
+      <h1>Top Cars {owner ? "Owner" : "City"}</h1>
+      <div className="top-container-car-results">
+        {ownerCars?.map((car, i) => (
+          <div className="top-owner-car">
+            <FavoriteDetails car={car} key={`car-${i}`} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
