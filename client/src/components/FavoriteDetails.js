@@ -55,60 +55,6 @@ export default function FavoriteDetails({ car }) {
   };
 
   return (
-    // <div className="car-details">
-    //   <div className="first-details">
-    //     {photosArray.length > 0 ? (
-    //       <CarGallery photosArray={photosArray} location={"result"} />
-    //     ) : (
-    //       <img
-    //         alt="car-photo"
-    //         className="no-photos-replacement"
-    //         src={defaultPhoto}
-    //       />
-    //     )}
-    //     <div className="data">
-    //       <div>Brand: {car.brand}</div>
-    //       <div>Model: {car.model}</div>
-    //       <div>Year: {car.year}</div>
-    //       <div>Price per day: {car.price_per_day}</div>
-    //     </div>
-    //     <div className="buttons">
-    //       <DateRangePicker
-    //         startDate={startDate}
-    //         startDatePlaceholderText="Start date:"
-    //         startDateId="tata-start-date"
-    //         endDate={endDate}
-    //         endDatePlaceholderText="End date:"
-    //         endDateId="tata-end-date"
-    //         onDatesChange={handleDatesChange}
-    //         focusedInput={focusedInput}
-    //         onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
-    //         small={true}
-    //       />
-    //       <button onClick={checkDatesValue} className="login-form-button">
-    //         Book on this dates
-    //       </button>
-    //     </div>
-    //   </div>
-    //   {/* <hr /> */}
-    //   {redirect === true && (
-    //     <Redirect
-    //       push
-    //       to={{
-    //         pathname: `/favorite/${car.car_id}`,
-    //         state: { car, dates },
-    //       }}
-    //     />
-    //   )}
-    //   {redirect === "snack" && (
-    //     <Snackbar
-    //       anchorOrigin={{ vertical: "top", horizontal: "center" }}
-    //       open={true}
-    //       message={"must choose dates"}
-    //       key={"top" + "center"}
-    //     />
-    //   )}
-    // </div>
     <div className="ft-recipe">
       <div className="ft-recipe__thumb">
         {photosArray.length > 0 ? (
@@ -163,7 +109,7 @@ export default function FavoriteDetails({ car }) {
           />
         </div>
         <footer className="content__footer">
-          <button>Book this car</button>
+          <button onClick={checkDatesValue}>Book this car</button>
         </footer>
       </div>
       {redirect === true && (

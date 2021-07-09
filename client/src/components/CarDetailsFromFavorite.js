@@ -3,11 +3,31 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useLocation } from "react-router-dom";
 import { setPhotosArray, setShowLogin, setCarToRental } from "../actions";
+import CarGallery from "./CarGallery";
+import { Snackbar } from "@material-ui/core";
+import Cards from "react-credit-cards";
+import { setRentalDetails, setAuthLicense } from "../actions";
+import "react-credit-cards/lib/styles-compiled.css";
 
-export default function CarDetailsFromFavorite() {
+export default function CarDetails() {
   const dispatch = useDispatch();
   const { car, dates } = useLocation().state;
-  console.log(dates);
+
+  // Use states
+  const [redirect, setRedirect] = useState();
+  const [showMessage, setShowMessage] = useState(false);
+  const [isTakenMessage, setIsTakenMessage] = useState(false);
+  const [image, setImage] = useState([]);
+  const [data, setData] = useState({
+    cvc: "",
+    expiry: "",
+    name: "",
+    number: "",
+  });
+
+  // Redux States
+  const photosArray = useSelector((state) => state.photosArray);
+  const auth = useSelector((state) => state.auth);
 
   //bringing the photos of the corresponding car, and emptying it on component down
   useEffect(() => {
@@ -23,17 +43,25 @@ export default function CarDetailsFromFavorite() {
     };
   }, []);
 
-  // Use states
-  const [redirect, setRedirect] = useState();
-
-  // Redux States
-
-  const photosArray = useSelector((state) => state.photosArray);
-  const auth = useSelector((state) => state.auth);
-
   useEffect(() => {
     if (auth) dispatch(setShowLogin(false));
   }, [auth]);
+
+  useEffect(() => {
+    if (showMessage) {
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 4500);
+    }
+  }, [showMessage]);
+
+  // Handle credit Card Details
+  const handleInputChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   // Function for get numbers of days rental
   const getNumberOfRentalDays = () => {
@@ -71,86 +99,272 @@ export default function CarDetailsFromFavorite() {
     }
   };
 
-  const goToPayment = () => {
-    if (auth) {
-      const data = {
-        carId: car.car_id,
-        ownerEmail: car.owner_email,
-        renterEmail: auth.user_email,
-        startDate: dates.startDate,
-        endDate: dates.endDate,
-        totalPrice: calculateDiscount().price,
-      };
-      dispatch(setCarToRental(data));
-      setRedirect("/payment");
-    } else {
-      // need to prompt login component
-      dispatch(setShowLogin(true));
-      console.log("must log in first!");
+  const makeOrder = async (e) => {
+    const data = {
+      carId: car.car_id,
+      ownerEmail: car.owner_email,
+      renterEmail: auth.user_email,
+      startDate: dates.startDate,
+      endDate: dates.endDate,
+      totalPrice: calculateDiscount().price,
+    };
+    dispatch(setCarToRental(data));
+    try {
+      if (auth) {
+        if (
+          (auth.license === null || auth.license === "") &&
+          image.length === 0
+        ) {
+          setIsTakenMessage(`You must Upload license first`);
+          setTimeout(() => {
+            setIsTakenMessage(false);
+          }, 3500);
+          return;
+        }
+        const rental = await axios.post("/api/v1/rentals/new", {
+          data: {
+            rentalDetails: data,
+            userDetails: auth,
+          },
+        });
+
+        // If order succeed redirect to summery
+        if (rental.status === 201) {
+          dispatch(setRentalDetails(rental.data.data));
+          setRedirect("/summery");
+        }
+      } else {
+        dispatch(setShowLogin(true));
+        setShowMessage(true);
+        console.log("must log in first!");
+      }
+    } catch (error) {
+      // If in the middle of the order, someone else took this car
+      if (error.response.status === 400) {
+        setIsTakenMessage(
+          `Oops.. someone just pick the car. \nyou are redirect to your favorite`
+        );
+        setTimeout(() => {
+          setRedirect("/favorite");
+          setIsTakenMessage(false);
+        }, 3500);
+      }
+      console.log(error);
+    }
+    try {
+      if (auth.license === null) {
+        const arr = ["User", ["license"], auth.user_email, [image]];
+        await axios.post("/api/v1/users/updateitems", { data: arr });
+
+        dispatch(setAuthLicense(image));
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
-  return (
-    <div className="car-details-page">
-      <div className="car-details-outer-container">
-        <div className="car-details-inner-container">
-          <p>
-            <span className="car-specific-detail">barnd:</span>
-            <span className="car-specific-info">{car.brand}</span>
-          </p>
-          <p>
-            <span className="car-specific-detail">model:</span>
-            <span className="car-specific-info">{car.model}</span>
-          </p>
-          <p>
-            <span className="car-specific-detail">year:</span>
-            <span className="car-specific-info">{car.year}</span>
-          </p>
-          <p>
-            <span className="car-specific-detail">fuel:</span>
-            <span className="car-specific-info">{car.fuel}</span>
-          </p>
-          <p>
-            <span className="car-specific-detail">gear:</span>
-            <span className="car-specific-info">{car.gear}</span>
-          </p>
-          <p>
-            <span className="car-specific-detail">passengers:</span>
-            <span className="car-specific-info"> {car.passengers}</span>
-          </p>
-          <p>
-            <span className="car-specific-detail">initial price:</span>{" "}
-            <span className="car-specific-info">{`${getNumberOfRentalDays()} x
-        ${car.price_per_day} =
-        ${getNumberOfRentalDays() * car.price_per_day}$`}</span>
-          </p>
-          {calculateDiscount().percent && (
-            <p>
-              <span className="car-specific-detail">{`discount for order over ${
-                calculateDiscount().days
-              }:`}</span>
-              <span className="car-specific-info">{`${
-                calculateDiscount().percent
-              } , - ${
-                getNumberOfRentalDays() * car.price_per_day -
-                calculateDiscount().price
-              } $`}</span>
-            </p>
-          )}
-          <p>
-            <span className="car-specific-detail">Total price:</span>
-            {
-              <span className="car-specific-info">
-                {calculateDiscount().price}$
-              </span>
-            }
-          </p>
-          <div className="gallery"></div>
+  const imageToBinary = async (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const data = await reader.result.split(",")[1];
+      setImage(data);
+    };
+    reader.readAsDataURL(file);
+  };
 
-          <button onClick={goToPayment}>go to payment</button>
+  return (
+    <div className="container">
+      <div className="window">
+        <div className="order-info">
+          <div className="order-info-content">
+            <h2>Order Summary</h2>
+            <div className="line" />
+            <table className="order-table">
+              <tbody>
+                <tr>
+                  <td>
+                    <span className="thin">Barnd:</span>
+                    {car.brand}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div className="line" />
+            <table className="order-table">
+              <tbody>
+                <tr>
+                  <td>
+                    <span className="thin">Model:</span>
+                    {car.model}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div className="line" />
+            <table className="order-table">
+              <tbody>
+                <tr>
+                  <td>
+                    <span className="thin">Year:</span>
+                    {car.year}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div className="line" />
+            <table className="order-table">
+              <tbody>
+                <tr>
+                  <td>
+                    <span className="thin">Fuel:</span>
+                    {car.fuel}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div className="line" />
+            <table className="order-table">
+              <tbody>
+                <tr>
+                  <td>
+                    <span className="thin">Gear:</span>
+                    {car.gear}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div className="line" />
+            <table className="order-table">
+              <tbody>
+                <tr>
+                  <td>
+                    <span className="thin">Passengers:</span>
+                    {car.passengers}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div className="line" />
+            {photosArray.length !== 0 && (
+              <div style={{ height: "80px" }}>
+                <CarGallery photosArray={photosArray} />
+                <div className="line" />
+              </div>
+            )}
+            <div className="total">
+              <span style={{ float: "left" }}>
+                <div className="thin dense">Initial Price:</div>
+                {calculateDiscount().percent && (
+                  <div className="thin dense">{`discount for ${
+                    calculateDiscount().days
+                  }:`}</div>
+                )}
+                TOTAL
+              </span>
+              <span style={{ float: "right", textAlign: "right" }}>
+                <div className="thin dense">{`${getNumberOfRentalDays()} x
+                   ${car.price_per_day} =
+                   ${getNumberOfRentalDays() * car.price_per_day} $`}</div>
+                {calculateDiscount().percent && (
+                  <div className="thin dense">{`${
+                    calculateDiscount().percent
+                  } , - ${Number(
+                    getNumberOfRentalDays() * car.price_per_day -
+                      calculateDiscount().price
+                  ).toFixed(2)} $`}</div>
+                )}
+                {Number(calculateDiscount().price).toFixed(2)}$
+              </span>
+            </div>
+          </div>
         </div>
-        {redirect && <Redirect push to="/payment" />}
+        <div className="credit-info">
+          <div className="credit-info-content">
+            <Cards
+              cvc={data.cvc}
+              expiry={data.expiry}
+              focus={data.focus}
+              name={data.name}
+              number={data.number}
+            />
+            Card Number
+            <input
+              className="input-field"
+              type="text"
+              name="number"
+              placeholder="Card Number"
+              onChange={handleInputChange}
+              maxLength="16"
+            />
+            Card Holder
+            <input
+              className="input-field"
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              onChange={handleInputChange}
+            />
+            <table className="half-input-table">
+              <tbody>
+                <tr>
+                  <td>
+                    Expires
+                    <input
+                      className="input-field"
+                      type="date"
+                      name="expiry"
+                      placeholder="Expire Date"
+                      onChange={handleInputChange}
+                    />
+                  </td>
+                  <td>
+                    CVC
+                    <input
+                      className="input-field"
+                      type="number"
+                      name="cvc"
+                      placeholder="CVC"
+                      onChange={handleInputChange}
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            {auth.license === null && (
+              <div>
+                <label>Upload license</label>
+                <input
+                  className="upload-photo-rental"
+                  type="file"
+                  onChange={(e) => imageToBinary(e)}
+                  placeholder="upload license"
+                ></input>
+              </div>
+            )}
+            <button className="pay-btn" onClick={makeOrder}>
+              Order
+            </button>
+          </div>
+        </div>
       </div>
+      {showMessage && (
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={true}
+          message={"In our terms, you must login first"}
+          key={"top" + "center"}
+        />
+      )}
+      {isTakenMessage && (
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={true}
+          message={isTakenMessage}
+          key={"top" + "center"}
+        />
+      )}
+      {redirect && <Redirect push to={redirect} />}
     </div>
   );
 }

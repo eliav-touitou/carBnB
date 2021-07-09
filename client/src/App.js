@@ -18,7 +18,6 @@ import { Badge } from "@material-ui/core";
 import PromptLogin from "./components/PromptLogin";
 import Avatar from "./components/Avatar";
 import logo from "./photos/logo-black.png";
-import CreditCards from "./components/CreditCards";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import Snackbar from "@material-ui/core/Snackbar";
 import MyFavorite from "./components/MyFavorite";
@@ -176,9 +175,6 @@ function App() {
           </Route>
           <Route exact path="/results">
             <Results />
-          </Route>
-          <Route exact path="/payment">
-            <CreditCards />
           </Route>
           <Route exact path="/summery">
             <OrderSummery />

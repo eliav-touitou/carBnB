@@ -4,6 +4,8 @@ export const authReducer = (state = false, action) => {
       return action.payload;
     case "LOG-OUT":
       return false;
+    case "SETAUTHLICENSE":
+      return { ...state, license: action.payload };
     default:
       return state;
   }

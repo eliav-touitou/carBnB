@@ -139,3 +139,9 @@ export const setAllCitiesApi = (obj) => {
     payload: obj,
   };
 };
+export const setAuthLicense = (str) => {
+  return {
+    type: "SETAUTHLICENSE",
+    payload: str,
+  };
+};
