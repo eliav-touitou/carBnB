@@ -3494,6 +3494,28 @@ form {
 
 .container-credit-and-summary .order-info-content {
   table-layout: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.container-credit-and-summary .order-info-content .upper-info {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 100%;
+          flex: 1 0 100%;
+  text-align: center;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  position: absolute;
+}
+
+.container-credit-and-summary .order-info-content .lower-info {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 
 .container-credit-and-summary .full-width {
