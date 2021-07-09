@@ -5,11 +5,22 @@ import FavoriteDetails from "./FavoriteDetails";
 import { Link, useParams } from "react-router-dom";
 import CarsBySelection from "./TopCars";
 import photoOwnerCar from "../photos/top-owner-car.jpeg";
-
+import city1 from "../photos/city1.jpeg";
+import city2 from "../photos/city2.jpeg";
+import city3 from "../photos/city3.jpeg";
+import city4 from "../photos/city4.jpeg";
+import city5 from "../photos/city5.jpeg";
 export default function Tops() {
   const { type } = useParams();
-
+  const [photoOfCitiesArr, setPhotoOfCitiesArr] = useState([
+    city1,
+    city2,
+    city3,
+    city4,
+    city5,
+  ]);
   const auth = useSelector((state) => state.auth);
+  const stamMishpat = `located in the unique landscape of Israel, and offers a special opportunity to travel, enjoy and absorb  the local culture.`;
 
   // Use State
   const [top, setTop] = useState();
@@ -24,6 +35,17 @@ export default function Tops() {
       .catch((err) => console.log(err.message));
   }, []);
 
+  useEffect(() => {
+    for (let i = photoOfCitiesArr.length - 1; i > 0; i--) {
+      let rand = Math.floor(Math.random() * (i + 1));
+      [photoOfCitiesArr[i], photoOfCitiesArr[rand]] = [
+        photoOfCitiesArr[rand],
+        photoOfCitiesArr[i],
+      ];
+    }
+    setPhotoOfCitiesArr(photoOfCitiesArr);
+  }, []);
+
   return (
     <>
       {type === "cars" ? (
@@ -35,17 +57,61 @@ export default function Tops() {
           </div>
         </div>
       ) : type === "locations" ? (
-        <div className="car-favorite-page">
-          {top?.map((city) => (
-            <Link
-              push={true}
-              to={{
-                pathname: `/top/city/${city}`,
-                state: { city },
-              }}
-            >
-              {city}
-            </Link>
+        <div className="top-city-div">
+          {top?.map((city, i) => (
+            <section key={`city-${i}`} className={`city-section ${i}`}>
+              <div>
+                <link
+                  rel="stylesheet"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+                />
+                <div id="container">
+                  <div className="product-details product-details-city">
+                    <h1>{city.city}</h1>
+                    <p className="information top-city-information">
+                      {city.description
+                        ? city.description
+                        : `${
+                            city.city.substring(0, 1).toUpperCase() +
+                            city.city.substring(1).toLowerCase()
+                          } is ${stamMishpat}`}
+                    </p>
+                    <Link
+                      push={true}
+                      to={{
+                        pathname: `/top/city/${city.city}`,
+                        state: { city },
+                      }}
+                    >
+                      <div className="control">
+                        <button className="btn">
+                          <span className="price">🚗</span>
+                          <span className="shopping-cart">
+                            <i
+                              className="fa fa-shopping-cart"
+                              aria-hidden="true"
+                            />
+                          </span>
+                          <span className="buy">Cars Collection</span>
+                        </button>
+                      </div>
+                    </Link>
+                  </div>
+                  <div className="product-image">
+                    <img src={photoOfCitiesArr[i]} alt="" />
+                  </div>
+                </div>
+              </div>
+            </section>
+            // <Link
+            //   push={true}
+            //   to={{
+            //     pathname: `/top/city/${city}`,
+            //     state: { city },
+            //   }}
+            // >
+            //   {city}
+            // </Link>
           ))}
         </div>
       ) : (

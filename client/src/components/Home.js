@@ -15,6 +15,7 @@ import topLocation from "../photos/top-location.jpeg";
 import TopCarousel from "./TopCarousel";
 import Snackbar from "@material-ui/core/Snackbar";
 import MyFavorite from "./MyFavorite";
+
 import { Link } from "react-router-dom";
 
 export default function Home() {

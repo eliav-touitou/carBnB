@@ -20,14 +20,12 @@ top.get("/:type", async (req, res) => {
         break;
       case "locations":
         topFive = await top5Locations(type);
-        topFive.forEach((city) => {
-          city.description = wikiScraper();
-        });
+        topFive = await wikiScraper(topFive);
         break;
       default:
         break;
     }
-
+    // console.log(topFive);
     return res.status(200).json({ success: true, data: topFive });
   } catch (error) {
     const objToWrite = {
