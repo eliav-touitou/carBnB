@@ -778,7 +778,7 @@ form {
 }
 
 .result {
-  margin: 5vh 3vw;
+  margin: 7vh 3vw;
   width: 90%;
   height: 300px;
   background: var(--white);
@@ -789,8 +789,9 @@ form {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-shadow: 0 0 88px 0 rgba(0, 0, 0, 0.160784);
-          box-shadow: 0 0 88px 0 rgba(0, 0, 0, 0.160784);
+  -webkit-box-shadow: 0 0 88px 0 rgba(0, 0, 0, 0.16);
+          box-shadow: 0 0 88px 0 rgba(0, 0, 0, 0.16);
+  position: relative;
   overflow: visible;
 }
 
@@ -803,21 +804,14 @@ form {
   text-decoration: none;
 }
 
-.result .ft-recipe__thumb {
-  position: relative;
-  height: 250px;
-  -webkit-box-shadow: 0px 0px 130px 0 rgba(0, 0, 0, 0.38);
-          box-shadow: 0px 0px 130px 0 rgba(0, 0, 0, 0.38);
-}
-
-.result .ft-recipe__thumb #love {
+.result #love {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: 5px;
   width: 36px;
   height: 36px;
   background: none;
-  color: red;
+  color: #db2d2d;
   text-align: center;
   line-height: 36px;
   font-size: 22px;
@@ -828,8 +822,15 @@ form {
   border: none;
 }
 
-.result .ft-recipe__thumb #love:hover {
+.result #love:hover {
   font-size: 26px;
+}
+
+.result .ft-recipe__thumb {
+  position: relative;
+  height: 300px;
+  max-width: 40%;
+  width: 40%;
 }
 
 .result .ft-recipe__thumb h3 {
@@ -923,6 +924,10 @@ form {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.result .ft-recipe__content .description .owner-rating-reviews {
+  color: #9b9997;
 }
 
 .result .ft-recipe__content .content__footer {
@@ -1910,7 +1915,6 @@ form {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  max-width: inherit;
   max-height: inherit;
   height: 100%;
 }
@@ -2606,8 +2610,9 @@ form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -webkit-box-align: center;
@@ -3154,8 +3159,6 @@ form {
 .ft-recipe .ft-recipe__thumb {
   position: relative;
   height: 250px;
-  -webkit-box-shadow: 0px 0px 130px 0 rgba(0, 0, 0, 0.38);
-          box-shadow: 0px 0px 130px 0 rgba(0, 0, 0, 0.38);
 }
 
 .ft-recipe .ft-recipe__thumb #love {

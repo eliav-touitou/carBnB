@@ -109,10 +109,10 @@ export default function Result({ car, resultId }) {
     //   {/* <hr /> */}
     // </div>
     <div className="result">
+      <button id="love" onClick={() => saveToFavorite(car.car_id)}>
+        <i className={heartButton}></i>
+      </button>
       <div className="ft-recipe__thumb">
-        <button id="love" onClick={() => saveToFavorite(car.car_id)}>
-          <i className={heartButton}></i>
-        </button>
         {photosArray.length > 0 ? (
           <CarGallery photosArray={photosArray} location={"result"} />
         ) : (
@@ -149,7 +149,20 @@ export default function Result({ car, resultId }) {
             </li>
           </ul>
         </header>
-        <div className="description"></div>
+        <div className="description">
+          <div className="rating-result">
+            <i className="fas fa-star"></i>{" "}
+            <span className="owner-rating-results">
+              {" "}
+              {car.owner_rating} / 5
+            </span>{" "}
+            |
+            <span className="owner-rating-reviews">
+              {" "}
+              {car.number_of_votes} reviews{" "}
+            </span>{" "}
+          </div>
+        </div>
         <footer className="content__footer">
           <Link to={`/result/${resultId}`}>
             <button>Book this car</button>
