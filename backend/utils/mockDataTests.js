@@ -219,6 +219,17 @@ const mockBodyResponseTopOwners = {
     },
   ],
 };
+const mockBodyResponseTopLocations = {
+  success: true,
+  data: [
+    { city: "MODI'IN-MAKKABBIM-RE", description: null },
+    {
+      city: "HAIFA",
+      description:
+        "Haifa  is the third-largest city in Israel—after Jerusalem and Tel Aviv—with a population of 285,316 in 2019. The city of Haifa forms part of the Haifa metropolitan area, the third-most populous metropolitan area in Israel. It is home to the Baháʼí Faith's Baháʼí World Centre, and is a UNESCO World Heritage Site and a destination for Baháʼí pilgrimage.",
+    },
+  ],
+};
 
 module.exports = {
   notFoundMessage,
@@ -233,4 +244,5 @@ module.exports = {
   mockBodyResponseGetCarByCityName,
   mockBodyResponseTopCars,
   mockBodyResponseTopOwners,
+  mockBodyResponseTopLocations,
 };

@@ -289,7 +289,7 @@ const writeLogs = async (body) => {
 };
 
 const wikiScraper = async (topFive) => {
-  for (let i = 0; i <= 4; i++) {
+  for (let i = 0; i < topFive.length; i++) {
     city = topFive[i].replace("-", " ");
     city = city.toLowerCase();
     city = city.replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
@@ -309,6 +309,14 @@ const wikiScraper = async (topFive) => {
       dataFromWiki = dataFromWiki.replace(/(\[.*?\]|\(.*?\))/g, "");
       topFive[i] = { city: topFive[i], description: dataFromWiki };
     } catch (err) {
+      const objToWrite = {
+        date: new Date(),
+        error: err,
+        status: 500,
+        ourMessage: "Problems with our server",
+        route: "wikiScraper Function",
+      };
+      await writeLogs(objToWrite);
       if (err.response.status === 404) {
         topFive[i] = { city: topFive[i], description: null };
         continue;

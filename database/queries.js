@@ -123,8 +123,7 @@ const top5Locations = async () => {
       ],
       group: ["address"],
     });
-    // console.log(typeof result);
-    console.log(result[0].Cars[0].dataValues.cars_number);
+
     result.sort(
       (a, b) =>
         b.Cars[0].dataValues.cars_number - a.Cars[0].dataValues.cars_number
@@ -132,7 +131,9 @@ const top5Locations = async () => {
     let cities = [];
 
     for (let i = 0; i < 5; i++) {
-      cities.push(result[i].address);
+      if (result[i]) {
+        cities.push(result[i].address);
+      }
     }
 
     return cities;

@@ -12,6 +12,7 @@ const {
   mockBodyResponseGetCarByCityName,
   mockBodyResponseTopCars,
   mockBodyResponseTopOwners,
+  mockBodyResponseTopLocations,
 } = require("./utils/mockDataTests");
 const app = require("./app");
 const { Car, Rental } = require("../database/models");
@@ -300,5 +301,23 @@ describe("Top route", () => {
     expect(response.status).toBe(200);
     // Is the response equals to mock response
     expect(arrToCheck).toEqual(mockBodyResponseTopOwners);
+  });
+
+  it("Should return top 5 or less locations from db", async () => {
+    const response = await request(app).get("/api/v1/top/locations");
+
+    const arrToCheck = { success: true, data: [] };
+    response.body.data.forEach((location) => {
+      const temp = {
+        city: location.city,
+        description: location.description,
+      };
+      arrToCheck.data.push(temp);
+    });
+
+    // // Is the status code 200
+    expect(response.status).toBe(200);
+    // // Is the response equals to mock response
+    expect(arrToCheck).toEqual(mockBodyResponseTopLocations);
   });
 });
