@@ -9,6 +9,7 @@ const {
   mockBodyResponseAllRentals,
   uniqueRentalId,
   mockBodyResponseUniqueRental,
+  mockBodyResponseGetCarByCityName,
 } = require("./utils/mockDataTests");
 const app = require("./app");
 const { Car, Rental } = require("../database/models");
@@ -83,26 +84,49 @@ describe("Cars route", () => {
     expect(data).toEqual(mockBodyResponseUniqueCar);
   });
 
-  it("Should success upload new car to DB", async () => {
-    const responseAllCarsBefore = await request(app).get(
-      "/api/v1/cars/allcars"
-    );
-    const response = await request(app)
-      .post("/api/v1/cars/upload")
-      .send(mockNewCarToUpload);
+  // it("Should success upload new car to DB", async () => {
+  //   const responseAllCarsBefore = await request(app).get(
+  //     "/api/v1/cars/allcars"
+  //   );
+  //   const response = await request(app)
+  //     .post("/api/v1/cars/upload")
+  //     .send(mockNewCarToUpload);
 
-    const responseAllCarsAfter = await request(app).get("/api/v1/cars/allcars");
+  //   const responseAllCarsAfter = await request(app).get("/api/v1/cars/allcars");
+
+  //   // Is the status code 200
+  //   expect(response.status).toBe(200);
+  //   // Is the response equals to mock response
+  //   expect(response.body).toEqual(mockBodyResponseForUpload);
+
+  //   // Check if the length of all cars before upload is less then after
+  //   expect(responseAllCarsBefore.body.data.length).toBeLessThan(
+  //     responseAllCarsAfter.body.data.length
+  //   );
+  // });
+
+  it("Should return a car from DB by city name", async () => {
+    const response = await request(app).get("/api/v1/cars/bycity/HAIFA");
+
+    const data = {
+      car_id: response.body.data[0].car_id,
+      owner_email: response.body.data[0].owner_email,
+      brand: response.body.data[0].brand,
+      year: response.body.data[0].year,
+      model: response.body.data[0].model,
+      fuel: response.body.data[0].fuel,
+      passengers: response.body.data[0].passengers,
+      price_per_day: response.body.data[0].price_per_day,
+      discount_for_week: response.body.data[0].discount_for_week,
+      discount_for_month: response.body.data[0].discount_for_month,
+    };
 
     // Is the status code 200
     expect(response.status).toBe(200);
     // Is the response equals to mock response
-    expect(response.body).toEqual(mockBodyResponseForUpload);
-
-    // Check if the length of all cars before upload is less then after
-    expect(responseAllCarsBefore.body.data.length).toBeLessThan(
-      responseAllCarsAfter.body.data.length
-    );
+    expect(data).toEqual(mockBodyResponseGetCarByCityName);
   });
+
   // Checks error side
   describe("Inner Car route", () => {
     beforeEach(async () => {
@@ -151,18 +175,30 @@ describe("Rental route", () => {
     expect(arrToCheck).toEqual(mockBodyResponseAllRentals);
   });
 
-  // ############### need to change ############### //
+  it("Should return a unique rental from DB", async () => {
+    const response = await request(app)
+      .post("/api/v1/rentals/uniquerental")
+      .send(uniqueRentalId);
 
-  //   it("Should return a unique rental from DB", async () => {
-  //     const response = await request(app)
-  //       .post("/api/v1/rentals/uniquerental")
-  //       .send(uniqueRentalId);
+    const data = {
+      success: true,
+      data: {
+        transaction_id: response.body.data.transaction_id,
+        car_id: response.body.data.car_id,
+        owner_email: response.body.data.owner_email,
+        renter_email: response.body.data.renter_email,
+        start_date: response.body.data.start_date,
+        end_date: response.body.data.end_date,
+        total_price: response.body.data.total_price,
+        is_active: response.body.data.is_active,
+      },
+    };
 
-  //     // Is the status code 200
-  //     expect(response.status).toBe(200);
+    // Is the status code 200
+    expect(response.status).toBe(200);
 
-  //     expect(response.body).toEqual(mockBodyResponseUniqueRental);
-  //   });
+    expect(data).toEqual(mockBodyResponseUniqueRental);
+  });
 
   // Checks error side
   describe("Inner Rental route", () => {

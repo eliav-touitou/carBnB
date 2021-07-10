@@ -14,18 +14,18 @@ const mockBodyResponseAllCars = {
     {
       car_id: 1,
       owner_email: "eyal@gmail.com",
-      brand: "Reno",
+      brand: "PEUGEOT",
       year: 2009,
-      model: "Megan",
-      fuel: "95",
+      model: "505",
+      fuel: "OCTAN-95",
     },
     {
       car_id: 2,
       owner_email: "jino@gmail.com",
-      brand: "Suzuki",
+      brand: "SUZUKI",
       year: 2014,
-      model: "Alto",
-      fuel: "95",
+      model: "VERONA",
+      fuel: "OCTAN-95",
     },
   ],
 };
@@ -35,10 +35,10 @@ const mockBodyResponseUniqueCar = {
   data: {
     car_id: 1,
     owner_email: "eyal@gmail.com",
-    brand: "Reno",
+    brand: "PEUGEOT",
     year: 2009,
-    model: "Megan",
-    fuel: "95",
+    model: "505",
+    fuel: "OCTAN-95",
   },
 };
 
@@ -52,6 +52,8 @@ const mockNewCarToUpload = {
     gear: "Auto",
     year: "2010",
     fuel: "Octan-95",
+    until: null,
+    from: null,
     passengers: 5,
     pricePerDay: 100,
     discountPerWeek: "5%",
@@ -67,11 +69,26 @@ const mockBodyResponseForUpload = {
     gear: "Auto",
     year: "2010",
     fuel: "Octan-95",
+    until: null,
+    from: null,
     passengers: 5,
     pricePerDay: 100,
     discountPerWeek: "5%",
     discountPerMonth: "10%",
   },
+};
+
+const mockBodyResponseGetCarByCityName = {
+  car_id: 2,
+  owner_email: "jino@gmail.com",
+  brand: "SUZUKI",
+  model: "VERONA",
+  year: 2014,
+  fuel: "OCTAN-95",
+  passengers: 4,
+  price_per_day: 30,
+  discount_for_week: "10%",
+  discount_for_month: "15%",
 };
 
 //---------------------------------------------------------------//
@@ -111,8 +128,7 @@ const mockBodyResponseUniqueRental = {
     start_date: "1969-12-31T23:59:57.000Z",
     end_date: "1969-12-31T23:59:57.000Z",
     total_price: 70,
-    createdAt: "2021-06-17T10:49:19.000Z",
-    updatedAt: "2021-06-17T10:49:19.000Z",
+    is_active: "confirm",
   },
 };
 
@@ -131,4 +147,5 @@ module.exports = {
   mockBodyResponseAllRentals,
   uniqueRentalId,
   mockBodyResponseUniqueRental,
+  mockBodyResponseGetCarByCityName,
 };
