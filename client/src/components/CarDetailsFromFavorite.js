@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useLocation } from "react-router-dom";
 import { setPhotosArray, setShowLogin, setCarToRental } from "../actions";
 import CarGallery from "./CarGallery";
+import { Icon, InlineIcon } from "@iconify/react";
+import seatPassenger from "@iconify-icons/mdi/seat-passenger";
 import { Snackbar } from "@material-ui/core";
 import Cards from "react-credit-cards";
 import { setRentalDetails, setAuthLicense } from "../actions";
@@ -178,20 +180,24 @@ export default function CarDetails() {
       <div className="window">
         <div className="order-info">
           <div className="order-info-content">
-            <h2>Order Summary</h2>
-            <div className="line" />
-            <table className="order-table">
-              <tbody>
-                <tr>
-                  <td>
-                    <span className="thin">Barnd:</span>
-                    {car.brand}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="line" />
-            <table className="order-table">
+            <div className="upper-info">
+              <h2>Order Summary</h2>
+              <div className="line" />
+            </div>
+            <div className="lower-info">
+              <table className="order-table">
+                <tbody>
+                  <tr>
+                    <td>
+                      <i class="fas fa-car"></i>
+                      <span className="thin"> Car: </span> {car.brand},{" "}
+                      {car.model}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="line" />
+              {/* <table className="order-table">
               <tbody>
                 <tr>
                   <td>
@@ -201,51 +207,56 @@ export default function CarDetails() {
                 </tr>
               </tbody>
             </table>
-            <div className="line" />
-            <table className="order-table">
-              <tbody>
-                <tr>
-                  <td>
-                    <span className="thin">Year:</span>
-                    {car.year}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="line" />
-            <table className="order-table">
-              <tbody>
-                <tr>
-                  <td>
-                    <span className="thin">Fuel:</span>
-                    {car.fuel}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="line" />
-            <table className="order-table">
-              <tbody>
-                <tr>
-                  <td>
-                    <span className="thin">Gear:</span>
-                    {car.gear}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="line" />
-            <table className="order-table">
-              <tbody>
-                <tr>
-                  <td>
-                    <span className="thin">Passengers:</span>
-                    {car.passengers}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="line" />
+            <div className="line" /> */}
+              <table className="order-table">
+                <tbody>
+                  <tr>
+                    <td>
+                      <i class="far fa-clock"></i>
+                      <span className="thin"> Year: </span>
+                      {car.year}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="line" />
+              <table className="order-table">
+                <tbody>
+                  <tr>
+                    <td>
+                      <i class="fas fa-gas-pump"></i>
+                      <span className="thin"> Fuel: </span>
+                      {car.fuel}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="line" />
+              <table className="order-table">
+                <tbody>
+                  <tr>
+                    <td>
+                      <i class="fas fa-cogs"></i>
+                      <span className="thin"> Gear: </span>
+                      {car.gear}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="line" />
+              <table className="order-table">
+                <tbody>
+                  <tr>
+                    <td>
+                      <Icon icon={seatPassenger} />
+                      <span className="thin"> Passengers: </span>
+                      {car.passengers}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="line" />
+            </div>
             {/* {photosArray.length !== 0 && (
               <div style={{ height: "80px" }}>
                 <CarGallery photosArray={photosArray} />
@@ -279,6 +290,7 @@ export default function CarDetails() {
             </div>
           </div>
         </div>
+
         <div className="credit-info">
           <div className="credit-info-content">
             <Cards
