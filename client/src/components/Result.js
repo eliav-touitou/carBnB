@@ -154,7 +154,7 @@ export default function Result({ car, resultId }) {
             <i className="fas fa-star"></i>{" "}
             <span className="owner-rating-results">
               {" "}
-              {car.owner_rating} / 5
+              {Number(car.owner_rating).toFixed(1)} / 5
             </span>{" "}
             |
             <span className="owner-rating-reviews">
