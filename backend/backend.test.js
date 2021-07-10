@@ -10,6 +10,8 @@ const {
   uniqueRentalId,
   mockBodyResponseUniqueRental,
   mockBodyResponseGetCarByCityName,
+  mockBodyResponseTopCars,
+  mockBodyResponseTopOwners,
 } = require("./utils/mockDataTests");
 const app = require("./app");
 const { Car, Rental } = require("../database/models");
@@ -228,5 +230,75 @@ describe("Rental route", () => {
       // Is the response equals to mock response
       expect(response.body).toEqual(notFoundMessage);
     });
+  });
+});
+
+describe("Top route", () => {
+  beforeEach(async () => {
+    console.log("before each");
+    try {
+      await Car.bulkCreate(mockCarsSeeders);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  // remove data before each test
+  afterEach(async () => {
+    console.log("after each");
+    try {
+      await Car.destroy({ where: {} });
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  it("Should return top 5 or less cars from db", async () => {
+    const response = await request(app).get("/api/v1/top/cars");
+
+    const arrToCheck = { success: true, data: [] };
+    response.body.data.forEach((car) => {
+      const temp = {
+        car_id: car.car_id,
+        owner_email: car.owner_email,
+        brand: car.brand,
+        model: car.model,
+        year: car.year,
+        fuel: car.fuel,
+        passengers: car.passengers,
+        price_per_day: car.price_per_day,
+        discount_for_week: car.discount_for_week,
+        discount_for_month: car.discount_for_month,
+        gear: car.gear,
+      };
+      arrToCheck.data.push(temp);
+    });
+
+    // Is the status code 200
+    expect(response.status).toBe(200);
+    // Is the response equals to mock response
+    expect(arrToCheck).toEqual(mockBodyResponseTopCars);
+  });
+  it("Should return top 5 or less owners from db", async () => {
+    const response = await request(app).get("/api/v1/top/owners");
+
+    const arrToCheck = { success: true, data: [] };
+    response.body.data.forEach((owner) => {
+      const temp = {
+        user_email: owner.user_email,
+        phone_number: owner.phone_number,
+        first_name: owner.first_name,
+        last_name: owner.last_name,
+        address: owner.address,
+        rating: owner.rating,
+        number_of_votes: owner.number_of_votes,
+      };
+      arrToCheck.data.push(temp);
+    });
+
+    // Is the status code 200
+    expect(response.status).toBe(200);
+    // Is the response equals to mock response
+    expect(arrToCheck).toEqual(mockBodyResponseTopOwners);
   });
 });

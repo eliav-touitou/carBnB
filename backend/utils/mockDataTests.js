@@ -99,7 +99,7 @@ const mockBodyResponseAllRentals = {
   data: [
     {
       transaction_id: 1,
-      car_id: 3,
+      car_id: 1,
       owner_email: "eliav@gmail.com",
       renter_email: "eyal@gmail.com",
       start_date: "1969-12-31T23:59:57.000Z",
@@ -108,7 +108,7 @@ const mockBodyResponseAllRentals = {
     },
     {
       transaction_id: 2,
-      car_id: 5,
+      car_id: 2,
       owner_email: "oded.mar@hotmail.com",
       renter_email: "lea.shosh@walla.co.il",
       start_date: "1969-12-31T23:59:57.000Z",
@@ -122,7 +122,7 @@ const mockBodyResponseUniqueRental = {
   success: true,
   data: {
     transaction_id: 1,
-    car_id: 3,
+    car_id: 1,
     owner_email: "eliav@gmail.com",
     renter_email: "eyal@gmail.com",
     start_date: "1969-12-31T23:59:57.000Z",
@@ -135,7 +135,90 @@ const mockBodyResponseUniqueRental = {
 const uniqueRentalId = { id: 1 };
 
 //---------------------------------------------------------------//
-//------------------------- USERS ---------------------------//
+//------------------------- TOPS ---------------------------//
+
+const mockBodyResponseTopCars = {
+  success: true,
+  data: [
+    {
+      car_id: 1,
+      owner_email: "eyal@gmail.com",
+      brand: "PEUGEOT",
+      model: "505",
+      year: 2009,
+      fuel: "OCTAN-95",
+      passengers: 5,
+      price_per_day: 50,
+      discount_for_week: "5%",
+      discount_for_month: "10%",
+      gear: "Manual",
+    },
+    {
+      car_id: 2,
+      owner_email: "jino@gmail.com",
+      brand: "SUZUKI",
+      model: "VERONA",
+      year: 2014,
+      fuel: "OCTAN-95",
+      passengers: 4,
+      price_per_day: 30,
+      discount_for_week: "10%",
+      discount_for_month: "15%",
+      gear: "Auto",
+    },
+  ],
+};
+
+const mockBodyResponseTopOwners = {
+  success: true,
+  data: [
+    {
+      user_email: "gil@hotmail.com",
+      phone_number: "0589623778",
+      first_name: "gil",
+      last_name: "naaman",
+      address: "HAIFA",
+      rating: 5,
+      number_of_votes: 50,
+    },
+    {
+      user_email: "rozjino@hotmail.com",
+      phone_number: "0589623778",
+      first_name: "rozi",
+      last_name: "jinobigo",
+      address: "HAIFA",
+      rating: 5,
+      number_of_votes: 10,
+    },
+    {
+      user_email: "eliav@gmail.com",
+      phone_number: "0545732117",
+      first_name: "Eliav",
+      last_name: "Touitou",
+      address: "EFRATA",
+      rating: 4,
+      number_of_votes: 2,
+    },
+    {
+      user_email: "oded.mar@hotmail.com",
+      phone_number: "0589623778",
+      first_name: "Oded",
+      last_name: "Margalit",
+      address: "HAIFA",
+      rating: 4,
+      number_of_votes: 10,
+    },
+    {
+      user_email: "zimermaneyal@gmail.com",
+      phone_number: "0589623778",
+      first_name: "eyal",
+      last_name: "zim",
+      address: "TEL AVIV - YAFO",
+      rating: 3,
+      number_of_votes: 10,
+    },
+  ],
+};
 
 module.exports = {
   notFoundMessage,
@@ -148,4 +231,6 @@ module.exports = {
   uniqueRentalId,
   mockBodyResponseUniqueRental,
   mockBodyResponseGetCarByCityName,
+  mockBodyResponseTopCars,
+  mockBodyResponseTopOwners,
 };

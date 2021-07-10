@@ -41,7 +41,7 @@ mockCarsSeeders = [
 const mockRentalsSeeders = [
   {
     transaction_id: 1,
-    car_id: 3,
+    car_id: 1,
     owner_email: "eliav@gmail.com",
     renter_email: "eyal@gmail.com",
     start_date: "1969-12-31T23:59:57.000Z",
@@ -53,7 +53,7 @@ const mockRentalsSeeders = [
   },
   {
     transaction_id: 2,
-    car_id: 5,
+    car_id: 2,
     owner_email: "oded.mar@hotmail.com",
     renter_email: "lea.shosh@walla.co.il",
     start_date: "1969-12-31T23:59:57.000Z",

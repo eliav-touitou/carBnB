@@ -83,9 +83,8 @@ const top5Cars = async () => {
     let idArray = [];
     carArray.forEach((car) => idArray.push(car.car_id));
 
-    console.log(idArray);
     const sortedCars = await getAllCarsByIdsArr(idArray);
-    console.log(sortedCars);
+
     return sortedCars;
   } catch (error) {
     throw error;
