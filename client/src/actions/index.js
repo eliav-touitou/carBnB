@@ -145,3 +145,9 @@ export const setAuthLicense = (str) => {
     payload: str,
   };
 };
+export const setSpinner = (bool) => {
+  return {
+    type: "SETSPINNER",
+    payload: bool,
+  };
+};
