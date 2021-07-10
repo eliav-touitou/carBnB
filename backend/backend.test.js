@@ -17,12 +17,16 @@ const {
   mockBodyResponseUniqueUser,
   minRateForUser,
   mockBodyResponseUsersByRating,
+  mockNewUserRegister,
+  mockBodyResponseUserRegister,
 } = require("./utils/mockDataTests");
 const app = require("./app");
-const { Car, Rental } = require("../database/models");
+const { Car, Rental, User, Auth } = require("../database/models");
 const {
   mockCarsSeeders,
   mockRentalsSeeders,
+  mockUsersSeeders,
+  mockAuthSeeders,
 } = require("./utils/mockDataTestsSeeders");
 
 describe("Cars route", () => {
@@ -327,6 +331,31 @@ describe("Top route", () => {
 });
 
 describe("Users route", () => {
+  //seeding data before each test
+  beforeEach(async () => {
+    console.log("before each");
+    try {
+      await User.destroy({ where: {} });
+      await User.bulkCreate(mockUsersSeeders);
+      await Auth.destroy({ where: {} });
+      await Auth.bulkCreate(mockAuthSeeders);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  //remove data before each test
+  afterAll(async () => {
+    console.log("after each");
+    try {
+      await User.destroy({ where: {} });
+      await User.bulkCreate(mockUsersSeeders);
+      await Auth.destroy({ where: {} });
+      await Auth.bulkCreate(mockAuthSeeders);
+    } catch (err) {
+      console.log(err);
+    }
+  });
   it("Should return data on unique user", async () => {
     const response = await request(app)
       .post("/api/v1/users/uniqueuser")
@@ -376,5 +405,18 @@ describe("Users route", () => {
     expect(response.status).toBe(200);
     // Is the response equals to mock response
     expect(arrToCheck).toEqual(mockBodyResponseUsersByRating);
+  });
+
+  it("Should success to register new user to system", async () => {
+    const response = await request(app)
+      .post("/api/v1/users/register")
+      .send(mockNewUserRegister);
+
+    console.log(response);
+
+    // Is the status code 200
+    expect(response.status).toBe(200);
+    // // Is the response equals to mock response
+    expect(response.body).toEqual(mockBodyResponseUserRegister);
   });
 });

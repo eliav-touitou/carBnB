@@ -298,6 +298,28 @@ const mockBodyResponseUsersByRating = {
   ],
 };
 
+const mockNewUserRegister = {
+  newUser: {
+    firstName: "testi",
+    lastName: "test",
+    address: "tester",
+    phoneNumber: "00000000000",
+    email: "test@test.com",
+    password: "testi-test",
+  },
+};
+
+const mockBodyResponseUserRegister = {
+  success: true,
+  data: {
+    firstName: "testi",
+    lastName: "test",
+    address: "tester",
+    phoneNumber: "00000000000",
+    email: "test@test.com",
+  },
+};
+
 module.exports = {
   notFoundMessage,
   mockBodyResponseAllCars,
@@ -316,4 +338,6 @@ module.exports = {
   mockBodyResponseUniqueUser,
   minRateForUser,
   mockBodyResponseUsersByRating,
+  mockNewUserRegister,
+  mockBodyResponseUserRegister,
 };
