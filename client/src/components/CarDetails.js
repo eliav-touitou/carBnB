@@ -7,6 +7,8 @@ import CarGallery from "./CarGallery";
 import { Snackbar } from "@material-ui/core";
 import Cards from "react-credit-cards";
 import "react-credit-cards/lib/styles-compiled.css";
+import { Icon, InlineIcon } from "@iconify/react";
+import seatPassenger from "@iconify-icons/mdi/seat-passenger";
 import {
   setRentalDetails,
   setAvailableCars,
@@ -214,20 +216,25 @@ export default function CarDetails() {
       <div className="window">
         <div className="order-info">
           <div className="order-info-content">
-            <h2>Order Summary</h2>
-            <div className="line" />
-            <table className="order-table">
-              <tbody>
-                <tr>
-                  <td>
-                    <span className="thin">Barnd:</span>
-                    {availableCars[resultId].brand}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="line" />
-            <table className="order-table">
+            <div className="upper-info">
+              <h2>Order Summary</h2>
+              <div className="line" />
+            </div>
+            <div className="lower-info">
+              <table className="order-table">
+                <tbody>
+                  <tr>
+                    <td>
+                      <i class="fas fa-car"></i>
+                      <span className="thin"> Car: </span>
+                      {availableCars[resultId].brand},{" "}
+                      {availableCars[resultId].model}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="line" />
+              {/* <table className="order-table">
               <tbody>
                 <tr>
                   <td>
@@ -237,51 +244,67 @@ export default function CarDetails() {
                 </tr>
               </tbody>
             </table>
-            <div className="line" />
-            <table className="order-table">
-              <tbody>
-                <tr>
-                  <td>
-                    <span className="thin">Year:</span>
-                    {availableCars[resultId].year}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="line" />
-            <table className="order-table">
-              <tbody>
-                <tr>
-                  <td>
-                    <span className="thin">Fuel:</span>
-                    {availableCars[resultId].fuel}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="line" />
-            <table className="order-table">
-              <tbody>
-                <tr>
-                  <td>
-                    <span className="thin">Gear:</span>
-                    {availableCars[resultId].gear}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="line" />
-            <table className="order-table">
-              <tbody>
-                <tr>
-                  <td>
-                    <span className="thin">Passengers:</span>
-                    {availableCars[resultId].passengers}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="line" />
+            <div className="line" /> */}
+              <table className="order-table">
+                <tbody>
+                  <tr>
+                    <td>
+                      <i class="far fa-clock"></i>
+                      <span className="thin"> Year: </span>
+                      {availableCars[resultId].year}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="line" />
+              <table className="order-table">
+                <tbody>
+                  <tr>
+                    <td>
+                      <i class="fas fa-gas-pump"></i>
+                      <span className="thin"> Fuel: </span>
+                      {availableCars[resultId].fuel}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="line" />
+              <table className="order-table">
+                <tbody>
+                  <tr>
+                    <td>
+                      <i class="fas fa-cogs"></i>
+                      <span className="thin"> Gear: </span>
+                      {availableCars[resultId].gear}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="line" />
+              <table className="order-table">
+                <tbody>
+                  <tr>
+                    <td>
+                      <Icon icon={seatPassenger} />
+                      <span className="thin"> Passengers: </span>
+                      {availableCars[resultId].passengers}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="line" />
+              {/* <table className="order-table">
+                <tbody>
+                  <tr>
+                    <td>
+                      <span className="thin">Wanted dates:</span>
+                      {initialSearch.startDate} - {initialSearch.endDate}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="line" /> */}
+            </div>
             {/* {photosArray.length !== 0 && (
               <div style={{ height: "80px" }}>
                 <CarGallery photosArray={photosArray} />

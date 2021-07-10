@@ -6,16 +6,9 @@ import { setShowLogin } from "../actions";
 import PromptLogin from "./PromptLogin";
 import defaultPhoto from "../photos/no-car-photo.png";
 import CarGallery from "./CarGallery";
-
-export default function Result({
-  model,
-  brand,
-  passengers,
-  carId,
-  resultId,
-  ownerRating,
-  numberOfVotes,
-}) {
+import { Icon, InlineIcon } from "@iconify/react";
+import seatPassenger from "@iconify-icons/mdi/seat-passenger";
+export default function Result({ car, resultId }) {
   const dispatch = useDispatch();
 
   // Redux states
@@ -37,7 +30,7 @@ export default function Result({
   // }, [carId]);
 
   useEffect(() => {
-    const photosData = ["Photo", ["car_id"], [carId]];
+    const photosData = ["Photo", ["car_id"], [car.car_id]];
     axios
       .post("/api/v1/search/getitem", { data: photosData })
       .then(({ data }) => {
@@ -85,33 +78,97 @@ export default function Result({
   };
 
   return (
-    <div className="car-details">
-      <div className="first-details">
+    // <div className="car-details">
+    //   <div className="first-details">
+    //     {photosArray.length > 0 ? (
+    //       <CarGallery photosArray={photosArray} location={"result"} />
+    //     ) : (
+    //       <img alt="car-photo" src={defaultPhoto} />
+    //     )}
+    //     <div className="rating-result">
+    //       <i className="fas fa-star"></i>
+    //       <span className="owner-rating-results"> {car.owner_rating} </span>
+    //       <span className="owner-rating-reviews">
+    //         ({car.number_of_votes})reviews
+    //       </span>
+    //     </div>
+    //     <div className="data">
+    //       <div className="car-brand">Brand: {car.brand}</div>
+    //       <div className="car-passengers">Model: {car.model}</div>
+    //       <div className="car-passengers">Passengers: {car.passengers}</div>
+    //     </div>
+    //     <div className="buttons">
+    //       <button id="love" onClick={() => saveToFavorite(car.car_id)}>
+    //         <i className={heartButton}></i>
+    //       </button>
+    //       <Link to={`/result/${resultId}`}>
+    //         <button>➡</button>
+    //       </Link>
+    //     </div>
+    //   </div>
+    //   {/* <hr /> */}
+    // </div>
+    <div className="result">
+      <button id="love" onClick={() => saveToFavorite(car.car_id)}>
+        <i className={heartButton}></i>
+      </button>
+      <div className="ft-recipe__thumb">
         {photosArray.length > 0 ? (
           <CarGallery photosArray={photosArray} location={"result"} />
         ) : (
-          <img alt="car-photo" src={defaultPhoto} height={100} />
+          <img
+            alt="car-photo"
+            className="no-photos-replacement"
+            src={defaultPhoto}
+          />
         )}
-        <div className="rating-result">
-          <i className="fas fa-star"></i>
-          <span className="owner-rating-results"> {ownerRating} </span>
-          <span className="owner-rating-reviews">({numberOfVotes})reviews</span>
-        </div>
-        <div className="data">
-          <div className="car-brand">Brand: {brand}</div>
-          <div className="car-passengers">Model: {model}</div>
-          <div className="car-passengers">Passengers: {passengers}</div>
-        </div>
-        <div className="buttons">
-          <button onClick={() => saveToFavorite(carId)}>
-            <i className={heartButton}></i>
-          </button>
-          <Link to={`/result/${resultId}`}>
-            <button>➡</button>
-          </Link>
-        </div>
       </div>
-      {/* <hr /> */}
+      <div className="ft-recipe__content">
+        <header className="content__header">
+          <div className="row-wrapper">
+            <h2 className="recipe-title">
+              {car.brand}, {car.model}
+            </h2>
+            <div className="user-rating" />
+          </div>
+          <ul className="recipe-details">
+            <li className="recipe-details-item time">
+              <i class="fas fa-tools"></i>
+              <span className="value">{car.year}</span>
+              <span className="title">Manufacture year</span>
+            </li>
+            <li className="recipe-details-item ingredients">
+              <i class="fas fa-dollar-sign ion"></i>
+              <span className="value">{car.price_per_day}</span>
+              <span className="title">Per day</span>
+            </li>
+            <li className="recipe-details-item servings">
+              <Icon icon={seatPassenger} className="ion" />
+              <span className="value">{car.passengers}</span>
+              <span className="title">Number of seats</span>
+            </li>
+          </ul>
+        </header>
+        <div className="description">
+          <div className="rating-result">
+            <i className="fas fa-star"></i>{" "}
+            <span className="owner-rating-results">
+              {" "}
+              {car.owner_rating} / 5
+            </span>{" "}
+            |
+            <span className="owner-rating-reviews">
+              {" "}
+              {car.number_of_votes} reviews{" "}
+            </span>{" "}
+          </div>
+        </div>
+        <footer className="content__footer">
+          <Link to={`/result/${resultId}`}>
+            <button>Book this car</button>
+          </Link>
+        </footer>
+      </div>
     </div>
   );
 }

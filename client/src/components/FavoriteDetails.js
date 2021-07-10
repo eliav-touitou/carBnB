@@ -88,7 +88,6 @@ export default function FavoriteDetails({ car }) {
             </li>
             <li className="recipe-details-item servings">
               <Icon icon={seatPassenger} className="ion" />
-              {/* <i class="fas fa-gas-pump"></i> */}
               <span className="value">{car.passengers}</span>
               <span className="title">Number of seats</span>
             </li>
