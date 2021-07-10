@@ -231,6 +231,81 @@ const mockBodyResponseTopLocations = {
   ],
 };
 
+//---------------------------------------------------------------//
+//------------------------- USERS ---------------------------//
+
+const uniqueUser = { email: "eliav@gmail.com" };
+
+const mockBodyResponseUniqueUser = {
+  success: true,
+  data: {
+    user_email: "eliav@gmail.com",
+    phone_number: "0545732117",
+    first_name: "Eliav",
+    last_name: "Touitou",
+    address: "EFRATA",
+    rating: 4,
+    number_of_votes: 2,
+    license: null,
+  },
+};
+
+const minRateForUser = { minRate: 4 };
+
+const mockBodyResponseUsersByRating = {
+  success: true,
+  data: [
+    {
+      user_email: "eliav@gmail.com",
+      phone_number: "0545732117",
+      first_name: "Eliav",
+      last_name: "Touitou",
+      address: "EFRATA",
+      rating: 4,
+      number_of_votes: 2,
+      license: null,
+      createdAt: "2021-07-05T06:17:26.000Z",
+      updatedAt: "2021-07-05T06:17:26.000Z",
+    },
+    {
+      user_email: "gil@hotmail.com",
+      phone_number: "0589623778",
+      first_name: "gil",
+      last_name: "naaman",
+      address: "HAIFA",
+      rating: 5,
+      number_of_votes: 50,
+      license: null,
+      createdAt: "2021-07-05T06:17:26.000Z",
+      updatedAt: "2021-07-05T06:17:26.000Z",
+    },
+    {
+      user_email: "oded.mar@hotmail.com",
+      phone_number: "0589623778",
+      first_name: "Oded",
+      last_name: "Margalit",
+      address: "HAIFA",
+      rating: 4,
+      number_of_votes: 10,
+      license: null,
+      createdAt: "2021-07-05T06:17:26.000Z",
+      updatedAt: "2021-07-05T06:17:26.000Z",
+    },
+    {
+      user_email: "rozjino@hotmail.com",
+      phone_number: "0589623778",
+      first_name: "rozi",
+      last_name: "jinobigo",
+      address: "HAIFA",
+      rating: 5,
+      number_of_votes: 10,
+      license: null,
+      createdAt: "2021-07-05T06:17:26.000Z",
+      updatedAt: "2021-07-05T06:17:26.000Z",
+    },
+  ],
+};
+
 module.exports = {
   notFoundMessage,
   mockBodyResponseAllCars,
@@ -245,4 +320,8 @@ module.exports = {
   mockBodyResponseTopCars,
   mockBodyResponseTopOwners,
   mockBodyResponseTopLocations,
+  uniqueUser,
+  mockBodyResponseUniqueUser,
+  minRateForUser,
+  mockBodyResponseUsersByRating,
 };

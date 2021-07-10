@@ -13,6 +13,10 @@ const {
   mockBodyResponseTopCars,
   mockBodyResponseTopOwners,
   mockBodyResponseTopLocations,
+  uniqueUser,
+  mockBodyResponseUniqueUser,
+  minRateForUser,
+  mockBodyResponseUsersByRating,
 } = require("./utils/mockDataTests");
 const app = require("./app");
 const { Car, Rental } = require("../database/models");
@@ -319,5 +323,33 @@ describe("Top route", () => {
     expect(response.status).toBe(200);
     // // Is the response equals to mock response
     expect(arrToCheck).toEqual(mockBodyResponseTopLocations);
+  });
+});
+
+describe("Users route", () => {
+  it("Should return data on unique user", async () => {
+    const response = await request(app)
+      .post("/api/v1/users/uniqueuser")
+      .send(uniqueUser);
+
+    const data = {
+      success: true,
+      data: {
+        user_email: response.body.data.user_email,
+        phone_number: response.body.data.phone_number,
+        first_name: response.body.data.first_name,
+        last_name: response.body.data.last_name,
+        address: response.body.data.address,
+        rating: response.body.data.rating,
+        number_of_votes: response.body.data.number_of_votes,
+        license: response.body.data.license,
+      },
+    };
+    console.log(response.body);
+
+    // // Is the status code 200
+    expect(response.status).toBe(200);
+    // // Is the response equals to mock response
+    expect(data).toEqual(mockBodyResponseUniqueUser);
   });
 });
