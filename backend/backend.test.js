@@ -319,9 +319,9 @@ describe("Top route", () => {
       arrToCheck.data.push(temp);
     });
 
-    // // Is the status code 200
+    // Is the status code 200
     expect(response.status).toBe(200);
-    // // Is the response equals to mock response
+    // Is the response equals to mock response
     expect(arrToCheck).toEqual(mockBodyResponseTopLocations);
   });
 });
@@ -345,11 +345,36 @@ describe("Users route", () => {
         license: response.body.data.license,
       },
     };
-    console.log(response.body);
 
     // // Is the status code 200
     expect(response.status).toBe(200);
     // // Is the response equals to mock response
     expect(data).toEqual(mockBodyResponseUniqueUser);
+  });
+
+  it("Should return all users that their rate above the given number", async () => {
+    const response = await request(app)
+      .post("/api/v1/users/rated")
+      .send(minRateForUser);
+
+    const arrToCheck = { success: true, data: [] };
+    response.body.data.forEach((user) => {
+      const temp = {
+        user_email: user.user_email,
+        phone_number: user.phone_number,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        address: user.address,
+        rating: user.rating,
+        number_of_votes: user.number_of_votes,
+        license: user.license,
+      };
+      arrToCheck.data.push(temp);
+    });
+
+    // Is the status code 200
+    expect(response.status).toBe(200);
+    // Is the response equals to mock response
+    expect(arrToCheck).toEqual(mockBodyResponseUsersByRating);
   });
 });

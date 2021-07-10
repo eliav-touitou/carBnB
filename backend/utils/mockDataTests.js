@@ -264,8 +264,6 @@ const mockBodyResponseUsersByRating = {
       rating: 4,
       number_of_votes: 2,
       license: null,
-      createdAt: "2021-07-05T06:17:26.000Z",
-      updatedAt: "2021-07-05T06:17:26.000Z",
     },
     {
       user_email: "gil@hotmail.com",
@@ -276,8 +274,6 @@ const mockBodyResponseUsersByRating = {
       rating: 5,
       number_of_votes: 50,
       license: null,
-      createdAt: "2021-07-05T06:17:26.000Z",
-      updatedAt: "2021-07-05T06:17:26.000Z",
     },
     {
       user_email: "oded.mar@hotmail.com",
@@ -288,8 +284,6 @@ const mockBodyResponseUsersByRating = {
       rating: 4,
       number_of_votes: 10,
       license: null,
-      createdAt: "2021-07-05T06:17:26.000Z",
-      updatedAt: "2021-07-05T06:17:26.000Z",
     },
     {
       user_email: "rozjino@hotmail.com",
@@ -300,8 +294,6 @@ const mockBodyResponseUsersByRating = {
       rating: 5,
       number_of_votes: 10,
       license: null,
-      createdAt: "2021-07-05T06:17:26.000Z",
-      updatedAt: "2021-07-05T06:17:26.000Z",
     },
   ],
 };
