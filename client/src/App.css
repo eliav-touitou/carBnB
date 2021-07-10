@@ -1118,6 +1118,7 @@ form {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/group-lines.png");
 }
 
 .top-pick-section h2 {
@@ -1775,6 +1776,7 @@ form {
       -ms-flex-pack: center;
           justify-content: center;
   max-width: 100vw;
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/group-lines.png");
 }
 
 .top-pick-carousel h2 {
@@ -2519,6 +2521,8 @@ form {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/purple-dots.png");
+  background-size: contain;
 }
 
 .car-favorite-page .favorite-car-list {
