@@ -95,7 +95,7 @@ cars.get("/bycity/:city", async (req, res) => {
       error: error,
       status: 500,
       ourMessage: "Problems with our server",
-      route: "api/v1/cars/upload",
+      route: "api/v1/cars/bycity/:city",
     };
     await writeLogs(objToWrite);
     return res
