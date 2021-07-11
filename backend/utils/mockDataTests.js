@@ -4,6 +4,9 @@
 //------------------------- MESSAGES ---------------------------//
 
 const notFoundMessage = { message: "NOT FOUND" };
+const userOrPasswordIncorrect = {
+  message: "Username or password is incorrect",
+};
 
 //---------------------------------------------------------------//
 //------------------------- CARS ---------------------------//
@@ -338,6 +341,12 @@ const mockBodyResponseUserLogin = {
   },
 };
 
+const mockResponseExistUser = { success: false, message: "User already exist" };
+
+const mockNotExistUserLogin = {
+  user: { email: "testerChoice@test.com", password: "testi-test" },
+};
+
 module.exports = {
   notFoundMessage,
   mockBodyResponseAllCars,
@@ -360,4 +369,7 @@ module.exports = {
   mockBodyResponseUserRegister,
   mockUserLogin,
   mockBodyResponseUserLogin,
+  mockResponseExistUser,
+  mockNotExistUserLogin,
+  userOrPasswordIncorrect,
 };

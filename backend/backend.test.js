@@ -21,6 +21,9 @@ const {
   mockBodyResponseUserRegister,
   mockUserLogin,
   mockBodyResponseUserLogin,
+  mockResponseExistUser,
+  mockNotExistUserLogin,
+  userOrPasswordIncorrect,
 } = require("./utils/mockDataTests");
 const app = require("./app");
 const { Car, Rental, User, Auth } = require("../database/models");
@@ -30,6 +33,8 @@ const {
   mockUsersSeeders,
   mockAuthSeeders,
 } = require("./utils/mockDataTestsSeeders");
+
+jest.setTimeout(10000);
 
 describe("Cars route", () => {
   //seeding data before each test
@@ -460,5 +465,58 @@ describe("Users route", () => {
     expect(response.status).toBe(200);
     // Is the response equals to mock response
     expect(data).toEqual(mockBodyResponseUserLogin);
+  });
+
+  // Checks error side
+  describe("Inner Users route", () => {
+    it("Should return 404 error if there no user that have the id", async () => {
+      const response = await request(app)
+        .post("/api/v1/users/uniqueuser")
+        .send({ email: "youarecheeter@gmai.com" });
+
+      // Is the status code 404
+      expect(response.status).toBe(404);
+      // Is the response equals to mock response
+      expect(response.body).toEqual(notFoundMessage);
+    });
+
+    it("Should return 404 error if there no user that have higher or equal rate", async () => {
+      const response = await request(app)
+        .post("/api/v1/users/rated")
+        .send({ minRate: 6 });
+
+      // Is the status code 404
+      expect(response.status).toBe(404);
+      // Is the response equals to mock response
+      expect(response.body).toEqual(notFoundMessage);
+    });
+
+    it("Should return 409 error if user already exist", async () => {
+      const response = await request(app)
+        .post("/api/v1/users/register")
+        .send(mockNewUserRegister);
+
+      const responseTryRegisterWithExistUser = await request(app)
+        .post("/api/v1/users/register")
+        .send(mockNewUserRegister);
+
+      // Is the status code 409
+      expect(responseTryRegisterWithExistUser.status).toBe(409);
+      // Is the response equals to mock response
+      expect(responseTryRegisterWithExistUser.body).toEqual(
+        mockResponseExistUser
+      );
+    });
+
+    it("Should return 401 error if email or password incorrect", async () => {
+      const response = await request(app)
+        .post("/api/v1/users/login")
+        .send(mockNotExistUserLogin);
+
+      // Is the status code 404
+      expect(response.status).toBe(401);
+      // Is the response equals to mock response
+      expect(response.body).toEqual(userOrPasswordIncorrect);
+    });
   });
 });
