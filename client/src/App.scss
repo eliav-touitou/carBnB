@@ -1615,7 +1615,10 @@ $form-border-color: rgba(0, 0, 0, 0.1);
   align-items: center;
 }
 .left-side-panel {
-  background-color: $secondary-bg-color;
+  background-image: url("C:/dev/carBnB/client/src/photos/long-road.jpg");
+  background-size: contain;
+  // background-size: 100%;
+  // background-repeat: no-repeat;
   width: 20%;
   height: 100%;
 }
@@ -1644,6 +1647,10 @@ $form-border-color: rgba(0, 0, 0, 0.1);
     .set {
       width: 100%;
       min-width: 100%;
+      .DateRangePicker {
+        width: 95%;
+        text-align: center;
+      }
     }
     .input-div {
       width: 50%;

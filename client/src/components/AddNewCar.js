@@ -176,7 +176,7 @@ export default function AddNewCar() {
       )}
       <div className="add-car-panel">
         <div className="left-side-panel">
-          <img width="150%" height="auto" bottom src={dog} />
+          {/* <img width="150%" height="auto" bottom src={dog} /> */}
         </div>
         <div className="right-side-panel">
           <div className="fields-inputs">
@@ -256,58 +256,6 @@ export default function AddNewCar() {
                   ))}
                 </datalist>
               </div>
-
-              <div className="input-div">
-                <div className="title">number of seats</div>
-                <input
-                  className="seats-input-addNewCar"
-                  ref={passengersRef}
-                  list="passengers"
-                ></input>
-                <datalist id="passengers">
-                  {seatsOptions?.map((seat, i) => (
-                    <option key={`passengers-${i}`} value={seat} />
-                  ))}
-                </datalist>
-              </div>
-            </div>
-            <div className="set">
-              <div className="input-div">
-                <div className="title">Enter wanted tariff per day</div>
-                <input
-                  className="tariff-input-addNewCar"
-                  ref={pricePerDayRef}
-                  placeholder="Enter wanted tariff per day"
-                ></input>
-              </div>
-              <div className="input-div">
-                <div className="title">percent of discount per week</div>
-                <input
-                  className="discount-week-input-addNewCar"
-                  ref={discountPerWeekRef}
-                  list="discountPerWeek"
-                ></input>
-                <datalist id="discountPerWeek">
-                  {percentage?.map((percent, i) => (
-                    <option key={`discountPerWeek-${i}`} value={percent} />
-                  ))}
-                </datalist>
-              </div>
-            </div>
-            <div className="set">
-              <div className="input-div">
-                <div className="title">percent of discount per month</div>
-                <input
-                  className="discount-month-input-addNewCar"
-                  ref={discountPerMonthRef}
-                  list="discountPerMonth"
-                ></input>
-                <datalist id="discountPerMonth">
-                  {percentage?.map((percent, i) => (
-                    <option key={`discountPerMonth-${i}`} value={percent} />
-                  ))}
-                </datalist>
-              </div>
               <div className="input-div">
                 <div className="title">Availability dates </div>
                 <DateRangePicker
@@ -324,6 +272,72 @@ export default function AddNewCar() {
                   }
                   small={true}
                 />
+              </div>
+              {/* <div className="input-div">
+                <div className="title">number of seats</div>
+                <input
+                  className="seats-input-addNewCar"
+                  ref={passengersRef}
+                  list="passengers"
+                ></input>
+                <datalist id="passengers">
+                  {seatsOptions?.map((seat, i) => (
+                    <option key={`passengers-${i}`} value={seat} />
+                  ))}
+                </datalist>
+              </div>
+            </div> */}
+              <div className="set">
+                <div className="input-div">
+                  <div className="title">Enter wanted tariff per day</div>
+                  <input
+                    className="tariff-input-addNewCar"
+                    ref={pricePerDayRef}
+                    placeholder="Enter wanted tariff per day"
+                  ></input>
+                </div>
+                <div className="input-div">
+                  <div className="title">number of seats</div>
+                  <input
+                    className="seats-input-addNewCar"
+                    ref={passengersRef}
+                    list="passengers"
+                  ></input>
+                  <datalist id="passengers">
+                    {seatsOptions?.map((seat, i) => (
+                      <option key={`passengers-${i}`} value={seat} />
+                    ))}
+                  </datalist>
+                </div>
+              </div>
+
+              <div className="set">
+                <div className="input-div">
+                  <div className="title">percent of discount per month</div>
+                  <input
+                    className="discount-month-input-addNewCar"
+                    ref={discountPerMonthRef}
+                    list="discountPerMonth"
+                  ></input>
+                  <datalist id="discountPerMonth">
+                    {percentage?.map((percent, i) => (
+                      <option key={`discountPerMonth-${i}`} value={percent} />
+                    ))}
+                  </datalist>
+                </div>
+                <div className="input-div">
+                  <div className="title">percent of discount per week</div>
+                  <input
+                    className="discount-week-input-addNewCar"
+                    ref={discountPerWeekRef}
+                    list="discountPerWeek"
+                  ></input>
+                  <datalist id="discountPerWeek">
+                    {percentage?.map((percent, i) => (
+                      <option key={`discountPerWeek-${i}`} value={percent} />
+                    ))}
+                  </datalist>
+                </div>
               </div>
             </div>
 

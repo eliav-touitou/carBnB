@@ -1986,7 +1986,8 @@ form {
 }
 
 .left-side-panel {
-  background-color: #46494b;
+  background-image: url("C:/dev/carBnB/client/src/photos/long-road.jpg");
+  background-size: contain;
   width: 20%;
   height: 100%;
 }
@@ -2038,6 +2039,11 @@ form {
 .right-side-panel .fields-inputs .set {
   width: 100%;
   min-width: 100%;
+}
+
+.right-side-panel .fields-inputs .set .DateRangePicker {
+  width: 95%;
+  text-align: center;
 }
 
 .right-side-panel .fields-inputs .input-div {
