@@ -122,7 +122,7 @@ export default function SearchBar() {
                   list="cities"
                   ref={cityRef}
                   defaultValue={
-                    window.location.href === "http://localhost:3000/"
+                    window.location.href !== "http://localhost:3000/results"
                       ? undefined
                       : initialSearch?.city
                   }
@@ -140,14 +140,14 @@ export default function SearchBar() {
               <div className="label">Choose Dates:</div>
               <DateRangePicker
                 startDate={
-                  window.location.href === "http://localhost:3000/"
+                  window.location.href !== "http://localhost:3000/results"
                     ? startDate
                     : moment(initialSearch?.startDate)
                 }
                 startDatePlaceholderText="Start date:"
                 startDateId="tata-start-date"
                 endDate={
-                  window.location.href === "http://localhost:3000/"
+                  window.location.href !== "http://localhost:3000/results"
                     ? endDate
                     : moment(initialSearch?.endDate)
                 }
@@ -168,7 +168,7 @@ export default function SearchBar() {
                   list="passengers"
                   ref={passengersRef}
                   defaultValue={
-                    window.location.href === "http://localhost:3000/"
+                    window.location.href !== "http://localhost:3000/results"
                       ? undefined
                       : initialSearch?.passengers + "+"
                   }

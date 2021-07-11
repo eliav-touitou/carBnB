@@ -106,7 +106,8 @@ export default function Login() {
     console.error("ERROR LOGIN WITH GOOGLE");
   };
 
-  const onForgotHandler = async () => {
+  const onForgotHandler = async (e) => {
+    e.preventDefault();
     if (!forgotEmailRef.current.value) return alert("Must enter email first");
     try {
       await axios.put("/api/v1/auth/forgotpassword", {
