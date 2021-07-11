@@ -347,6 +347,13 @@ const mockNotExistUserLogin = {
   user: { email: "testerChoice@test.com", password: "testi-test" },
 };
 
+//---------------------------------------------------------------//
+//------------------------- PHOTOS ---------------------------//
+
+const mockNewPhotoToUpload = [{ file: "new photo to upload", car_id: 3 }];
+
+const mockResponseSavePhoto = { success: true };
+
 module.exports = {
   notFoundMessage,
   mockBodyResponseAllCars,
@@ -372,4 +379,6 @@ module.exports = {
   mockResponseExistUser,
   mockNotExistUserLogin,
   userOrPasswordIncorrect,
+  mockNewPhotoToUpload,
+  mockResponseSavePhoto,
 };

@@ -24,9 +24,11 @@ const {
   mockResponseExistUser,
   mockNotExistUserLogin,
   userOrPasswordIncorrect,
+  mockNewPhotoToUpload,
+  mockResponseSavePhoto,
 } = require("./utils/mockDataTests");
 const app = require("./app");
-const { Car, Rental, User, Auth } = require("../database/models");
+const { Car, Rental, User, Auth, Photo } = require("../database/models");
 const {
   mockCarsSeeders,
   mockRentalsSeeders,
@@ -39,7 +41,7 @@ jest.setTimeout(10000);
 describe("Cars route", () => {
   //seeding data before each test
   beforeEach(async () => {
-    console.log("before each");
+    console.log("before each - cars route");
     try {
       await Car.bulkCreate(mockCarsSeeders);
     } catch (err) {
@@ -49,7 +51,7 @@ describe("Cars route", () => {
 
   //remove data before each test
   afterEach(async () => {
-    console.log("after each");
+    console.log("after each - cars route");
     try {
       await Car.destroy({ where: {} });
     } catch (err) {
@@ -148,7 +150,7 @@ describe("Cars route", () => {
   // Checks error side
   describe("Inner Car route", () => {
     beforeEach(async () => {
-      console.log("before each");
+      console.log("before each - inner cars route");
       try {
         await Car.destroy({ where: {} });
       } catch (err) {
@@ -221,7 +223,7 @@ describe("Rental route", () => {
   // Checks error side
   describe("Inner Rental route", () => {
     beforeEach(async () => {
-      console.log("before each");
+      console.log("before each - inner rentals route");
       try {
         await Rental.destroy({ where: {} });
       } catch (err) {
@@ -230,7 +232,7 @@ describe("Rental route", () => {
     });
 
     afterEach(async () => {
-      console.log("after each");
+      console.log("after each - inner rentals route");
       try {
         await Rental.bulkCreate(mockRentalsSeeders);
       } catch (err) {
@@ -251,7 +253,7 @@ describe("Rental route", () => {
 
 describe("Top route", () => {
   beforeEach(async () => {
-    console.log("before each");
+    console.log("before each - top route");
     try {
       await Car.bulkCreate(mockCarsSeeders);
     } catch (err) {
@@ -261,7 +263,7 @@ describe("Top route", () => {
 
   // remove data before each test
   afterEach(async () => {
-    console.log("after each");
+    console.log("after each - top route");
     try {
       await Car.destroy({ where: {} });
     } catch (err) {
@@ -340,7 +342,7 @@ describe("Top route", () => {
 describe("Users route", () => {
   //seeding data before each test
   beforeEach(async () => {
-    console.log("before each");
+    console.log("before each - users route");
     try {
       await User.destroy({ where: {} });
       await User.bulkCreate(mockUsersSeeders);
@@ -353,7 +355,7 @@ describe("Users route", () => {
 
   //remove data before each test
   afterAll(async () => {
-    console.log("after each");
+    console.log("after all - users route");
     try {
       await User.destroy({ where: {} });
       await User.bulkCreate(mockUsersSeeders);
@@ -382,9 +384,9 @@ describe("Users route", () => {
       },
     };
 
-    // // Is the status code 200
+    // Is the status code 200
     expect(response.status).toBe(200);
-    // // Is the response equals to mock response
+    // Is the response equals to mock response
     expect(data).toEqual(mockBodyResponseUniqueUser);
   });
 
@@ -428,7 +430,7 @@ describe("Users route", () => {
 
     // Is the status code 200
     expect(response.status).toBe(200);
-    // // Is the response equals to mock response
+    // Is the response equals to mock response
     expect(response.body).toEqual(mockBodyResponseUserRegister);
     // is the length of the users bigger then before
     expect(responseAllUsersBefore.body.data.length).toBeLessThan(
@@ -518,5 +520,26 @@ describe("Users route", () => {
       // Is the response equals to mock response
       expect(response.body).toEqual(userOrPasswordIncorrect);
     });
+  });
+});
+
+describe("Photo route", () => {
+  afterAll(async () => {
+    console.log("after all - photos route");
+    try {
+      await Photo.destroy({ where: {} });
+    } catch (error) {
+      console.log(error);
+    }
+  });
+  it("Should success upload new photo", async () => {
+    const response = await request(app)
+      .post("/api/v1/photos/savephotos")
+      .send(mockNewPhotoToUpload);
+
+    // Is the status code 200
+    expect(response.status).toBe(200);
+    // Is the response equals to mock response
+    expect(response.body).toEqual(mockResponseSavePhoto);
   });
 });
