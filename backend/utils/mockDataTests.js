@@ -320,6 +320,24 @@ const mockBodyResponseUserRegister = {
   },
 };
 
+const mockUserLogin = {
+  user: { email: "test@test.com", password: "testi-test" },
+};
+
+const mockBodyResponseUserLogin = {
+  message: "Login Successfully!",
+  data: {
+    user_email: "test@test.com",
+    phone_number: "00000000000",
+    first_name: "testi",
+    last_name: "test",
+    address: "tester",
+    rating: 0,
+    number_of_votes: 0,
+    license: null,
+  },
+};
+
 module.exports = {
   notFoundMessage,
   mockBodyResponseAllCars,
@@ -340,4 +358,6 @@ module.exports = {
   mockBodyResponseUsersByRating,
   mockNewUserRegister,
   mockBodyResponseUserRegister,
+  mockUserLogin,
+  mockBodyResponseUserLogin,
 };

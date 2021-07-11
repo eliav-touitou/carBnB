@@ -19,6 +19,8 @@ const {
   mockBodyResponseUsersByRating,
   mockNewUserRegister,
   mockBodyResponseUserRegister,
+  mockUserLogin,
+  mockBodyResponseUserLogin,
 } = require("./utils/mockDataTests");
 const app = require("./app");
 const { Car, Rental, User, Auth } = require("../database/models");
@@ -408,13 +410,55 @@ describe("Users route", () => {
   });
 
   it("Should success to register new user to system", async () => {
+    const responseAllUsersBefore = await request(app).get(
+      "/api/v1/users/allusers"
+    );
     const response = await request(app)
       .post("/api/v1/users/register")
       .send(mockNewUserRegister);
+
+    const responseAllUsersAfter = await request(app).get(
+      "/api/v1/users/allusers"
+    );
 
     // Is the status code 200
     expect(response.status).toBe(200);
     // // Is the response equals to mock response
     expect(response.body).toEqual(mockBodyResponseUserRegister);
+    // is the length of the users bigger then before
+    expect(responseAllUsersBefore.body.data.length).toBeLessThan(
+      responseAllUsersAfter.body.data.length
+    );
+  });
+
+  it("Should success to login exist user", async () => {
+    // Create new user
+    const responseFromRegister = await request(app)
+      .post("/api/v1/users/register")
+      .send(mockNewUserRegister);
+
+    // Try to login
+    const response = await request(app)
+      .post("/api/v1/users/login")
+      .send(mockUserLogin);
+
+    const data = {
+      message: "Login Successfully!",
+      data: {
+        user_email: response.body.data.user_email,
+        phone_number: response.body.data.phone_number,
+        first_name: response.body.data.first_name,
+        last_name: response.body.data.last_name,
+        address: response.body.data.address,
+        rating: response.body.data.rating,
+        number_of_votes: response.body.data.number_of_votes,
+        license: response.body.data.license,
+      },
+    };
+
+    // Is the status code 200
+    expect(response.status).toBe(200);
+    // Is the response equals to mock response
+    expect(data).toEqual(mockBodyResponseUserLogin);
   });
 });
