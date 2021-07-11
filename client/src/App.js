@@ -111,9 +111,12 @@ function App() {
         <NavLink
           className="navlink add-car-btn"
           activeStyle={{ color: "navy" }}
-          to="/addnewcar"
+          to={auth && "/addnewcar"}
+          onClick={() => {
+            !auth && dispatch(setShowLogin(true));
+          }}
         >
-          Become a host
+          Rent Your Car
         </NavLink>
         {auth ? (
           <div className="navlink messages">
@@ -161,11 +164,11 @@ function App() {
           <Route exact path="/register">
             <Register />
           </Route>
-          {auth && (
-            <Route exact path="/addnewcar">
-              <AddNewCar />
-            </Route>
-          )}
+
+          <Route exact path="/addnewcar">
+            <AddNewCar />
+          </Route>
+
           {auth && (
             <Route exact path="/profile">
               <Profile />

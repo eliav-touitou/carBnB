@@ -110,15 +110,12 @@ auth.put("/forgotpassword", async (req, res) => {
 auth.put("/resetpassword/:id", async (req, res) => {
   const { id } = req.params;
   const { resetCode, newPassword } = req.body;
-  // console.log(resetCode, newPassword);
-  console.log(id);
   try {
     const auth = await getItemFromDB({
       model: Auth,
       column: ["id"],
       columnValue: [id],
     });
-    console.log(auth[0].reset_code);
     if (!auth) {
       return res.status(404).json({ message: "User does not exist" });
     }
