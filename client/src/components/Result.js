@@ -21,17 +21,6 @@ export default function Result({ car, resultId }) {
   const [photosArray, setPhotosArray] = useState([]);
   const [heartButton, setHeartButton] = useState("far fa-heart");
 
-  // useEffect(() => {
-  //   axios
-  //     .post("/api/v1/photos/uniquephoto", { carId })
-  //     .then(({ data: photo }) => {
-  //       setCarPhoto(photo.data?.file);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [carId]);
-
   useEffect(() => {
     const photosData = ["Photo", ["car_id"], [car.car_id]];
     axios
