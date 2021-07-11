@@ -1,10 +1,16 @@
 const { Router } = require("express");
 const auth = Router();
 const { facebookLoginValidation } = require("../../utils/authentication");
-const { getUserOrAuth } = require("../../../database/queries");
-const { User } = require("../../../database/models");
+const {
+  getUserOrAuth,
+  getItemFromDB,
+  updateItemToDB,
+} = require("../../../database/queries");
+const { hashSync, genSaltSync } = require("bcrypt");
+const { User, Auth } = require("../../../database/models");
 const { googleLoginVerified } = require("../../utils/authentication");
-const { writeLogs } = require("../../utils/helperFunctions");
+const { writeLogs, sendMail } = require("../../utils/helperFunctions");
+const { v4: uuidv4 } = require("uuid");
 
 // Route to login with facebook
 auth.post("/facebookLogin", facebookLoginValidation, async (req, res) => {
@@ -46,6 +52,99 @@ auth.post("/googleLogin", googleLoginVerified, async (req, res) => {
       status: 500,
       ourMessage: "Problems with our server",
       route: "api/v1/auth/googleLogin",
+    };
+    await writeLogs(objToWrite);
+    return res
+      .status(500)
+      .json({ message: "Problems with our server", error: err.message });
+  }
+});
+
+auth.put("/forgotpassword", async (req, res) => {
+  const { userEmail } = req.body;
+  try {
+    const auth = await getUserOrAuth({ model: Auth, email: userEmail });
+    if (!auth) {
+      console.log("hello");
+      return res.status(404).json({ message: "This email does not exist" });
+    }
+    const code = uuidv4().slice(0, 7);
+    sendMail({
+      from: "rozjino@gmail.com",
+      to: auth.user_email,
+      subject: "Reset your password",
+      text: `<p>
+          Please click on this
+          <a href=http://localhost:3000/reserpassword/${auth.id}}>
+            CarBnB Reset Password
+          </a>
+          and enter this code ${code} to reset tour password.
+        </p>`,
+    });
+    const objToUpdate = {
+      table: Auth,
+      column: ["reset_code"],
+      primaryKey: "id",
+      primaryKeyValue: auth.id,
+      content: [code],
+    };
+    await updateItemToDB(objToUpdate);
+    res
+      .status(200)
+      .json({ message: "Check your mail box, reset link successfully send" });
+  } catch (err) {
+    const objToWrite = {
+      date: new Date(),
+      error: err,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: "api/v1/auth/forgotpassword",
+    };
+    await writeLogs(objToWrite);
+    return res
+      .status(500)
+      .json({ message: "Problems with our server", error: err.message });
+  }
+});
+
+auth.put("/resetpassword/:id", async (req, res) => {
+  const { id } = req.params;
+  const { resetCode, newPassword } = req.body;
+  // console.log(resetCode, newPassword);
+  console.log(id);
+  try {
+    const auth = await getItemFromDB({
+      model: Auth,
+      column: ["id"],
+      columnValue: [id],
+    });
+    console.log(auth[0].reset_code);
+    if (!auth) {
+      return res.status(404).json({ message: "User does not exist" });
+    }
+    if (auth[0].reset_code !== resetCode) {
+      return res.status(404).json({ message: "Incorrect Reset Code" });
+    } else {
+      const password = hashSync(newPassword, genSaltSync(10));
+      const objToUpdate = {
+        table: Auth,
+        column: ["password", "reset_code"],
+        primaryKey: "id",
+        primaryKeyValue: auth[0].id,
+        content: [password, null],
+      };
+      await updateItemToDB(objToUpdate);
+      return res
+        .status(200)
+        .json({ message: "Your new password successfully updated" });
+    }
+  } catch (err) {
+    const objToWrite = {
+      date: new Date(),
+      error: err,
+      status: 500,
+      ourMessage: "Problems with our server",
+      route: `api/v1/auth/resetpaswword/${id}`,
     };
     await writeLogs(objToWrite);
     return res

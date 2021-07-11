@@ -1165,7 +1165,7 @@ form {
           align-items: center;
   height: 100vh;
   background-size: 70vh;
-  background-image: url("C:/dev/carBnB/client/src/photos/good-logo-white.png");
+  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
   background-repeat: no-repeat;
   background-position-y: 10vh;
   background-position-x: 4vw;
@@ -1204,7 +1204,7 @@ form {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/group-lines.png");
+  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\group-lines.png);
 }
 
 .top-pick-section h2 {
@@ -1439,7 +1439,7 @@ form {
           align-items: center;
   height: 100vh;
   width: 100vw;
-  background-image: url("C:/dev/carBnB/client/src/photos/dottes.png");
+  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\dottes.png);
 }
 
 .details-container {
@@ -1862,7 +1862,7 @@ form {
       -ms-flex-pack: center;
           justify-content: center;
   max-width: 100vw;
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/group-lines.png");
+  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\group-lines.png);
 }
 
 .top-pick-carousel h2 {
@@ -2606,7 +2606,7 @@ form {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/purple-dots.png");
+  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\purple-dots.png);
   background-size: contain;
 }
 
@@ -2663,7 +2663,7 @@ form {
   display: -ms-flexbox;
   display: flex;
   background: #e4fff1;
-  background-image: url("C:/dev/carBnB/client/src/photos/road_lines-style.png"), linear-gradient(197deg, #e4fff1 13%, #e6f5ff 85%);
+  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\road_lines-style.png), linear-gradient(197deg, #e4fff1 13%, #e6f5ff 85%);
   background-repeat: no-repeat;
   background-position-y: 55vh;
   background-size: contain;
