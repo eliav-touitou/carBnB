@@ -24,6 +24,7 @@ import MyFavorite from "./components/MyFavorite";
 import CarDetailsFromFavorite from "./components/CarDetailsFromFavorite";
 import Tops from "./components/Tops";
 import CarsBySelection from "./components/TopCars";
+import ResetPassword from "./components/ResetPassword";
 import {
   setAllCarsApi,
   setAuthOut,
@@ -197,6 +198,7 @@ function App() {
           <Route exact path="/allmyorders/:type" component={MyOrders} />
           <Route exact path="/order/:orderId" component={OrderDetails} />
           <Route exact path="/top/:type" component={Tops} />
+          <Route exact path="/resetpassword/:id" component={ResetPassword} />
           <Route
             exact
             path="/top/ownercars/:ownername"
