@@ -36,7 +36,7 @@ export default function ResetPassword() {
         setSneck(false);
         setRedirect(true);
         setShowLogin(true);
-      }, 3500);
+      }, 2500);
     } catch (err) {
       setSneck(err.response.data.message);
       setTimeout(() => {

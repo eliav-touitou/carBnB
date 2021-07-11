@@ -94,6 +94,10 @@ button {
           align-items: center;
 }
 
+.login-page .forgot-password-btn {
+  margin-bottom: 2%;
+}
+
 .login-container {
   position: fixed;
   margin: auto;

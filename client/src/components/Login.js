@@ -39,7 +39,8 @@ export default function Login() {
   }, [auth]);
 
   // Send login data, user name and password
-  const onLoginHandler = async () => {
+  const onLoginHandler = async (e) => {
+    e.preventDefault();
     if (userNameRef.current.value === "" || passwordRef.current.value === "") {
       return;
     }
@@ -47,11 +48,14 @@ export default function Login() {
       email: userNameRef.current.value,
       password: passwordRef.current.value,
     };
+    console.log(user);
 
     try {
       const { data: userDetails } = await axios.post("/api/v1/users/login", {
         user: user,
       });
+      console.log("mose mose");
+      console.log(userDetails);
       dispatch(setAuth(userDetails.data));
       console.log("Success Login");
     } catch (error) {
@@ -111,7 +115,7 @@ export default function Login() {
       setSnack(true);
       setTimeout(() => {
         setSnack(false);
-      }, 3500);
+      }, 4000);
     } catch (err) {
       console.log(err.message);
     }
@@ -119,17 +123,17 @@ export default function Login() {
 
   return (
     <div className="form-container sign-in-container">
-      {!forgotPassword ? (
-        <>
-          <div
-            className="x login"
-            onClick={() => {
-              dispatch(setShowLogin(false));
-            }}
-          >
-            ✖
-          </div>
-          <form action="#">
+      <div
+        className="x login"
+        onClick={() => {
+          dispatch(setShowLogin(false));
+        }}
+      >
+        ✖
+      </div>
+      <form action="#">
+        {!forgotPassword ? (
+          <>
             <h1 className="login-form-title">Sign in</h1>
             <div className="social-container">
               {/* <a href="#" className="login-form-a social"></a>
@@ -174,62 +178,38 @@ export default function Login() {
               placeholder="Password"
               ref={passwordRef}
             />
-            <a href="#" onClick={() => setForgotPassword(true)}>
+            <a
+              href="#"
+              onClick={() => setForgotPassword(true)}
+              className="forgot-password-btn "
+            >
               Forgot your password?
             </a>
             <button className="login-form-button" onClick={onLoginHandler}>
               Sign In
             </button>
-          </form>{" "}
-        </>
-      ) : (
-        <>
-          <input ref={forgotEmailRef} placeholder="Enter Your email" />
-          <button onClick={onForgotHandler}>Reset Password</button>
-          {snack && (
-            <Snackbar
-              anchorOrigin={{ vertical: "top", horizontal: "center" }}
-              open={true}
-              message={"Check your mail box, reset link successfully send"}
-              key={"top" + "center"}
+          </>
+        ) : (
+          <>
+            <input
+              ref={forgotEmailRef}
+              className="login-form-input"
+              placeholder="Enter Your email"
             />
-          )}
-        </>
-      )}
+            <button onClick={onForgotHandler} className="login-form-button">
+              Reset Password
+            </button>
+            {snack && (
+              <Snackbar
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                open={true}
+                message={"Check your mail box, reset link successfully send"}
+                key={"top" + "center"}
+              />
+            )}
+          </>
+        )}
+      </form>{" "}
     </div>
-
-    // <div className={`login-container-${promptOrNormal}`}>
-    //   <input
-    //     className={`username-input-login-${promptOrNormal}`}
-    //     ref={userNameRef}
-    //     type="text"
-    //     placeholder="enter your username"
-    //   ></input>
-    //   <input
-    //     className={`password-input-login-${promptOrNormal}`}
-    //     ref={passwordRef}
-    //     type="password"
-    //     placeholder="enter your password"
-    //   ></input>
-    //   <button onClick={onLoginHandler}>login</button>
-    // <GoogleLogin
-    //   clientId="186150944842-sg6rcdti8hqtq2td43gv4jo2t1jmc8hj.apps.googleusercontent.com"
-    //   buttonText="Login"
-    //   onSuccess={responseSuccessGoogle}
-    //   onFailure={responseErrorGoogle}
-    //   cookiePolicy={"single_host_origin"}
-    // />
-    // <FacebookLogin
-    //   appId="830912607629776"
-    //   autoLoad={false}
-    //   callback={responseFacebook}
-    // />
-
-    //   <Link to="/register">
-    //     <button className={`register-btn-login-${promptOrNormal}`}>
-    //       go to register
-    //     </button>
-    //   </Link>
-    // </div><div>
   );
 }
