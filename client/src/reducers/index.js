@@ -19,6 +19,7 @@ import { photosArrayReducer } from "./photosArray";
 import { showLoginReducer } from "./showLogin";
 import { carToRentalReducer } from "./carToRental";
 import { allCitiesApiReducer } from "./allCitiesApi";
+import { spinnerReducer } from "./spinner";
 
 const allReducers = combineReducers({
   allCars: carsReducer,
@@ -41,6 +42,7 @@ const allReducers = combineReducers({
   showLogin: showLoginReducer,
   carToRental: carToRentalReducer,
   allCitiesApi: allCitiesApiReducer,
+  spinner: spinnerReducer,
 });
 
 const rootReducer = (state, action) => {

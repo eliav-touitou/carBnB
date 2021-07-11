@@ -226,7 +226,7 @@ export default function CarDetails() {
                   <tr>
                     <td>
                       <i class="fas fa-car"></i>
-                      <span className="thin"> Car: </span>
+                      <span className="thin"> Car: </span>{" "}
                       {availableCars[resultId].brand},{" "}
                       {availableCars[resultId].model}
                     </td>

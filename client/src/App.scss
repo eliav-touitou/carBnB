@@ -1091,6 +1091,8 @@ form {
   flex-direction: column;
   align-self: center;
   justify-content: center;
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/group-lines.png");
+
   h2 {
     margin-bottom: 70px;
     height: fit-content;
@@ -1521,6 +1523,7 @@ form {
   align-self: center;
   justify-content: center;
   max-width: 100vw;
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/group-lines.png");
 
   h2 {
     margin-bottom: 70px;
@@ -2189,6 +2192,8 @@ $color-white: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/purple-dots.png");
+  background-size: contain;
   .favorite-car-list {
     display: flex;
     justify-content: center;
