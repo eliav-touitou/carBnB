@@ -741,7 +741,7 @@ form {
           justify-content: center;
   max-height: 100%;
   overflow-y: scroll;
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/bricks-1.png");
+  background-image: url(C:\dev\carBnB\client\src\photos/bricks-1.png);
   background-repeat: repeat;
   background-size: cover;
 }
@@ -1215,7 +1215,6 @@ form {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-image: url("C:/dev/carBnB/client/src/photos/group-lines.png");
 }
 
 .top-pick-section h2 {
@@ -1798,6 +1797,9 @@ form {
 }
 
 #item-2:target ~ .item-2,
+#item-4:target ~ .item-4,
+#item-5:target ~ .item-5,
+#item-6:target ~ .item-6,
 #item-3:target ~ .item-3 {
   z-index: 3;
   opacity: 1;
@@ -1917,7 +1919,7 @@ form {
   color: rgba(0, 0, 0, 0.8);
   height: 100vh;
   min-width: 100vw;
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/lines-horizontal.png");
+  background-image: url(C:\dev\carBnB\client\src\photos\lines-horizontal.png);
   background-repeat: repeat;
   background-size: contain;
 }
@@ -1945,7 +1947,7 @@ form {
 }
 
 .left-side-panel {
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/long-road.jpg");
+  background-image: url("C:/dev/carBnB/client/src/photos/long-road.jpg");
   background-size: contain;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
@@ -2920,7 +2922,7 @@ form {
   min-height: 100vh;
   margin-top: 0;
   background: #e4fff1;
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/scratch.png"), linear-gradient(197deg, #e4fff1 13%, #e6f5ff 85%);
+  background-image: url(C:\dev\carBnB\client\src\photos\scratch.png), linear-gradient(197deg, #e4fff1 13%, #e6f5ff 85%);
   background-attachment: fixed;
   background-size: cover;
   padding-top: 5em;
@@ -3381,7 +3383,7 @@ form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/klipartz.png");
+  background-image: url(C:\dev\carBnB\client\src\photos/klipartz.png);
   background-repeat: no-repeat;
   background-size: cover;
   color: black;

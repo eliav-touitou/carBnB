@@ -268,60 +268,57 @@ export default function AddNewCar() {
                   small={true}
                 />
               </div>
-
-              <div className="set">
-                <div className="input-div">
-                  <div className="title">Enter wanted price per day</div>
-                  <input
-                    className="tariff-input-addNewCar"
-                    ref={pricePerDayRef}
-                  ></input>
-                </div>
-                <div className="input-div">
-                  <div className="title">Number of seats</div>
-                  <input
-                    className="seats-input-addNewCar"
-                    ref={passengersRef}
-                    list="passengers"
-                  ></input>
-                  <datalist id="passengers">
-                    {seatsOptions?.map((seat, i) => (
-                      <option key={`passengers-${i}`} value={seat} />
-                    ))}
-                  </datalist>
-                </div>
+            </div>
+            <div className="set">
+              <div className="input-div">
+                <div className="title">Enter wanted price per day</div>
+                <input
+                  className="tariff-input-addNewCar"
+                  ref={pricePerDayRef}
+                ></input>
               </div>
-
-              <div className="set">
-                <div className="input-div">
-                  <div className="title">Percent of discount per month</div>
-                  <input
-                    className="discount-month-input-addNewCar"
-                    ref={discountPerMonthRef}
-                    list="discountPerMonth"
-                  ></input>
-                  <datalist id="discountPerMonth">
-                    {percentage?.map((percent, i) => (
-                      <option key={`discountPerMonth-${i}`} value={percent} />
-                    ))}
-                  </datalist>
-                </div>
-                <div className="input-div">
-                  <div className="title">Percent of discount per week</div>
-                  <input
-                    className="discount-week-input-addNewCar"
-                    ref={discountPerWeekRef}
-                    list="discountPerWeek"
-                  ></input>
-                  <datalist id="discountPerWeek">
-                    {percentage?.map((percent, i) => (
-                      <option key={`discountPerWeek-${i}`} value={percent} />
-                    ))}
-                  </datalist>
-                </div>
+              <div className="input-div">
+                <div className="title">Number of seats</div>
+                <input
+                  className="seats-input-addNewCar"
+                  ref={passengersRef}
+                  list="passengers"
+                ></input>
+                <datalist id="passengers">
+                  {seatsOptions?.map((seat, i) => (
+                    <option key={`passengers-${i}`} value={seat} />
+                  ))}
+                </datalist>
               </div>
             </div>
-
+            <div className="set">
+              <div className="input-div">
+                <div className="title">Percent of discount per month</div>
+                <input
+                  className="discount-month-input-addNewCar"
+                  ref={discountPerMonthRef}
+                  list="discountPerMonth"
+                ></input>
+                <datalist id="discountPerMonth">
+                  {percentage?.map((percent, i) => (
+                    <option key={`discountPerMonth-${i}`} value={percent} />
+                  ))}
+                </datalist>
+              </div>
+              <div className="input-div">
+                <div className="title">Percent of discount per week</div>
+                <input
+                  className="discount-week-input-addNewCar"
+                  ref={discountPerWeekRef}
+                  list="discountPerWeek"
+                ></input>
+                <datalist id="discountPerWeek">
+                  {percentage?.map((percent, i) => (
+                    <option key={`discountPerWeek-${i}`} value={percent} />
+                  ))}
+                </datalist>
+              </div>
+            </div>
             <div className="set">
               <div
                 className="gas-type"
