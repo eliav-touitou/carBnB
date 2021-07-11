@@ -205,6 +205,7 @@ function App() {
             component={CarsBySelection}
           />
           <Route exact path="/top/city/:name" component={CarsBySelection} />
+          <Route exact path="/top/car/:brand" component={CarsBySelection} />
           <Route path="/" component={NotFound} />
         </Switch>
         {needToLogin && <Redirect push to="/" />}

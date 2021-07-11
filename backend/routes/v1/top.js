@@ -45,6 +45,7 @@ top.get("/:type", async (req, res) => {
 
 top.get("/brand/:brand", async (req, res) => {
   const { brand } = req.params;
+  console.log(brand);
   try {
     const allCarsByBrand = await getCarsByBrand(brand);
     return res.status(200).json({ success: true, data: allCarsByBrand });

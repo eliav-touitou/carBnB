@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import FavoriteDetails from "./FavoriteDetails";
 
 export default function CarsBySelection() {
   const [ownerCars, setOwnerCars] = useState();
-  const owner = useLocation()?.state.owner;
-  const city = useLocation()?.state.city;
+  const owner = useLocation()?.state?.owner;
+  const city = useLocation()?.state?.city;
+  const { brand } = useParams();
 
   useEffect(() => {
     if (owner) {
@@ -18,7 +19,8 @@ export default function CarsBySelection() {
           setOwnerCars(cars.data);
         })
         .catch((err) => console.log(err));
-    } else {
+    }
+    if (city) {
       axios
         .get(`/api/v1/cars/bycity/${city.city}`)
         .then(({ data: cars }) => {
@@ -26,7 +28,17 @@ export default function CarsBySelection() {
         })
         .catch((err) => console.log(err));
     }
-  }, [owner, city]);
+    if (brand) {
+      console.log(brand);
+      axios
+        .get(`/api/v1/top/brand/${brand}`)
+        .then(({ data: cars }) => {
+          console.log(cars);
+          setOwnerCars(cars.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [owner, city, brand]);
 
   return (
     <div className="top-page-car-results">

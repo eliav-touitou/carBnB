@@ -1427,6 +1427,9 @@ form {
   width: 800px;
   margin: 0 auto;
   max-width: 100vw;
+  h4 {
+    text-decoration: none;
+  }
 }
 .carousel-item {
   position: absolute;
