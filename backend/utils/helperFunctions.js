@@ -309,18 +309,18 @@ const wikiScraper = async (topFive) => {
       dataFromWiki = dataFromWiki.replace(/(\[.*?\]|\(.*?\))/g, "");
       topFive[i] = { city: topFive[i], description: dataFromWiki };
     } catch (err) {
-      const objToWrite = {
-        date: new Date(),
-        error: err,
-        status: 500,
-        ourMessage: "Problems with our server",
-        route: "wikiScraper Function",
-      };
-      await writeLogs(objToWrite);
       if (err.response.status === 404) {
         topFive[i] = { city: topFive[i], description: null };
         continue;
       } else {
+        const objToWrite = {
+          date: new Date(),
+          error: err,
+          status: 500,
+          ourMessage: "Problems with our server",
+          route: "wikiScraper Function",
+        };
+        await writeLogs(objToWrite);
         throw err;
       }
     }

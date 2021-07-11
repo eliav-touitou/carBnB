@@ -16,7 +16,11 @@ export default function Results() {
       <FilterCheck />
 
       <div className="results-section">
-        <h1>Cars in {initialSearch.city} </h1>
+        <h1>
+          {initialSearch.city !== ""
+            ? `Cars in ${initialSearch.city}`
+            : `All available cars`}{" "}
+        </h1>
         <h3>
           {" "}
           {new Date(initialSearch.startDate).toDateString()} -{" "}

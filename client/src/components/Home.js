@@ -45,14 +45,6 @@ export default function Home() {
       });
   }, []);
 
-  useEffect(() => {
-    if (notFoundMessage) {
-      setTimeout(() => {
-        dispatch(setNotFoundMessage(false));
-      }, 4500);
-    }
-  }, [notFoundMessage]);
-
   return (
     <div>
       <section className="land-section">
@@ -65,14 +57,7 @@ export default function Home() {
           <a href="#search">Let's Start</a>
         </span>
       </section>
-      {notFoundMessage && (
-        <Snackbar
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          open={true}
-          message={notFoundMessage}
-          key={"top" + "center"}
-        />
-      )}
+
       <section className="search-section" id="search">
         <SearchBar />
       </section>
