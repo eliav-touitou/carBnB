@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import { setNotifications, setNotificationCounter } from "../actions";
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import messagePhoto from "../photos/message-photo.jpg";
 import { Snackbar } from "@material-ui/core";
 
@@ -140,10 +139,11 @@ export default function MessageDetails() {
           <div className="details">
             <div className="upper-section-message-photo">
               <div className="author">
-                <i class="fas fa-user"></i> {auth.first_name} {auth.last_name}
+                <i className="fas fa-user"></i> {auth.first_name}{" "}
+                {auth.last_name}
               </div>
               <div className="date">
-                <i class="far fa-calendar"></i>{" "}
+                <i className="far fa-calendar"></i>{" "}
                 {new Date(message.updatedAt).toDateString()}
               </div>
             </div>

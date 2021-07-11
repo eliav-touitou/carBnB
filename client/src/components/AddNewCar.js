@@ -146,8 +146,6 @@ export default function AddNewCar() {
         dispatch(setPhotosArray(photosArray));
         await axios.post("/api/v1/photos/savephotos", photosArray);
         setRedirect(true);
-      } else {
-        // need to prompt login promp component
       }
     } catch (error) {
       if (error.response.status === 403) {
@@ -174,9 +172,7 @@ export default function AddNewCar() {
         />
       )}
       <div className="add-car-panel">
-        <div className="left-side-panel">
-          {/* <img width="150%" height="auto" bottom src={dog} /> */}
-        </div>
+        <div className="left-side-panel"></div>
         <div className="right-side-panel">
           <div className="fields-inputs">
             <h1>We invite you to become a member in our host's team</h1>

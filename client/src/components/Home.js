@@ -1,32 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "./SearchBar";
-import {
-  setPromptOrNormal,
-  setNotFoundMessage,
-  setAllCitiesApi,
-  setInitialSearch,
-} from "../actions";
+import { setAllCitiesApi } from "../actions";
 import photo from "../photos/background-4593643_1920.jpg";
 import topCar from "../photos/top-car.jpeg";
 import topOwner from "../photos/top-owner.jpeg";
 import topLocation from "../photos/top-location.jpeg";
 import TopCarousel from "./TopCarousel";
-import Snackbar from "@material-ui/core/Snackbar";
-import MyFavorite from "./MyFavorite";
 
 import { Link } from "react-router-dom";
 
 export default function Home() {
   const dispatch = useDispatch();
-
-  // Redux states
-  const allCars = useSelector((state) => state.allCars);
-  const auth = useSelector((state) => state.auth);
-  const notFoundMessage = useSelector((state) => state.notFoundMessage);
-  const allCitiesApi = useSelector((state) => state.allCitiesApi);
-  const initialSearch = useSelector((state) => state.initialSearch);
 
   useEffect(() => {
     axios

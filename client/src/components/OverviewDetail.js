@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -13,16 +13,9 @@ export default function OverviewDetail({ iconsKey, keys, value }) {
 
   // Use states
   const [isOpen, setIsOpen] = useState(false);
-  const [isNull, setIsNull] = useState(false);
 
   // Use ref
   const inputRef = useRef();
-
-  useEffect(() => {
-    if (value === null || value === "") {
-      setIsNull(true);
-    }
-  }, [value]);
 
   // Function for update user details
   const updateItem = async (keys, value) => {

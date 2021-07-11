@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import Result from "./Result";
-import SideBar from "./SideBar";
 import FilterCheck from "./FilterCheck";
-import FilterBar from "./FilterBar";
 import SearchBar from "./SearchBar";
 
 export default function Results() {

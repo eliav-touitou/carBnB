@@ -11,7 +11,6 @@ export default function Register() {
   const passwordValidationRef = useRef();
 
   // Redux states
-  const promptOrNormal = useSelector((state) => state.promptOrNormal);
   const auth = useSelector((state) => state.auth);
 
   // Use Effect
@@ -24,7 +23,7 @@ export default function Register() {
     const form = e.target;
     e.preventDefault();
     if (passwordRef.current.value !== passwordValidationRef.current.value) {
-      alert("Passwords does'nt match");
+      alert("Passwords doesn't match");
     }
     try {
       const formData = new FormData(form);
@@ -42,8 +41,6 @@ export default function Register() {
   };
 
   return (
-    //   {promptOrNormal === "normal" && auth && <Redirect to="/" />}
-    // </div>
     <div className="form-container sign-up-container">
       <div
         className="x register"

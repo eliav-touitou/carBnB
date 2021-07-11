@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import CarGallery from "./CarGallery";
 import defaultPhoto from "../photos/no-car-photo.png";
-import { Icon, InlineIcon } from "@iconify/react";
+import { Icon } from "@iconify/react";
 import seatPassenger from "@iconify-icons/mdi/seat-passenger";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
@@ -21,8 +21,6 @@ export default function FavoriteDetails({ car }) {
   const [photosArray, setPhotosArray] = useState([]);
 
   useEffect(() => {
-    console.log(car);
-
     const photosData = ["Photo", ["car_id"], [car.car_id]];
     axios
       .post("/api/v1/search/getitem", { data: photosData })
@@ -77,12 +75,12 @@ export default function FavoriteDetails({ car }) {
           </div>
           <ul className="recipe-details">
             <li className="recipe-details-item time">
-              <i class="fas fa-tools"></i>
+              <i className="fas fa-tools"></i>
               <span className="value">{car.year}</span>
               <span className="title">Manufacture year</span>
             </li>
             <li className="recipe-details-item ingredients">
-              <i class="fas fa-dollar-sign ion"></i>
+              <i className="fas fa-dollar-sign ion"></i>
               <span className="value">{car.price_per_day}</span>
               <span className="title">Per day</span>
             </li>

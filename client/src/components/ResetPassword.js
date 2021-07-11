@@ -64,7 +64,7 @@ export default function ResetPassword() {
                     : (newPasswordRef.current.type = "text");
                 }}
               >
-                show
+                <i className="far fa-eye"></i>
               </button>
             </div>
             <label>Confirm Password</label>
@@ -82,7 +82,7 @@ export default function ResetPassword() {
                     : (confirmNewPasswordRef.current.type = "text");
                 }}
               >
-                show
+                <i className="far fa-eye"></i>
               </button>
             </div>
             <label>Confirm Reset Code from email</label>

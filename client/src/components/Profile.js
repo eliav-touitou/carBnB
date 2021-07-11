@@ -1,9 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
 import axios from "axios";
-import { setAuth } from "../actions";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import EventBusyIcon from "@material-ui/icons/EventBusy";
 import MyCars from "./MyCars";
@@ -12,7 +9,6 @@ import LabelOutlinedIcon from "@material-ui/icons/LabelOutlined";
 import Overview from "./Overview";
 
 export default function Profile() {
-  const dispatch = useDispatch();
   const iconsKey = {
     brand: <i className="fas fa-car-side"></i>,
     year: <i className="far fa-calendar-alt"></i>,

@@ -1,16 +1,8 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setNotifications } from "../actions";
 
 export default function Messages({ message, messageId, setVisibility }) {
-  const dispatch = useDispatch();
-
-  // Redux states
-  const auth = useSelector((state) => state.auth);
-  const notifications = useSelector((state) => state.notifications);
-
   const updateRead = async () => {
     try {
       await axios.patch("/api/v1/notification/updateread", {

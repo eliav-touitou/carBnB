@@ -46,10 +46,7 @@ export default function SearchBar() {
   const search = async () => {
     const city = cityRef.current.value;
     const passengers = Number(passengersRef.current.value.slice(0, -1));
-    console.log(city);
-    console.log(passengers);
-    console.log(startDate);
-    console.log(endDate);
+
     if (window.location.href !== "http://localhost:3000/") {
       console.log("asdsad");
       setStartDate(moment(initialSearch.startDate));
@@ -190,7 +187,6 @@ export default function SearchBar() {
           </div>
         </div>
       </nav>{" "}
-      {/*   End nav   */}
       {notFoundMessage && (
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "center" }}

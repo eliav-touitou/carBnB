@@ -1342,6 +1342,10 @@ form {
   padding: 0;
 }
 
+.fa-arrow-right {
+  cursor: pointer;
+}
+
 .profile-inner-container {
   display: -webkit-box;
   display: -ms-flexbox;

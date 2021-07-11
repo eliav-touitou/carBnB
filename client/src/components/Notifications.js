@@ -1,13 +1,10 @@
-import axios from "axios";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setNotifications } from "../actions";
+import React from "react";
+import { useSelector } from "react-redux";
 import Messages from "./Messages";
 
 export default function Notifications({ setVisibility }) {
-  const auth = useSelector((state) => state.auth);
+  // Redux states
   const notifications = useSelector((state) => state.notifications);
-  const dispatch = useDispatch();
 
   return (
     <div className="all-notifications-container">

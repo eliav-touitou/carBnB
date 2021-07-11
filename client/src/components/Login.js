@@ -1,14 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setAuth, setAuthOut, setOnLoginPage, setShowLogin } from "../actions";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
-import logo from "../photos/carBnB-logo.png";
 import { Snackbar } from "@material-ui/core";
-import FacebookOutlinedIcon from "@material-ui/icons/FacebookOutlined";
-import GoogleIcon from "@material-ui/icons/Google";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -48,14 +44,12 @@ export default function Login() {
       email: userNameRef.current.value,
       password: passwordRef.current.value,
     };
-    console.log(user);
 
     try {
       const { data: userDetails } = await axios.post("/api/v1/users/login", {
         user: user,
       });
-      console.log("mose mose");
-      console.log(userDetails);
+
       dispatch(setAuth(userDetails.data));
       console.log("Success Login");
     } catch (error) {
@@ -137,9 +131,6 @@ export default function Login() {
           <>
             <h1 className="login-form-title">Sign in</h1>
             <div className="social-container">
-              {/* <a href="#" className="login-form-a social"></a>
-          <a href="#" className="login-form-a social"></a> */}
-
               <GoogleLogin
                 clientId="186150944842-sg6rcdti8hqtq2td43gv4jo2t1jmc8hj.apps.googleusercontent.com"
                 render={(renderProps) => (

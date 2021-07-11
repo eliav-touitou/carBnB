@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Register from "./Register";
 import Login from "./Login";
 import { useDispatch } from "react-redux";
-// import { setPromptOrNormal } from "../actions";
 import { setOnLoginPage } from "../actions";
 
 import logo from "../photos/logo-white.png";
@@ -10,7 +9,9 @@ import logo from "../photos/logo-white.png";
 export default function PromptLogin() {
   const dispatch = useDispatch();
 
+  // Use states
   const [rightPanelActive, setRightPanelActive] = useState();
+
   useEffect(() => {
     dispatch(setOnLoginPage(true));
     return () => {
