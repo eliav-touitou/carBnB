@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import FavoriteDetails from "./FavoriteDetails";
 
 export default function MyFavorite() {
+  // Redux states
   const auth = useSelector((state) => state.auth);
 
   // Use State

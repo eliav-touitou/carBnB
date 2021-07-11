@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import Result from "./Result";
-import SideBar from "./SideBar";
 import FilterCheck from "./FilterCheck";
-import FilterBar from "./FilterBar";
 import SearchBar from "./SearchBar";
 
 export default function Results() {
@@ -16,7 +14,11 @@ export default function Results() {
       <FilterCheck />
 
       <div className="results-section">
-        <h1>Cars in {initialSearch.city} </h1>
+        <h1>
+          {initialSearch.city !== ""
+            ? `Cars in ${initialSearch.city}`
+            : `All available cars`}{" "}
+        </h1>
         <h3>
           {" "}
           {new Date(initialSearch.startDate).toDateString()} -{" "}

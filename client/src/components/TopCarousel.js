@@ -2,7 +2,6 @@ import React from "react";
 import topCar from "../photos/car-round-top.jpg";
 import topOwner from "../photos/top-owner-blonde.jpg";
 import topLocation from "../photos/top-location-2.jpg";
-// import TopPicks from "./TopPicks";
 
 export default function TopCarousel() {
   return (

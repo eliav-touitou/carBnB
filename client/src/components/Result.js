@@ -14,6 +14,9 @@ export default function Result({ car, resultId }) {
   // Redux states
   const auth = useSelector((state) => state.auth);
   const showLogin = useSelector((state) => state.showLogin);
+  const availableCars = useSelector((state) => state.availableCars);
+
+  // Use states
   const [carPhoto, setCarPhoto] = useState();
   const [photosArray, setPhotosArray] = useState([]);
   const [heartButton, setHeartButton] = useState("far fa-heart");
@@ -37,7 +40,7 @@ export default function Result({ car, resultId }) {
         setPhotosArray(data.data);
       })
       .catch((err) => console.log(err.message));
-  }, []);
+  }, [[], availableCars]);
 
   useEffect(() => {
     if (auth) dispatch(setShowLogin(false));
@@ -78,36 +81,6 @@ export default function Result({ car, resultId }) {
   };
 
   return (
-    // <div className="car-details">
-    //   <div className="first-details">
-    //     {photosArray.length > 0 ? (
-    //       <CarGallery photosArray={photosArray} location={"result"} />
-    //     ) : (
-    //       <img alt="car-photo" src={defaultPhoto} />
-    //     )}
-    //     <div className="rating-result">
-    //       <i className="fas fa-star"></i>
-    //       <span className="owner-rating-results"> {car.owner_rating} </span>
-    //       <span className="owner-rating-reviews">
-    //         ({car.number_of_votes})reviews
-    //       </span>
-    //     </div>
-    //     <div className="data">
-    //       <div className="car-brand">Brand: {car.brand}</div>
-    //       <div className="car-passengers">Model: {car.model}</div>
-    //       <div className="car-passengers">Passengers: {car.passengers}</div>
-    //     </div>
-    //     <div className="buttons">
-    //       <button id="love" onClick={() => saveToFavorite(car.car_id)}>
-    //         <i className={heartButton}></i>
-    //       </button>
-    //       <Link to={`/result/${resultId}`}>
-    //         <button>➡</button>
-    //       </Link>
-    //     </div>
-    //   </div>
-    //   {/* <hr /> */}
-    // </div>
     <div className="result">
       <button id="love" onClick={() => saveToFavorite(car.car_id)}>
         <i className={heartButton}></i>
@@ -133,12 +106,12 @@ export default function Result({ car, resultId }) {
           </div>
           <ul className="recipe-details">
             <li className="recipe-details-item time">
-              <i class="fas fa-tools"></i>
+              <i className="fas fa-tools"></i>
               <span className="value">{car.year}</span>
               <span className="title">Manufacture year</span>
             </li>
             <li className="recipe-details-item ingredients">
-              <i class="fas fa-dollar-sign ion"></i>
+              <i className="fas fa-dollar-sign ion"></i>
               <span className="value">{car.price_per_day}</span>
               <span className="title">Per day</span>
             </li>

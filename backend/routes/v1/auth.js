@@ -75,7 +75,7 @@ auth.put("/forgotpassword", async (req, res) => {
       subject: "Reset your password",
       text: `<p>
           Please click on this
-          <a href=http://localhost:3000/reserpassword/${auth.id}}>
+          <a href=http://localhost:3000/resetpassword/${auth.id}>
             CarBnB Reset Password
           </a>
           and enter this code ${code} to reset tour password.

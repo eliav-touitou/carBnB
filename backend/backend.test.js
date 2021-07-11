@@ -412,8 +412,6 @@ describe("Users route", () => {
       .post("/api/v1/users/register")
       .send(mockNewUserRegister);
 
-    console.log(response);
-
     // Is the status code 200
     expect(response.status).toBe(200);
     // // Is the response equals to mock response

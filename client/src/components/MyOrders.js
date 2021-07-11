@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import OrderDetails from "./OrderDetails";
 
 export default function MyOrders() {
@@ -21,7 +21,6 @@ export default function MyOrders() {
       })
       .then(({ data }) => {
         setAllOrders(data.data);
-        console.log(data);
       })
       .catch((err) => {
         console.log(err);

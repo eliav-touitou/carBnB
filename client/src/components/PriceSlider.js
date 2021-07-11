@@ -19,9 +19,7 @@ export default function RangeSlider() {
   const classes = useStyles();
 
   // Redux states
-  const priceFilter = useSelector((state) => state.priceFilter);
   const availableCars = useSelector((state) => state.availableCars);
-  const filteredCars = useSelector((state) => state.filteredCars);
 
   // Use states
   const [maxPrice, setMaxPrice] = useState(100);
@@ -36,9 +34,9 @@ export default function RangeSlider() {
       const maxPriceFromDB = Math.max(...temp);
       setMaxPrice(maxPriceFromDB);
       dispatch(setFilterPrice([10, maxPriceFromDB + 5]));
-      setTempPrice([10, maxPriceFromDB + 5]);
+      setTempPrice([0, maxPriceFromDB + 5]);
     }
-  }, []);
+  }, [availableCars]);
 
   const handleChange = (event, newValue) => {
     setTempPrice(newValue);

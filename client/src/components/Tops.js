@@ -1,9 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import FavoriteDetails from "./FavoriteDetails";
 import { Link, useParams } from "react-router-dom";
-import CarsBySelection from "./TopCars";
 import photoOwnerCar from "../photos/top-owner-car.jpeg";
 import city1 from "../photos/city1.jpeg";
 import city2 from "../photos/city2.jpeg";
@@ -12,6 +10,10 @@ import city4 from "../photos/city4.jpeg";
 import city5 from "../photos/city5.jpeg";
 export default function Tops() {
   const { type } = useParams();
+  const stamMishpat = `located in the unique landscape of Israel, and offers a special opportunity to travel, enjoy and absorb  the local culture.`;
+
+  // Use State
+  const [top, setTop] = useState();
   const [photoOfCitiesArr, setPhotoOfCitiesArr] = useState([
     city1,
     city2,
@@ -19,11 +21,6 @@ export default function Tops() {
     city4,
     city5,
   ]);
-  const auth = useSelector((state) => state.auth);
-  const stamMishpat = `located in the unique landscape of Israel, and offers a special opportunity to travel, enjoy and absorb  the local culture.`;
-
-  // Use State
-  const [top, setTop] = useState();
 
   useEffect(() => {
     axios
@@ -103,15 +100,6 @@ export default function Tops() {
                 </div>
               </div>
             </section>
-            // <Link
-            //   push={true}
-            //   to={{
-            //     pathname: `/top/city/${city}`,
-            //     state: { city },
-            //   }}
-            // >
-            //   {city}
-            // </Link>
           ))}
         </div>
       ) : (

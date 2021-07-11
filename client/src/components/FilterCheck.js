@@ -34,12 +34,12 @@ export default function FilterCheck() {
     { label: "Auto", value: "Auto" },
   ];
   const fuelTypes = [
-    { label: "OCTAN-95", value: "OCTAN-95" },
-    { label: "OCTAN-96", value: "OCTAN-96" },
-    { label: "OCTAN-98", value: "OCTAN-98" },
-    { label: "SOLER", value: "SOLER" },
-    { label: "ELECTRIC", value: "ELECTRIC" },
-    { label: "GAS", value: "GAS" },
+    { label: "Octan-95", value: "OCTAN-95" },
+    { label: "Octan-96", value: "OCTAN-96" },
+    { label: "Octan-98", value: "OCTAN-98" },
+    { label: "Soler", value: "SOLER" },
+    { label: "Electric", value: "ELECTRIC" },
+    { label: "Gas", value: "GAS" },
   ];
 
   useEffect(() => {
@@ -52,15 +52,23 @@ export default function FilterCheck() {
   }, []);
 
   useEffect(() => {
+    const tempBrands = [];
+    const tempModels = [];
     availableCars?.forEach((car) => {
-      setBrandFilterArr((prev) => [
-        ...prev,
-        { label: car.brand, value: car.brand },
-      ]);
-      setModelFilterArr((prev) => [
-        ...prev,
-        { label: car.model, value: car.model },
-      ]);
+      if (!tempBrands.includes(car.brand)) {
+        tempBrands.push(car.brand);
+        setBrandFilterArr((prev) => [
+          ...prev,
+          { label: car.brand, value: car.brand },
+        ]);
+      }
+      if (!tempModels.includes(car.model)) {
+        tempModels.push(car.model);
+        setModelFilterArr((prev) => [
+          ...prev,
+          { label: car.model, value: car.model },
+        ]);
+      }
     });
   }, []);
 
@@ -70,7 +78,7 @@ export default function FilterCheck() {
       const temp = [];
       tempResults.forEach((car) => {
         selectedBrandFilterArr.forEach((filter) => {
-          if (car.brand === filter.label) {
+          if (car.brand.toLowerCase() === filter.label.toLowerCase()) {
             temp.push(car);
           }
         });
@@ -82,7 +90,7 @@ export default function FilterCheck() {
       const temp = [];
       tempResults.forEach((car) => {
         selectedModelFilterArr.forEach((filter) => {
-          if (car.model === filter.label) {
+          if (car.model.toLowerCase() === filter.label.toLowerCase()) {
             temp.push(car);
           }
         });
@@ -94,7 +102,7 @@ export default function FilterCheck() {
       const temp = [];
       tempResults.forEach((car) => {
         selectedGearFilterArr.forEach((filter) => {
-          if (car.gear === filter.label) {
+          if (car.gear.toLowerCase() === filter.label.toLowerCase()) {
             temp.push(car);
           }
         });
@@ -106,7 +114,7 @@ export default function FilterCheck() {
       const temp = [];
       tempResults?.forEach((car) => {
         selectedFuelFilterArr?.forEach((filter) => {
-          if (car.fuel === filter.label) {
+          if (car.fuel.toLowerCase() === filter.label.toLowerCase()) {
             temp.push(car);
           }
         });
@@ -154,8 +162,9 @@ export default function FilterCheck() {
 
   return (
     <div className="filter-bar">
+      <h4>Filter By:</h4>
       <div className="select">
-        filter your car brand
+        Brand
         <Select
           options={brandFilterArr}
           onChange={(e) => setSelectedBrandFilterArr(e)}
@@ -163,7 +172,7 @@ export default function FilterCheck() {
         />
       </div>
       <div className="select">
-        filter your car model
+        Model
         <Select
           options={modelFilterArr}
           onChange={(e) => setSelectedModelFilterArr(e)}
@@ -171,7 +180,7 @@ export default function FilterCheck() {
         />
       </div>
       <div className="select">
-        filter your car fuel
+        Fuel
         <Select
           options={fuelTypes}
           onChange={(e) => setSelectedFuelFilterArr(e)}
@@ -179,7 +188,7 @@ export default function FilterCheck() {
         />
       </div>
       <div className="select">
-        filter your car gear
+        Gear
         <Select
           options={gearOptions}
           onChange={(e) => setSelectedGearFilterArr(e)}
@@ -187,11 +196,11 @@ export default function FilterCheck() {
         />
       </div>
       <div className="slider">
-        pick your car year
+        Year
         <YearsSlider />
       </div>
       <div className="slider">
-        Enter wanted tariff per day
+        Price
         <PriceSlider />
       </div>
       <div className="slider">

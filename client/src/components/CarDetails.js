@@ -3,11 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { setPhotosArray, setShowLogin, setCarToRental } from "../actions";
-import CarGallery from "./CarGallery";
 import { Snackbar } from "@material-ui/core";
 import Cards from "react-credit-cards";
 import "react-credit-cards/lib/styles-compiled.css";
-import { Icon, InlineIcon } from "@iconify/react";
+import { Icon } from "@iconify/react";
 import seatPassenger from "@iconify-icons/mdi/seat-passenger";
 import {
   setRentalDetails,
@@ -36,7 +35,6 @@ export default function CarDetails() {
   // Redux States
   const availableCars = useSelector((state) => state.availableCars);
   const initialSearch = useSelector((state) => state.initialSearch);
-  const photosArray = useSelector((state) => state.photosArray);
   const auth = useSelector((state) => state.auth);
 
   //bringing the photos of the corresponding car, and emptying it on component down
@@ -219,13 +217,15 @@ export default function CarDetails() {
             <div className="upper-info">
               <h2>Order Summary</h2>
               <div className="line" />
+              {new Date(initialSearch.startDate).toDateString()} -{" "}
+              {new Date(initialSearch.endDate).toDateString()}
             </div>
             <div className="lower-info">
               <table className="order-table">
                 <tbody>
                   <tr>
                     <td>
-                      <i class="fas fa-car"></i>
+                      <i className="fas fa-car"></i>
                       <span className="thin"> Car: </span>{" "}
                       {availableCars[resultId].brand},{" "}
                       {availableCars[resultId].model}
@@ -234,22 +234,12 @@ export default function CarDetails() {
                 </tbody>
               </table>
               <div className="line" />
-              {/* <table className="order-table">
-              <tbody>
-                <tr>
-                  <td>
-                    <span className="thin">Model:</span>
-                    {availableCars[resultId].model}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="line" /> */}
+
               <table className="order-table">
                 <tbody>
                   <tr>
                     <td>
-                      <i class="far fa-clock"></i>
+                      <i className="far fa-clock"></i>
                       <span className="thin"> Year: </span>
                       {availableCars[resultId].year}
                     </td>
@@ -261,7 +251,7 @@ export default function CarDetails() {
                 <tbody>
                   <tr>
                     <td>
-                      <i class="fas fa-gas-pump"></i>
+                      <i className="fas fa-gas-pump"></i>
                       <span className="thin"> Fuel: </span>
                       {availableCars[resultId].fuel}
                     </td>
@@ -273,7 +263,7 @@ export default function CarDetails() {
                 <tbody>
                   <tr>
                     <td>
-                      <i class="fas fa-cogs"></i>
+                      <i className="fas fa-cogs"></i>
                       <span className="thin"> Gear: </span>
                       {availableCars[resultId].gear}
                     </td>
@@ -293,24 +283,8 @@ export default function CarDetails() {
                 </tbody>
               </table>
               <div className="line" />
-              {/* <table className="order-table">
-                <tbody>
-                  <tr>
-                    <td>
-                      <span className="thin">Wanted dates:</span>
-                      {initialSearch.startDate} - {initialSearch.endDate}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div className="line" /> */}
             </div>
-            {/* {photosArray.length !== 0 && (
-              <div style={{ height: "80px" }}>
-                <CarGallery photosArray={photosArray} />
-                <div className="line" />
-              </div>
-            )} */}
+
             <div className="total">
               <span style={{ float: "left" }}>
                 <div className="thin dense">Initial Price:</div>

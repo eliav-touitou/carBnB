@@ -1,5 +1,3 @@
-// import axios from "axios";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setPhotosArray } from "../actions";

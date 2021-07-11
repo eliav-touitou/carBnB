@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
+import Snackbar from "@material-ui/core/Snackbar";
 import {
   setFilteredCars,
   setAvailableCars,
@@ -31,29 +32,51 @@ export default function SearchBar() {
   const [focusedInput, setFocusedInput] = useState(null);
 
   // UseRefs
-  const cityRef = useRef();
+  const cityRef = useRef("");
   const passengersRef = useRef();
+
+  useEffect(() => {
+    if (notFoundMessage) {
+      setTimeout(() => {
+        dispatch(setNotFoundMessage(false));
+      }, 4500);
+    }
+  }, [notFoundMessage]);
 
   const search = async () => {
     const city = cityRef.current.value;
     const passengers = Number(passengersRef.current.value.slice(0, -1));
-    if (!city || !passengers || !startDate || !endDate) {
-      dispatch(setNotFoundMessage("You must fill all inputs"));
-      return;
+
+    if (window.location.href !== "http://localhost:3000/") {
+      console.log("asdsad");
+      setStartDate(moment(initialSearch.startDate));
+      setEndDate(moment(initialSearch.endDate));
+    } else {
+      if (!passengers || !startDate || !endDate) {
+        dispatch(setNotFoundMessage("You must fill all inputs"));
+        return;
+      }
     }
 
     const searchParameters = {
-      data: { city, startDate, endDate, passengers },
+      data: {
+        city,
+        startDate: initialSearch.startDate,
+        endDate: initialSearch.endDate,
+        passengers,
+      },
     };
-    dispatch(setInitialSearch(searchParameters.data));
+    console.log(searchParameters);
     try {
       const { data: availableCars } = await axios.post(
         "/api/v1/search/initial",
         searchParameters
       );
+
       dispatch(setAvailableCars(availableCars.data));
       dispatch(setFilteredCars(availableCars.data));
       if (availableCars.data.length !== 0) {
+        dispatch(setInitialSearch(searchParameters.data));
         setResultsPage(true);
       }
     } catch (err) {
@@ -79,8 +102,8 @@ export default function SearchBar() {
   const handleDatesChange = ({ startDate, endDate }) => {
     setStartDate(startDate);
     setEndDate(endDate);
-    initialSearch.startDate = startDate;
-    initialSearch.endDate = endDate;
+    initialSearch.startDate = moment(startDate);
+    initialSearch.endDate = moment(endDate);
   };
 
   return (
@@ -96,7 +119,7 @@ export default function SearchBar() {
                   list="cities"
                   ref={cityRef}
                   defaultValue={
-                    window.location.href === "http://localhost:3000/"
+                    window.location.href !== "http://localhost:3000/results"
                       ? undefined
                       : initialSearch?.city
                   }
@@ -114,14 +137,14 @@ export default function SearchBar() {
               <div className="label">Choose Dates:</div>
               <DateRangePicker
                 startDate={
-                  window.location.href === "http://localhost:3000/"
+                  window.location.href !== "http://localhost:3000/results"
                     ? startDate
                     : moment(initialSearch?.startDate)
                 }
                 startDatePlaceholderText="Start date:"
                 startDateId="tata-start-date"
                 endDate={
-                  window.location.href === "http://localhost:3000/"
+                  window.location.href !== "http://localhost:3000/results"
                     ? endDate
                     : moment(initialSearch?.endDate)
                 }
@@ -142,7 +165,7 @@ export default function SearchBar() {
                   list="passengers"
                   ref={passengersRef}
                   defaultValue={
-                    window.location.href === "http://localhost:3000/"
+                    window.location.href !== "http://localhost:3000/results"
                       ? undefined
                       : initialSearch?.passengers + "+"
                   }
@@ -164,7 +187,14 @@ export default function SearchBar() {
           </div>
         </div>
       </nav>{" "}
-      {/*   End nav   */}
+      {notFoundMessage && (
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={true}
+          message={notFoundMessage}
+          key={"top" + "center"}
+        />
+      )}
       {resultsPage && <Redirect push={true} to={"/results"} />}
     </div>
 

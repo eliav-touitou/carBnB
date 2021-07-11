@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
 import MyCar from "./MyCar";
 
 export default function MyCars({
@@ -11,6 +10,7 @@ export default function MyCars({
   setMyCarsData,
   myCarsData,
 }) {
+  // Use states
   const [carDetails, setCarDetails] = useState([]);
 
   useEffect(() => {
@@ -57,7 +57,9 @@ export default function MyCars({
           />
         ))}
       </ul>
-      <span onClick={nextPage}>⏭</span>
+      <span onClick={nextPage}>
+        <i className="fas fa-arrow-right"></i>
+      </span>
     </div>
   );
 }

@@ -12,7 +12,6 @@ import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 import "../react_dates_overrides.css";
-import dog from "../photos/dog-4223905_1920.jpg";
 import { setAuth } from "../actions";
 import { Redirect } from "react-router";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -147,8 +146,6 @@ export default function AddNewCar() {
         dispatch(setPhotosArray(photosArray));
         await axios.post("/api/v1/photos/savephotos", photosArray);
         setRedirect(true);
-      } else {
-        // need to prompt login promp component
       }
     } catch (error) {
       if (error.response.status === 403) {
@@ -175,15 +172,13 @@ export default function AddNewCar() {
         />
       )}
       <div className="add-car-panel">
-        <div className="left-side-panel">
-          {/* <img width="150%" height="auto" bottom src={dog} /> */}
-        </div>
+        <div className="left-side-panel"></div>
         <div className="right-side-panel">
           <div className="fields-inputs">
             <h1>We invite you to become a member in our host's team</h1>
             <div className="set">
               <div className="input-div">
-                <div className="title">pick your car brand</div>
+                <div className="title">Pick your car brand</div>
                 <input
                   className="brand-input-addNewCar"
                   ref={brandRef}
@@ -202,7 +197,7 @@ export default function AddNewCar() {
             </div>
             <div className="set">
               <div className="input-div">
-                <div className="title">pick your car model</div>
+                <div className="title">Pick your car model</div>
                 <input
                   className="model-input-addNewCar"
                   ref={modelRef}
@@ -244,7 +239,7 @@ export default function AddNewCar() {
             </div>
             <div className="set">
               <div className="input-div">
-                <div className="title">pick your car year</div>
+                <div className="title">Pick your car year</div>
                 <input
                   className="year-input-addNewCar"
                   ref={yearRef}
@@ -273,31 +268,17 @@ export default function AddNewCar() {
                   small={true}
                 />
               </div>
-              {/* <div className="input-div">
-                <div className="title">number of seats</div>
-                <input
-                  className="seats-input-addNewCar"
-                  ref={passengersRef}
-                  list="passengers"
-                ></input>
-                <datalist id="passengers">
-                  {seatsOptions?.map((seat, i) => (
-                    <option key={`passengers-${i}`} value={seat} />
-                  ))}
-                </datalist>
-              </div>
-            </div> */}
+
               <div className="set">
                 <div className="input-div">
-                  <div className="title">Enter wanted tariff per day</div>
+                  <div className="title">Enter wanted price per day</div>
                   <input
                     className="tariff-input-addNewCar"
                     ref={pricePerDayRef}
-                    placeholder="Enter wanted tariff per day"
                   ></input>
                 </div>
                 <div className="input-div">
-                  <div className="title">number of seats</div>
+                  <div className="title">Number of seats</div>
                   <input
                     className="seats-input-addNewCar"
                     ref={passengersRef}
@@ -313,7 +294,7 @@ export default function AddNewCar() {
 
               <div className="set">
                 <div className="input-div">
-                  <div className="title">percent of discount per month</div>
+                  <div className="title">Percent of discount per month</div>
                   <input
                     className="discount-month-input-addNewCar"
                     ref={discountPerMonthRef}
@@ -326,7 +307,7 @@ export default function AddNewCar() {
                   </datalist>
                 </div>
                 <div className="input-div">
-                  <div className="title">percent of discount per week</div>
+                  <div className="title">Percent of discount per week</div>
                   <input
                     className="discount-week-input-addNewCar"
                     ref={discountPerWeekRef}
@@ -347,7 +328,7 @@ export default function AddNewCar() {
                 onChange={(e) => setGasType(e.target.value)}
               >
                 <label className="title" htmlFor="Octan-95">
-                  pick your car gas type
+                  Pick your car gas type
                 </label>
                 <div className="radio-container">
                   <input
