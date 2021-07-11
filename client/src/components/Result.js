@@ -13,24 +13,12 @@ export default function Result({ car, resultId }) {
 
   // Redux states
   const auth = useSelector((state) => state.auth);
-  const showLogin = useSelector((state) => state.showLogin);
   const availableCars = useSelector((state) => state.availableCars);
+  const filteredCars = useSelector((state) => state.filteredCars);
 
   // Use states
-  const [carPhoto, setCarPhoto] = useState();
   const [photosArray, setPhotosArray] = useState([]);
   const [heartButton, setHeartButton] = useState("far fa-heart");
-
-  // useEffect(() => {
-  //   axios
-  //     .post("/api/v1/photos/uniquephoto", { carId })
-  //     .then(({ data: photo }) => {
-  //       setCarPhoto(photo.data?.file);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [carId]);
 
   useEffect(() => {
     const photosData = ["Photo", ["car_id"], [car.car_id]];
@@ -39,8 +27,14 @@ export default function Result({ car, resultId }) {
       .then(({ data }) => {
         setPhotosArray(data.data);
       })
-      .catch((err) => console.log(err.message));
-  }, [[], availableCars]);
+      .catch((err) => {
+        if (err.response.status === 404) {
+          setPhotosArray(false);
+          return;
+        }
+        console.log(err);
+      });
+  }, [availableCars, filteredCars]);
 
   useEffect(() => {
     if (auth) dispatch(setShowLogin(false));
@@ -86,7 +80,7 @@ export default function Result({ car, resultId }) {
         <i className={heartButton}></i>
       </button>
       <div className="ft-recipe__thumb">
-        {photosArray.length > 0 ? (
+        {photosArray !== false ? (
           <CarGallery photosArray={photosArray} location={"result"} />
         ) : (
           <img
