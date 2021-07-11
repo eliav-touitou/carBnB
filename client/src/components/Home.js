@@ -46,7 +46,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="home-page-container">
       <section className="land-section">
         <img className="intro-img" height="50%" src={photo}></img>
         <h1>

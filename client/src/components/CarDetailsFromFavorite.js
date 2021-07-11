@@ -183,6 +183,8 @@ export default function CarDetails() {
             <div className="upper-info">
               <h2>Order Summary</h2>
               <div className="line" />
+              {new Date(dates.startDate).toDateString()} -{" "}
+              {new Date(dates.endDate).toDateString()}
             </div>
             <div className="lower-info">
               <table className="order-table">

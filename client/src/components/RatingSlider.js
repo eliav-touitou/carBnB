@@ -66,7 +66,7 @@ export default function RatingSlider() {
         aria-labelledby="discrete-slider-always"
         step={1}
         marks={marks}
-        valueLabelDisplay="on"
+        valueLabelDisplay="auto"
       />
     </div>
   );

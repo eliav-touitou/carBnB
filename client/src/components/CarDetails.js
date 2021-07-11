@@ -219,6 +219,8 @@ export default function CarDetails() {
             <div className="upper-info">
               <h2>Order Summary</h2>
               <div className="line" />
+              {new Date(initialSearch.startDate).toDateString()} -{" "}
+              {new Date(initialSearch.endDate).toDateString()}
             </div>
             <div className="lower-info">
               <table className="order-table">
@@ -234,17 +236,7 @@ export default function CarDetails() {
                 </tbody>
               </table>
               <div className="line" />
-              {/* <table className="order-table">
-              <tbody>
-                <tr>
-                  <td>
-                    <span className="thin">Model:</span>
-                    {availableCars[resultId].model}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="line" /> */}
+
               <table className="order-table">
                 <tbody>
                   <tr>
@@ -293,24 +285,8 @@ export default function CarDetails() {
                 </tbody>
               </table>
               <div className="line" />
-              {/* <table className="order-table">
-                <tbody>
-                  <tr>
-                    <td>
-                      <span className="thin">Wanted dates:</span>
-                      {initialSearch.startDate} - {initialSearch.endDate}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div className="line" /> */}
             </div>
-            {/* {photosArray.length !== 0 && (
-              <div style={{ height: "80px" }}>
-                <CarGallery photosArray={photosArray} />
-                <div className="line" />
-              </div>
-            )} */}
+
             <div className="total">
               <span style={{ float: "left" }}>
                 <div className="thin dense">Initial Price:</div>

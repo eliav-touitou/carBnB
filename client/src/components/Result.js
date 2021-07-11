@@ -78,36 +78,6 @@ export default function Result({ car, resultId }) {
   };
 
   return (
-    // <div className="car-details">
-    //   <div className="first-details">
-    //     {photosArray.length > 0 ? (
-    //       <CarGallery photosArray={photosArray} location={"result"} />
-    //     ) : (
-    //       <img alt="car-photo" src={defaultPhoto} />
-    //     )}
-    //     <div className="rating-result">
-    //       <i className="fas fa-star"></i>
-    //       <span className="owner-rating-results"> {car.owner_rating} </span>
-    //       <span className="owner-rating-reviews">
-    //         ({car.number_of_votes})reviews
-    //       </span>
-    //     </div>
-    //     <div className="data">
-    //       <div className="car-brand">Brand: {car.brand}</div>
-    //       <div className="car-passengers">Model: {car.model}</div>
-    //       <div className="car-passengers">Passengers: {car.passengers}</div>
-    //     </div>
-    //     <div className="buttons">
-    //       <button id="love" onClick={() => saveToFavorite(car.car_id)}>
-    //         <i className={heartButton}></i>
-    //       </button>
-    //       <Link to={`/result/${resultId}`}>
-    //         <button>➡</button>
-    //       </Link>
-    //     </div>
-    //   </div>
-    //   {/* <hr /> */}
-    // </div>
     <div className="result">
       <button id="love" onClick={() => saveToFavorite(car.car_id)}>
         <i className={heartButton}></i>

@@ -99,7 +99,7 @@ export default function Profile() {
         <div className="rating-panel-profile">
           <span>
             <i className="fas fa-star"></i>
-            {auth.rating ? auth.rating : 0} / 5
+            {auth.rating ? Number(auth.rating).toFixed(1) : 0} / 5
           </span>
           <span>|</span>
           <span>
