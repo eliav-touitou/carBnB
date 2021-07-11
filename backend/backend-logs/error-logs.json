@@ -1,1 +1,436 @@
-{"allErrors":[{"date":"2021-07-05T18:20:43.375Z","error":{"name":"SequelizeValidationError","errors":[{"message":"license cannot be an array or an object","type":"string violation","path":"license","value":[],"origin":"CORE","instance":{"user_email":null,"license":[],"updatedAt":"2021-07-05T18:20:43.368Z"},"validatorKey":"not_a_string","validatorName":null,"validatorArgs":[]}]},"status":500,"ourMessage":"Problems with our server","route":"api/v1/users/updateitems"},{"date":"2021-07-05T18:20:55.553Z","error":{"name":"SequelizeValidationError","errors":[{"message":"license cannot be an array or an object","type":"string violation","path":"license","value":[],"origin":"CORE","instance":{"user_email":null,"license":[],"updatedAt":"2021-07-05T18:20:55.547Z"},"validatorKey":"not_a_string","validatorName":null,"validatorArgs":[]}]},"status":500,"ourMessage":"Problems with our server","route":"api/v1/users/updateitems"},{"date":"2021-07-07T15:10:44.267Z","error":{},"status":500,"ourMessage":"Problems with our server","route":"api/v1/top/locations"},{"date":"2021-07-07T15:21:28.131Z","error":{},"status":500,"ourMessage":"Problems with our server","route":"api/v1/top/cars"},{"date":"2021-07-09T10:58:55.029Z","error":{"name":"SequelizeValidationError","errors":[{"message":"license cannot be an array or an object","type":"string violation","path":"license","value":[],"origin":"CORE","instance":{"user_email":null,"license":[],"updatedAt":"2021-07-09T10:58:55.021Z"},"validatorKey":"not_a_string","validatorName":null,"validatorArgs":[]}]},"status":500,"ourMessage":"Problems with our server","route":"api/v1/users/updateitems"},{"date":"2021-07-09T10:59:08.424Z","error":{"name":"SequelizeValidationError","errors":[{"message":"license cannot be an array or an object","type":"string violation","path":"license","value":[],"origin":"CORE","instance":{"user_email":null,"license":[],"updatedAt":"2021-07-09T10:59:08.413Z"},"validatorKey":"not_a_string","validatorName":null,"validatorArgs":[]}]},"status":500,"ourMessage":"Problems with our server","route":"api/v1/users/updateitems"},{"date":"2021-07-09T10:59:20.449Z","error":{"name":"SequelizeValidationError","errors":[{"message":"license cannot be an array or an object","type":"string violation","path":"license","value":[],"origin":"CORE","instance":{"user_email":null,"license":[],"updatedAt":"2021-07-09T10:59:20.440Z"},"validatorKey":"not_a_string","validatorName":null,"validatorArgs":[]}]},"status":500,"ourMessage":"Problems with our server","route":"api/v1/users/updateitems"},{"date":"2021-07-09T11:00:20.039Z","error":{"name":"SequelizeValidationError","errors":[{"message":"license cannot be an array or an object","type":"string violation","path":"license","value":[],"origin":"CORE","instance":{"user_email":null,"license":[],"updatedAt":"2021-07-09T11:00:20.031Z"},"validatorKey":"not_a_string","validatorName":null,"validatorArgs":[]}]},"status":500,"ourMessage":"Problems with our server","route":"api/v1/users/updateitems"},{"date":"2021-07-09T11:00:39.142Z","error":{"name":"SequelizeValidationError","errors":[{"message":"license cannot be an array or an object","type":"string violation","path":"license","value":[],"origin":"CORE","instance":{"user_email":null,"license":[],"updatedAt":"2021-07-09T11:00:39.136Z"},"validatorKey":"not_a_string","validatorName":null,"validatorArgs":[]}]},"status":500,"ourMessage":"Problems with our server","route":"api/v1/users/updateitems"},{"date":"2021-07-09T11:00:53.471Z","error":{"name":"SequelizeValidationError","errors":[{"message":"license cannot be an array or an object","type":"string violation","path":"license","value":[],"origin":"CORE","instance":{"user_email":null,"license":[],"updatedAt":"2021-07-09T11:00:53.465Z"},"validatorKey":"not_a_string","validatorName":null,"validatorArgs":[]}]},"status":500,"ourMessage":"Problems with our server","route":"api/v1/users/updateitems"},{"date":"2021-07-09T13:07:48.287Z","error":{},"status":500,"ourMessage":"Problems with our server","route":"api/v1/top/locations"},{"date":"2021-07-09T13:08:06.099Z","error":{},"status":500,"ourMessage":"Problems with our server","route":"api/v1/top/locations"},{"date":"2021-07-09T13:08:51.196Z","error":{},"status":500,"ourMessage":"Problems with our server","route":"api/v1/top/locations"},{"date":"2021-07-11T04:18:10.567Z","error":{"message":"Request failed with status code 404","name":"Error","stack":"Error: Request failed with status code 404\n    at createError (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\createError.js:16:15)\n    at settle (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\settle.js:17:12)\n    at IncomingMessage.handleStreamEnd (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\adapters\\http.js:260:11)\n    at IncomingMessage.emit (events.js:327:22)\n    at endReadableNT (internal/streams/readable.js:1327:12)\n    at processTicksAndRejections (internal/process/task_queues.js:80:21)","config":{"url":"https://en.wikipedia.org/wiki/Herzeliyya","method":"get","headers":{"Accept":"application/json, text/plain, */*","User-Agent":"axios/0.21.1"},"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1}},"status":500,"ourMessage":"Problems with our server","route":"wikiScraper Function"},{"date":"2021-07-11T04:18:18.243Z","error":{"message":"Request failed with status code 404","name":"Error","stack":"Error: Request failed with status code 404\n    at createError (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\createError.js:16:15)\n    at settle (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\settle.js:17:12)\n    at IncomingMessage.handleStreamEnd (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\adapters\\http.js:260:11)\n    at IncomingMessage.emit (events.js:327:22)\n    at endReadableNT (internal/streams/readable.js:1327:12)\n    at processTicksAndRejections (internal/process/task_queues.js:80:21)","config":{"url":"https://en.wikipedia.org/wiki/Herzeliyya","method":"get","headers":{"Accept":"application/json, text/plain, */*","User-Agent":"axios/0.21.1"},"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1}},"status":500,"ourMessage":"Problems with our server","route":"wikiScraper Function"},{"date":"2021-07-11T04:19:40.438Z","error":{"message":"Request failed with status code 404","name":"Error","stack":"Error: Request failed with status code 404\n    at createError (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\createError.js:16:15)\n    at settle (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\settle.js:17:12)\n    at IncomingMessage.handleStreamEnd (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\adapters\\http.js:260:11)\n    at IncomingMessage.emit (events.js:327:22)\n    at endReadableNT (internal/streams/readable.js:1327:12)\n    at processTicksAndRejections (internal/process/task_queues.js:80:21)","config":{"url":"https://en.wikipedia.org/wiki/Herzeliyya","method":"get","headers":{"Accept":"application/json, text/plain, */*","User-Agent":"axios/0.21.1"},"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1}},"status":500,"ourMessage":"Problems with our server","route":"wikiScraper Function"},{"date":"2021-07-11T04:20:47.761Z","error":{"message":"Request failed with status code 404","name":"Error","stack":"Error: Request failed with status code 404\n    at createError (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\createError.js:16:15)\n    at settle (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\settle.js:17:12)\n    at IncomingMessage.handleStreamEnd (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\adapters\\http.js:260:11)\n    at IncomingMessage.emit (events.js:327:22)\n    at endReadableNT (internal/streams/readable.js:1327:12)\n    at processTicksAndRejections (internal/process/task_queues.js:80:21)","config":{"url":"https://en.wikipedia.org/wiki/Herzeliyya","method":"get","headers":{"Accept":"application/json, text/plain, */*","User-Agent":"axios/0.21.1"},"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1}},"status":500,"ourMessage":"Problems with our server","route":"wikiScraper Function"},{"date":"2021-07-11T04:51:38.609Z","error":{},"status":500,"ourMessage":"Problems with our server","route":"api/v1/auth/forgotpassword"},{"date":"2021-07-11T04:52:24.051Z","error":{},"status":500,"ourMessage":"Problems with our server","route":"api/v1/auth/forgotpassword"},{"date":"2021-07-11T04:59:36.833Z","error":{},"status":500,"ourMessage":"Problems with our server","route":"api/v1/auth/resetpaswword/11"},{"date":"2021-07-11T04:59:56.805Z","error":{},"status":500,"ourMessage":"Problems with our server","route":"api/v1/auth/resetpaswword/11"},{"date":"2021-07-11T05:00:39.421Z","error":{},"status":500,"ourMessage":"Problems with our server","route":"api/v1/auth/resetpaswword/11"},{"date":"2021-07-11T06:42:43.247Z","error":{"message":"Request failed with status code 404","name":"Error","stack":"Error: Request failed with status code 404\n    at createError (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\createError.js:16:15)\n    at settle (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\settle.js:17:12)\n    at IncomingMessage.handleStreamEnd (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\adapters\\http.js:260:11)\n    at IncomingMessage.emit (events.js:327:22)\n    at endReadableNT (internal/streams/readable.js:1327:12)\n    at processTicksAndRejections (internal/process/task_queues.js:80:21)","config":{"url":"https://en.wikipedia.org/wiki/Herzeliyya","method":"get","headers":{"Accept":"application/json, text/plain, */*","User-Agent":"axios/0.21.1"},"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1}},"status":500,"ourMessage":"Problems with our server","route":"wikiScraper Function"}]}
+{
+  "allErrors": [
+    {
+      "date": "2021-07-05T18:20:43.375Z",
+      "error": {
+        "name": "SequelizeValidationError",
+        "errors": [
+          {
+            "message": "license cannot be an array or an object",
+            "type": "string violation",
+            "path": "license",
+            "value": [],
+            "origin": "CORE",
+            "instance": {
+              "user_email": null,
+              "license": [],
+              "updatedAt": "2021-07-05T18:20:43.368Z"
+            },
+            "validatorKey": "not_a_string",
+            "validatorName": null,
+            "validatorArgs": []
+          }
+        ]
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/users/updateitems"
+    },
+    {
+      "date": "2021-07-05T18:20:55.553Z",
+      "error": {
+        "name": "SequelizeValidationError",
+        "errors": [
+          {
+            "message": "license cannot be an array or an object",
+            "type": "string violation",
+            "path": "license",
+            "value": [],
+            "origin": "CORE",
+            "instance": {
+              "user_email": null,
+              "license": [],
+              "updatedAt": "2021-07-05T18:20:55.547Z"
+            },
+            "validatorKey": "not_a_string",
+            "validatorName": null,
+            "validatorArgs": []
+          }
+        ]
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/users/updateitems"
+    },
+    {
+      "date": "2021-07-07T15:10:44.267Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/top/locations"
+    },
+    {
+      "date": "2021-07-07T15:21:28.131Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/top/cars"
+    },
+    {
+      "date": "2021-07-09T10:58:55.029Z",
+      "error": {
+        "name": "SequelizeValidationError",
+        "errors": [
+          {
+            "message": "license cannot be an array or an object",
+            "type": "string violation",
+            "path": "license",
+            "value": [],
+            "origin": "CORE",
+            "instance": {
+              "user_email": null,
+              "license": [],
+              "updatedAt": "2021-07-09T10:58:55.021Z"
+            },
+            "validatorKey": "not_a_string",
+            "validatorName": null,
+            "validatorArgs": []
+          }
+        ]
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/users/updateitems"
+    },
+    {
+      "date": "2021-07-09T10:59:08.424Z",
+      "error": {
+        "name": "SequelizeValidationError",
+        "errors": [
+          {
+            "message": "license cannot be an array or an object",
+            "type": "string violation",
+            "path": "license",
+            "value": [],
+            "origin": "CORE",
+            "instance": {
+              "user_email": null,
+              "license": [],
+              "updatedAt": "2021-07-09T10:59:08.413Z"
+            },
+            "validatorKey": "not_a_string",
+            "validatorName": null,
+            "validatorArgs": []
+          }
+        ]
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/users/updateitems"
+    },
+    {
+      "date": "2021-07-09T10:59:20.449Z",
+      "error": {
+        "name": "SequelizeValidationError",
+        "errors": [
+          {
+            "message": "license cannot be an array or an object",
+            "type": "string violation",
+            "path": "license",
+            "value": [],
+            "origin": "CORE",
+            "instance": {
+              "user_email": null,
+              "license": [],
+              "updatedAt": "2021-07-09T10:59:20.440Z"
+            },
+            "validatorKey": "not_a_string",
+            "validatorName": null,
+            "validatorArgs": []
+          }
+        ]
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/users/updateitems"
+    },
+    {
+      "date": "2021-07-09T11:00:20.039Z",
+      "error": {
+        "name": "SequelizeValidationError",
+        "errors": [
+          {
+            "message": "license cannot be an array or an object",
+            "type": "string violation",
+            "path": "license",
+            "value": [],
+            "origin": "CORE",
+            "instance": {
+              "user_email": null,
+              "license": [],
+              "updatedAt": "2021-07-09T11:00:20.031Z"
+            },
+            "validatorKey": "not_a_string",
+            "validatorName": null,
+            "validatorArgs": []
+          }
+        ]
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/users/updateitems"
+    },
+    {
+      "date": "2021-07-09T11:00:39.142Z",
+      "error": {
+        "name": "SequelizeValidationError",
+        "errors": [
+          {
+            "message": "license cannot be an array or an object",
+            "type": "string violation",
+            "path": "license",
+            "value": [],
+            "origin": "CORE",
+            "instance": {
+              "user_email": null,
+              "license": [],
+              "updatedAt": "2021-07-09T11:00:39.136Z"
+            },
+            "validatorKey": "not_a_string",
+            "validatorName": null,
+            "validatorArgs": []
+          }
+        ]
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/users/updateitems"
+    },
+    {
+      "date": "2021-07-09T11:00:53.471Z",
+      "error": {
+        "name": "SequelizeValidationError",
+        "errors": [
+          {
+            "message": "license cannot be an array or an object",
+            "type": "string violation",
+            "path": "license",
+            "value": [],
+            "origin": "CORE",
+            "instance": {
+              "user_email": null,
+              "license": [],
+              "updatedAt": "2021-07-09T11:00:53.465Z"
+            },
+            "validatorKey": "not_a_string",
+            "validatorName": null,
+            "validatorArgs": []
+          }
+        ]
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/users/updateitems"
+    },
+    {
+      "date": "2021-07-09T13:07:48.287Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/top/locations"
+    },
+    {
+      "date": "2021-07-09T13:08:06.099Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/top/locations"
+    },
+    {
+      "date": "2021-07-09T13:08:51.196Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/top/locations"
+    },
+    {
+      "date": "2021-07-11T04:18:10.567Z",
+      "error": {
+        "message": "Request failed with status code 404",
+        "name": "Error",
+        "stack": "Error: Request failed with status code 404\n    at createError (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\createError.js:16:15)\n    at settle (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\settle.js:17:12)\n    at IncomingMessage.handleStreamEnd (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\adapters\\http.js:260:11)\n    at IncomingMessage.emit (events.js:327:22)\n    at endReadableNT (internal/streams/readable.js:1327:12)\n    at processTicksAndRejections (internal/process/task_queues.js:80:21)",
+        "config": {
+          "url": "https://en.wikipedia.org/wiki/Herzeliyya",
+          "method": "get",
+          "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "User-Agent": "axios/0.21.1"
+          },
+          "transformRequest": [null],
+          "transformResponse": [null],
+          "timeout": 0,
+          "xsrfCookieName": "XSRF-TOKEN",
+          "xsrfHeaderName": "X-XSRF-TOKEN",
+          "maxContentLength": -1,
+          "maxBodyLength": -1
+        }
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "wikiScraper Function"
+    },
+    {
+      "date": "2021-07-11T04:18:18.243Z",
+      "error": {
+        "message": "Request failed with status code 404",
+        "name": "Error",
+        "stack": "Error: Request failed with status code 404\n    at createError (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\createError.js:16:15)\n    at settle (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\settle.js:17:12)\n    at IncomingMessage.handleStreamEnd (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\adapters\\http.js:260:11)\n    at IncomingMessage.emit (events.js:327:22)\n    at endReadableNT (internal/streams/readable.js:1327:12)\n    at processTicksAndRejections (internal/process/task_queues.js:80:21)",
+        "config": {
+          "url": "https://en.wikipedia.org/wiki/Herzeliyya",
+          "method": "get",
+          "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "User-Agent": "axios/0.21.1"
+          },
+          "transformRequest": [null],
+          "transformResponse": [null],
+          "timeout": 0,
+          "xsrfCookieName": "XSRF-TOKEN",
+          "xsrfHeaderName": "X-XSRF-TOKEN",
+          "maxContentLength": -1,
+          "maxBodyLength": -1
+        }
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "wikiScraper Function"
+    },
+    {
+      "date": "2021-07-11T04:19:40.438Z",
+      "error": {
+        "message": "Request failed with status code 404",
+        "name": "Error",
+        "stack": "Error: Request failed with status code 404\n    at createError (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\createError.js:16:15)\n    at settle (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\settle.js:17:12)\n    at IncomingMessage.handleStreamEnd (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\adapters\\http.js:260:11)\n    at IncomingMessage.emit (events.js:327:22)\n    at endReadableNT (internal/streams/readable.js:1327:12)\n    at processTicksAndRejections (internal/process/task_queues.js:80:21)",
+        "config": {
+          "url": "https://en.wikipedia.org/wiki/Herzeliyya",
+          "method": "get",
+          "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "User-Agent": "axios/0.21.1"
+          },
+          "transformRequest": [null],
+          "transformResponse": [null],
+          "timeout": 0,
+          "xsrfCookieName": "XSRF-TOKEN",
+          "xsrfHeaderName": "X-XSRF-TOKEN",
+          "maxContentLength": -1,
+          "maxBodyLength": -1
+        }
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "wikiScraper Function"
+    },
+    {
+      "date": "2021-07-11T04:20:47.761Z",
+      "error": {
+        "message": "Request failed with status code 404",
+        "name": "Error",
+        "stack": "Error: Request failed with status code 404\n    at createError (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\createError.js:16:15)\n    at settle (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\settle.js:17:12)\n    at IncomingMessage.handleStreamEnd (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\adapters\\http.js:260:11)\n    at IncomingMessage.emit (events.js:327:22)\n    at endReadableNT (internal/streams/readable.js:1327:12)\n    at processTicksAndRejections (internal/process/task_queues.js:80:21)",
+        "config": {
+          "url": "https://en.wikipedia.org/wiki/Herzeliyya",
+          "method": "get",
+          "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "User-Agent": "axios/0.21.1"
+          },
+          "transformRequest": [null],
+          "transformResponse": [null],
+          "timeout": 0,
+          "xsrfCookieName": "XSRF-TOKEN",
+          "xsrfHeaderName": "X-XSRF-TOKEN",
+          "maxContentLength": -1,
+          "maxBodyLength": -1
+        }
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "wikiScraper Function"
+    },
+    {
+      "date": "2021-07-11T04:51:38.609Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/auth/forgotpassword"
+    },
+    {
+      "date": "2021-07-11T04:52:24.051Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/auth/forgotpassword"
+    },
+    {
+      "date": "2021-07-11T04:59:36.833Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/auth/resetpaswword/11"
+    },
+    {
+      "date": "2021-07-11T04:59:56.805Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/auth/resetpaswword/11"
+    },
+    {
+      "date": "2021-07-11T05:00:39.421Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/auth/resetpaswword/11"
+    },
+    {
+      "date": "2021-07-11T06:42:43.247Z",
+      "error": {
+        "message": "Request failed with status code 404",
+        "name": "Error",
+        "stack": "Error: Request failed with status code 404\n    at createError (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\createError.js:16:15)\n    at settle (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\core\\settle.js:17:12)\n    at IncomingMessage.handleStreamEnd (C:\\Users\\yone5\\Desktop\\Cyber4s\\carBnB\\backend\\node_modules\\axios\\lib\\adapters\\http.js:260:11)\n    at IncomingMessage.emit (events.js:327:22)\n    at endReadableNT (internal/streams/readable.js:1327:12)\n    at processTicksAndRejections (internal/process/task_queues.js:80:21)",
+        "config": {
+          "url": "https://en.wikipedia.org/wiki/Herzeliyya",
+          "method": "get",
+          "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "User-Agent": "axios/0.21.1"
+          },
+          "transformRequest": [null],
+          "transformResponse": [null],
+          "timeout": 0,
+          "xsrfCookieName": "XSRF-TOKEN",
+          "xsrfHeaderName": "X-XSRF-TOKEN",
+          "maxContentLength": -1,
+          "maxBodyLength": -1
+        }
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "wikiScraper Function"
+    },
+    {
+      "date": "2021-07-11T07:53:00.210Z",
+      "error": {
+        "name": "SequelizeDatabaseError",
+        "parent": {
+          "code": "ER_BAD_FIELD_ERROR",
+          "errno": 1054,
+          "sqlState": "42S22",
+          "sqlMessage": "Unknown column 'reset_code' in 'field list'",
+          "sql": "SELECT `id`, `user_email`, `password`, `full_name`, `reset_code`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `auth` AS `Auth` WHERE `Auth`.`user_email` = 'test@test.com' LIMIT 1;"
+        },
+        "original": {
+          "code": "ER_BAD_FIELD_ERROR",
+          "errno": 1054,
+          "sqlState": "42S22",
+          "sqlMessage": "Unknown column 'reset_code' in 'field list'",
+          "sql": "SELECT `id`, `user_email`, `password`, `full_name`, `reset_code`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `auth` AS `Auth` WHERE `Auth`.`user_email` = 'test@test.com' LIMIT 1;"
+        },
+        "sql": "SELECT `id`, `user_email`, `password`, `full_name`, `reset_code`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `auth` AS `Auth` WHERE `Auth`.`user_email` = 'test@test.com' LIMIT 1;"
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/users/register"
+    }
+  ]
+}
