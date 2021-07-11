@@ -437,7 +437,10 @@ const getCarsByCity = async (city) => {
   return allCarsByCity;
 };
 
-getCarsByCity("Haifa");
+const getCarsByBrand = async (brand) => {
+  const allCarsByBrand = await Car.findAll({ where: { brand: brand } });
+  return allCarsByBrand;
+};
 
 module.exports = {
   getCar,
@@ -466,4 +469,5 @@ module.exports = {
   top5Owners,
   top5Locations,
   getCarsByCity,
+  getCarsByBrand,
 };
