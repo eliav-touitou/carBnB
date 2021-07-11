@@ -58,7 +58,7 @@ export default function MyCars({
         ))}
       </ul>
       <span onClick={nextPage}>
-        <i class="fas fa-arrow-right"></i>
+        <i className="fas fa-arrow-right"></i>
       </span>
     </div>
   );
