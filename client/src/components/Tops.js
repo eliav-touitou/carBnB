@@ -3,12 +3,17 @@ import React, { useEffect, useState } from "react";
 import FavoriteDetails from "./FavoriteDetails";
 import { Link, useParams } from "react-router-dom";
 import photoOwnerCar from "../photos/top-owner-car.jpeg";
+import { setSpinner } from "../actions";
+import { useDispatch } from "react-redux";
+
 import city1 from "../photos/city1.jpeg";
 import city2 from "../photos/city2.jpeg";
 import city3 from "../photos/city3.jpeg";
 import city4 from "../photos/city4.jpeg";
 import city5 from "../photos/city5.jpeg";
 export default function Tops() {
+  const dispatch = useDispatch();
+
   const { type } = useParams();
   const stamMishpat = `located in the unique landscape of Israel, and offers a special opportunity to travel, enjoy and absorb  the local culture.`;
 
@@ -23,13 +28,18 @@ export default function Tops() {
   ]);
 
   useEffect(() => {
+    dispatch(setSpinner(true));
     axios
       .get(`/api/v1/top/${type}`)
       .then(({ data: top }) => {
         setTop(top.data);
         console.log(top.data);
+        dispatch(setSpinner(false));
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => {
+        console.log(err.message);
+        dispatch(setSpinner(false));
+      });
   }, []);
 
   useEffect(() => {

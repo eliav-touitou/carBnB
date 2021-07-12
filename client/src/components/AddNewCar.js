@@ -6,6 +6,7 @@ import {
   setAllCarsApi,
   setPhotosArray,
   setNotFoundMessage,
+  setSpinner,
 } from "../actions";
 import UploadPhoto from "./UploadPhoto";
 import "react-dates/initialize";
@@ -72,11 +73,17 @@ export default function AddNewCar() {
 
   // Get all cars brand from API.
   useEffect(() => {
+    dispatch(setSpinner(true));
     axios
       .get(apiCars + "/vehicles/GetMakesForVehicleType/car?format=json")
       .then(({ data }) => {
         console.log(data);
         dispatch(setAllCarsApi(data.Results));
+        dispatch(setSpinner(false));
+      })
+      .catch((err) => {
+        dispatch(setSpinner(false));
+        console.log(err);
       });
   }, []);
 
@@ -103,6 +110,8 @@ export default function AddNewCar() {
 
   // After car brand selected, axios request to get all models of this brand
   const onBrandChangeHandler = async () => {
+    dispatch(setSpinner(true));
+
     allCarsApi?.forEach((car) => {
       if (car.MakeName.toLowerCase() === brandRef.current.value.toLowerCase()) {
         axios
@@ -111,8 +120,12 @@ export default function AddNewCar() {
           )
           .then(({ data }) => {
             dispatch(setAllModelsApi(data.Results));
+            dispatch(setSpinner(false));
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            console.log(err);
+            dispatch(setSpinner(false));
+          });
       } else {
         modelRef.current.value = "";
       }
@@ -136,6 +149,7 @@ export default function AddNewCar() {
       discountPerMonth: discountPerMonthRef.current.value,
     };
     try {
+      dispatch(setSpinner(true));
       if (auth) {
         const { data: savedCar } = await axios.post("/api/v1/cars/upload", {
           newCar: newCar,
@@ -146,10 +160,13 @@ export default function AddNewCar() {
         dispatch(setPhotosArray(photosArray));
         await axios.post("/api/v1/photos/savephotos", photosArray);
         setRedirect(true);
+        dispatch(setSpinner(false));
       }
     } catch (error) {
       if (error.response.status === 403) {
         dispatch(setAuth(false));
+        dispatch(setSpinner(false));
+
         alert("please login again");
       }
       console.log(error);

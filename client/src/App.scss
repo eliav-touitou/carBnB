@@ -714,63 +714,7 @@ form {
     }
   }
 }
-// .car-details {
-//   float: left;
-//   width: 70%;
-//   margin: 15px;
-//   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-//   padding: 0.7em;
-//   text-align: center;
-//   background-color: #f1f1f1;
-//   .first-details {
-//     width: 100%;
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: space-between;
-//     align-items: stretch;
-//     height: 100%;
-//     .no-photos-replacement {
-//       max-height: inherit;
-//       height: 100%;
-//       width: auto;
-//       object-fit: cover;
-//     }
-//     .data {
-//       display: flex;
-//       flex-direction: column;
-//       justify-content: center;
-//       align-content: center;
-//     }
-//     .buttons {
-//       // min-height: 100%;
-//       display: flex;
-//       flex-direction: column;
-//       padding-right: 0;
-//       justify-content: space-between;
-//       // button:first-childe {
-//       //   mlmlm
-//       // }
-//     }
-//   }
-// }
-// .results {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   width: 100%;
-//   margin-top: 4vh;
-// }
 
-// .rating-result {
-//   display: flex;
-//   align-items: flex-end;
-// }
-// .owner-rating-results {
-//   font-weight: bold;
-// }
-// .owner-rating-reviews {
-//   font-weight: lighter;
-// }
 .result {
   // overflow: visible;
   margin: 7vh 3vw;
@@ -3082,3 +3026,173 @@ $color_grey_dark: #a2a2a2;
   }
 }
 ///////////////////// resetpassword */
+////////////////////spinner
+.spinner {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  .sk-folding-cube {
+    width: 100px;
+    height: 100px;
+    -webkit-transform: rotateZ(45deg);
+    transform: rotateZ(45deg);
+    z-index: 9999;
+  }
+
+  .sk-folding-cube .sk-cube {
+    float: left;
+    width: 50%;
+    height: 50%;
+    position: relative;
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  .sk-folding-cube .sk-cube:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    -webkit-animation: sk-foldCubeAngle 2.8s infinite linear both;
+    animation: sk-foldCubeAngle 2.8s infinite linear both;
+    -webkit-transform-origin: 100% 100%;
+    -ms-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+  }
+  .sk-folding-cube .sk-cube2 {
+    -webkit-transform: scale(1.1) rotateZ(90deg);
+    transform: scale(1.1) rotateZ(90deg);
+  }
+  .sk-folding-cube .sk-cube3 {
+    -webkit-transform: scale(1.1) rotateZ(180deg);
+    transform: scale(1.1) rotateZ(180deg);
+  }
+  .sk-folding-cube .sk-cube4 {
+    -webkit-transform: scale(1.1) rotateZ(270deg);
+    transform: scale(1.1) rotateZ(270deg);
+  }
+  .sk-folding-cube .sk-cube2:before {
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+  }
+  .sk-folding-cube .sk-cube3:before {
+    -webkit-animation-delay: 0.6s;
+    animation-delay: 0.6s;
+  }
+  .sk-folding-cube .sk-cube4:before {
+    -webkit-animation-delay: 0.9s;
+    animation-delay: 0.9s;
+  }
+  @-webkit-keyframes sk-foldCubeAngle {
+    0%,
+    10% {
+      -webkit-transform: perspective(140px) rotateX(-180deg);
+      transform: perspective(140px) rotateX(-180deg);
+      opacity: 0;
+    }
+    25%,
+    75% {
+      -webkit-transform: perspective(140px) rotateX(0deg);
+      transform: perspective(140px) rotateX(0deg);
+      opacity: 1;
+    }
+    90%,
+    100% {
+      -webkit-transform: perspective(140px) rotateY(180deg);
+      transform: perspective(140px) rotateY(180deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes sk-foldCubeAngle {
+    0%,
+    10% {
+      -webkit-transform: perspective(140px) rotateX(-180deg);
+      transform: perspective(140px) rotateX(-180deg);
+      opacity: 0;
+    }
+    25%,
+    75% {
+      -webkit-transform: perspective(140px) rotateX(0deg);
+      transform: perspective(140px) rotateX(0deg);
+      opacity: 1;
+    }
+    90%,
+    100% {
+      -webkit-transform: perspective(140px) rotateY(180deg);
+      transform: perspective(140px) rotateY(180deg);
+      opacity: 0;
+    }
+  }
+}
+////////////////////////drop-down
+.dropbtn {
+  background-color: var(--wildWatermelon);
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 2vh;
+  font-weight: 600;
+  transition: transform 250ms ease, box-shadow 250ms ease;
+  &:hover {
+    // transform: translateY(-3px);
+    box-shadow: 0 10px 34px 0 rgba(30, 84, 97, 0.32);
+  }
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  .order-label {
+    min-width: 200px;
+    font-size: 1.3em;
+    background-color: #666666;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: rgba(158, 158, 158, 0.5) 0px 3px 3px;
+  }
+}
+
+.dropdown-content {
+  text-align: left;
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content div {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content div:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #2b788b;
+}

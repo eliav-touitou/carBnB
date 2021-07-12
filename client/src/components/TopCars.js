@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import FavoriteDetails from "./FavoriteDetails";
 
@@ -8,6 +9,7 @@ export default function CarsBySelection() {
   const owner = useLocation()?.state?.owner;
   const city = useLocation()?.state?.city;
   const { brand } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (owner) {
@@ -18,7 +20,9 @@ export default function CarsBySelection() {
         .then(({ data: cars }) => {
           setOwnerCars(cars.data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+        });
     }
     if (city) {
       axios
@@ -26,7 +30,9 @@ export default function CarsBySelection() {
         .then(({ data: cars }) => {
           setOwnerCars(cars.data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+        });
     }
     if (brand) {
       console.log(brand);
@@ -36,7 +42,9 @@ export default function CarsBySelection() {
           console.log(cars);
           setOwnerCars(cars.data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }, [owner, city, brand]);
 

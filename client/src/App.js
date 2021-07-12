@@ -52,6 +52,7 @@ function App() {
   const notificationCounter = useSelector((state) => state.notificationCounter);
   const auth = useSelector((state) => state.auth);
   const showLogin = useSelector((state) => state.showLogin);
+  const spinner = useSelector((state) => state.spinner);
 
   // Use state
   const [visibility, setVisibility] = useState(false);
@@ -152,6 +153,16 @@ function App() {
           setAnchorEl={setAnchorEl}
           setVisibility={setVisibility}
         />
+        {spinner && (
+          <div className="spinner">
+            <div className="sk-folding-cube">
+              <div className="sk-cube1 sk-cube"></div>
+              <div className="sk-cube2 sk-cube"></div>
+              <div className="sk-cube4 sk-cube"></div>
+              <div className="sk-cube3 sk-cube"></div>
+            </div>
+          </div>
+        )}
 
         {showLogin && <PromptLogin />}
         <Switch>
