@@ -14,7 +14,6 @@ const {
   addToUsersDB,
   addToAuthDB,
   updateItemToDB,
-  getItemFromDB,
   getUserByRating,
 } = require("../../../database/queries");
 const { writeLogs } = require("../../utils/helperFunctions");

@@ -1,12 +1,7 @@
 require("dotenv").config();
 const { Router } = require("express");
 const photos = Router();
-const {
-  addToPhotosDB,
-  getItemFromDB,
-  getPhoto,
-} = require("../../../database/queries");
-const { Photo } = require("../../../database/models");
+const { addToPhotosDB } = require("../../../database/queries");
 const { writeLogs } = require("../../utils/helperFunctions");
 
 // Save new photo in DB
