@@ -3204,6 +3204,18 @@ form {
   width: 3px;
 }
 
+.top-owner-div .top-car-information,
+.top-city-div .top-car-information {
+  max-height: 17vh;
+  min-height: 17vh;
+  overflow-y: auto;
+}
+
+.top-owner-div .top-car-information::-webkit-scrollbar,
+.top-city-div .top-car-information::-webkit-scrollbar {
+  width: 3px;
+}
+
 .ft-recipe {
   margin: 5vh 3vw;
   width: 400px;
