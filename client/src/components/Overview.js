@@ -3,9 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import OverviewDetail from "./OverviewDetail";
 
 export default function Overview({ iconsKey }) {
+  // Redux states
   const auth = useSelector((state) => state.auth);
 
+  // Use states
   const [userDetails, setUserDetails] = useState([]);
+
   useEffect(() => {
     const temp = Object.entries(auth);
     temp.map(([key, value]) => {

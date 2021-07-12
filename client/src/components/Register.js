@@ -2,16 +2,16 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowLogin } from "../actions";
+import { setShowLogin, setSpinner } from "../actions";
 
 export default function Register() {
   const dispatch = useDispatch();
+
   // UseRefs
   const passwordRef = useRef();
   const passwordValidationRef = useRef();
 
   // Redux states
-  const promptOrNormal = useSelector((state) => state.promptOrNormal);
   const auth = useSelector((state) => state.auth);
 
   // Use Effect
@@ -24,9 +24,10 @@ export default function Register() {
     const form = e.target;
     e.preventDefault();
     if (passwordRef.current.value !== passwordValidationRef.current.value) {
-      alert("Passwords does'nt match");
+      alert("Passwords doesn't match");
     }
     try {
+      dispatch(setSpinner(true));
       const formData = new FormData(form);
       const user = {};
       for (let [key, value] of formData.entries()) {
@@ -36,14 +37,14 @@ export default function Register() {
       user.password = passwordRef.current.value;
       await axios.post("/api/v1/users/register", { newUser: user });
       console.log("User Saved!");
+      dispatch(setSpinner(false));
     } catch (error) {
       console.log(error);
+      dispatch(setSpinner(false));
     }
   };
 
   return (
-    //   {promptOrNormal === "normal" && auth && <Redirect to="/" />}
-    // </div>
     <div className="form-container sign-up-container">
       <div
         className="x register"

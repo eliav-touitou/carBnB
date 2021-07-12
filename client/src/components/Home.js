@@ -1,33 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "./SearchBar";
-import {
-  setPromptOrNormal,
-  setNotFoundMessage,
-  setAllCitiesApi,
-  setInitialSearch,
-} from "../actions";
+import { setAllCitiesApi, setSpinner } from "../actions";
 import photo from "../photos/background-4593643_1920.jpg";
 import topCar from "../photos/top-car.jpeg";
 import topOwner from "../photos/top-owner.jpeg";
 import topLocation from "../photos/top-location.jpeg";
 import TopCarousel from "./TopCarousel";
-import Snackbar from "@material-ui/core/Snackbar";
-import MyFavorite from "./MyFavorite";
+
 import { Link } from "react-router-dom";
 
 export default function Home() {
   const dispatch = useDispatch();
 
-  // Redux states
-  const allCars = useSelector((state) => state.allCars);
-  const auth = useSelector((state) => state.auth);
-  const notFoundMessage = useSelector((state) => state.notFoundMessage);
-  const allCitiesApi = useSelector((state) => state.allCitiesApi);
-  const initialSearch = useSelector((state) => state.initialSearch);
-
   useEffect(() => {
+    dispatch(setSpinner(true));
+
     axios
       .get(
         "https://data.gov.il/api/3/action/datastore_search?resource_id=5c78e9fa-c2e2-4771-93ff-7f400a12f7ba&limit=1271"
@@ -41,19 +30,12 @@ export default function Home() {
           }
         });
         dispatch(setAllCitiesApi(temp));
+        dispatch(setSpinner(false));
       });
   }, []);
 
-  useEffect(() => {
-    if (notFoundMessage) {
-      setTimeout(() => {
-        dispatch(setNotFoundMessage(false));
-      }, 4500);
-    }
-  }, [notFoundMessage]);
-
   return (
-    <div>
+    <div className="home-page-container">
       <section className="land-section">
         <img className="intro-img" height="50%" src={photo}></img>
         <h1>
@@ -64,14 +46,7 @@ export default function Home() {
           <a href="#search">Let's Start</a>
         </span>
       </section>
-      {notFoundMessage && (
-        <Snackbar
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          open={true}
-          message={notFoundMessage}
-          key={"top" + "center"}
-        />
-      )}
+
       <section className="search-section" id="search">
         <SearchBar />
       </section>

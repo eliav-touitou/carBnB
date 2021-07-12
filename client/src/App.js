@@ -18,13 +18,13 @@ import { Badge } from "@material-ui/core";
 import PromptLogin from "./components/PromptLogin";
 import Avatar from "./components/Avatar";
 import logo from "./photos/logo-black.png";
-import CreditCards from "./components/CreditCards";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import Snackbar from "@material-ui/core/Snackbar";
 import MyFavorite from "./components/MyFavorite";
 import CarDetailsFromFavorite from "./components/CarDetailsFromFavorite";
 import Tops from "./components/Tops";
 import CarsBySelection from "./components/TopCars";
+import ResetPassword from "./components/ResetPassword";
 import {
   setAllCarsApi,
   setAuthOut,
@@ -52,6 +52,7 @@ function App() {
   const notificationCounter = useSelector((state) => state.notificationCounter);
   const auth = useSelector((state) => state.auth);
   const showLogin = useSelector((state) => state.showLogin);
+  const spinner = useSelector((state) => state.spinner);
 
   // Use state
   const [visibility, setVisibility] = useState(false);
@@ -111,9 +112,12 @@ function App() {
         <NavLink
           className="navlink add-car-btn"
           activeStyle={{ color: "navy" }}
-          to="/addnewcar"
+          to={auth && "/addnewcar"}
+          onClick={() => {
+            !auth && dispatch(setShowLogin(true));
+          }}
         >
-          Become a host
+          Rent Your Car
         </NavLink>
         {auth ? (
           <div className="navlink messages">
@@ -149,6 +153,16 @@ function App() {
           setAnchorEl={setAnchorEl}
           setVisibility={setVisibility}
         />
+        {spinner && (
+          <div className="spinner">
+            <div className="sk-folding-cube">
+              <div className="sk-cube1 sk-cube"></div>
+              <div className="sk-cube2 sk-cube"></div>
+              <div className="sk-cube4 sk-cube"></div>
+              <div className="sk-cube3 sk-cube"></div>
+            </div>
+          </div>
+        )}
 
         {showLogin && <PromptLogin />}
         <Switch>
@@ -161,11 +175,11 @@ function App() {
           <Route exact path="/register">
             <Register />
           </Route>
-          {auth && (
-            <Route exact path="/addnewcar">
-              <AddNewCar />
-            </Route>
-          )}
+
+          <Route exact path="/addnewcar">
+            <AddNewCar />
+          </Route>
+
           {auth && (
             <Route exact path="/profile">
               <Profile />
@@ -176,9 +190,6 @@ function App() {
           </Route>
           <Route exact path="/results">
             <Results />
-          </Route>
-          <Route exact path="/payment">
-            <CreditCards />
           </Route>
           <Route exact path="/summery">
             <OrderSummery />
@@ -201,12 +212,14 @@ function App() {
           <Route exact path="/allmyorders/:type" component={MyOrders} />
           <Route exact path="/order/:orderId" component={OrderDetails} />
           <Route exact path="/top/:type" component={Tops} />
+          <Route exact path="/resetpassword/:id" component={ResetPassword} />
           <Route
             exact
             path="/top/ownercars/:ownername"
             component={CarsBySelection}
           />
           <Route exact path="/top/city/:name" component={CarsBySelection} />
+          <Route exact path="/top/car/:brand" component={CarsBySelection} />
           <Route path="/" component={NotFound} />
         </Switch>
         {needToLogin && <Redirect push to="/" />}

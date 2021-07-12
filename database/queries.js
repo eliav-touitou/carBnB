@@ -83,9 +83,8 @@ const top5Cars = async () => {
     let idArray = [];
     carArray.forEach((car) => idArray.push(car.car_id));
 
-    console.log(idArray);
     const sortedCars = await getAllCarsByIdsArr(idArray);
-    console.log(sortedCars);
+
     return sortedCars;
   } catch (error) {
     throw error;
@@ -124,8 +123,7 @@ const top5Locations = async () => {
       ],
       group: ["address"],
     });
-    // console.log(typeof result);
-    console.log(result[0].Cars[0].dataValues.cars_number);
+
     result.sort(
       (a, b) =>
         b.Cars[0].dataValues.cars_number - a.Cars[0].dataValues.cars_number
@@ -133,7 +131,9 @@ const top5Locations = async () => {
     let cities = [];
 
     for (let i = 0; i < 5; i++) {
-      cities.push(result[i].address);
+      if (result[i]) {
+        cities.push(result[i].address);
+      }
     }
 
     return cities;
@@ -437,7 +437,10 @@ const getCarsByCity = async (city) => {
   return allCarsByCity;
 };
 
-getCarsByCity("Haifa");
+const getCarsByBrand = async (brand) => {
+  const allCarsByBrand = await Car.findAll({ where: { brand: brand } });
+  return allCarsByBrand;
+};
 
 module.exports = {
   getCar,
@@ -466,4 +469,5 @@ module.exports = {
   top5Owners,
   top5Locations,
   getCarsByCity,
+  getCarsByBrand,
 };

@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { setSpinner } from "../actions";
 import OrderDetails from "./OrderDetails";
 
 export default function MyOrders() {
   const { type } = useParams();
+  const dispatch = useDispatch();
 
   // Redux states
   const auth = useSelector((state) => state.auth);
@@ -15,16 +17,19 @@ export default function MyOrders() {
 
   useEffect(() => {
     const orderOrRental = type === "orders" ? "renter_email" : "owner_email";
+    dispatch(setSpinner(true));
+
     axios
       .post("/api/v1/rentals/myorders", {
         data: [auth.user_email, orderOrRental],
       })
       .then(({ data }) => {
         setAllOrders(data.data);
-        console.log(data);
+        dispatch(setSpinner(false));
       })
       .catch((err) => {
         console.log(err);
+        dispatch(setSpinner(false));
       });
   }, [window.location.href]);
 

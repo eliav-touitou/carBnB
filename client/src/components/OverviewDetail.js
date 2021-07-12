@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setAuth } from "../actions";
+import { setAuth, setSpinner } from "../actions";
 
 export default function OverviewDetail({ iconsKey, keys, value }) {
   const dispatch = useDispatch();
@@ -13,16 +13,9 @@ export default function OverviewDetail({ iconsKey, keys, value }) {
 
   // Use states
   const [isOpen, setIsOpen] = useState(false);
-  const [isNull, setIsNull] = useState(false);
 
   // Use ref
   const inputRef = useRef();
-
-  useEffect(() => {
-    if (value === null || value === "") {
-      setIsNull(true);
-    }
-  }, [value]);
 
   // Function for update user details
   const updateItem = async (keys, value) => {
@@ -48,19 +41,26 @@ export default function OverviewDetail({ iconsKey, keys, value }) {
         [firstName, lastName],
       ];
       try {
+        dispatch(setSpinner(true));
         await axiosRequestToUpdate(arrToUpdateAuth);
         await axiosRequestToUpdate(arrToUpdateUser);
         await updateStates();
+        dispatch(setSpinner(false));
       } catch (error) {
         console.log(error);
+        dispatch(setSpinner(false));
       }
     } else {
       arrToUpdateUser = ["User", [keys], auth.user_email, [value]];
       try {
+        dispatch(setSpinner(true));
+
         await axiosRequestToUpdate(arrToUpdateUser);
         await updateStates();
+        dispatch(setSpinner(false));
       } catch (error) {
         console.log(error);
+        dispatch(setSpinner(false));
       }
     }
   };

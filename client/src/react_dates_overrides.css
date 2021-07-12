@@ -65,3 +65,7 @@
   position: fixed;
   z-index: 9999;
 } */
+
+.DateRangePicker {
+  z-index: 1;
+}

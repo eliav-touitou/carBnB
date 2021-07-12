@@ -288,24 +288,44 @@ const writeLogs = async (body) => {
   });
 };
 
-const wikiScraper = async (city) => {
-  const url = `https://en.wikipedia.org/wiki/${city}`;
-  try {
-    const { data } = await axios.get(url);
-    // console.log(data);
-    const scraper = cheerio.load(data);
-    let dataFromWiki = scraper(
-      ".mw-body > #bodyContent > #mw-content-text > .mw-parser-output"
-    )
-      .children("p")
-      .eq(1)
-      .text()
-      .trim();
-    const textAboutTheCity = dataFromWiki.replace(/[^.,a-zA-Z ]/g, "");
-    console.log(textAboutTheCity);
-  } catch (err) {
-    throw err;
+const wikiScraper = async (topFive) => {
+  for (let i = 0; i < topFive.length; i++) {
+    city = topFive[i].replace("-", " ");
+    city = city.toLowerCase();
+    city = city.replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
+      letter.toUpperCase()
+    );
+    const url = `https://en.wikipedia.org/wiki/${city}`;
+    try {
+      const { data } = await axios.get(url);
+      const scraper = cheerio.load(data);
+      let dataFromWiki = scraper(
+        ".mw-body > #bodyContent > #mw-content-text > .mw-parser-output"
+      )
+        .children("p")
+        .eq(1)
+        .text()
+        .trim();
+      dataFromWiki = dataFromWiki.replace(/(\[.*?\]|\(.*?\))/g, "");
+      topFive[i] = { city: topFive[i], description: dataFromWiki };
+    } catch (err) {
+      if (err.response.status === 404) {
+        topFive[i] = { city: topFive[i], description: null };
+        continue;
+      } else {
+        const objToWrite = {
+          date: new Date(),
+          error: err,
+          status: 500,
+          ourMessage: "Problems with our server",
+          route: "wikiScraper Function",
+        };
+        await writeLogs(objToWrite);
+        throw err;
+      }
+    }
   }
+  return topFive;
 };
 
 module.exports = {

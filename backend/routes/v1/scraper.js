@@ -7,7 +7,7 @@ async function run() {
   const url = `https://en.wikipedia.org/wiki/${city}`;
   try {
     const { data } = await axios.get(url);
-    // console.log(data);
+
     const scraper = cheerio.load(data);
     let dataFromWiki = scraper(
       ".mw-body > #bodyContent > #mw-content-text > .mw-parser-output"
@@ -17,7 +17,6 @@ async function run() {
       .text()
       .trim();
     dataFromWiki = dataFromWiki.replace(/(\[.*?\]|\(.*?\))/g, "");
-    console.log(dataFromWiki);
   } catch (err) {
     console.log(err);
     const objToWrite = {

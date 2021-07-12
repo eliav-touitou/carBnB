@@ -139,3 +139,15 @@ export const setAllCitiesApi = (obj) => {
     payload: obj,
   };
 };
+export const setAuthLicense = (str) => {
+  return {
+    type: "SETAUTHLICENSE",
+    payload: str,
+  };
+};
+export const setSpinner = (bool) => {
+  return {
+    type: "SETSPINNER",
+    payload: bool,
+  };
+};

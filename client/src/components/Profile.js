@@ -1,18 +1,17 @@
-import React, { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
 import axios from "axios";
-import { setAuth } from "../actions";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import EventBusyIcon from "@material-ui/icons/EventBusy";
 import MyCars from "./MyCars";
 import AirlineSeatReclineNormalTwoToneIcon from "@material-ui/icons/AirlineSeatReclineNormalTwoTone";
 import LabelOutlinedIcon from "@material-ui/icons/LabelOutlined";
 import Overview from "./Overview";
+import { setSpinner } from "../actions";
 
 export default function Profile() {
   const dispatch = useDispatch();
+
   const iconsKey = {
     brand: <i className="fas fa-car-side"></i>,
     year: <i className="far fa-calendar-alt"></i>,
@@ -40,12 +39,19 @@ export default function Profile() {
   const [indexPage, setIndexPage] = useState(0);
 
   useEffect(() => {
+    dispatch(setSpinner(true));
     axios
       .post("/api/v1/search/getitem", {
         data: ["Car", ["owner_email"], [auth.user_email]],
       })
-      .then(({ data: cars }) => setMyCarsData(cars.data))
-      .catch((error) => console.log(error));
+      .then(({ data: cars }) => {
+        setMyCarsData(cars.data);
+        dispatch(setSpinner(false));
+      })
+      .catch((error) => {
+        dispatch(setSpinner(false));
+        console.log(error);
+      });
   }, []);
 
   const nextPage = () => {
@@ -99,7 +105,7 @@ export default function Profile() {
         <div className="rating-panel-profile">
           <span>
             <i className="fas fa-star"></i>
-            {auth.rating ? auth.rating : 0} / 5
+            {auth.rating ? Number(auth.rating).toFixed(1) : 0} / 5
           </span>
           <span>|</span>
           <span>
