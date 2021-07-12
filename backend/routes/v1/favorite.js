@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const favorite = Router();
-const { Favorite } = require("../../../database/models");
+const { Favorite } = require("../../database/models");
 
 const {
   addToFavoriteDB,
@@ -8,7 +8,7 @@ const {
   getItemFromDB,
   getAllCarsByIdsArr,
   whatCarsAreTaken,
-} = require("../../../database/queries");
+} = require("../../database/queries");
 const { writeLogs } = require("../../utils/helperFunctions");
 
 favorite.post("/add", async (req, res) => {

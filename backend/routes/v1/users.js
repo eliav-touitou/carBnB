@@ -1,8 +1,8 @@
 const { Router } = require("express");
 const users = Router();
 const { hashSync, genSaltSync, compareSync } = require("bcrypt");
-const { User, Auth, Car, Rental } = require("../../../database/models");
-const models = require("../../../database/models");
+const { User, Auth, Car, Rental } = require("../../database/models");
+const models = require("../../database/models");
 const {
   createAccessToken,
   createRefreshToken,
@@ -15,7 +15,7 @@ const {
   addToAuthDB,
   updateItemToDB,
   getUserByRating,
-} = require("../../../database/queries");
+} = require("../../database/queries");
 const { writeLogs } = require("../../utils/helperFunctions");
 
 const primaryKeys = {

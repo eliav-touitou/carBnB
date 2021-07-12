@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const notification = Router();
-const { getItemFromDB, updateItemToDB } = require("../../../database/queries");
-const { Notification } = require("../../../database/models");
+const { getItemFromDB, updateItemToDB } = require("../../database/queries");
+const { Notification } = require("../../database/models");
 const { writeLogs } = require("../../utils/helperFunctions");
 
 // Get all messages to user

@@ -5,9 +5,9 @@ const {
   getUserOrAuth,
   getItemFromDB,
   updateItemToDB,
-} = require("../../../database/queries");
+} = require("../../database/queries");
 const { hashSync, genSaltSync } = require("bcrypt");
-const { User, Auth } = require("../../../database/models");
+const { User, Auth } = require("../../database/models");
 const { googleLoginVerified } = require("../../utils/authentication");
 const { writeLogs, sendMail } = require("../../utils/helperFunctions");
 const { v4: uuidv4 } = require("uuid");

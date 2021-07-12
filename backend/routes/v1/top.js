@@ -6,7 +6,7 @@ const {
   top5Locations,
   top5Cars,
   getCarsByBrand,
-} = require("../../../database/queries");
+} = require("../../database/queries");
 
 top.get("/:type", async (req, res) => {
   const { type } = req.params;

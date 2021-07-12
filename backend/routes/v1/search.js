@@ -5,9 +5,9 @@ const {
   whatCarsAreTaken,
   getByCity,
   GetCarsByParameters,
-} = require("../../../database/queries");
-const { User, Auth, Car, Rental, Photo } = require("../../../database/models");
-const models = require("../../../database/models");
+} = require("../../database/queries");
+const { User, Auth, Car, Rental, Photo } = require("../../database/models");
+const models = require("../../database/models");
 const { writeLogs } = require("../../utils/helperFunctions");
 
 // Get any items from any table.

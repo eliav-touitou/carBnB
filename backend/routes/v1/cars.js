@@ -1,13 +1,13 @@
 const { Router } = require("express");
 const cars = Router();
-const { Car } = require("../../../database/models");
+const { Car } = require("../../database/models");
 const { validToken } = require("../../utils/authentication");
 const {
   getAllItems,
   getCar,
   addToCarsDB,
   getCarsByCity,
-} = require("../../../database/queries");
+} = require("../../database/queries");
 const { writeLogs } = require("../../utils/helperFunctions");
 
 // Gets a unique car
