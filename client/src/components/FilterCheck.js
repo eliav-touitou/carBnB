@@ -14,6 +14,7 @@ export default function FilterCheck() {
   const yearsFilter = useSelector((state) => state.yearsFilter);
   const priceFilter = useSelector((state) => state.priceFilter);
   const ratingFilter = useSelector((state) => state.ratingFilter);
+  const initialSearch = useSelector((state) => state.initialSearch);
 
   // Use states
   const [yearsArr, setYearsArr] = useState([]);
@@ -70,7 +71,11 @@ export default function FilterCheck() {
         ]);
       }
     });
-  }, []);
+    return () => {
+      setBrandFilterArr([]);
+      setModelFilterArr([]);
+    };
+  }, [initialSearch]);
 
   useEffect(() => {
     let tempResults = availableCars;

@@ -9,6 +9,7 @@ import {
   setAvailableCars,
   setInitialSearch,
   setNotFoundMessage,
+  setSpinner,
 } from "../actions";
 import moment from "moment";
 
@@ -44,15 +45,16 @@ export default function SearchBar() {
   }, [notFoundMessage]);
 
   const search = async () => {
+    dispatch(setSpinner(true));
     const city = cityRef.current.value;
     const passengers = Number(passengersRef.current.value.slice(0, -1));
 
     if (window.location.href !== "http://localhost:3000/") {
-      console.log("asdsad");
       setStartDate(moment(initialSearch.startDate));
       setEndDate(moment(initialSearch.endDate));
     } else {
       if (!passengers || !startDate || !endDate) {
+        dispatch(setSpinner(false));
         dispatch(setNotFoundMessage("You must fill all inputs"));
         return;
       }
@@ -78,8 +80,10 @@ export default function SearchBar() {
       if (availableCars.data.length !== 0) {
         dispatch(setInitialSearch(searchParameters.data));
         setResultsPage(true);
+        dispatch(setSpinner(false));
       }
     } catch (err) {
+      dispatch(setSpinner(false));
       dispatch(setNotFoundMessage(err.response.data.message));
       console.log(err);
     }
