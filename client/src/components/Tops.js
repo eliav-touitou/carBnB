@@ -16,6 +16,11 @@ export default function Tops() {
 
   const { type } = useParams();
   const stamMishpat = `located in the unique landscape of Israel, and offers a special opportunity to travel, enjoy and absorb  the local culture.`;
+  const sentence1 = `" I enjoy being a part of carBnB host's team. there is nothing that makes me feel better then seeing a satisfied guest. "`;
+  const sentence2 = `" Since my family and i became car hosts, we got the opportunity to benefit from extra time together, while helping guests in our city to find a good, comfortable and cheap alternative to car rentals companies. "`;
+  const sentence3 = `" I invite all the visitors of my city to join many other  guests that already enjoyed driving my cars through the wonderful local landscape. "`;
+  const sentence4 = `" CarBnB gave me the possibility to benefit from my unused cars, and help others in the same time. "`;
+  const sentence5 = `" With the great experience of carBnB, i got the opportunity to offer my car to whoever needs it for a great deal and make everyone satisfied. "`;
 
   // Use State
   const [top, setTop] = useState();
@@ -25,6 +30,13 @@ export default function Tops() {
     city3,
     city4,
     city5,
+  ]);
+  const [randomSentenceForUsersArr, setRandomSentenceForUsersArr] = useState([
+    sentence1,
+    sentence2,
+    sentence3,
+    sentence4,
+    sentence5,
   ]);
 
   useEffect(() => {
@@ -49,7 +61,12 @@ export default function Tops() {
         photoOfCitiesArr[rand],
         photoOfCitiesArr[i],
       ];
+      [randomSentenceForUsersArr[i], randomSentenceForUsersArr[rand]] = [
+        randomSentenceForUsersArr[rand],
+        randomSentenceForUsersArr[i],
+      ];
     }
+    setRandomSentenceForUsersArr(randomSentenceForUsersArr);
     setPhotoOfCitiesArr(photoOfCitiesArr);
   }, []);
 
@@ -146,11 +163,8 @@ export default function Tops() {
                         aria-hidden={true}
                       />
                     </span>
-                    <p className="information">
-                      " Let's spread the joy , here is Christmas , the most
-                      awaited day of the year.Christmas Tree is what one need
-                      the most. Here is the correct tree which will enhance your
-                      Christmas."
+                    <p className="information top-car-information">
+                      {randomSentenceForUsersArr[i]}
                     </p>
                     <Link
                       push={true}
