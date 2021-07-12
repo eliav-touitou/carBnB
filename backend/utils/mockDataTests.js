@@ -7,6 +7,7 @@ const notFoundMessage = { message: "NOT FOUND" };
 const userOrPasswordIncorrect = {
   message: "Username or password is incorrect",
 };
+const invalidTokenMessage = { message: "Access denied invalid token" };
 
 //---------------------------------------------------------------//
 //------------------------- CARS ---------------------------//
@@ -402,4 +403,5 @@ module.exports = {
   mockResponseAfterPasswordChanged,
   mockResponseUserNotExist,
   mockResponseResetCodeIncorrect,
+  invalidTokenMessage,
 };

@@ -31,6 +31,7 @@ const {
   mockResponseAfterPasswordChanged,
   mockResponseUserNotExist,
   mockResponseResetCodeIncorrect,
+  invalidTokenMessage,
 } = require("./utils/mockDataTests");
 const app = require("./app");
 const { Car, Rental, User, Auth, Photo } = require("../database/models");
@@ -622,5 +623,29 @@ describe("Auth route", () => {
       // Is the response equals to mock response
       expect(response.body).toEqual(mockResponseUserNotExist);
     });
+  });
+});
+
+describe("Valid Token", () => {
+  it("Should return 401 error user don't have valid token in favorite route", async () => {
+    const response = await request(app)
+      .post("/api/v1/favorite/add")
+      .send({ carId: 3, userEmail: "test@testi.com" });
+
+    // Is the status code 401
+    expect(response.status).toBe(401);
+    // Is the response equals to mock response
+    expect(response.body).toEqual(invalidTokenMessage);
+  });
+
+  it("Should return 401 error user don't have valid token in notification route", async () => {
+    const response = await request(app)
+      .post("/api/v1/notification/messages")
+      .send({ data: { email: "test@testi.com" } });
+
+    // Is the status code 401
+    expect(response.status).toBe(401);
+    // Is the response equals to mock response
+    expect(response.body).toEqual(invalidTokenMessage);
   });
 });
