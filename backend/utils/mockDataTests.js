@@ -363,6 +363,37 @@ const mockResponseDetailsOfItem = {
   ],
 };
 
+const mockInitialSearch = {
+  data: {
+    city: "MODI'IN-MAKKABBIM-RE",
+    startDate: "2021-07-21T09:00:00.000Z",
+    endDate: "2021-07-23T09:00:00.000Z",
+    passengers: 4,
+  },
+};
+
+const mockResponseForInitialSearch = {
+  message: "successful",
+  data: [
+    {
+      car_id: 1,
+      owner_email: "eyal@gmail.com",
+      brand: "PEUGEOT",
+      model: "505",
+      year: 2009,
+      fuel: "OCTAN-95",
+      passengers: 5,
+      price_per_day: 50,
+      discount_for_week: "5%",
+      discount_for_month: "10%",
+      is_rented: false,
+      gear: "Manual",
+      owner_rating: 1,
+      number_of_votes: 1,
+    },
+  ],
+};
+
 module.exports = {
   notFoundMessage,
   mockBodyResponseAllCars,
@@ -396,4 +427,6 @@ module.exports = {
   invalidTokenMessage,
   mockDataToGetDetails,
   mockResponseDetailsOfItem,
+  mockInitialSearch,
+  mockResponseForInitialSearch,
 };
