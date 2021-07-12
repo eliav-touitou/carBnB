@@ -1,0 +1,42 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d9c6c7fb.chunk.css",
+    "main.js": "/static/js/main.0b8f6276.chunk.js",
+    "main.js.map": "/static/js/main.0b8f6276.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.7545a8a1.js",
+    "runtime-main.js.map": "/static/js/runtime-main.7545a8a1.js.map",
+    "static/css/2.582760c2.chunk.css": "/static/css/2.582760c2.chunk.css",
+    "static/js/2.a7a54728.chunk.js": "/static/js/2.a7a54728.chunk.js",
+    "static/js/2.a7a54728.chunk.js.map": "/static/js/2.a7a54728.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.582760c2.chunk.css.map": "/static/css/2.582760c2.chunk.css.map",
+    "static/css/main.d9c6c7fb.chunk.css.map": "/static/css/main.d9c6c7fb.chunk.css.map",
+    "static/js/2.a7a54728.chunk.js.LICENSE.txt": "/static/js/2.a7a54728.chunk.js.LICENSE.txt",
+    "static/media/background-4593643_1920.f7b44022.jpg": "/static/media/background-4593643_1920.f7b44022.jpg",
+    "static/media/bmw-logo.f09bec57.jpg": "/static/media/bmw-logo.f09bec57.jpg",
+    "static/media/App.css": "/static/media/scratch.ad357e87.png",
+    "static/media/city1.f861a581.jpeg": "/static/media/city1.f861a581.jpeg",
+    "static/media/city2.14657faf.jpeg": "/static/media/city2.14657faf.jpeg",
+    "static/media/city3.257f857a.jpeg": "/static/media/city3.257f857a.jpeg",
+    "static/media/city4.40d89517.jpeg": "/static/media/city4.40d89517.jpeg",
+    "static/media/city5.e6a90d09.jpeg": "/static/media/city5.e6a90d09.jpeg",
+    "static/media/ford-logo.5ece7ffe.jpg": "/static/media/ford-logo.5ece7ffe.jpg",
+    "static/media/mazda-logo.8da475f6.jpg": "/static/media/mazda-logo.8da475f6.jpg",
+    "static/media/message-photo.3b3c4de2.jpg": "/static/media/message-photo.3b3c4de2.jpg",
+    "static/media/no-car-photo.b76b185a.png": "/static/media/no-car-photo.b76b185a.png",
+    "static/media/peugeot-logo.f8c9c4ff.jpg": "/static/media/peugeot-logo.f8c9c4ff.jpg",
+    "static/media/tesla-logo.73c29e2d.jpg": "/static/media/tesla-logo.73c29e2d.jpg",
+    "static/media/top-car.219c240b.jpeg": "/static/media/top-car.219c240b.jpeg",
+    "static/media/top-location.38593913.jpeg": "/static/media/top-location.38593913.jpeg",
+    "static/media/top-owner-car.84754b42.jpeg": "/static/media/top-owner-car.84754b42.jpeg",
+    "static/media/top-owner.9f22d43d.jpeg": "/static/media/top-owner.9f22d43d.jpeg",
+    "static/media/toyota-logo.89418194.jpg": "/static/media/toyota-logo.89418194.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7545a8a1.js",
+    "static/css/2.582760c2.chunk.css",
+    "static/js/2.a7a54728.chunk.js",
+    "static/css/main.d9c6c7fb.chunk.css",
+    "static/js/main.0b8f6276.chunk.js"
+  ]
+}

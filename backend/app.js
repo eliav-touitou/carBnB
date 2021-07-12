@@ -11,10 +11,10 @@ app.use(
   express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 })
 );
 
-app.use(express.static("../client/build"));
+app.use(express.static("./build"));
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile("index.html");
 });
 
 app.use("/api", api);

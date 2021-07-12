@@ -1,0 +1,20 @@
+{
+  "name": "carbnb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd backend && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eliav-touitou/carBnB.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eliav-touitou/carBnB/issues"
+  },
+  "homepage": "https://github.com/eliav-touitou/carBnB#readme"
+}
