@@ -337,6 +337,32 @@ const mockResponseAfterPasswordChanged = {
 const mockResponseUserNotExist = { message: "This email does not exist" };
 const mockResponseResetCodeIncorrect = { message: "Incorrect Reset Code" };
 
+//---------------------------------------------------------------//
+//------------------------- Search ---------------------------//
+
+const mockDataToGetDetails = {
+  data: ["Car", ["owner_email"], ["jino@gmail.com"]],
+};
+const mockResponseDetailsOfItem = {
+  message: "Success",
+  data: [
+    {
+      car_id: 2,
+      owner_email: "jino@gmail.com",
+      brand: "SUZUKI",
+      model: "VERONA",
+      year: 2014,
+      fuel: "OCTAN-95",
+      passengers: 4,
+      price_per_day: 30,
+      discount_for_week: "10%",
+      discount_for_month: "15%",
+      is_rented: false,
+      gear: "Auto",
+    },
+  ],
+};
+
 module.exports = {
   notFoundMessage,
   mockBodyResponseAllCars,
@@ -368,4 +394,6 @@ module.exports = {
   mockResponseUserNotExist,
   mockResponseResetCodeIncorrect,
   invalidTokenMessage,
+  mockDataToGetDetails,
+  mockResponseDetailsOfItem,
 };
