@@ -34,6 +34,11 @@ const {
   mockResponseDetailsOfItem,
   mockInitialSearch,
   mockResponseForInitialSearch,
+  mockNotExistDataToGetDetails,
+  mockNoCityInitialSearch,
+  notFoundCarInThisCity,
+  mockNoAvailableCarsByParameters,
+  notFoundCarByParameters,
 } = require("./utils/mockDataTests");
 const app = require("./app");
 const { Car, Rental, User, Auth, Photo } = require("../database/models");
@@ -704,5 +709,40 @@ describe("Search route", () => {
     expect(response.status).toBe(200);
     // Is the response equals to mock response
     expect(data).toEqual(mockResponseForInitialSearch);
+  });
+
+  describe("Inner Search route", () => {
+    it("Should return 404 error if there no item found", async () => {
+      const response = await request(app)
+        .post("/api/v1/search/getitem")
+        .send(mockNotExistDataToGetDetails);
+
+      // Is the status code 404
+      expect(response.status).toBe(404);
+      // Is the response equals to mock response
+      expect(response.body).toEqual(notFoundMessage);
+    });
+
+    it("Should return 404 error if there no cars in this city", async () => {
+      const response = await request(app)
+        .post("/api/v1/search/initial")
+        .send(mockNoCityInitialSearch);
+
+      // Is the status code 404
+      expect(response.status).toBe(404);
+      // Is the response equals to mock response
+      expect(response.body).toEqual(notFoundCarInThisCity);
+    });
+
+    it("Should return 404 error if there no cars by parameters in this city", async () => {
+      const response = await request(app)
+        .post("/api/v1/search/initial")
+        .send(mockNoAvailableCarsByParameters);
+
+      // Is the status code 404
+      expect(response.status).toBe(404);
+      // Is the response equals to mock response
+      expect(response.body).toEqual(notFoundCarByParameters);
+    });
   });
 });

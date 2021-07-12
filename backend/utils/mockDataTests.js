@@ -9,6 +9,11 @@ const userOrPasswordIncorrect = {
 };
 const invalidTokenMessage = { message: "Access denied invalid token" };
 
+const notFoundCarInThisCity = { message: "THERE IS NO AVAILABLE CAR IN EILAT" };
+const notFoundCarByParameters = {
+  message: `THERE IS NO AVAILABLE CAR THAT MATCH TO CHOSEN OPTIONS`,
+};
+
 //---------------------------------------------------------------//
 //------------------------- CARS ---------------------------//
 
@@ -394,6 +399,27 @@ const mockResponseForInitialSearch = {
   ],
 };
 
+const mockNotExistDataToGetDetails = {
+  data: ["Car", ["owner_email"], ["aaaaaa@aaaa.com"]],
+};
+
+const mockNoCityInitialSearch = {
+  data: {
+    city: "EILAT",
+    startDate: "2021-07-21T09:00:00.000Z",
+    endDate: "2021-07-23T09:00:00.000Z",
+    passengers: 4,
+  },
+};
+const mockNoAvailableCarsByParameters = {
+  data: {
+    city: "MODI'IN-MAKKABBIM-RE",
+    startDate: "2021-07-21T09:00:00.000Z",
+    endDate: "2021-07-23T09:00:00.000Z",
+    passengers: 6,
+  },
+};
+
 module.exports = {
   notFoundMessage,
   mockBodyResponseAllCars,
@@ -429,4 +455,9 @@ module.exports = {
   mockResponseDetailsOfItem,
   mockInitialSearch,
   mockResponseForInitialSearch,
+  mockNotExistDataToGetDetails,
+  mockNoCityInitialSearch,
+  notFoundCarInThisCity,
+  mockNoAvailableCarsByParameters,
+  notFoundCarByParameters,
 };
