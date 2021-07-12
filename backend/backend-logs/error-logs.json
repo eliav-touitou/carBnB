@@ -431,6 +431,37 @@
       "status": 500,
       "ourMessage": "Problems with our server",
       "route": "api/v1/users/register"
+    },
+    {
+      "date": "2021-07-12T11:33:01.056Z",
+      "error": {
+        "name": "SequelizeDatabaseError",
+        "parent": {
+          "code": "ER_WRONG_VALUE",
+          "errno": 1525,
+          "sqlState": "HY000",
+          "sqlMessage": "Incorrect DATETIME value: 'Invalid date'",
+          "sql": "SELECT `car_id`, `owner_email`, `brand`, `model`, `year`, `fuel`, `passengers`, `price_per_day`, `discount_for_week`, `discount_for_month`, `is_rented`, `available_from`, `available_until`, `gear`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `cars` AS `Car` WHERE (((`Car`.`available_from` <= 'Invalid date' AND `Car`.`available_until` >= '2021-07-23 09:00:00') OR `Car`.`available_from` IS NULL) AND `Car`.`passengers` >= 4 AND `Car`.`owner_email` IN ('eyal@gmail.com'));"
+        },
+        "original": {
+          "code": "ER_WRONG_VALUE",
+          "errno": 1525,
+          "sqlState": "HY000",
+          "sqlMessage": "Incorrect DATETIME value: 'Invalid date'",
+          "sql": "SELECT `car_id`, `owner_email`, `brand`, `model`, `year`, `fuel`, `passengers`, `price_per_day`, `discount_for_week`, `discount_for_month`, `is_rented`, `available_from`, `available_until`, `gear`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `cars` AS `Car` WHERE (((`Car`.`available_from` <= 'Invalid date' AND `Car`.`available_until` >= '2021-07-23 09:00:00') OR `Car`.`available_from` IS NULL) AND `Car`.`passengers` >= 4 AND `Car`.`owner_email` IN ('eyal@gmail.com'));"
+        },
+        "sql": "SELECT `car_id`, `owner_email`, `brand`, `model`, `year`, `fuel`, `passengers`, `price_per_day`, `discount_for_week`, `discount_for_month`, `is_rented`, `available_from`, `available_until`, `gear`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `cars` AS `Car` WHERE (((`Car`.`available_from` <= 'Invalid date' AND `Car`.`available_until` >= '2021-07-23 09:00:00') OR `Car`.`available_from` IS NULL) AND `Car`.`passengers` >= 4 AND `Car`.`owner_email` IN ('eyal@gmail.com'));"
+      },
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/search/initial"
+    },
+    {
+      "date": "2021-07-12T14:00:57.063Z",
+      "error": {},
+      "status": 500,
+      "ourMessage": "Problems with our server",
+      "route": "api/v1/top/locations"
     }
   ]
 }

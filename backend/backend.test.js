@@ -4,8 +4,6 @@ const {
   mockBodyResponseAllCars,
   uniqueCarId,
   mockBodyResponseUniqueCar,
-  mockNewCarToUpload,
-  mockBodyResponseForUpload,
   mockBodyResponseAllRentals,
   uniqueRentalId,
   mockBodyResponseUniqueRental,
@@ -26,9 +24,25 @@ const {
   userOrPasswordIncorrect,
   mockNewPhotoToUpload,
   mockResponseSavePhoto,
+  mockUserToChangePassword,
+  mockResponseUserToChangePassword,
+  mockResponseAfterPasswordChanged,
+  mockResponseUserNotExist,
+  mockResponseResetCodeIncorrect,
+  invalidTokenMessage,
+  mockDataToGetDetails,
+  mockResponseDetailsOfItem,
+  mockInitialSearch,
+  mockResponseForInitialSearch,
+  mockNotExistDataToGetDetails,
+  mockNoCityInitialSearch,
+  notFoundCarInThisCity,
+  mockNoAvailableCarsByParameters,
+  notFoundCarByParameters,
 } = require("./utils/mockDataTests");
 const app = require("./app");
 const { Car, Rental, User, Auth, Photo } = require("../database/models");
+const { getUserOrAuth } = require("../database/queries");
 const {
   mockCarsSeeders,
   mockRentalsSeeders,
@@ -43,6 +57,7 @@ describe("Cars route", () => {
   beforeEach(async () => {
     console.log("before each - cars route");
     try {
+      await Car.destroy({ where: {} });
       await Car.bulkCreate(mockCarsSeeders);
     } catch (err) {
       console.log(err);
@@ -103,27 +118,6 @@ describe("Cars route", () => {
     // Is the response equals to mock response
     expect(data).toEqual(mockBodyResponseUniqueCar);
   });
-
-  // it("Should success upload new car to DB", async () => {
-  //   const responseAllCarsBefore = await request(app).get(
-  //     "/api/v1/cars/allcars"
-  //   );
-  //   const response = await request(app)
-  //     .post("/api/v1/cars/upload")
-  //     .send(mockNewCarToUpload);
-
-  //   const responseAllCarsAfter = await request(app).get("/api/v1/cars/allcars");
-
-  //   // Is the status code 200
-  //   expect(response.status).toBe(200);
-  //   // Is the response equals to mock response
-  //   expect(response.body).toEqual(mockBodyResponseForUpload);
-
-  //   // Check if the length of all cars before upload is less then after
-  //   expect(responseAllCarsBefore.body.data.length).toBeLessThan(
-  //     responseAllCarsAfter.body.data.length
-  //   );
-  // });
 
   it("Should return a car from DB by city name", async () => {
     const response = await request(app).get("/api/v1/cars/bycity/HAIFA");
@@ -266,6 +260,15 @@ describe("Top route", () => {
     console.log("after each - top route");
     try {
       await Car.destroy({ where: {} });
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  afterAll(async () => {
+    console.log("after all - top route");
+    try {
+      await Car.bulkCreate(mockCarsSeeders);
     } catch (err) {
       console.log(err);
     }
@@ -541,5 +544,205 @@ describe("Photo route", () => {
     expect(response.status).toBe(200);
     // Is the response equals to mock response
     expect(response.body).toEqual(mockResponseSavePhoto);
+  });
+});
+
+describe("Auth route", () => {
+  it("Should be able to get reset code for forget password", async () => {
+    const response = await request(app)
+      .put("/api/v1/auth/forgotpassword")
+      .send(mockUserToChangePassword);
+
+    // Is the status code 200
+    expect(response.status).toBe(200);
+    // Is the response equals to mock response
+    expect(response.body).toEqual(mockResponseUserToChangePassword);
+  });
+
+  it("Should return 404 error if reset code is incorrect", async () => {
+    const user = await getUserOrAuth({
+      model: Auth,
+      email: "eliav@gmail.com",
+    });
+    const { id } = user.toJSON();
+
+    const mockDataToChangePassword = {
+      resetCode: "204867",
+      newPassword: "i am test",
+    };
+
+    const response = await request(app)
+      .put(`/api/v1/auth/resetpassword/${id}`)
+      .send(mockDataToChangePassword);
+    // Is the status code 404
+    expect(response.status).toBe(404);
+    // Is the response equals to mock response
+    expect(response.body).toEqual(mockResponseResetCodeIncorrect);
+  });
+
+  it("Should success to change password if forget", async () => {
+    const user = await getUserOrAuth({ model: Auth, email: "eliav@gmail.com" });
+    const { id, reset_code } = user.toJSON();
+
+    const mockDataToChangePassword = {
+      resetCode: reset_code,
+      newPassword: "i am test",
+    };
+
+    const response = await request(app)
+      .put(`/api/v1/auth/resetpassword/${id}`)
+      .send(mockDataToChangePassword);
+
+    // Is the status code 200
+    expect(response.status).toBe(200);
+    // Is the response equals to mock response
+    expect(response.body).toEqual(mockResponseAfterPasswordChanged);
+  });
+
+  it("Should delete reset code after user change the password", async () => {
+    const user = await getUserOrAuth({ model: Auth, email: "eliav@gmail.com" });
+
+    const { reset_code } = user.toJSON();
+
+    // Is the response equals to mock response
+    expect(reset_code).toEqual(null);
+  });
+
+  describe("Inner Auth route", () => {
+    it("Should return 404 error if not exist user try to reset password", async () => {
+      const response = await request(app)
+        .put("/api/v1/auth/forgotpassword")
+        .send({ userEmail: "test@testi.com" });
+
+      // Is the status code 404
+      expect(response.status).toBe(404);
+      // Is the response equals to mock response
+      expect(response.body).toEqual(mockResponseUserNotExist);
+    });
+  });
+});
+
+describe("Valid Token", () => {
+  it("Should return 401 error user don't have valid token in favorite route", async () => {
+    const response = await request(app)
+      .post("/api/v1/favorite/add")
+      .send({ carId: 3, userEmail: "test@testi.com" });
+
+    // Is the status code 401
+    expect(response.status).toBe(401);
+    // Is the response equals to mock response
+    expect(response.body).toEqual(invalidTokenMessage);
+  });
+
+  it("Should return 401 error user don't have valid token in notification route", async () => {
+    const response = await request(app)
+      .post("/api/v1/notification/messages")
+      .send({ data: { email: "test@testi.com" } });
+
+    // Is the status code 401
+    expect(response.status).toBe(401);
+    // Is the response equals to mock response
+    expect(response.body).toEqual(invalidTokenMessage);
+  });
+});
+
+describe("Search route", () => {
+  it("Should return data of item searched", async () => {
+    const response = await request(app)
+      .post("/api/v1/search/getitem")
+      .send(mockDataToGetDetails);
+
+    const data = {
+      message: "Success",
+      data: [
+        {
+          car_id: response.body.data[0].car_id,
+          owner_email: response.body.data[0].owner_email,
+          brand: response.body.data[0].brand,
+          model: response.body.data[0].model,
+          year: response.body.data[0].year,
+          fuel: response.body.data[0].fuel,
+          passengers: response.body.data[0].passengers,
+          price_per_day: response.body.data[0].price_per_day,
+          discount_for_week: response.body.data[0].discount_for_week,
+          discount_for_month: response.body.data[0].discount_for_month,
+          is_rented: response.body.data[0].is_rented,
+          gear: response.body.data[0].gear,
+        },
+      ],
+    };
+
+    // Is the status code 200
+    expect(response.status).toBe(200);
+    // Is the response equals to mock response
+    expect(data).toEqual(mockResponseDetailsOfItem);
+  });
+
+  it("Should return all available cars from initial search", async () => {
+    const response = await request(app)
+      .post("/api/v1/search/initial")
+      .send(mockInitialSearch);
+
+    const data = {
+      message: "successful",
+      data: [
+        {
+          car_id: response.body.data[0].car_id,
+          owner_email: response.body.data[0].owner_email,
+          brand: response.body.data[0].brand,
+          model: response.body.data[0].model,
+          year: response.body.data[0].year,
+          fuel: response.body.data[0].fuel,
+          passengers: response.body.data[0].passengers,
+          price_per_day: response.body.data[0].price_per_day,
+          discount_for_week: response.body.data[0].discount_for_week,
+          discount_for_month: response.body.data[0].discount_for_month,
+          is_rented: response.body.data[0].is_rented,
+          gear: response.body.data[0].gear,
+          owner_rating: response.body.data[0].owner_rating,
+          number_of_votes: response.body.data[0].number_of_votes,
+        },
+      ],
+    };
+
+    // Is the status code 200
+    expect(response.status).toBe(200);
+    // Is the response equals to mock response
+    expect(data).toEqual(mockResponseForInitialSearch);
+  });
+
+  describe("Inner Search route", () => {
+    it("Should return 404 error if there no item found", async () => {
+      const response = await request(app)
+        .post("/api/v1/search/getitem")
+        .send(mockNotExistDataToGetDetails);
+
+      // Is the status code 404
+      expect(response.status).toBe(404);
+      // Is the response equals to mock response
+      expect(response.body).toEqual(notFoundMessage);
+    });
+
+    it("Should return 404 error if there no cars in this city", async () => {
+      const response = await request(app)
+        .post("/api/v1/search/initial")
+        .send(mockNoCityInitialSearch);
+
+      // Is the status code 404
+      expect(response.status).toBe(404);
+      // Is the response equals to mock response
+      expect(response.body).toEqual(notFoundCarInThisCity);
+    });
+
+    it("Should return 404 error if there no cars by parameters in this city", async () => {
+      const response = await request(app)
+        .post("/api/v1/search/initial")
+        .send(mockNoAvailableCarsByParameters);
+
+      // Is the status code 404
+      expect(response.status).toBe(404);
+      // Is the response equals to mock response
+      expect(response.body).toEqual(notFoundCarByParameters);
+    });
   });
 });

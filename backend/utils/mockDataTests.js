@@ -7,6 +7,12 @@ const notFoundMessage = { message: "NOT FOUND" };
 const userOrPasswordIncorrect = {
   message: "Username or password is incorrect",
 };
+const invalidTokenMessage = { message: "Access denied invalid token" };
+
+const notFoundCarInThisCity = { message: "THERE IS NO AVAILABLE CAR IN EILAT" };
+const notFoundCarByParameters = {
+  message: `THERE IS NO AVAILABLE CAR THAT MATCH TO CHOSEN OPTIONS`,
+};
 
 //---------------------------------------------------------------//
 //------------------------- CARS ---------------------------//
@@ -46,40 +52,6 @@ const mockBodyResponseUniqueCar = {
 };
 
 const uniqueCarId = { id: 1 };
-
-const mockNewCarToUpload = {
-  newCar: {
-    ownerEmail: "eyal@gmail.com",
-    brand: "HONDA",
-    model: "CIVIC",
-    gear: "Auto",
-    year: "2010",
-    fuel: "Octan-95",
-    until: null,
-    from: null,
-    passengers: 5,
-    pricePerDay: 100,
-    discountPerWeek: "5%",
-    discountPerMonth: "10%",
-  },
-};
-const mockBodyResponseForUpload = {
-  success: true,
-  data: {
-    ownerEmail: "eyal@gmail.com",
-    brand: "HONDA",
-    model: "CIVIC",
-    gear: "Auto",
-    year: "2010",
-    fuel: "Octan-95",
-    until: null,
-    from: null,
-    passengers: 5,
-    pricePerDay: 100,
-    discountPerWeek: "5%",
-    discountPerMonth: "10%",
-  },
-};
 
 const mockBodyResponseGetCarByCityName = {
   car_id: 2,
@@ -249,7 +221,7 @@ const mockBodyResponseUniqueUser = {
     address: "EFRATA",
     rating: 4,
     number_of_votes: 2,
-    license: null,
+    license: "fake licence",
   },
 };
 
@@ -266,7 +238,7 @@ const mockBodyResponseUsersByRating = {
       address: "EFRATA",
       rating: 4,
       number_of_votes: 2,
-      license: null,
+      license: "fake licence",
     },
     {
       user_email: "gil@hotmail.com",
@@ -354,13 +326,105 @@ const mockNewPhotoToUpload = [{ file: "new photo to upload", car_id: 3 }];
 
 const mockResponseSavePhoto = { success: true };
 
+//---------------------------------------------------------------//
+//------------------------- Auth ---------------------------//
+
+const mockUserToChangePassword = { userEmail: "eliav@gmail.com" };
+
+const mockResponseUserToChangePassword = {
+  message: "Check your mail box, reset link successfully send",
+};
+
+const mockResponseAfterPasswordChanged = {
+  message: "Your new password successfully updated",
+};
+
+const mockResponseUserNotExist = { message: "This email does not exist" };
+const mockResponseResetCodeIncorrect = { message: "Incorrect Reset Code" };
+
+//---------------------------------------------------------------//
+//------------------------- Search ---------------------------//
+
+const mockDataToGetDetails = {
+  data: ["Car", ["owner_email"], ["jino@gmail.com"]],
+};
+const mockResponseDetailsOfItem = {
+  message: "Success",
+  data: [
+    {
+      car_id: 2,
+      owner_email: "jino@gmail.com",
+      brand: "SUZUKI",
+      model: "VERONA",
+      year: 2014,
+      fuel: "OCTAN-95",
+      passengers: 4,
+      price_per_day: 30,
+      discount_for_week: "10%",
+      discount_for_month: "15%",
+      is_rented: false,
+      gear: "Auto",
+    },
+  ],
+};
+
+const mockInitialSearch = {
+  data: {
+    city: "MODI'IN-MAKKABBIM-RE",
+    startDate: "2021-07-21T09:00:00.000Z",
+    endDate: "2021-07-23T09:00:00.000Z",
+    passengers: 4,
+  },
+};
+
+const mockResponseForInitialSearch = {
+  message: "successful",
+  data: [
+    {
+      car_id: 1,
+      owner_email: "eyal@gmail.com",
+      brand: "PEUGEOT",
+      model: "505",
+      year: 2009,
+      fuel: "OCTAN-95",
+      passengers: 5,
+      price_per_day: 50,
+      discount_for_week: "5%",
+      discount_for_month: "10%",
+      is_rented: false,
+      gear: "Manual",
+      owner_rating: 1,
+      number_of_votes: 1,
+    },
+  ],
+};
+
+const mockNotExistDataToGetDetails = {
+  data: ["Car", ["owner_email"], ["aaaaaa@aaaa.com"]],
+};
+
+const mockNoCityInitialSearch = {
+  data: {
+    city: "EILAT",
+    startDate: "2021-07-21T09:00:00.000Z",
+    endDate: "2021-07-23T09:00:00.000Z",
+    passengers: 4,
+  },
+};
+const mockNoAvailableCarsByParameters = {
+  data: {
+    city: "MODI'IN-MAKKABBIM-RE",
+    startDate: "2021-07-21T09:00:00.000Z",
+    endDate: "2021-07-23T09:00:00.000Z",
+    passengers: 6,
+  },
+};
+
 module.exports = {
   notFoundMessage,
   mockBodyResponseAllCars,
   uniqueCarId,
   mockBodyResponseUniqueCar,
-  mockNewCarToUpload,
-  mockBodyResponseForUpload,
   mockBodyResponseAllRentals,
   uniqueRentalId,
   mockBodyResponseUniqueRental,
@@ -381,4 +445,19 @@ module.exports = {
   userOrPasswordIncorrect,
   mockNewPhotoToUpload,
   mockResponseSavePhoto,
+  mockUserToChangePassword,
+  mockResponseUserToChangePassword,
+  mockResponseAfterPasswordChanged,
+  mockResponseUserNotExist,
+  mockResponseResetCodeIncorrect,
+  invalidTokenMessage,
+  mockDataToGetDetails,
+  mockResponseDetailsOfItem,
+  mockInitialSearch,
+  mockResponseForInitialSearch,
+  mockNotExistDataToGetDetails,
+  mockNoCityInitialSearch,
+  notFoundCarInThisCity,
+  mockNoAvailableCarsByParameters,
+  notFoundCarByParameters,
 };
