@@ -4,6 +4,9 @@
 //------------------------- MESSAGES ---------------------------//
 
 const notFoundMessage = { message: "NOT FOUND" };
+const userOrPasswordIncorrect = {
+  message: "Username or password is incorrect",
+};
 
 //---------------------------------------------------------------//
 //------------------------- CARS ---------------------------//
@@ -320,6 +323,37 @@ const mockBodyResponseUserRegister = {
   },
 };
 
+const mockUserLogin = {
+  user: { email: "test@test.com", password: "testi-test" },
+};
+
+const mockBodyResponseUserLogin = {
+  message: "Login Successfully!",
+  data: {
+    user_email: "test@test.com",
+    phone_number: "00000000000",
+    first_name: "testi",
+    last_name: "test",
+    address: "tester",
+    rating: 0,
+    number_of_votes: 0,
+    license: null,
+  },
+};
+
+const mockResponseExistUser = { success: false, message: "User already exist" };
+
+const mockNotExistUserLogin = {
+  user: { email: "testerChoice@test.com", password: "testi-test" },
+};
+
+//---------------------------------------------------------------//
+//------------------------- PHOTOS ---------------------------//
+
+const mockNewPhotoToUpload = [{ file: "new photo to upload", car_id: 3 }];
+
+const mockResponseSavePhoto = { success: true };
+
 module.exports = {
   notFoundMessage,
   mockBodyResponseAllCars,
@@ -340,4 +374,11 @@ module.exports = {
   mockBodyResponseUsersByRating,
   mockNewUserRegister,
   mockBodyResponseUserRegister,
+  mockUserLogin,
+  mockBodyResponseUserLogin,
+  mockResponseExistUser,
+  mockNotExistUserLogin,
+  userOrPasswordIncorrect,
+  mockNewPhotoToUpload,
+  mockResponseSavePhoto,
 };

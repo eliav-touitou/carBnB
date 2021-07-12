@@ -19,9 +19,16 @@ const {
   mockBodyResponseUsersByRating,
   mockNewUserRegister,
   mockBodyResponseUserRegister,
+  mockUserLogin,
+  mockBodyResponseUserLogin,
+  mockResponseExistUser,
+  mockNotExistUserLogin,
+  userOrPasswordIncorrect,
+  mockNewPhotoToUpload,
+  mockResponseSavePhoto,
 } = require("./utils/mockDataTests");
 const app = require("./app");
-const { Car, Rental, User, Auth } = require("../database/models");
+const { Car, Rental, User, Auth, Photo } = require("../database/models");
 const {
   mockCarsSeeders,
   mockRentalsSeeders,
@@ -29,10 +36,12 @@ const {
   mockAuthSeeders,
 } = require("./utils/mockDataTestsSeeders");
 
+jest.setTimeout(10000);
+
 describe("Cars route", () => {
   //seeding data before each test
   beforeEach(async () => {
-    console.log("before each");
+    console.log("before each - cars route");
     try {
       await Car.bulkCreate(mockCarsSeeders);
     } catch (err) {
@@ -42,7 +51,7 @@ describe("Cars route", () => {
 
   //remove data before each test
   afterEach(async () => {
-    console.log("after each");
+    console.log("after each - cars route");
     try {
       await Car.destroy({ where: {} });
     } catch (err) {
@@ -141,7 +150,7 @@ describe("Cars route", () => {
   // Checks error side
   describe("Inner Car route", () => {
     beforeEach(async () => {
-      console.log("before each");
+      console.log("before each - inner cars route");
       try {
         await Car.destroy({ where: {} });
       } catch (err) {
@@ -214,7 +223,7 @@ describe("Rental route", () => {
   // Checks error side
   describe("Inner Rental route", () => {
     beforeEach(async () => {
-      console.log("before each");
+      console.log("before each - inner rentals route");
       try {
         await Rental.destroy({ where: {} });
       } catch (err) {
@@ -223,7 +232,7 @@ describe("Rental route", () => {
     });
 
     afterEach(async () => {
-      console.log("after each");
+      console.log("after each - inner rentals route");
       try {
         await Rental.bulkCreate(mockRentalsSeeders);
       } catch (err) {
@@ -244,7 +253,7 @@ describe("Rental route", () => {
 
 describe("Top route", () => {
   beforeEach(async () => {
-    console.log("before each");
+    console.log("before each - top route");
     try {
       await Car.bulkCreate(mockCarsSeeders);
     } catch (err) {
@@ -254,7 +263,7 @@ describe("Top route", () => {
 
   // remove data before each test
   afterEach(async () => {
-    console.log("after each");
+    console.log("after each - top route");
     try {
       await Car.destroy({ where: {} });
     } catch (err) {
@@ -333,7 +342,7 @@ describe("Top route", () => {
 describe("Users route", () => {
   //seeding data before each test
   beforeEach(async () => {
-    console.log("before each");
+    console.log("before each - users route");
     try {
       await User.destroy({ where: {} });
       await User.bulkCreate(mockUsersSeeders);
@@ -346,7 +355,7 @@ describe("Users route", () => {
 
   //remove data before each test
   afterAll(async () => {
-    console.log("after each");
+    console.log("after all - users route");
     try {
       await User.destroy({ where: {} });
       await User.bulkCreate(mockUsersSeeders);
@@ -375,9 +384,9 @@ describe("Users route", () => {
       },
     };
 
-    // // Is the status code 200
+    // Is the status code 200
     expect(response.status).toBe(200);
-    // // Is the response equals to mock response
+    // Is the response equals to mock response
     expect(data).toEqual(mockBodyResponseUniqueUser);
   });
 
@@ -408,13 +417,129 @@ describe("Users route", () => {
   });
 
   it("Should success to register new user to system", async () => {
+    const responseAllUsersBefore = await request(app).get(
+      "/api/v1/users/allusers"
+    );
     const response = await request(app)
       .post("/api/v1/users/register")
       .send(mockNewUserRegister);
 
+    const responseAllUsersAfter = await request(app).get(
+      "/api/v1/users/allusers"
+    );
+
     // Is the status code 200
     expect(response.status).toBe(200);
-    // // Is the response equals to mock response
+    // Is the response equals to mock response
     expect(response.body).toEqual(mockBodyResponseUserRegister);
+    // is the length of the users bigger then before
+    expect(responseAllUsersBefore.body.data.length).toBeLessThan(
+      responseAllUsersAfter.body.data.length
+    );
+  });
+
+  it("Should success to login exist user", async () => {
+    // Create new user
+    const responseFromRegister = await request(app)
+      .post("/api/v1/users/register")
+      .send(mockNewUserRegister);
+
+    // Try to login
+    const response = await request(app)
+      .post("/api/v1/users/login")
+      .send(mockUserLogin);
+
+    const data = {
+      message: "Login Successfully!",
+      data: {
+        user_email: response.body.data.user_email,
+        phone_number: response.body.data.phone_number,
+        first_name: response.body.data.first_name,
+        last_name: response.body.data.last_name,
+        address: response.body.data.address,
+        rating: response.body.data.rating,
+        number_of_votes: response.body.data.number_of_votes,
+        license: response.body.data.license,
+      },
+    };
+
+    // Is the status code 200
+    expect(response.status).toBe(200);
+    // Is the response equals to mock response
+    expect(data).toEqual(mockBodyResponseUserLogin);
+  });
+
+  // Checks error side
+  describe("Inner Users route", () => {
+    it("Should return 404 error if there no user that have the id", async () => {
+      const response = await request(app)
+        .post("/api/v1/users/uniqueuser")
+        .send({ email: "youarecheeter@gmai.com" });
+
+      // Is the status code 404
+      expect(response.status).toBe(404);
+      // Is the response equals to mock response
+      expect(response.body).toEqual(notFoundMessage);
+    });
+
+    it("Should return 404 error if there no user that have higher or equal rate", async () => {
+      const response = await request(app)
+        .post("/api/v1/users/rated")
+        .send({ minRate: 6 });
+
+      // Is the status code 404
+      expect(response.status).toBe(404);
+      // Is the response equals to mock response
+      expect(response.body).toEqual(notFoundMessage);
+    });
+
+    it("Should return 409 error if user already exist", async () => {
+      const response = await request(app)
+        .post("/api/v1/users/register")
+        .send(mockNewUserRegister);
+
+      const responseTryRegisterWithExistUser = await request(app)
+        .post("/api/v1/users/register")
+        .send(mockNewUserRegister);
+
+      // Is the status code 409
+      expect(responseTryRegisterWithExistUser.status).toBe(409);
+      // Is the response equals to mock response
+      expect(responseTryRegisterWithExistUser.body).toEqual(
+        mockResponseExistUser
+      );
+    });
+
+    it("Should return 401 error if email or password incorrect", async () => {
+      const response = await request(app)
+        .post("/api/v1/users/login")
+        .send(mockNotExistUserLogin);
+
+      // Is the status code 404
+      expect(response.status).toBe(401);
+      // Is the response equals to mock response
+      expect(response.body).toEqual(userOrPasswordIncorrect);
+    });
+  });
+});
+
+describe("Photo route", () => {
+  afterAll(async () => {
+    console.log("after all - photos route");
+    try {
+      await Photo.destroy({ where: {} });
+    } catch (error) {
+      console.log(error);
+    }
+  });
+  it("Should success upload new photo", async () => {
+    const response = await request(app)
+      .post("/api/v1/photos/savephotos")
+      .send(mockNewPhotoToUpload);
+
+    // Is the status code 200
+    expect(response.status).toBe(200);
+    // Is the response equals to mock response
+    expect(response.body).toEqual(mockResponseSavePhoto);
   });
 });

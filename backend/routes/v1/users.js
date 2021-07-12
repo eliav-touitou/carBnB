@@ -59,7 +59,8 @@ users.post("/rated", async (req, res) => {
   const { minRate } = req.body;
   try {
     const ratedUsers = await getUserByRating(minRate);
-    if (!ratedUsers) {
+
+    if (ratedUsers.length === 0) {
       return res.status(404).json({ message: "NOT FOUND" });
     }
     return res.status(200).json({ success: true, data: ratedUsers });
@@ -116,7 +117,7 @@ users.post("/register", async (req, res) => {
     if (auth) {
       return res
         .status(409)
-        .json({ success: true, message: "User already exist" });
+        .json({ success: false, message: "User already exist" });
     }
 
     newUser.password = hashSync(newUser.password, genSaltSync(10));
