@@ -12,7 +12,7 @@ const {
   buildPatternsForAfterRentalFinish,
   sendMail,
   writeLogs,
-} = require("../backend/utils/helperFunctions");
+} = require("./utils/helperFunctions");
 
 const removePendingOrders = async () => {
   const rentalToRemoveIds = [];

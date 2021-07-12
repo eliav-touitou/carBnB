@@ -10,8 +10,8 @@ const {
   updateItemToDB,
   getItemFromDB,
   getAllCarsByIdsArr,
-} = require("../../../database/queries");
-const { Rental, Car } = require("../../../database/models");
+} = require("../../database/queries");
+const { Rental, Car } = require("../../database/models");
 const {
   buildPatterns,
   sendMail,
