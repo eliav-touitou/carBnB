@@ -65,7 +65,6 @@ auth.put("/forgotpassword", async (req, res) => {
   try {
     const auth = await getUserOrAuth({ model: Auth, email: userEmail });
     if (!auth) {
-      console.log("hello");
       return res.status(404).json({ message: "This email does not exist" });
     }
     const code = uuidv4().slice(0, 7);
@@ -110,15 +109,14 @@ auth.put("/forgotpassword", async (req, res) => {
 auth.put("/resetpassword/:id", async (req, res) => {
   const { id } = req.params;
   const { resetCode, newPassword } = req.body;
-  // console.log(resetCode, newPassword);
-  console.log(id);
+
   try {
     const auth = await getItemFromDB({
       model: Auth,
       column: ["id"],
       columnValue: [id],
     });
-    console.log(auth[0].reset_code);
+
     if (!auth) {
       return res.status(404).json({ message: "User does not exist" });
     }

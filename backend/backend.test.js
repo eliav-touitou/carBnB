@@ -26,9 +26,15 @@ const {
   userOrPasswordIncorrect,
   mockNewPhotoToUpload,
   mockResponseSavePhoto,
+  mockUserToChangePassword,
+  mockResponseUserToChangePassword,
+  mockResponseAfterPasswordChanged,
+  mockResponseUserNotExist,
+  mockResponseResetCodeIncorrect,
 } = require("./utils/mockDataTests");
 const app = require("./app");
 const { Car, Rental, User, Auth, Photo } = require("../database/models");
+const { getUserOrAuth } = require("../database/queries");
 const {
   mockCarsSeeders,
   mockRentalsSeeders,
@@ -541,5 +547,80 @@ describe("Photo route", () => {
     expect(response.status).toBe(200);
     // Is the response equals to mock response
     expect(response.body).toEqual(mockResponseSavePhoto);
+  });
+});
+
+describe("Auth route", () => {
+  it("Should be able to get reset code for forget password", async () => {
+    const response = await request(app)
+      .put("/api/v1/auth/forgotpassword")
+      .send(mockUserToChangePassword);
+
+    // Is the status code 200
+    expect(response.status).toBe(200);
+    // Is the response equals to mock response
+    expect(response.body).toEqual(mockResponseUserToChangePassword);
+  });
+
+  it("Should return 404 error if reset code is incorrect", async () => {
+    const user = await getUserOrAuth({
+      model: Auth,
+      email: "eliav@gmail.com",
+    });
+    const { id } = user.toJSON();
+
+    const mockDataToChangePassword = {
+      resetCode: "204867",
+      newPassword: "i am test",
+    };
+
+    const response = await request(app)
+      .put(`/api/v1/auth/resetpassword/${id}`)
+      .send(mockDataToChangePassword);
+    // Is the status code 404
+    expect(response.status).toBe(404);
+    // Is the response equals to mock response
+    expect(response.body).toEqual(mockResponseResetCodeIncorrect);
+  });
+
+  it("Should success to change password if forget", async () => {
+    const user = await getUserOrAuth({ model: Auth, email: "eliav@gmail.com" });
+    const { id, reset_code } = user.toJSON();
+
+    const mockDataToChangePassword = {
+      resetCode: reset_code,
+      newPassword: "i am test",
+    };
+
+    const response = await request(app)
+      .put(`/api/v1/auth/resetpassword/${id}`)
+      .send(mockDataToChangePassword);
+
+    // Is the status code 200
+    expect(response.status).toBe(200);
+    // Is the response equals to mock response
+    expect(response.body).toEqual(mockResponseAfterPasswordChanged);
+  });
+
+  it("Should delete reset code after user change the password", async () => {
+    const user = await getUserOrAuth({ model: Auth, email: "eliav@gmail.com" });
+
+    const { reset_code } = user.toJSON();
+
+    // Is the response equals to mock response
+    expect(reset_code).toEqual(null);
+  });
+
+  describe("Inner Auth route", () => {
+    it("Should return 404 error if not exist user try to reset password", async () => {
+      const response = await request(app)
+        .put("/api/v1/auth/forgotpassword")
+        .send({ userEmail: "test@testi.com" });
+
+      // Is the status code 404
+      expect(response.status).toBe(404);
+      // Is the response equals to mock response
+      expect(response.body).toEqual(mockResponseUserNotExist);
+    });
   });
 });

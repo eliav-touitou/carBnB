@@ -354,6 +354,22 @@ const mockNewPhotoToUpload = [{ file: "new photo to upload", car_id: 3 }];
 
 const mockResponseSavePhoto = { success: true };
 
+//---------------------------------------------------------------//
+//------------------------- Auth ---------------------------//
+
+const mockUserToChangePassword = { userEmail: "eliav@gmail.com" };
+
+const mockResponseUserToChangePassword = {
+  message: "Check your mail box, reset link successfully send",
+};
+
+const mockResponseAfterPasswordChanged = {
+  message: "Your new password successfully updated",
+};
+
+const mockResponseUserNotExist = { message: "This email does not exist" };
+const mockResponseResetCodeIncorrect = { message: "Incorrect Reset Code" };
+
 module.exports = {
   notFoundMessage,
   mockBodyResponseAllCars,
@@ -381,4 +397,9 @@ module.exports = {
   userOrPasswordIncorrect,
   mockNewPhotoToUpload,
   mockResponseSavePhoto,
+  mockUserToChangePassword,
+  mockResponseUserToChangePassword,
+  mockResponseAfterPasswordChanged,
+  mockResponseUserNotExist,
+  mockResponseResetCodeIncorrect,
 };
