@@ -689,6 +689,7 @@ form {
   overflow-y: scroll;
   // background-image: url(C:\dev\carBnB\client\src\photos/bricks-1.png);
   background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/bricks-1.png");
+  // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\bricks-1.png);
   background-repeat: repeat;
   background-size: cover;
   &:after {
@@ -1021,6 +1022,7 @@ form {
   // background-image: url("C:/dev/carBnB/client/src/photos/good-logo-white.png");
   background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
   // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
+  // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
   background-repeat: no-repeat;
   background-position-y: 10vh;
   background-position-x: 4vw;
@@ -1192,8 +1194,8 @@ form {
   height: 100vh;
   width: 100vw;
   background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/dottes.png");
-  // background-image: url("C:/dev/carBnB/client/src/photos/dottes.png");
   // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\dottes.png);
+  // background-image: url("C:/dev/carBnB/client/src/photos/dottes.png");
 }
 .details-container {
   width: 100%;
@@ -1534,8 +1536,13 @@ $form-border-color: rgba(0, 0, 0, 0.1);
   min-width: 100vw;
   // background-image: url(C:\dev\carBnB\client\src\photos\lines-horizontal.png);
   background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/lines-horizontal.png");
+  // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\lines-horizontal.png);
   background-repeat: repeat;
   background-size: contain;
+  .snackbar {
+    position: fixed;
+    margin-top: 40vh;
+  }
 }
 .add-car-panel {
   height: 80vh;
@@ -1552,6 +1559,7 @@ $form-border-color: rgba(0, 0, 0, 0.1);
   // background-image: url("C:/dev/carBnB/client/src/photos/long-road.jpg");
   background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/long-road.jpg");
   // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\long-road.jpg);
+
   background-size: contain;
   // background-size: 100%;
   // background-repeat: no-repeat;
@@ -1645,35 +1653,11 @@ $form-border-color: rgba(0, 0, 0, 0.1);
     color: $font-color;
   }
 
-  //   & header {
-  //     padding: 40px;
-  //   }
-
   & label,
   input,
   .pets-photo {
     width: 176px;
   }
-
-  //   & .pets-photo {
-  //     align-items: center;
-  //     display: grid;
-  //     grid-template-areas: ". .";
-
-  //     & button {
-  //       border: none;
-  //       border-radius: 50%;
-  //       height: 38px;
-  //       margin-right: 10px;
-  //       outline: none;
-  //       width: 38px;
-  //     }
-
-  //     & button i {
-  //       color: $font-color;
-  //       font-size: 16px;
-  //     }
-  //   }
 
   .gas-type {
     width: 100%;
@@ -2138,6 +2122,7 @@ $color-white: #fff;
 
   // background-image: url("C:/dev/carBnB/client/src/photos/lines-horizontal.png");
   background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/lines-horizontal.png");
+  // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\lines-horizontal.png);
   background-repeat: repeat;
   background-size: contain;
   .favorite-car-list {
@@ -2187,14 +2172,14 @@ $color_grey_dark: #a2a2a2;
   width: 100vw;
   display: flex;
   background: rgb(228, 255, 241);
-  // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\road_lines-style.png),
-  // background-image: url("C:/dev/carBnB/client/src/photos/road_lines-style.png"),
   background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/road_lines-style.png"),
+    // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\road_lines-style.png),
+    // background-image: url("C:/dev/carBnB/client/src/photos/road_lines-style.png"),
     linear-gradient(
-      197deg,
-      rgba(228, 255, 241, 1) 13%,
-      rgba(230, 245, 255, 1) 85%
-    );
+        197deg,
+        rgba(228, 255, 241, 1) 13%,
+        rgba(230, 245, 255, 1) 85%
+      );
   background-repeat: no-repeat;
   background-position-y: 55vh;
   background-size: contain;
@@ -2401,6 +2386,7 @@ $color_grey_dark: #a2a2a2;
   margin-top: 0;
   background: #e4fff1;
   // background-image: url(C:\dev\carBnB\client\src\photos\scratch.png),
+  // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\scratch.png),
   background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/scratch.png"),
     linear-gradient(197deg, #e4fff1 13%, #e6f5ff 85%);
   background-attachment: fixed;
@@ -2765,6 +2751,7 @@ $color_grey_dark: #a2a2a2;
   display: flex;
   // background-image: url(C:\dev\carBnB\client\src\photos/klipartz.png);
   background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/klipartz.png");
+  // background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\klipartz.png);
   background-repeat: no-repeat;
   background-size: cover;
   color: black;

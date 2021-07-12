@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
+import { setSpinner } from "../actions";
 import FavoriteDetails from "./FavoriteDetails";
 
 export default function CarsBySelection() {
@@ -13,37 +14,45 @@ export default function CarsBySelection() {
 
   useEffect(() => {
     if (owner) {
+      dispatch(setSpinner(true));
       axios
         .post("/api/v1/search/getitem", {
           data: ["Car", ["owner_email"], [owner.user_email]],
         })
         .then(({ data: cars }) => {
           setOwnerCars(cars.data);
+          dispatch(setSpinner(false));
         })
         .catch((err) => {
           console.log(err);
+          dispatch(setSpinner(false));
         });
     }
     if (city) {
+      dispatch(setSpinner(true));
+
       axios
         .get(`/api/v1/cars/bycity/${city.city}`)
         .then(({ data: cars }) => {
           setOwnerCars(cars.data);
+          dispatch(setSpinner(false));
         })
         .catch((err) => {
           console.log(err);
+          dispatch(setSpinner(false));
         });
     }
     if (brand) {
-      console.log(brand);
+      dispatch(setSpinner(true));
       axios
         .get(`/api/v1/top/brand/${brand}`)
         .then(({ data: cars }) => {
-          console.log(cars);
           setOwnerCars(cars.data);
+          dispatch(setSpinner(false));
         })
         .catch((err) => {
           console.log(err);
+          dispatch(setSpinner(false));
         });
     }
   }, [owner, city, brand]);

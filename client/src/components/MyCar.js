@@ -1,10 +1,13 @@
 import React, { useRef, useState } from "react";
 import CreateOutlinedIcon from "@material-ui/icons/CreateOutlined";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { setSpinner } from "../actions";
 
 export default function MyCar({ iconsKey, keys, value, carId, setMyCarsData }) {
   const includesCondition = ["available", "discount", "price"];
+  const dispatch = useDispatch();
+
   // Redux states
   const auth = useSelector((state) => state.auth);
 
@@ -25,34 +28,43 @@ export default function MyCar({ iconsKey, keys, value, carId, setMyCarsData }) {
     }
     let arrToUpdateUser = ["Car", [keys], carId, [value]];
     try {
+      dispatch(setSpinner(true));
       await axiosRequestToUpdate(arrToUpdateUser);
       await updateStates();
+      dispatch(setSpinner(false));
     } catch (error) {
       console.log(error);
+      dispatch(setSpinner(false));
     }
   };
 
   ///////////////// ⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇ need to display the new details after update⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇ //////////////
   const updateStates = async () => {
+    dispatch(setSpinner(true));
     try {
       const { data: cars } = await axios.post("/api/v1/search/getitem", {
         data: ["Car", ["owner_email"], [auth.user_email]],
       });
       setMyCarsData(cars.data);
       setIsOpen(false);
+      dispatch(setSpinner(false));
     } catch (error) {
       console.log(error);
+      dispatch(setSpinner(false));
     }
   };
 
   // Axios request
   const axiosRequestToUpdate = async (arr) => {
+    dispatch(setSpinner(true));
     try {
       await axios.post("/api/v1/users/updateitems", {
         data: arr,
       });
+      dispatch(setSpinner(false));
     } catch (error) {
       console.log(error);
+      dispatch(setSpinner(false));
     }
   };
 

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { setShowLogin } from "../actions";
+import { setShowLogin, setSpinner } from "../actions";
 import PromptLogin from "./PromptLogin";
 import defaultPhoto from "../photos/no-car-photo.png";
 import CarGallery from "./CarGallery";
@@ -21,15 +21,20 @@ export default function Result({ car, resultId }) {
   const [heartButton, setHeartButton] = useState("far fa-heart");
 
   useEffect(() => {
+    dispatch(setSpinner(true));
+
     const photosData = ["Photo", ["car_id"], [car.car_id]];
     axios
       .post("/api/v1/search/getitem", { data: photosData })
       .then(({ data }) => {
         setPhotosArray(data.data);
+        dispatch(setSpinner(false));
       })
       .catch((err) => {
         if (err.response.status === 404) {
           setPhotosArray(false);
+          dispatch(setSpinner(false));
+
           return;
         }
         console.log(err);
@@ -44,9 +49,12 @@ export default function Result({ car, resultId }) {
     if (heartButton === "far fa-heart") {
       try {
         if (auth) {
+          dispatch(setSpinner(true));
           const result = await axios.post("/api/v1/favorite/add", {
             data: { carId: carId, userEmail: auth.user_email },
           });
+          dispatch(setSpinner(false));
+
           console.log(result);
         } else {
           // need to prompt login promp component
@@ -54,14 +62,17 @@ export default function Result({ car, resultId }) {
         }
       } catch (err) {
         console.log(err);
+        dispatch(setSpinner(false));
       }
       setHeartButton("fas fa-heart");
     } else {
       try {
         if (auth) {
+          dispatch(setSpinner(true));
           const result = await axios.post("/api/v1/favorite/remove", {
             data: { carId: carId, userEmail: auth.user_email },
           });
+          dispatch(setSpinner(false));
           console.log(result);
         } else {
           // need to prompt login promp component
@@ -69,6 +80,7 @@ export default function Result({ car, resultId }) {
         }
       } catch (err) {
         console.log(err);
+        dispatch(setSpinner(false));
       }
       setHeartButton("far fa-heart");
     }

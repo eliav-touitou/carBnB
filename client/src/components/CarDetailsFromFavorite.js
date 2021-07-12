@@ -2,7 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useLocation } from "react-router-dom";
-import { setPhotosArray, setShowLogin, setCarToRental } from "../actions";
+import {
+  setPhotosArray,
+  setShowLogin,
+  setCarToRental,
+  setSpinner,
+} from "../actions";
 import { Icon } from "@iconify/react";
 import seatPassenger from "@iconify-icons/mdi/seat-passenger";
 import { Snackbar } from "@material-ui/core";
@@ -32,13 +37,19 @@ export default function CarDetails() {
 
   //bringing the photos of the corresponding car, and emptying it on component down
   useEffect(() => {
+    dispatch(setSpinner(true));
+
     const photosData = ["Photo", ["car_id"], [car.car_id]];
     axios
       .post("/api/v1/search/getitem", { data: photosData })
       .then(({ data }) => {
         dispatch(setPhotosArray(data.data));
+        dispatch(setSpinner(false));
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => {
+        console.log(err.message);
+        dispatch(setSpinner(false));
+      });
     return () => {
       dispatch(setPhotosArray([]));
     };

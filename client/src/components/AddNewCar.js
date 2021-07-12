@@ -20,6 +20,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 export default function AddNewCar() {
   const dispatch = useDispatch();
 
+  // Variable
   let id;
 
   // Redux states
@@ -28,6 +29,7 @@ export default function AddNewCar() {
   const auth = useSelector((state) => state.auth);
   const photosArray = useSelector((state) => state.photosArray);
   const notFoundMessage = useSelector((state) => state.notFoundMessage);
+  const spinner = useSelector((state) => state.spinner);
 
   // Use states
   const [yearsArr, setYearsArr] = useState([]);
@@ -67,7 +69,7 @@ export default function AddNewCar() {
       setTimeout(() => {
         dispatch(setNotFoundMessage(false));
         setRedirect(true);
-      }, 4000);
+      }, 6000);
     }
   }, [notFoundMessage]);
 
@@ -77,7 +79,6 @@ export default function AddNewCar() {
     axios
       .get(apiCars + "/vehicles/GetMakesForVehicleType/car?format=json")
       .then(({ data }) => {
-        console.log(data);
         dispatch(setAllCarsApi(data.Results));
         dispatch(setSpinner(false));
       })
@@ -110,10 +111,9 @@ export default function AddNewCar() {
 
   // After car brand selected, axios request to get all models of this brand
   const onBrandChangeHandler = async () => {
-    dispatch(setSpinner(true));
-
     allCarsApi?.forEach((car) => {
       if (car.MakeName.toLowerCase() === brandRef.current.value.toLowerCase()) {
+        dispatch(setSpinner(true));
         axios
           .get(
             apiCars + `/vehicles/GetModelsForMake/${car.MakeName}?format=json`
@@ -149,8 +149,9 @@ export default function AddNewCar() {
       discountPerMonth: discountPerMonthRef.current.value,
     };
     try {
-      dispatch(setSpinner(true));
       if (auth) {
+        dispatch(setSpinner(true));
+
         const { data: savedCar } = await axios.post("/api/v1/cars/upload", {
           newCar: newCar,
         });
@@ -170,6 +171,7 @@ export default function AddNewCar() {
         alert("please login again");
       }
       console.log(error);
+      dispatch(setSpinner(false));
     }
   };
 
@@ -182,6 +184,7 @@ export default function AddNewCar() {
     <div className="add-new-car-page">
       {notFoundMessage && (
         <Snackbar
+          className="snackbar"
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
           open={true}
           message={notFoundMessage}
@@ -271,6 +274,7 @@ export default function AddNewCar() {
               <div className="input-div">
                 <div className="title">Availability dates </div>
                 <DateRangePicker
+                  id="dates"
                   startDate={startDate}
                   startDatePlaceholderText="Start date:"
                   startDateId="tata-start-date"

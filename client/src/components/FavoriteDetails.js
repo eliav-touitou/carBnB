@@ -10,8 +10,12 @@ import seatPassenger from "@iconify-icons/mdi/seat-passenger";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import "../react_dates_overrides.css";
+import { setSpinner } from "../actions";
+import { useDispatch } from "react-redux";
 
 export default function FavoriteDetails({ car }) {
+  const dispatch = useDispatch();
+
   // Use States
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -21,14 +25,20 @@ export default function FavoriteDetails({ car }) {
   const [photosArray, setPhotosArray] = useState([]);
 
   useEffect(() => {
+    dispatch(setSpinner(true));
+
     const photosData = ["Photo", ["car_id"], [car.car_id]];
     axios
       .post("/api/v1/search/getitem", { data: photosData })
       .then(({ data }) => {
         setPhotosArray(data.data);
         console.log(data.data);
+        dispatch(setSpinner(false));
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => {
+        console.log(err.message);
+        dispatch(setSpinner(false));
+      });
   }, []);
 
   const checkDatesValue = async () => {

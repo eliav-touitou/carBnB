@@ -1,7 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setAuth, setAuthOut, setOnLoginPage, setShowLogin } from "../actions";
+import {
+  setAuth,
+  setAuthOut,
+  setOnLoginPage,
+  setShowLogin,
+  setSpinner,
+} from "../actions";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import { Snackbar } from "@material-ui/core";
@@ -46,15 +52,18 @@ export default function Login() {
     };
 
     try {
+      dispatch(setSpinner(true));
       const { data: userDetails } = await axios.post("/api/v1/users/login", {
         user: user,
       });
 
       dispatch(setAuth(userDetails.data));
       console.log("Success Login");
+      dispatch(setSpinner(false));
     } catch (error) {
       dispatch(setAuthOut());
       console.log(error.message);
+      dispatch(setSpinner(false));
     }
   };
 

@@ -5,7 +5,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Fade from "@material-ui/core/Fade";
 import { useSelector, useDispatch } from "react-redux";
-import { setAuthOut } from "../actions";
+import { setAuthOut, setSpinner } from "../actions";
 import Name from "@material-ui/core/Avatar";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import axios from "axios";
@@ -29,11 +29,14 @@ export default function Avatar({ setVisibility, setAnchorEl, anchorEl }) {
     setAnchorEl(null);
   };
   const logoutHandler = async () => {
+    dispatch(setSpinner(true));
     try {
-      console.log(await axios.post("/api/v1/users/logout"));
+      await axios.post("/api/v1/users/logout");
       dispatch(setAuthOut());
+      dispatch(setSpinner(false));
     } catch (error) {
       console.log("error logout");
+      dispatch(setSpinner(false));
     }
   };
 
