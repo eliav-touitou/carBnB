@@ -1928,6 +1928,11 @@ form {
   background-size: contain;
 }
 
+.add-new-car-page .snackbar {
+  position: fixed;
+  margin-top: 40vh;
+}
+
 .add-car-panel {
   height: 80vh;
   width: 60vw;

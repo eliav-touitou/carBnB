@@ -1541,6 +1541,10 @@ $form-border-color: rgba(0, 0, 0, 0.1);
   background-image: url(C:\dev\carBnB\client\src\photos\lines-horizontal.png);
   background-repeat: repeat;
   background-size: contain;
+  .snackbar {
+    position: fixed;
+    margin-top: 40vh;
+  }
 }
 .add-car-panel {
   height: 80vh;

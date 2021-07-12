@@ -28,6 +28,7 @@ export default function AddNewCar() {
   const auth = useSelector((state) => state.auth);
   const photosArray = useSelector((state) => state.photosArray);
   const notFoundMessage = useSelector((state) => state.notFoundMessage);
+  const spinner = useSelector((state) => state.spinner);
 
   // Use states
   const [yearsArr, setYearsArr] = useState([]);
@@ -67,7 +68,7 @@ export default function AddNewCar() {
       setTimeout(() => {
         dispatch(setNotFoundMessage(false));
         setRedirect(true);
-      }, 4000);
+      }, 6000);
     }
   }, [notFoundMessage]);
 
@@ -182,6 +183,7 @@ export default function AddNewCar() {
     <div className="add-new-car-page">
       {notFoundMessage && (
         <Snackbar
+          className="snackbar"
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
           open={true}
           message={notFoundMessage}
@@ -271,6 +273,7 @@ export default function AddNewCar() {
               <div className="input-div">
                 <div className="title">Availability dates </div>
                 <DateRangePicker
+                  id="dates"
                   startDate={startDate}
                   startDatePlaceholderText="Start date:"
                   startDateId="tata-start-date"
