@@ -1,10 +1,13 @@
 import { Snackbar } from "@material-ui/core";
 import axios from "axios";
 import React, { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
-import { setShowLogin } from "../actions";
+import { setShowLogin, setSpinner } from "../actions";
 
 export default function ResetPassword() {
+  const dispatch = useDispatch();
+
   const { id } = useParams();
   const newPasswordRef = useRef();
   const confirmNewPasswordRef = useRef();
@@ -25,10 +28,12 @@ export default function ResetPassword() {
       if (newPasswordRef.current.value !== confirmNewPasswordRef.current.value)
         return alert("Password does not match");
 
+      dispatch(setSpinner(true));
       await axios.put(`/api/v1/auth/resetpassword/${id}`, {
         resetCode: resetCodeRef.current.value,
         newPassword: newPasswordRef.current.value,
       });
+      dispatch(setSpinner(false));
       setSneck(
         "Your password reset was successful you will redirect to login page"
       );
@@ -38,6 +43,7 @@ export default function ResetPassword() {
         setShowLogin(true);
       }, 2500);
     } catch (err) {
+      dispatch(setSpinner(false));
       setSneck(err.response.data.message);
       setTimeout(() => {
         setSneck(false);

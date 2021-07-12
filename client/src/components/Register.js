@@ -2,10 +2,11 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowLogin } from "../actions";
+import { setShowLogin, setSpinner } from "../actions";
 
 export default function Register() {
   const dispatch = useDispatch();
+
   // UseRefs
   const passwordRef = useRef();
   const passwordValidationRef = useRef();
@@ -26,6 +27,7 @@ export default function Register() {
       alert("Passwords doesn't match");
     }
     try {
+      dispatch(setSpinner(true));
       const formData = new FormData(form);
       const user = {};
       for (let [key, value] of formData.entries()) {
@@ -35,8 +37,10 @@ export default function Register() {
       user.password = passwordRef.current.value;
       await axios.post("/api/v1/users/register", { newUser: user });
       console.log("User Saved!");
+      dispatch(setSpinner(false));
     } catch (error) {
       console.log(error);
+      dispatch(setSpinner(false));
     }
   };
 

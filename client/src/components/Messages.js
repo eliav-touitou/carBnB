@@ -1,16 +1,24 @@
 import axios from "axios";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { setSpinner } from "../actions";
 
 export default function Messages({ message, messageId, setVisibility }) {
+  const dispatch = useDispatch();
+
   const updateRead = async () => {
+    dispatch(setSpinner(true));
+
     try {
       await axios.patch("/api/v1/notification/updateread", {
         data: { id: message?.id, status: "read" },
       });
       setVisibility(false);
+      dispatch(setSpinner(false));
     } catch (error) {
       console.log(error);
+      dispatch(setSpinner(false));
     }
   };
 

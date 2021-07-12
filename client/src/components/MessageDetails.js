@@ -2,7 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { setNotifications, setNotificationCounter } from "../actions";
+import {
+  setNotifications,
+  setNotificationCounter,
+  setSpinner,
+} from "../actions";
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
 import messagePhoto from "../photos/message-photo.jpg";
@@ -24,6 +28,8 @@ export default function MessageDetails() {
   const message = notifications[messageId];
 
   useEffect(() => {
+    dispatch(setSpinner(true));
+
     axios
       .post("/api/v1/search/getitem", {
         data: ["Rental", ["transaction_id"], [message.transaction_id]],
@@ -34,18 +40,26 @@ export default function MessageDetails() {
           rental.data[0].is_active === "pending"
         )
           setStatusButton(true);
+        dispatch(setSpinner(false));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        dispatch(setSpinner(false));
+      });
   }, []);
 
   const updateUnRead = async () => {
+    dispatch(setSpinner(true));
+
     try {
       await axios.patch("/api/v1/notification/updateread", {
         data: { id: message.id, status: "unread" },
       });
       setListenToUnread((prev) => !prev);
+      dispatch(setSpinner(false));
     } catch (error) {
       console.log(error);
+      dispatch(setSpinner(false));
     }
   };
 
@@ -53,6 +67,8 @@ export default function MessageDetails() {
     let count = 0;
     try {
       if (auth) {
+        dispatch(setSpinner(true));
+
         axios
           .post("/api/v1/notification/messages", {
             data: { email: auth.user_email },
@@ -65,17 +81,20 @@ export default function MessageDetails() {
             });
             dispatch(setNotificationCounter(count));
             dispatch(setNotifications(messages.data));
+            dispatch(setSpinner(false));
           });
       }
     } catch (error) {
       console.log(error);
+      dispatch(setSpinner(false));
     }
   }, [listenToUnread]);
 
   const updateRentalStatus = async (e) => {
-    console.log(e);
     const status = e.target.innerText === "accept" ? "confirm" : "reject";
     try {
+      dispatch(setSpinner(true));
+
       await axios.patch("/api/v1/rentals/status", {
         data: {
           transactionId: message.transaction_id,
@@ -83,14 +102,18 @@ export default function MessageDetails() {
         },
       });
       setStatusButton(false);
+      dispatch(setSpinner(false));
     } catch (error) {
       console.log(error);
+      dispatch(setSpinner(false));
     }
   };
 
   const updateRating = async (newValue) => {
     setValue(newValue);
     try {
+      dispatch(setSpinner(true));
+
       const { data: uniqueRental } = await axios.post(
         "/api/v1/rentals/uniquerental",
         {
@@ -118,10 +141,12 @@ export default function MessageDetails() {
       const updateUser = await axios.post("/api/v1/users/updateitems", {
         data: arrToUpdate,
       });
+      dispatch(setSpinner(false));
       setShowMessage(true);
       console.log(updateUser);
     } catch (error) {
       console.log(error);
+      dispatch(setSpinner(false));
     }
   };
 

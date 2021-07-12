@@ -7,8 +7,11 @@ import MyCars from "./MyCars";
 import AirlineSeatReclineNormalTwoToneIcon from "@material-ui/icons/AirlineSeatReclineNormalTwoTone";
 import LabelOutlinedIcon from "@material-ui/icons/LabelOutlined";
 import Overview from "./Overview";
+import { setSpinner } from "../actions";
 
 export default function Profile() {
+  const dispatch = useDispatch();
+
   const iconsKey = {
     brand: <i className="fas fa-car-side"></i>,
     year: <i className="far fa-calendar-alt"></i>,
@@ -36,12 +39,19 @@ export default function Profile() {
   const [indexPage, setIndexPage] = useState(0);
 
   useEffect(() => {
+    dispatch(setSpinner(true));
     axios
       .post("/api/v1/search/getitem", {
         data: ["Car", ["owner_email"], [auth.user_email]],
       })
-      .then(({ data: cars }) => setMyCarsData(cars.data))
-      .catch((error) => console.log(error));
+      .then(({ data: cars }) => {
+        setMyCarsData(cars.data);
+        dispatch(setSpinner(false));
+      })
+      .catch((error) => {
+        dispatch(setSpinner(false));
+        console.log(error);
+      });
   }, []);
 
   const nextPage = () => {

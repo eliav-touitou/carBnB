@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "./SearchBar";
-import { setAllCitiesApi } from "../actions";
+import { setAllCitiesApi, setSpinner } from "../actions";
 import photo from "../photos/background-4593643_1920.jpg";
 import topCar from "../photos/top-car.jpeg";
 import topOwner from "../photos/top-owner.jpeg";
@@ -15,6 +15,8 @@ export default function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(setSpinner(true));
+
     axios
       .get(
         "https://data.gov.il/api/3/action/datastore_search?resource_id=5c78e9fa-c2e2-4771-93ff-7f400a12f7ba&limit=1271"
@@ -28,6 +30,7 @@ export default function Home() {
           }
         });
         dispatch(setAllCitiesApi(temp));
+        dispatch(setSpinner(false));
       });
   }, []);
 
