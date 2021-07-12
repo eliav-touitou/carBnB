@@ -20,7 +20,7 @@ const {
   buildPatternsForConfirmOrRejectRental,
   writeLogs,
 } = require("../../utils/helperFunctions");
-const path = process.env.PDF_PATH;
+const path = process.cwd() + "/Receipt.pdf";
 
 // Gets a unique rental
 rentals.post("/uniquerental", async (req, res) => {

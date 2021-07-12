@@ -2,7 +2,7 @@ require("dotenv").config();
 const nodemailer = require("nodemailer");
 const PDFDocument = require("pdfkit");
 const fs = require("fs");
-const logo = process.env.LOGO_PATH;
+const logo = process.cwd() + "/utils/carBnB-logo.png";
 const cheerio = require("cheerio");
 const axios = require("axios");
 
@@ -68,7 +68,7 @@ const sendMail = ({ from, to, subject, text }) => {
     attachments: [
       {
         filename: "Receipt.pdf",
-        path: process.env.PDF_PATH,
+        path: process.cwd() + "/Receipt.pdf",
         contentType: "application/pdf",
       },
     ],
