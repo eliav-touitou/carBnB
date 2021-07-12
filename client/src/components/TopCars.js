@@ -50,7 +50,6 @@ export default function CarsBySelection() {
 
   return (
     <div className="top-page-car-results">
-      <h1>Top Cars {owner ? "Owner" : "City"}</h1>
       <div className="top-container-car-results">
         {ownerCars?.map((car, i) => (
           <div className="top-owner-car">
