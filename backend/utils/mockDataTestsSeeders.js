@@ -2,7 +2,7 @@ const date = new Date();
 
 //---------------------------------------------------------------//
 //------------------------- CARS SEEDERS ---------------------------//
-mockCarsSeeders = [
+const mockCarsSeeders = [
   {
     car_id: 1,
     owner_email: "eyal@gmail.com",
@@ -81,7 +81,7 @@ const mockUsersSeeders = [
     address: "EFRATA",
     rating: 4,
     number_of_votes: 2,
-    license: null,
+    license: "fake licence",
     createdAt: "2021-07-05T06:17:26.000Z",
     updatedAt: "2021-07-05T06:17:26.000Z",
   },

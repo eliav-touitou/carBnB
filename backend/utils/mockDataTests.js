@@ -48,40 +48,6 @@ const mockBodyResponseUniqueCar = {
 
 const uniqueCarId = { id: 1 };
 
-const mockNewCarToUpload = {
-  newCar: {
-    ownerEmail: "eyal@gmail.com",
-    brand: "HONDA",
-    model: "CIVIC",
-    gear: "Auto",
-    year: "2010",
-    fuel: "Octan-95",
-    until: null,
-    from: null,
-    passengers: 5,
-    pricePerDay: 100,
-    discountPerWeek: "5%",
-    discountPerMonth: "10%",
-  },
-};
-const mockBodyResponseForUpload = {
-  success: true,
-  data: {
-    ownerEmail: "eyal@gmail.com",
-    brand: "HONDA",
-    model: "CIVIC",
-    gear: "Auto",
-    year: "2010",
-    fuel: "Octan-95",
-    until: null,
-    from: null,
-    passengers: 5,
-    pricePerDay: 100,
-    discountPerWeek: "5%",
-    discountPerMonth: "10%",
-  },
-};
-
 const mockBodyResponseGetCarByCityName = {
   car_id: 2,
   owner_email: "jino@gmail.com",
@@ -250,7 +216,7 @@ const mockBodyResponseUniqueUser = {
     address: "EFRATA",
     rating: 4,
     number_of_votes: 2,
-    license: null,
+    license: "fake licence",
   },
 };
 
@@ -267,7 +233,7 @@ const mockBodyResponseUsersByRating = {
       address: "EFRATA",
       rating: 4,
       number_of_votes: 2,
-      license: null,
+      license: "fake licence",
     },
     {
       user_email: "gil@hotmail.com",
@@ -376,8 +342,6 @@ module.exports = {
   mockBodyResponseAllCars,
   uniqueCarId,
   mockBodyResponseUniqueCar,
-  mockNewCarToUpload,
-  mockBodyResponseForUpload,
   mockBodyResponseAllRentals,
   uniqueRentalId,
   mockBodyResponseUniqueRental,

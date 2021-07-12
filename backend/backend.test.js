@@ -4,8 +4,6 @@ const {
   mockBodyResponseAllCars,
   uniqueCarId,
   mockBodyResponseUniqueCar,
-  mockNewCarToUpload,
-  mockBodyResponseForUpload,
   mockBodyResponseAllRentals,
   uniqueRentalId,
   mockBodyResponseUniqueRental,
@@ -50,6 +48,7 @@ describe("Cars route", () => {
   beforeEach(async () => {
     console.log("before each - cars route");
     try {
+      await Car.destroy({ where: {} });
       await Car.bulkCreate(mockCarsSeeders);
     } catch (err) {
       console.log(err);
@@ -110,27 +109,6 @@ describe("Cars route", () => {
     // Is the response equals to mock response
     expect(data).toEqual(mockBodyResponseUniqueCar);
   });
-
-  // it("Should success upload new car to DB", async () => {
-  //   const responseAllCarsBefore = await request(app).get(
-  //     "/api/v1/cars/allcars"
-  //   );
-  //   const response = await request(app)
-  //     .post("/api/v1/cars/upload")
-  //     .send(mockNewCarToUpload);
-
-  //   const responseAllCarsAfter = await request(app).get("/api/v1/cars/allcars");
-
-  //   // Is the status code 200
-  //   expect(response.status).toBe(200);
-  //   // Is the response equals to mock response
-  //   expect(response.body).toEqual(mockBodyResponseForUpload);
-
-  //   // Check if the length of all cars before upload is less then after
-  //   expect(responseAllCarsBefore.body.data.length).toBeLessThan(
-  //     responseAllCarsAfter.body.data.length
-  //   );
-  // });
 
   it("Should return a car from DB by city name", async () => {
     const response = await request(app).get("/api/v1/cars/bycity/HAIFA");
@@ -273,6 +251,15 @@ describe("Top route", () => {
     console.log("after each - top route");
     try {
       await Car.destroy({ where: {} });
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  afterAll(async () => {
+    console.log("after all - top route");
+    try {
+      await Car.bulkCreate(mockCarsSeeders);
     } catch (err) {
       console.log(err);
     }
