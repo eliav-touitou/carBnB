@@ -20,6 +20,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 export default function AddNewCar() {
   const dispatch = useDispatch();
 
+  // Variable
   let id;
 
   // Redux states
@@ -77,7 +78,6 @@ export default function AddNewCar() {
     axios
       .get(apiCars + "/vehicles/GetMakesForVehicleType/car?format=json")
       .then(({ data }) => {
-        console.log(data);
         dispatch(setAllCarsApi(data.Results));
         dispatch(setSpinner(false));
       })
@@ -110,10 +110,9 @@ export default function AddNewCar() {
 
   // After car brand selected, axios request to get all models of this brand
   const onBrandChangeHandler = async () => {
-    dispatch(setSpinner(true));
-
     allCarsApi?.forEach((car) => {
       if (car.MakeName.toLowerCase() === brandRef.current.value.toLowerCase()) {
+        dispatch(setSpinner(true));
         axios
           .get(
             apiCars + `/vehicles/GetModelsForMake/${car.MakeName}?format=json`
@@ -149,8 +148,9 @@ export default function AddNewCar() {
       discountPerMonth: discountPerMonthRef.current.value,
     };
     try {
-      dispatch(setSpinner(true));
       if (auth) {
+        dispatch(setSpinner(true));
+
         const { data: savedCar } = await axios.post("/api/v1/cars/upload", {
           newCar: newCar,
         });
@@ -170,6 +170,7 @@ export default function AddNewCar() {
         alert("please login again");
       }
       console.log(error);
+      dispatch(setSpinner(false));
     }
   };
 
