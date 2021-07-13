@@ -120,10 +120,30 @@ const finishOrders = async () => {
 
 // Run every hour
 setInterval(async () => {
-  await removePendingOrders();
+  try {
+    await removePendingOrders();
+  } catch (error) {
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: "none",
+      route: "scraper-removePendingOrders interval",
+    };
+    await writeLogs(objToWrite);
+  }
 }, 3600000);
 
 // Run every day
 setInterval(async () => {
-  await finishOrders();
+  try {
+    await finishOrders();
+  } catch (error) {
+    const objToWrite = {
+      date: new Date(),
+      error: error,
+      status: "none",
+      route: "scraper-finishOrders interval",
+    };
+    await writeLogs(objToWrite);
+  }
 }, 86400000);

@@ -54,10 +54,10 @@ export default function Results() {
               {" "}
               <i class="fas fa-sort-amount-down"></i> Price - high to low
             </div>
-            <div onClick={(e) => sortBy("year", "down", e)}>
+            <div onClick={(e) => sortBy("year", "up", e)}>
               <i class="fas fa-sort-numeric-down-alt"></i> Year - new to old
             </div>
-            <div onClick={(e) => sortBy("year", "up", e)}>
+            <div onClick={(e) => sortBy("year", "down", e)}>
               <i class="fas fa-sort-numeric-down"></i> Year - old to new
             </div>
           </div>

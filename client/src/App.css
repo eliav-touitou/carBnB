@@ -741,15 +741,7 @@ form {
           justify-content: center;
   max-height: 100%;
   overflow-y: scroll;
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\bricks-1.png);
-=======
   background-image: url(C:\dev\carBnB\client\src\photos/bricks-1.png);
->>>>>>> Stashed changes
-=======
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/bricks-1.png");
->>>>>>> main
   background-repeat: repeat;
   background-size: cover;
 }
@@ -1184,15 +1176,7 @@ form {
           align-items: center;
   height: 100vh;
   background-size: 70vh;
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\good-logo-white.png);
-=======
   background-image: url("C:/dev/carBnB/client/src/photos/good-logo-white.png");
->>>>>>> Stashed changes
-=======
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/good-logo-white.png");
->>>>>>> main
   background-repeat: no-repeat;
   background-position-y: 10vh;
   background-position-x: 4vw;
@@ -1469,15 +1453,7 @@ form {
           align-items: center;
   height: 100vh;
   width: 100vw;
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\dottes.png);
-=======
   background-image: url("C:/dev/carBnB/client/src/photos/dottes.png");
->>>>>>> Stashed changes
-=======
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/dottes.png");
->>>>>>> main
 }
 
 .details-container {
@@ -1947,15 +1923,7 @@ form {
   color: rgba(0, 0, 0, 0.8);
   height: 100vh;
   min-width: 100vw;
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\lines-horizontal.png);
-=======
   background-image: url(C:\dev\carBnB\client\src\photos\lines-horizontal.png);
->>>>>>> Stashed changes
-=======
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/lines-horizontal.png");
->>>>>>> main
   background-repeat: repeat;
   background-size: contain;
 }
@@ -1988,15 +1956,7 @@ form {
 }
 
 .left-side-panel {
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\long-road.jpg);
-=======
   background-image: url("C:/dev/carBnB/client/src/photos/long-road.jpg");
->>>>>>> Stashed changes
-=======
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/long-road.jpg");
->>>>>>> main
   background-size: contain;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
@@ -2629,15 +2589,7 @@ form {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\lines-horizontal.png);
-=======
   background-image: url("C:/dev/carBnB/client/src/photos/lines-horizontal.png");
->>>>>>> Stashed changes
-=======
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/lines-horizontal.png");
->>>>>>> main
   background-repeat: repeat;
   background-size: contain;
 }
@@ -2695,15 +2647,7 @@ form {
   display: -ms-flexbox;
   display: flex;
   background: #e4fff1;
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\road_lines-style.png), linear-gradient(197deg, #e4fff1 13%, #e6f5ff 85%);
-=======
   background-image: url("C:/dev/carBnB/client/src/photos/road_lines-style.png"), linear-gradient(197deg, #e4fff1 13%, #e6f5ff 85%);
->>>>>>> Stashed changes
-=======
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/road_lines-style.png"), linear-gradient(197deg, #e4fff1 13%, #e6f5ff 85%);
->>>>>>> main
   background-repeat: no-repeat;
   background-position-y: 55vh;
   background-size: contain;
@@ -2987,15 +2931,7 @@ form {
   min-height: 100vh;
   margin-top: 0;
   background: #e4fff1;
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\scratch.png), linear-gradient(197deg, #e4fff1 13%, #e6f5ff 85%);
-=======
   background-image: url(C:\dev\carBnB\client\src\photos\scratch.png), linear-gradient(197deg, #e4fff1 13%, #e6f5ff 85%);
->>>>>>> Stashed changes
-=======
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/scratch.png"), linear-gradient(197deg, #e4fff1 13%, #e6f5ff 85%);
->>>>>>> main
   background-attachment: fixed;
   background-size: cover;
   padding-top: 5em;
@@ -3468,15 +3404,7 @@ form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-  background-image: url(C:\Users\yone5\Desktop\Cyber4s\carBnB\client\src\photos\klipartz.png);
-=======
   background-image: url(C:\dev\carBnB\client\src\photos/klipartz.png);
->>>>>>> Stashed changes
-=======
-  background-image: url("C:/Users/zimer/OneDrive/Documents/Cyber4s Projects/carBnB/client/src/photos/klipartz.png");
->>>>>>> main
   background-repeat: no-repeat;
   background-size: cover;
   color: black;
